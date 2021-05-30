@@ -44,7 +44,7 @@ We will store user login credentials, user watch lists, and historical stock dat
 - links/view to industry related news for the stock in interest
 - links/view public reports from analyzers
 
-### Task breakdown 
+## Task breakdown 
 - Show opening and closing of stock prices
 - Get data for the required ticker symbol from an API (probably Yahoo finance)
 - Store this data onto a database 
