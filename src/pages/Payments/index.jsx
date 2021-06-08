@@ -13,7 +13,7 @@ const CustomHeading = ({children, ...otherProps}) => (
 )
 
 const Payments = () => (
-    <PageTemplate bgColor={useColorModeValue("brand.200", "brand.900")}>
+    <PageTemplate bgColor={useColorModeValue("brand.300", "brand.900")}>
         <CustomHeading mt={7}>Select A Plan</CustomHeading>
         <PaymentPlanList/>
         <Divider my={16} orientation="horizontal"/>

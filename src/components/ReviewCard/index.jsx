@@ -2,7 +2,19 @@ import React from 'react';
 import {Box, Text, VStack, useColorModeValue, HStack, Avatar, Divider} from '@chakra-ui/react';
 import {StarIcon} from '@chakra-ui/icons'
 
-const ReviewCard = ({name, imageUrl, reviewTitle, reviewSummary, ...otherProps}) => {
+const StartRatings = ({rating}) => {
+    const ratingStars = [];
+    for (let i = 0; i < rating; i++) {
+        ratingStars.push(<StarIcon w={5} h={5} color="yellow"/>);
+    }
+    return (
+        <>
+            {ratingStars}
+        </>
+    )
+}
+
+const ReviewCard = ({name, imageUrl, rating, reviewTitle, reviewSummary, ...otherProps}) => {
     const boxColor = useColorModeValue("brand.100", "brand.700");
     return (
         <Box mx={3} mt={5} px={4} py={10} borderRadius="lg" shadow="md" bg={boxColor} {...otherProps}>
@@ -12,11 +24,7 @@ const ReviewCard = ({name, imageUrl, reviewTitle, reviewSummary, ...otherProps})
                     <Text>{name}</Text>
                 </HStack>
                 <HStack>
-                    <StarIcon w={5} h={5} color="yellow"/>
-                    <StarIcon w={5} h={5} color="yellow"/>
-                    <StarIcon w={5} h={5} color="yellow"/>
-                    <StarIcon w={5} h={5} color="yellow"/>
-                    <StarIcon w={5} h={5} color="yellow"/>
+                    <StartRatings rating={rating}/>
                     <Text>Google</Text>
                 </HStack>
                 <Divider py={3} orientation="horizontal"/>
