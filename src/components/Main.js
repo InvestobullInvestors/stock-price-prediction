@@ -1,13 +1,10 @@
 import {Route} from 'react-router-dom';
 import React, {Component} from 'react';
 import Payments from "../pages/Payments";
+import Home from "../pages/Home/Home";
 
 class Main extends Component {
     render() {
-        const Home = () => (
-            <div>Hello</div>
-        )
-
         return (
             <switch>
                 <Route path="/home" component={Home}/> {/*Raghav*/}
