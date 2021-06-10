@@ -9,8 +9,8 @@ class Main extends Component {
         )
 
         return (
-            <switch>
-                <Route path="/home" component={Home}/> {/*Raghav*/}
+            <>
+                <Route path="/" exact component={Home}/> {/*Raghav*/}
                 {/*<Route path="/watchlist" component={WatchList}/> /!*Weiyoung*!/*/}
                 <Route path="/plans" component={Payments}/> {/*Himanshu*/}
                 {/*<Route path="/about" component={About}/> /!*Paul*!/*/}
@@ -18,7 +18,7 @@ class Main extends Component {
                 {/*<Route path="/help" component={Help}/> /!*Himanshu*!/*/}
                 {/*<Route path="/stock-detail/:tickerId" component={StockDetail}/> /!*TODO*!/*/}
                 {/*<Route component={() => <Redirect to="/home"/>}/>*/}
-            </switch>
+            </>
         )
     }
 }
