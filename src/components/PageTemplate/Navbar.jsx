@@ -18,14 +18,14 @@ const PADDING = 1
 const MARGIN = 1
 const ICON_SIZE = 6
 
-const Logo = () => {
+const Logo = () => (
     // TODO: update logo
-    return <Link to="/"><Button fontSize={24} fontWeight={200} m={MARGIN}>InvestoBull</Button></Link>;
-}
+    <Link to="/"><Button fontSize={24} fontWeight={200} m={MARGIN}>InvestoBull</Button></Link>
+)
 
-const HamburgerMenu = ({bgColor}) => {
+const HamburgerMenu = ({bgColor}) => (
     // visible when screen width narrow
-    return <Flex display={['flex', 'flex', 'none', 'none']}>
+    <Flex display={['flex', 'flex', 'none', 'none']}>
         <Menu>
             <MenuButton as={Button} bg="transparent" pl={PADDING} pr={PADDING} m={MARGIN}>
                 <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
@@ -38,24 +38,24 @@ const HamburgerMenu = ({bgColor}) => {
             </MenuList>
         </Menu>
     </Flex>
-}
+)
 
-const Links = () => {
+const Links = () => (
     // visible when screen width wide
-    return <Flex display={['none', 'none', 'flex', 'flex']}>
+    <Flex display={['none', 'none', 'flex', 'flex']}>
         <Link to="/"><Button bg="transparent" m={MARGIN}>Home</Button></Link>
         <Link to="/watchlist"><Button bg="transparent" m={MARGIN}>Watchlist</Button></Link>
         <Link to="/news"><Button bg="transparent" m={MARGIN}>News</Button></Link>
         <Link to="/about"><Button bg="transparent" m={MARGIN}>About</Button></Link>
     </Flex>
-}
+)
 
-const ThemeSwitch = ({tcm}) => {
-    return <Flex display={['none', 'flex', 'flex', 'flex']} p={PADDING} m={MARGIN}><Switch onChange={tcm}/></Flex>
-}
+const ThemeSwitch = ({tcm}) => (
+    <Flex display={['none', 'flex', 'flex', 'flex']} p={PADDING} m={MARGIN}><Switch onChange={tcm}/></Flex>
+)
 
-const Notifications = ({bgColor}) => {
-    return <Menu>
+const Notifications = ({bgColor}) => (
+    <Menu>
         <MenuButton as={Button} bg="transparent" borderRadius="full" pl={PADDING} pr={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
             <BellIcon w={ICON_SIZE} h={ICON_SIZE}/>
@@ -66,10 +66,10 @@ const Notifications = ({bgColor}) => {
             <MenuItem>Placeholder Notification 3</MenuItem>
         </MenuList>
     </Menu>
-}
+)
 
-const UserMenu = ({bgColor}) => {
-    return <Menu>
+const UserMenu = ({bgColor}) => (
+    <Menu>
         <MenuButton as={Button} bg="transparent" borderRadius="full" pl={PADDING} pr={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
             <Avatar size="sm"/>
@@ -81,7 +81,7 @@ const UserMenu = ({bgColor}) => {
             <MenuItem>Help</MenuItem>
         </MenuList>
     </Menu>
-}
+)
 
 const Navbar = () => {
     const {toggleColorMode} = useColorMode()
@@ -103,6 +103,6 @@ const Navbar = () => {
 
         </Flex>
     </Flex>
-};
+}
 
 export default Navbar;

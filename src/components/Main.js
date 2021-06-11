@@ -1,6 +1,7 @@
 import {Route} from 'react-router-dom';
 import React, {Component} from 'react';
 import Payments from "../pages/Payments";
+import Watchlist from "../pages/Watchlist";
 
 class Main extends Component {
     render() {
@@ -11,7 +12,7 @@ class Main extends Component {
         return (
             <>
                 <Route path="/" exact component={Home}/> {/*Raghav*/}
-                {/*<Route path="/watchlist" component={WatchList}/> /!*Weiyoung*!/*/}
+                <Route path="/watchlist" component={Watchlist}/> {/*Weiyoung*/}
                 <Route path="/plans" component={Payments}/> {/*Himanshu*/}
                 {/*<Route path="/about" component={About}/> /!*Paul*!/*/}
                 {/*<Route path="/news" component={News}/> /!*Paul*!/*/}
