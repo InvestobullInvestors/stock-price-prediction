@@ -27,7 +27,7 @@ const HamburgerMenu = ({bgColor}) => {
     // visible when screen width narrow
     return <Flex display={['flex', 'flex', 'none', 'none']}>
         <Menu>
-            <MenuButton as={Button} bg="transparent" pl={PADDING} pr={PADDING} m={MARGIN}>
+            <MenuButton as={Button} bg="transparent" px={PADDING} m={MARGIN}>
                 <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
             </MenuButton>
             <MenuList bg={bgColor}>
@@ -56,7 +56,7 @@ const ThemeSwitch = ({tcm}) => {
 
 const Notifications = ({bgColor}) => {
     return <Menu>
-        <MenuButton as={Button} bg="transparent" borderRadius="full" pl={PADDING} pr={PADDING} m={MARGIN}
+        <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
             <BellIcon w={ICON_SIZE} h={ICON_SIZE}/>
         </MenuButton>
@@ -70,7 +70,7 @@ const Notifications = ({bgColor}) => {
 
 const UserMenu = ({bgColor}) => {
     return <Menu>
-        <MenuButton as={Button} bg="transparent" borderRadius="full" pl={PADDING} pr={PADDING} m={MARGIN}
+        <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
             <Avatar size="sm"/>
         </MenuButton>
