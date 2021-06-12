@@ -11,7 +11,7 @@ const CustomMenuItem = ({children, ...otherProps}) => (
     </MenuItem>
 )
 
-const NotificationList = () => (
+const OtherNotificationList = () => (
     <MenuList bg={useColorModeValue("brand.400", "brand.900")}>
         <CustomMenuItem><NotificationItem/></CustomMenuItem>
         <CustomMenuItem><NotificationItem/></CustomMenuItem>
@@ -19,4 +19,4 @@ const NotificationList = () => (
     </MenuList>
 )
 
-export default NotificationList;
+export default OtherNotificationList;

@@ -1,13 +1,13 @@
 import React from 'react';
+import PageTemplate from "../../components/PageTemplate";
 import StockTable from '../../components/StockTable/StockTable';
+import {Heading} from "@chakra-ui/react";
 
-const Home = () => {
-    return (
-        <div>
-            <h1>Home</h1>
-            <StockTable/>
-        </div>
-    )
-}
+const Home = () => (
+    <PageTemplate>
+        <Heading>Home</Heading>
+        <StockTable/>
+    </PageTemplate>
+)
 
 export default Home;
