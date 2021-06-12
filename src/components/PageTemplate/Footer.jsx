@@ -4,7 +4,7 @@ import {Icon} from "@chakra-ui/icons";
 import {FaEnvelope, FaGithub} from 'react-icons/fa';
 
 const Footer = () => (
-    <Flex direction="column" m={16} align="center">
+    <Flex direction="column" p={16} align="center">
         <Flex align="center">
             <Text m={2}>Contact us: </Text>
             <Link href="https://github.com/InvestoBull/stock-price-prediction"
@@ -17,7 +17,7 @@ const Footer = () => (
                 <Icon as={FaEnvelope} w={5} h={5} m={2}/>
             </Link>
         </Flex>
-        <Text>Copyright © InvestoBull 2021</Text>
+        <Text color="brand.500" fontSize="sm">Copyright © InvestoBull 2021</Text>
     </Flex>
 )
 
