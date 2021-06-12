@@ -24,12 +24,7 @@ const PaymentPlanCard = ({type, price, buttonText, details, ...otherProps}) => {
                             Thank you for using Investobull
                         </ModalHeader>
                         <ModalCloseButton/>
-                        <ModalBody>{payableAmount ? <CreditCardInformation/> : "Sign up"}</ModalBody>
-                        <ModalFooter>
-                            <Button colorScheme="brand" onClick={onClose}>
-                                Close
-                            </Button>
-                        </ModalFooter>
+                        <ModalBody>{payableAmount ? <CreditCardInformation/> : "Redirecting"}</ModalBody>
                     </ModalContent>
                 </ModalOverlay>
             </Modal>);

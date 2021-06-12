@@ -1,14 +1,20 @@
 import React from "react";
-import {Box, Container, useColorModeValue} from "@chakra-ui/react";
-import Header from "../Header";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import {Box, Container, Divider} from "@chakra-ui/react";
 
-const PageTemplate = ({children, ...otherProps}) => (
-    <Box {...otherProps} minH="100vH" paddingBottom={10}>
-        <Header bgColor={useColorModeValue("gray.300", "gray.800")}/>
+const PageTemplate = ({children, ...props}) => (
+    <Box {...props}>
+
+        <Navbar/>
+
         <Container maxW="container.xl">
             {children}
+            <Divider mt={16} orientation="horizontal"/>
         </Container>
-        {/*<Footer/> /!*Weiyoung*!/*/}
+
+        <Footer/>
+
     </Box>
 )
 

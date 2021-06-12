@@ -1,5 +1,5 @@
 import React from "react";
-import {Heading, useColorModeValue, Center, Divider} from "@chakra-ui/react";
+import {Heading, Center, Divider, useColorModeValue} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
 import PaymentPlanList from "../../components/PaymentPlanList";
 import ReviewCardList from "../../components/ReviewCardList";
@@ -13,7 +13,7 @@ const CustomHeading = ({children, ...otherProps}) => (
 )
 
 const Payments = () => (
-    <PageTemplate bgColor={useColorModeValue("brand.300", "brand.900")}>
+    <PageTemplate bgColor={useColorModeValue("brand.300", "brand.800")}>
         <CustomHeading mt={7}>Select A Plan</CustomHeading>
         <PaymentPlanList/>
         <Divider my={16} orientation="horizontal"/>
