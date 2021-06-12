@@ -1,7 +1,8 @@
 import React, {useState} from "react";
-import {Button, Heading, Center, Flex} from "@chakra-ui/react";
+import {Button, Heading, Center, Flex, Spacer} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
 import NewsGrid from "../../components/NewsGrid";
+import NewsSourceDrawer from "../../components/NewsSourceDrawer";
 
 const CustomHeading = ({children, ...otherProps}) => (
     <Center>
@@ -20,12 +21,12 @@ const News = () => {
 
     return (
         <PageTemplate>
-            <Flex justify="center">
-                <CustomHeading mt={7}>News</CustomHeading>
+            <Flex>
+                <NewsSourceDrawer/>
+                <Spacer/>
+                <Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>
             </Flex>
-            <Flex justify="flex-end">
-                <Button bg={color} onClick={handleChangeColor}>watchlist only</Button>
-            </Flex>
+            <CustomHeading>News</CustomHeading>
             <NewsGrid/>
         </PageTemplate>
     )
