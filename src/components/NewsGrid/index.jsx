@@ -3,7 +3,7 @@ import {SimpleGrid} from '@chakra-ui/react';
 import NewsCard from "../NewsCard";
 
 const NewsGrid = () => (
-    <SimpleGrid columns={{base: 1, sm: 2, md: 4}} spacing={3}>
+    <SimpleGrid columns={{base: 1, sm: 2, md: 3, lg: 4}} spacing={3}>
         <NewsCard source="Bloomberg"/>
         <NewsCard source="Financial Post"/>
         <NewsCard source="Financial Times"/>
