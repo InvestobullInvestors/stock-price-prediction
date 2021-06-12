@@ -5,7 +5,7 @@ import {StarIcon} from '@chakra-ui/icons'
 const StartRatings = ({rating}) => {
     const ratingStars = [];
     for (let i = 0; i < rating; i++) {
-        ratingStars.push(<StarIcon w={5} h={5} color="yellow"/>);
+        ratingStars.push(<StarIcon w={5} h={5} color="#FDCC0D"/>);
     }
     return (
         <>
@@ -23,10 +23,12 @@ const ReviewCard = ({name, imageUrl, rating, reviewTitle, reviewSummary, ...othe
                     <Avatar name={name} src={imageUrl}/>
                     <Text>{name}</Text>
                 </HStack>
-                <HStack>
-                    <StartRatings rating={rating}/>
+                <VStack>
+                    <HStack>
+                        <StartRatings rating={rating}/>
+                    </HStack>
                     <Text>Google</Text>
-                </HStack>
+                </VStack>
                 <Divider py={3} orientation="horizontal"/>
                 <HStack>
                     <Text fontSize="lg">{reviewTitle}</Text>

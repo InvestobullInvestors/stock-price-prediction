@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom'
 import {
     Avatar,
@@ -6,84 +6,123 @@ import {
     Flex,
     Menu,
     MenuButton,
+    MenuDivider,
     MenuItem,
     MenuList,
-    Switch,
     useColorMode,
     useColorModeValue
 } from "@chakra-ui/react";
 import {BellIcon, ChevronDownIcon, HamburgerIcon} from "@chakra-ui/icons";
-import NotificationList from '../NotificationList';
+import NotificationList from "../NotificationList";
+
+const PADDING = 1
+const MARGIN = 1
+const ICON_SIZE = 6
+const MENU_MAX_WIDTH = 60
+
+const Logo = () => (
+    // TODO: update logo
+    <Button as={Link} to="/" fontSize={24} fontWeight={200} m={MARGIN}>InvestoBull</Button>
+)
+
+const HamburgerMenu = ({bgColor}) => (
+    // visible when screen width narrow
+    <Flex display={['flex', 'flex', 'none', 'none']}>
+        <Menu>
+            <MenuButton as={Button} bg="transparent" px={PADDING} m={MARGIN}>
+                <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
+            </MenuButton>
+            <MenuList bg={bgColor}  maxW={MENU_MAX_WIDTH}>
+                <MenuItem as={Link} to="/">Home</MenuItem>
+                <MenuItem as={Link} to="/watchlist">Watchlist</MenuItem>
+                <MenuItem as={Link} to="/news">News</MenuItem>
+                <MenuItem as={Link} to="/about">About</MenuItem>
+            </MenuList>
+        </Menu>
+    </Flex>
+)
+
+const Links = () => (
+    // visible when screen width wide
+    <Flex display={['none', 'none', 'flex', 'flex']}>
+        <Button bg="transparent" m={MARGIN} as={Link} to="/">Home</Button>
+        <Button bg="transparent" m={MARGIN} as={Link} to="/watchlist">Watchlist</Button>
+        <Button bg="transparent" m={MARGIN} as={Link} to="/news">News</Button>
+        <Button bg="transparent" m={MARGIN} as={Link} to="/about">About</Button>
+    </Flex>
+)
+
+const sampleNotifications = [
+    {
+        text: "Hi! I am the 1st notification! I can take up multiple lines if needed!",
+        viewed: false
+    },
+    {
+        text: "Me is 2nd notification!",
+        viewed: true
+    },
+    {
+        text: "3rd notification here!",
+        viewed: false
+    }
+]
+
+const NotificationMenu = ({bgColor}) => (
+    <Menu>
+        <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
+                    rightIcon={<ChevronDownIcon/>}>
+            <BellIcon w={ICON_SIZE} h={ICON_SIZE}/>
+        </MenuButton>
+        <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
+            <NotificationList notificationList={sampleNotifications}/>
+        </MenuList>
+    </Menu>
+)
+
+const userName = "pro_sk8ter_boi"
+
+const UserMenu = ({bgColor, toggleColorMode, setLoggedIn}) => (
+    <Menu>
+        <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
+                    rightIcon={<ChevronDownIcon/>}>
+            <Avatar size="sm"/>
+        </MenuButton>
+        <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
+            <MenuItem fontWeight="bold" isTruncated>{userName}</MenuItem>
+            <MenuDivider/>
+            <MenuItem as={Link} to="/plans">Upgrade Account</MenuItem>
+            <MenuItem>Help</MenuItem>
+            <MenuItem as="button" onClick={toggleColorMode}>
+                Use {useColorMode().colorMode === "light" ? "Dark" : "Light"} Theme
+            </MenuItem>
+            <MenuItem as="button" onClick={() => setLoggedIn(false)}>Log Out</MenuItem>
+        </MenuList>
+    </Menu>
+)
 
 const Navbar = () => {
-    const MARGIN = 1
     const {toggleColorMode} = useColorMode()
     const bgColor = useColorModeValue("brand.400", "brand.900")
     const txtColor = useColorModeValue("brand.900", "brand.100")
+    const [loggedIn, setLoggedIn] = useState(false)
 
-    return (
-        <Flex zIndex={5} pos="sticky" top={0} w="100%" justify="center" bg={bgColor} color={txtColor}>
-            <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
+    return <Flex zIndex={5} pos="sticky" top={0} w="100%" justify="center" bg={bgColor} color={txtColor}>
+        <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
 
-                {/*Hamburger Menu, visible when screen width narrow*/}
-                <Flex display={['flex', 'flex', 'none', 'none']}>
-                    <Menu>
-                        <MenuButton as={Button} bg="transparent" pl={1} pr={1} m={MARGIN}>
-                            <HamburgerIcon w={6} h={6}/>
-                        </MenuButton>
-                        <MenuList bg={bgColor}>
-                            <Link to="/"><MenuItem>Home</MenuItem></Link>
-                            <Link to="/watchlist"><MenuItem>Watchlist</MenuItem></Link>
-                            <Link to="/news"><MenuItem>News</MenuItem></Link>
-                            <Link to="/about"><MenuItem>About</MenuItem></Link>
-                        </MenuList>
-                    </Menu>
-                </Flex>
+            <HamburgerMenu bgColor={bgColor}/>
+            <Logo/>
+            <Links/>
 
-                {/*TODO InvestoBull Logo*/}
-                <Link to="/"><Button fontSize={24} fontWeight={200} m={MARGIN}>InvestoBull</Button></Link>
-
-                {/*Button Links, visible when screen width wide*/}
-                <Flex display={['none', 'none', 'flex', 'flex']}>
-                    <Link to="/"><Button bg="transparent" m={MARGIN}>Home</Button></Link>
-                    <Link to="/watchlist"><Button bg="transparent" m={MARGIN}>Watchlist</Button></Link>
-                    <Link to="/news"><Button bg="transparent" m={MARGIN}>News</Button></Link>
-                    <Link to="/about"><Button bg="transparent" m={MARGIN}>About</Button></Link>
-                </Flex>
-
-                <Flex flex="1" align="center" justify="flex-end">
-                    {/*Light/Dark Mode Toggle*/}
-                    <Flex display={['none', 'flex', 'flex', 'flex']} p={1} m={MARGIN}>
-                        <Switch onChange={toggleColorMode} />
-                    </Flex>
-
-                    {/*Notifications*/}
-                    <Menu>
-                        <MenuButton as={Button} bg="transparent" borderRadius="full" pl={1} pr={1} m={MARGIN}
-                                    rightIcon={<ChevronDownIcon/>}>
-                            <BellIcon w={6} h={6}/>
-                        </MenuButton>
-                        <NotificationList/>
-                    </Menu>
-
-                    {/*User Settings*/}
-                    <Menu>
-                        <MenuButton as={Button} bg="transparent" borderRadius="full" pl={1} pr={1} m={MARGIN}
-                                    rightIcon={<ChevronDownIcon/>}>
-                            <Avatar size="sm"/>
-                        </MenuButton>
-                        <MenuList bg={bgColor}>
-                            <MenuItem>Profile</MenuItem>
-                            <Link to="/plans"><MenuItem>Upgrade Account</MenuItem></Link>
-                            <MenuItem>Settings</MenuItem>
-                            <MenuItem>Help</MenuItem>
-                        </MenuList>
-                    </Menu>
-                </Flex>
-
+            <Flex flex="1" align="center" justify="flex-end">
+                {!loggedIn && <Button onClick={() => setLoggedIn(true)}>Log In</Button>}
+                {loggedIn && <>
+                    <NotificationMenu bgColor={bgColor}/>
+                    <UserMenu bgColor={bgColor} toggleColorMode={toggleColorMode} setLoggedIn={setLoggedIn}/>
+                </>}
             </Flex>
+
         </Flex>
-    );
-};
+    </Flex>
+}
 
 export default Navbar;
