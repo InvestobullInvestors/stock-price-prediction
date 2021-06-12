@@ -1,5 +1,5 @@
 import React from 'react';
-import StockTable from '../../components/StockTable';
+import StockTable from '../../components/StockTable/StockTable';
 
 const Home = () => {
     return (

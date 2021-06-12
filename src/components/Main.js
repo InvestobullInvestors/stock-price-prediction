@@ -1,7 +1,7 @@
 import {Route} from 'react-router-dom';
 import React, {Component} from 'react';
 import Payments from "../pages/Payments";
-import Home from "../pages/Home/Home";
+import Home from "../pages/Home";
 
 class Main extends Component {
     render() {
