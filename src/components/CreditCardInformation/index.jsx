@@ -10,9 +10,8 @@ const stripePublicKey = loadStripe('pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtD
 
 const CreditCardInformation = () => (
     <Elements stripe={stripePublicKey}>
-        <Box px={5} py={2} rounded="md" border="solid" borderColor="brand.800" h="10" alignContent="center">
-            <CardElement
-            />
+        <Box px={5} py={2} rounded="md" border="solid" borderColor="brand.800" h="10" alignContent="center" bg="brand.100">
+            <CardElement/>
         </Box>
         <Center>
             <Button size="sm" my={10} align="center">Subscribe Now</Button>

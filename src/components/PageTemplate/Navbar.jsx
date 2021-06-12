@@ -13,6 +13,7 @@ import {
     useColorModeValue
 } from "@chakra-ui/react";
 import {BellIcon, ChevronDownIcon, HamburgerIcon} from "@chakra-ui/icons";
+import NotificationList from '../NotificationList';
 
 const Navbar = () => {
     const MARGIN = 1
@@ -62,11 +63,7 @@ const Navbar = () => {
                                     rightIcon={<ChevronDownIcon/>}>
                             <BellIcon w={6} h={6}/>
                         </MenuButton>
-                        <MenuList bg={bgColor}>
-                            <MenuItem>Placeholder Notification 1</MenuItem>
-                            <MenuItem>Placeholder Notification 2</MenuItem>
-                            <MenuItem>Placeholder Notification 3</MenuItem>
-                        </MenuList>
+                        <NotificationList/>
                     </Menu>
 
                     {/*User Settings*/}
