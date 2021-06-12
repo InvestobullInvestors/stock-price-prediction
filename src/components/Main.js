@@ -1,15 +1,12 @@
 import {Route} from 'react-router-dom';
 import React, {Component} from 'react';
 import Payments from "../pages/Payments";
+import Home from "../pages/Home";
 import Watchlist from "../pages/Watchlist";
 import News from "../pages/News";
 
 class Main extends Component {
     render() {
-        const Home = () => (
-            <div>Hello</div>
-        )
-
         return (
             <>
                 <Route path="/" exact component={Home}/> {/*Raghav*/}
