@@ -4,6 +4,7 @@ import Payments from "../pages/Payments";
 import Home from "../pages/Home";
 import Watchlist from "../pages/Watchlist";
 import News from "../pages/News";
+import StockDetails from "../pages/StockDetails";
 
 class Main extends Component {
     render() {
@@ -15,7 +16,7 @@ class Main extends Component {
                 {/*<Route path="/about" component={About}/> /!*Paul*!/*/}
                 <Route path="/news" component={News}/> {/*Paul*/}
                 {/*<Route path="/help" component={Help}/> /!*Himanshu*!/*/}
-                {/*<Route path="/stock-detail/:tickerId" component={StockDetail}/> /!*TODO*!/*/}
+                <Route path="/stock-details/:tickerId" component={StockDetails}/>
                 {/*<Route component={() => <Redirect to="/home"/>}/>*/}
             </>
         )
