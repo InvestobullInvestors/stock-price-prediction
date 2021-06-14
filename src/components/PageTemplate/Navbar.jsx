@@ -3,14 +3,21 @@ import {Link} from 'react-router-dom'
 import {
     Avatar,
     Button,
+    Divider,
+    Drawer,
+    DrawerBody,
+    DrawerContent, DrawerHeader,
+    DrawerOverlay,
     Flex,
+    Image,
     Menu,
     MenuButton,
     MenuDivider,
     MenuItem,
     MenuList,
     useColorMode,
-    useColorModeValue
+    useColorModeValue,
+    useDisclosure
 } from "@chakra-ui/react";
 import {BellIcon, ChevronDownIcon, HamburgerIcon} from "@chakra-ui/icons";
 import NotificationList from "../NotificationList";
@@ -22,25 +29,43 @@ const MENU_MAX_WIDTH = 60
 
 const Logo = () => (
     // TODO: update logo
-    <Button as={Link} to="/" fontSize={24} fontWeight={200} m={MARGIN}>InvestoBull</Button>
+    <Button as={Link} to="/" fontSize={24} fontWeight={200} m={MARGIN}>
+        Investo
+        <Image src="https://image.flaticon.com/icons/png/512/4072/4072641.png" boxSize={8}/>
+        Bull
+    </Button>
 )
 
-const HamburgerMenu = ({bgColor}) => (
+const HamburgerMenu = ({bgColor}) => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     // visible when screen width narrow
-    <Flex display={['flex', 'flex', 'none', 'none']}>
-        <Menu>
-            <MenuButton as={Button} bg="transparent" px={PADDING} m={MARGIN}>
-                <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
-            </MenuButton>
-            <MenuList bg={bgColor}  maxW={MENU_MAX_WIDTH}>
-                <MenuItem as={Link} to="/">Home</MenuItem>
-                <MenuItem as={Link} to="/watchlist">Watchlist</MenuItem>
-                <MenuItem as={Link} to="/news">News</MenuItem>
-                <MenuItem as={Link} to="/about">About</MenuItem>
-            </MenuList>
-        </Menu>
+    return <Flex display={['flex', 'flex', 'none', 'none']}>
+        <Button onClick={onOpen} bg="transparent" px={PADDING} m={MARGIN}>
+            <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
+        </Button>
+        <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
+            <DrawerOverlay/>
+            <DrawerContent bg={bgColor}>
+                <DrawerHeader borderBottomWidth="1px">
+                    <Button onClick={onClose} bg="transparent" px={PADDING} mr={3}>
+                        <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
+                    </Button>
+                    MENU
+                </DrawerHeader>
+                <DrawerBody>
+                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/">Home</Button>
+                    <Divider my={1}/>
+                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/watchlist">Watchlist</Button>
+                    <Divider my={1}/>
+                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/news">News</Button>
+                    <Divider my={1}/>
+                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/about">About</Button>
+                </DrawerBody>
+            </DrawerContent>
+        </Drawer>
     </Flex>
-)
+}
 
 const Links = () => (
     // visible when screen width wide
