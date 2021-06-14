@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import {Box, Container} from "@chakra-ui/react";
+import {Box, Container, Divider} from "@chakra-ui/react";
 
 const PageTemplate = ({children, ...props}) => (
     <Box {...props}>
@@ -10,6 +10,7 @@ const PageTemplate = ({children, ...props}) => (
 
         <Container maxW="container.xl">
             {children}
+            <Divider mt={16} orientation="horizontal"/>
         </Container>
 
         <Footer/>
