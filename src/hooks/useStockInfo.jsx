@@ -21,8 +21,6 @@ const StockInfoProvider = ({children}) => {
     const [stockDetails, setStockDetails] = useState(defaultDetails);
 
     const setSymbol = (stockSymbol) => {
-        console.log(`stock symbol = ${stockSymbol}`);
-
         const details = stockInfo.filter((stock) => stock.symbol === stockSymbol);
         setStockDetails(details.length > 0 ? details[0] : defaultDetails);
     }
