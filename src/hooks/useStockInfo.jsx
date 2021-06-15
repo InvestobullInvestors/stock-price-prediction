@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useState} from 'react'
 import {stockInfo} from "../shared/stockInfo";
 
-const StockInfoContext = createContext("");
+const StockInfoContext = createContext({});
 
 const StockInfoProvider = ({children}) => {
     const defaultDetails = {
@@ -20,9 +20,11 @@ const StockInfoProvider = ({children}) => {
     }
     const [stockDetails, setStockDetails] = useState(defaultDetails);
 
-    const setSymbol = ({stockSymbol}) => {
+    const setSymbol = (stockSymbol) => {
+        console.log(`stock symbol = ${stockSymbol}`);
+
         const details = stockInfo.filter((stock) => stock.symbol === stockSymbol);
-        setStockDetails(details.length > 0 ? details : defaultDetails);
+        setStockDetails(details.length > 0 ? details[0] : defaultDetails);
     }
 
     return (

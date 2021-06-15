@@ -1,11 +1,9 @@
 import React from "react";
 import {useStockSymbol} from "../../hooks/useStockInfo";
-import {Box, Table, Tbody, Tr, Td, SimpleGrid, useColorModeValue} from "@chakra-ui/react";
+import {Box, SimpleGrid, Table, Tbody, Td, Tr, useColorModeValue} from "@chakra-ui/react";
 
 const TableData = () => {
-    console.log(useStockSymbol())
     const {stockDetails} = useStockSymbol();
-    console.log(stockDetails)
     return (
         <Tbody>
             <Tr>
@@ -24,27 +22,24 @@ const TableData = () => {
     )
 }
 
-const StockInformation = () => {
-    return (
-        <SimpleGrid columns={3} spacing={6} bgColor={useColorModeValue("brand.100", "brand.700")} mt={8} borderRadius="lg">
-            <Box>
-                <Table>
-                    <TableData/>
-                </Table>
-            </Box>
-            <Box>
-                <Table>
-                    <TableData/>
-                </Table>
-            </Box>
-            <Box>
-                <Table>
-                    <TableData/>
-                </Table>
-            </Box>
-        </SimpleGrid>
-    )
-
-}
+const StockInformation = () => (
+    <SimpleGrid columns={3} spacing={6} bgColor={useColorModeValue("brand.100", "brand.700")} mt={8} borderRadius="lg">
+        <Box>
+            <Table>
+                <TableData/>
+            </Table>
+        </Box>
+        <Box>
+            <Table>
+                <TableData/>
+            </Table>
+        </Box>
+        <Box>
+            <Table>
+                <TableData/>
+            </Table>
+        </Box>
+    </SimpleGrid>
+)
 
 export default StockInformation;
