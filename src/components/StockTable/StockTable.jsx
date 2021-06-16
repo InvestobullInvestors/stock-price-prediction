@@ -12,7 +12,7 @@ import {
 const StockTable = () => {
     const stocks = useStocks();
 
-    const tableData = () => {
+    const TableData = () => {
         return stocks.map((stock, index) => {
             return (
                 <Tr key={stock.symbol}>
@@ -30,7 +30,7 @@ const StockTable = () => {
         })
     }
 
-    const tableHeader = () => {
+    const TableHeader = () => {
         let header = Object.keys(stocks[0])
 
         return header.map((key, index) => {
@@ -46,11 +46,11 @@ const StockTable = () => {
                 <TableCaption placement="top">Stock Table</TableCaption>
                 <Thead>
                     <Tr>
-                        {tableHeader()}
+                        <TableHeader/>
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {tableData()}
+                    <TableData/>
                 </Tbody>
             </Table>
         </div>
