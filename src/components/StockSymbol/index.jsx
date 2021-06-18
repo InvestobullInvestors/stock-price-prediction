@@ -11,9 +11,13 @@ const StockSymbol = () => {
     const [avgVolume, setAvgVolume] = useState("");
     const [marketCap, setMarketCap] = useState("");
 
+    const loadPage = () => {
+        
+    }
+
     return (
         <div>
-
+            <h1 onClick={loadPage}>{symbol}</h1>
         </div>
     );
 }

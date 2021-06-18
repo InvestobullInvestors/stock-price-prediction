@@ -1,4 +1,4 @@
-import { useStocks } from '../../hooks/stocks'; // custom hook
+import {stockInfo} from "../../shared/stockInfo";
 import {
     Table,
     Thead,
@@ -9,8 +9,9 @@ import {
     TableCaption,
 } from "@chakra-ui/react"
 
+
 const StockTable = () => {
-    const stocks = useStocks();
+    const stocks = stockInfo;
 
     const TableData = () => {
         return stocks.map((stock, index) => {
@@ -31,6 +32,8 @@ const StockTable = () => {
     }
 
     const TableHeader = () => {
+        console.log("stocks: ", stocks);
+        console.log("Hello!")
         let header = Object.keys(stocks[0])
 
         return header.map((key, index) => {
