@@ -1,6 +1,6 @@
 import React from 'react';
 import PageTemplate from "../../components/PageTemplate";
-import StockTable from '../../components/StockTable/StockTable';
+import StockTable from '../../components/StockTable';
 import {Heading} from "@chakra-ui/react";
 
 const Home = () => (
