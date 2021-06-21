@@ -48,10 +48,8 @@ const stockInfo = [
 ]
 
 /* GET stock details. */
-router.get('/:ticker', function(req, res, next) {
-    const ticketSymbol = req.params.ticker;
-    const details = stockInfo.filter((stock) => stock.symbol === ticketSymbol);
-
+router.get('/:ticker', function(req, res) {
+    const details = stockInfo.filter((stock) => stock.symbol === req.params.ticker);
     res.send(details.length === 1 ? details[0] : defaultDetails)
 });
 

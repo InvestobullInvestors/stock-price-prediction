@@ -1,14 +1,14 @@
 var express = require('express');
 var Stripe = require('stripe')
 var router = express.Router();
+var bodyParser = require('body-parser')
 
 const stripe = new Stripe('sk_test_51IweHkKvAxvZ5kVetx3UiymBoyjtPixhy4q72vX0lh5MaPQfI9r9zilffbnSnOXRsfbJKbYSNQAkTCB9vPWyTBOO00WrHtvZsQ');
+var jsonParser = bodyParser.json()
 
 /* Create charges on Stripe. */
-router.post('/', async function (req, res, next) {
-    const paymentDetails = JSON.parse(Object.keys(JSON.parse(JSON.stringify(req.body)))[0])
-
-    const {paymentId, amount} = paymentDetails
+router.post('/', jsonParser, async function (req, res) {
+    const {paymentId, amount} = req.body;
 
     try {
         await stripe.paymentIntents.create({

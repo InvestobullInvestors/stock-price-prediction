@@ -5,7 +5,7 @@ export const chargeCard = async (paymentId, amount) => {
         const response = await axios.post(`http://localhost:3000/charge-card`, JSON.stringify({
             paymentId: paymentId,
             amount: amount
-        }))
+        }), {headers: {'Content-Type': 'application/json'}})
         console.log(response.data)
     } catch (error) {
         console.log(error.message)
