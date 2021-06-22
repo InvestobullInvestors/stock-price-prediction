@@ -4,7 +4,7 @@ import { AiFillStar } from "react-icons/ai";
 const WatchlistButton = () => {
     return (
     <Button leftIcon={<AiFillStar />} colorScheme="green" variant="solid">
-        Add to Watchlist
+        Add to watchlist
     </Button>
     )
 }

@@ -5,14 +5,12 @@ import {Heading} from "@chakra-ui/react";
 import StockSymbol from '../../components/StockSymbol';
 import WatchlistButton from '../../components/WatchlistButton';
 import SearchBar from '../../components/SearchBar';
+import StockTableCard from '../../components/StockTableCard';
 
 const Home = () => (
     <PageTemplate>
         <Heading>Home</Heading>
-        <StockSymbol/>
-        <WatchlistButton/>
-        <SearchBar/>
-        <StockTable/>
+        <StockTableCard/>
     </PageTemplate>
 )
 

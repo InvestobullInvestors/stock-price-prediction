@@ -45,7 +45,7 @@ const StockTable = () => {
 
     return (
         <div>
-            <Table size="md" variant="striped" colorScheme="cyan">
+            <Table size="sm" variant="striped" colorScheme="facebook">
                 <TableCaption placement="top">Stock Table</TableCaption>
                 <Thead>
                     <Tr>
