@@ -12,7 +12,7 @@ const StockSymbol = () => {
     return (
         <HStack spacing="24px">
             <WatchlistButton/>
-            <Text color="blue" fontWeight="bold" _hover={{ textDecoration: "underline" }} onClick={loadPage}>{symbol}</Text>
+            <Text color="blue" fontWeight="bold" _hover={{ textDecoration: "underline", cursor: "pointer" }} onClick={loadPage}>{symbol}</Text>
         </HStack>
     )
 }
