@@ -1,4 +1,5 @@
 import {stockInfo} from "../../shared/stockInfo";
+import StockSymbol from "../StockSymbol";
 import {
     Table,
     Thead,
@@ -17,7 +18,7 @@ const StockTable = () => {
         return stocks.map((stock, index) => {
             return (
                 <Tr key={stock.symbol}>
-                    <Td>{stock.symbol}</Td>
+                    <Td>{<StockSymbol/>}</Td>
                     <Td>{stock.last_price}</Td>
                     <Td>{stock.change}</Td>
                     <Td>{stock.change_percent}</Td>
