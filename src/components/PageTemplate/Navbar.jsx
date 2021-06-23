@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import {BellIcon, ChevronDownIcon, HamburgerIcon} from "@chakra-ui/icons";
 import NotificationList from "../NotificationList";
+import Login from "../Login";
 
 const PADDING = 1
 const MARGIN = 1
@@ -28,7 +29,6 @@ const ICON_SIZE = 6
 const MENU_MAX_WIDTH = 60
 
 const Logo = () => (
-    // TODO: update logo
     <Button as={Link} to="/" fontSize={24} fontWeight={200} m={MARGIN}>
         Investo
         <Image src="https://image.flaticon.com/icons/png/512/4072/4072641.png" boxSize={8}/>
@@ -139,7 +139,7 @@ const Navbar = () => {
             <Links/>
 
             <Flex flex="1" align="center" justify="flex-end">
-                {!loggedIn && <Button onClick={() => setLoggedIn(true)}>Log In</Button>}
+                {!loggedIn && <Login setLoggedIn={setLoggedIn}/>}
                 {loggedIn && <>
                     <NotificationMenu bgColor={bgColor}/>
                     <UserMenu bgColor={bgColor} toggleColorMode={toggleColorMode} setLoggedIn={setLoggedIn}/>
