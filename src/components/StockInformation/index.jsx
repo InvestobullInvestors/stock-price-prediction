@@ -23,7 +23,7 @@ const TableData = () => {
 }
 
 const StockInformation = () => (
-    <SimpleGrid columns={3} spacing={6} bgColor={useColorModeValue("brand.100", "brand.700")} mt={8} borderRadius="lg">
+    <SimpleGrid columns={{base: 1, md: 3}} spacing={6} bgColor={useColorModeValue("brand.100", "brand.700")} mt={8} borderRadius="lg">
         <Box>
             <Table>
                 <TableData/>
