@@ -1,8 +1,8 @@
 import React from 'react'
-import {Box, VStack, Grid, GridItem, Spacer, useColorModeValue, Heading, HStack} from "@chakra-ui/react";
+import {Box, VStack, Grid, GridItem, Spacer, useColorModeValue, Heading, HStack, SimpleGrid} from "@chakra-ui/react";
 
 const CustomGridItem = ({children, ...otherProps}) => (
-    <GridItem {...otherProps} mx={4} my={4} borderRadius="lg" shadow="md">
+    <GridItem mx={4} my={4} borderRadius="lg" shadow="md" {...otherProps}>
         {children}
     </GridItem>
 )
@@ -14,7 +14,7 @@ const CustomBox = ({children, ...otherProps}) => (
 )
 
 const PredictionTable = () => (
-    <CustomGridItem colSpan={2}>
+    <CustomGridItem colSpan={2} shadow="none">
         <VStack spacing={4}>
             <CustomBox>
                 Prediction
@@ -22,18 +22,16 @@ const PredictionTable = () => (
             <CustomBox p={4} w="80%" bgColor={useColorModeValue("brand.300", "brand.600")} borderRadius="lg">
                 <VStack spacing={4}>
                     <Box p={4} w="100%" bgColor={useColorModeValue("brand.100", "brand.500")} borderRadius="lg">
-                        <HStack>
+                        <SimpleGrid columns={{ base: 1, lg:2 }} spacing={1}>
                             <Heading as="h3" size="lg">1 Day</Heading>
-                            <Spacer/>
-                            <Heading as="h4" size="md" color="lightgreen">612.25</Heading>
-                        </HStack>
+                            <Heading as="h3" size="lg" color="lightgreen">612.25</Heading>
+                        </SimpleGrid>
                     </Box>
                     <Box p={4} w="100%" bgColor={useColorModeValue("brand.100", "brand.500")} borderRadius="lg">
-                        <HStack>
+                        <SimpleGrid columns={{ base: 1, lg:2 }} spacing={1}>
                             <Heading as="h3" size="lg">1 Week</Heading>
-                            <Spacer/>
-                            <Heading as="h4" size="md" color="lightgreen">676.25</Heading>
-                        </HStack>
+                            <Heading as="h3" size="lg" color="lightgreen">676.25</Heading>
+                        </SimpleGrid>
                     </Box>
                 </VStack>
             </CustomBox>

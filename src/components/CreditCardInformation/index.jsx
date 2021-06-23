@@ -2,27 +2,14 @@ import React from 'react';
 import {loadStripe} from "@stripe/stripe-js";
 import {CardElement, Elements, useElements, useStripe} from "@stripe/react-stripe-js";
 import {Box, Button, Center} from "@chakra-ui/react";
-import {chargeCard} from "../../services/PaymentService";
+import useHandlePayment from "../../hooks/useHandlePayment";
 
 const stripePublicKey = loadStripe('pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4');
 
 const CheckoutForm = ({payableAmount}) => {
     const stripe = useStripe();
     const elements = useElements();
-
-    const handlePayment = async (event) => {
-        event.preventDefault();
-
-        const {error, paymentMethod: {id}} = await stripe.createPaymentMethod({
-            type: "card",
-            card: elements.getElement(CardElement)
-        })
-
-        if (!error) {
-            await chargeCard(id, payableAmount);
-        }
-    }
-
+    const handlePayment = useHandlePayment(payableAmount, stripe, elements)
     return (
         <>
             <Box px={5} py={2} rounded="md" border="solid" borderColor="brand.800" h="10" alignContent="center"
