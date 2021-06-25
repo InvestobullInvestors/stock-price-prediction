@@ -3,14 +3,7 @@ import {Heading, Center, Divider, useColorModeValue} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
 import PaymentPlanList from "../../components/PaymentPlanList";
 import ReviewCardList from "../../components/ReviewCardList";
-
-const CustomHeading = ({children, ...otherProps}) => (
-    <Center>
-        <Heading as="h2" size="xl" {...otherProps}>
-            {children}
-        </Heading>
-    </Center>
-)
+import CustomHeading from "../../components/CustomHeading";
 
 const Payments = () => (
     <PageTemplate bgColor={useColorModeValue("brand.300", "brand.800")}>

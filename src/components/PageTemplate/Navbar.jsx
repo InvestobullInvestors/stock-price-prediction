@@ -28,11 +28,9 @@ const ICON_SIZE = 6
 const MENU_MAX_WIDTH = 60
 
 const Logo = () => (
-    // TODO: update logo
     <Button as={Link} to="/" fontSize={24} fontWeight={200} m={MARGIN}>
-        Investo
+        InvestoBull
         <Image src="https://image.flaticon.com/icons/png/512/4072/4072641.png" boxSize={8}/>
-        Bull
     </Button>
 )
 
