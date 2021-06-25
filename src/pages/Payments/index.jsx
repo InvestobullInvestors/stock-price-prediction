@@ -1,5 +1,5 @@
 import React from "react";
-import {Heading, Center, Divider, useColorModeValue} from "@chakra-ui/react";
+import {Divider, useColorModeValue} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
 import PaymentPlanList from "../../components/PaymentPlanList";
 import ReviewCardList from "../../components/ReviewCardList";

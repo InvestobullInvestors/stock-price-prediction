@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Heading, Center, Flex, Spacer} from "@chakra-ui/react";
+import {Button, Flex, Spacer} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
 import NewsGrid from "../../components/NewsGrid";
 import NewsSourceDrawer from "../../components/NewsSourceDrawer";
