@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var stockDetailsRouter = require('./routes/stock-details')
 var chargeCardRouter = require('./routes/charge-card')
+var predictStockPriceRouter = require('./routes/stock-prediction')
 var cors = require('cors');
 
 var app = express();
@@ -25,6 +26,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/stock-details', stockDetailsRouter);
 app.use('/charge-card', chargeCardRouter);
+app.use('/stock-prediction', predictStockPriceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
