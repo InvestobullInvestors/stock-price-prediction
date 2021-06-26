@@ -7,8 +7,11 @@ import {
     useColorModeValue,
     useDisclosure,
     Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
     ModalOverlay,
-    ModalContent, ModalHeader, ModalCloseButton, ModalBody
+    ModalHeader,
 } from '@chakra-ui/react';
 import CreditCardInformation from "../CreditCardInformation";
 

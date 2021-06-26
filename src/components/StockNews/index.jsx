@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Divider, Heading, Link, useColorModeValue, VStack} from "@chakra-ui/react";
-import {useStockNews} from "../../hooks/useStockNews";
+import {useStockNews} from "../../contexts/useStockNews";
 
 const CustomNewsBox = ({children}) => (
     <Box as="button" w="80%" minH={12} textAlign="left" my={8} px={8} _hover={{bgColor: "brand.600"}} borderRadius="lg">

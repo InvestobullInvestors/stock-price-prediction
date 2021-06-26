@@ -1,9 +1,11 @@
 import {BrowserRouter} from 'react-router-dom';
 import Main from "./components/Main";
 import {ChakraProvider, extendTheme} from "@chakra-ui/react"
-import StockInfoProvider from "./hooks/useStockInfo";
-import PredictionProvider from "./hooks/usePredictions";
-import StockNewsProvider from "./hooks/useStockNews";
+import StockInfoProvider from "./contexts/useStockInfo";
+import AuthProvider from "./contexts/useAuth";
+import UserProvider from "./contexts/useUser";
+import PredictionProvider from "./contexts/usePredictions";
+import StockNewsProvider from "./contexts/useStockNews";
 
 const theme = extendTheme({
     config: {
@@ -28,22 +30,24 @@ const theme = extendTheme({
 
 function App() {
     return (
-        <StockInfoProvider>
-            <PredictionProvider>
-                <StockNewsProvider>
-                    <div className="App">
-                        <ChakraProvider theme={theme}>
-                            <BrowserRouter>
-                                <div>
-                                    <Main/>
-                                </div>
-                            </BrowserRouter>
-                        </ChakraProvider>
-                    </div>
-                </StockNewsProvider>
-            </PredictionProvider>
-        </StockInfoProvider>
-    );
+        <UserProvider>
+            <AuthProvider>
+                <StockInfoProvider>
+                    <PredictionProvider>
+                        <StockNewsProvider>
+                            <div className="App">
+                                <ChakraProvider theme={theme}>
+                                    <BrowserRouter>
+                                        <Main />
+                                    </BrowserRouter>
+                                </ChakraProvider>
+                            </div>
+                        </StockNewsProvider>
+                    </PredictionProvider>
+                </StockInfoProvider>
+            </AuthProvider>
+        </UserProvider>
+    )
 }
 
 export default App;
