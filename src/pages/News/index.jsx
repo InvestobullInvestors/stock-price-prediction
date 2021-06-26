@@ -19,13 +19,14 @@ const News = () => {
         setNewsSources();
         setNewsInfo();
     }, [])
-    
+
+    //TODO: enable watchlist filter
     return (
         <PageTemplate>
             <Flex>
                 <NewsSourceDrawer/>
-                <Spacer/>
-                <Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>
+                {/*<Spacer/>*/}
+                {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
             </Flex>
             <CustomHeading>News</CustomHeading>
             <NewsGrid/>

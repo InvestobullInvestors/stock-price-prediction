@@ -17,14 +17,14 @@ const newsInfo = [
         name: "Bloomberg",
         articles: [
             {
-                title: "BlackBerry CEO focused on fundamentals, not Reddit frenzy",
-                src: "https://www.bnnbloomberg.ca/blackberry-ceo-focused-on-fundamentals-not-reddit-frenzy-1.1621812",
+                title: "Bitcoin Slips Toward $30,000 as Strategists Flag Near-Term Risks",
+                src: "https://www.bloomberg.com/news/articles/2021-06-26/bitcoin-slips-toward-30-000-as-strategists-flag-near-term-risks?srnd=markets-vp",
                 date: "2021-06-26"
             },
             {
-                title: "Wall Street and C-Suite grapple with a meme-stock new normal",
-                src: "https://www.bnnbloomberg.ca/wall-street-and-c-suite-grapple-with-a-meme-stock-new-normal-1.1621926",
-                date: "2021-06-26"
+                title: "GameStop Moves to Russell 1000; AMC Stays in Small-Cap Index",
+                src: "https://www.bloomberg.com/news/articles/2021-06-25/gamestop-graduates-to-russell-1000-amc-stays-in-small-cap-index?srnd=markets-vp",
+                date: "2021-06-25"
             }
         ]
     },
@@ -32,14 +32,14 @@ const newsInfo = [
         name: "Financial Post",
         articles: [
             {
-                title: "How to test-drive your mortgage before you get stuck with a home you can't afford",
-                src: "https://financialpost.com/personal-finance/how-to-test-drive-your-mortgage-before-you-get-stuck-with-a-home-you-cant-afford",
-                date: "2021-06-26"
+                title: "David Rosenberg: The best way to invest in China's new five-year plan",
+                src: "https://financialpost.com/investing/david-rosenberg-the-best-way-to-invest-in-chinas-new-five-year-plan",
+                date: "2021-06-25"
             },
             {
-                title: "This couple needs to turbocharge their TFSAs to make up for the financial loss from COVID-19",
-                src: "https://financialpost.com/personal-finance/family-finance/this-couple-needs-to-turbocharge-their-tfsas-to-make-up-for-the-financial-loss-from-covid-19",
-                date: "2021-06-26"
+                title: "We need to remember that smart retirement is about everything other than money",
+                src: "https://financialpost.com/investing/we-need-to-remember-that-smart-retirement-is-about-everything-other-than-money",
+                date: "2021-06-25"
             }
         ]
     },
@@ -47,14 +47,14 @@ const newsInfo = [
         name: "Financial Times",
         articles: [
             {
-                title: "FT 1",
-                src: "https://financialpost.com/personal-finance/how-to-test-drive-your-mortgage-before-you-get-stuck-with-a-home-you-cant-afford",
-                date: "2021-06-26"
+                title: "Investors pile $54bn in to ESG bond funds in fiery start to 2021",
+                src: "https://www.ft.com/content/af62e245-a136-40c1-b53d-89795b507d45",
+                date: "2021-06-25"
             },
             {
-                title: "FT 2",
-                src: "https://financialpost.com/personal-finance/family-finance/this-couple-needs-to-turbocharge-their-tfsas-to-make-up-for-the-financial-loss-from-covid-19",
-                date: "2021-06-26"
+                title: "Wall Street notches best week since February after Biden infrastructure deal",
+                src: "https://www.ft.com/content/2b07f1d2-42a5-4fd6-9fe1-441487213a36",
+                date: "2021-06-25"
             }
         ]
     },
@@ -62,14 +62,14 @@ const newsInfo = [
         name: "The Economist",
         articles: [
             {
-                title: "TE 1",
-                src: "https://financialpost.com/personal-finance/how-to-test-drive-your-mortgage-before-you-get-stuck-with-a-home-you-cant-afford",
+                title: "Big miners’ capital discipline is good news for investors",
+                src: "https://www.economist.com/business/2021/06/26/big-miners-capital-discipline-is-good-news-for-investors",
                 date: "2021-06-26"
             },
             {
-                title: "TE 2",
-                src: "https://financialpost.com/personal-finance/family-finance/this-couple-needs-to-turbocharge-their-tfsas-to-make-up-for-the-financial-loss-from-covid-19",
-                date: "2021-06-26"
+                title: "A new phase in the financial cycle",
+                src: "https://www.economist.com/finance-and-economics/2021/06/24/a-new-phase-in-the-financial-cycle",
+                date: "2021-06-24"
             }
         ]
     },
@@ -77,14 +77,14 @@ const newsInfo = [
         name: "The Global and Mail",
         articles: [
             {
-                title: "TGAM 1",
-                src: "https://financialpost.com/personal-finance/how-to-test-drive-your-mortgage-before-you-get-stuck-with-a-home-you-cant-afford",
-                date: "2021-06-26"
+                title: "Short sales on the TSX: What bearish investors are betting against",
+                src: "https://www.theglobeandmail.com/investing/markets/inside-the-market/article-short-sales-on-the-tsx-what-bearish-investors-are-betting-against-35/",
+                date: "2021-06-25"
             },
             {
-                title: "TGAM 2",
-                src: "https://financialpost.com/personal-finance/family-finance/this-couple-needs-to-turbocharge-their-tfsas-to-make-up-for-the-financial-loss-from-covid-19",
-                date: "2021-06-26"
+                title: "BMO CEO predicts economic boom as COVID-19 pandemic wanes",
+                src: "https://www.theglobeandmail.com/business/article-bmo-ceo-predicts-economic-boom-as-covid-19-pandemic-wanes/",
+                date: "2021-06-25"
             }
         ]
     },
@@ -92,14 +92,14 @@ const newsInfo = [
         name: "The New York Times",
         articles: [
             {
-                title: "TNYT 1",
-                src: "https://financialpost.com/personal-finance/how-to-test-drive-your-mortgage-before-you-get-stuck-with-a-home-you-cant-afford",
-                date: "2021-06-26"
+                title: "Ousting Toshiba Chairman, Foreign Investors Score Breakthrough in Japan",
+                src: "https://www.nytimes.com/2021/06/25/business/japan-toshiba-chair.html",
+                date: "2021-06-25"
             },
             {
-                title: "TNYT 2",
-                src: "https://financialpost.com/personal-finance/family-finance/this-couple-needs-to-turbocharge-their-tfsas-to-make-up-for-the-financial-loss-from-covid-19",
-                date: "2021-06-26"
+                title: "Top U.S. Officials Consulted With BlackRock as Markets Melted Down",
+                src: "https://www.nytimes.com/2021/06/24/business/economy/fed-blackrock-pandemic-crisis.html",
+                date: "2021-06-24"
             }
         ]
     },
@@ -107,14 +107,14 @@ const newsInfo = [
         name: "The Wall Street Journal",
         articles: [
             {
-                title: "TWSJ 1",
-                src: "https://financialpost.com/personal-finance/how-to-test-drive-your-mortgage-before-you-get-stuck-with-a-home-you-cant-afford",
-                date: "2021-06-26"
+                title: "S&P 500 Closes Higher to Extend Weekly Gains",
+                src: "https://www.wsj.com/articles/global-stock-markets-dow-update-06-25-21-11624606680?mod=markets_lead_pos1",
+                date: "2021-06-25"
             },
             {
-                title: "TWSJ 2",
-                src: "https://financialpost.com/personal-finance/family-finance/this-couple-needs-to-turbocharge-their-tfsas-to-make-up-for-the-financial-loss-from-covid-19",
-                date: "2021-06-26"
+                title: "Saving for Retirement? Now You Can Bet on Bitcoin.",
+                src: "https://www.wsj.com/articles/saving-for-retirement-now-you-can-bet-on-bitcoin-11624613435?mod=markets_lead_pos7",
+                date: "2021-06-25"
             }
         ]
     },
@@ -122,14 +122,14 @@ const newsInfo = [
         name: "Time",
         articles: [
             {
-                title: "T 1",
-                src: "https://financialpost.com/personal-finance/how-to-test-drive-your-mortgage-before-you-get-stuck-with-a-home-you-cant-afford",
-                date: "2021-06-26"
+                title: "The Devastated Cruise Industry Celebrates as the First Cruise Prepares to Set Sail From U.S. Since the Pandemic",
+                src: "https://time.com/6075938/first-cruise-ship-sail-covid19",
+                date: "2021-06-25"
             },
             {
-                title: "T 2",
-                src: "https://financialpost.com/personal-finance/family-finance/this-couple-needs-to-turbocharge-their-tfsas-to-make-up-for-the-financial-loss-from-covid-19",
-                date: "2021-06-26"
+                title: "'Someone's Going to Be Left Holding the Bag.' How Finance TikTok Is Navigating 'Meme Stock' Hype Among Young Investors",
+                src: "https://time.com/6073524/meme-stock-tiktok/",
+                date: "2021-06-24"
             }
         ]
     }

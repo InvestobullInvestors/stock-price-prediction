@@ -30,13 +30,14 @@ const NewsCard = ({source, price, buttonText, details, ...otherProps}) => {
         newsArticles = [];
     }
 
+    //TODO: implement drag/drop and x icon
     return (
-        <Box mx={3} mt={5} px={4} py={4} borderRadius="lg" shadow="md" bg={boxColor} {...otherProps}>
-            <Flex>
-                <DragHandleIcon/>
-                <Spacer/>
-                <CloseIcon/>
-            </Flex>
+        <Box mx={3} mt={5} px={4} py={4} border="1px" borderColor="brand.400" borderRadius="lg" shadow="md" bg={boxColor} {...otherProps}>
+            {/*<Flex>*/}
+            {/*    <DragHandleIcon/>*/}
+            {/*    <Spacer/>*/}
+            {/*    <CloseIcon/>*/}
+            {/*</Flex>*/}
             <Text align="center" mt="5px" fontSize="xl" fontWeight="bold">{source}</Text>
 
             <VStack align="flex-start">
