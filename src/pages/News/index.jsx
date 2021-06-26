@@ -1,16 +1,9 @@
 import React, {useState} from "react";
-import {Button, Heading, Center, Flex, Spacer} from "@chakra-ui/react";
+import {Button, Flex, Spacer} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
 import NewsGrid from "../../components/NewsGrid";
 import NewsSourceDrawer from "../../components/NewsSourceDrawer";
-
-const CustomHeading = ({children, ...otherProps}) => (
-    <Center>
-        <Heading as="h2" size="xl" {...otherProps}>
-            {children}
-        </Heading>
-    </Center>
-)
+import CustomHeading from "../../components/CustomHeading";
 
 const News = () => {
     const [color, setColor] = useState("green");
