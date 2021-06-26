@@ -1,7 +1,9 @@
 import {BrowserRouter} from 'react-router-dom';
 import Main from "./components/Main";
 import {ChakraProvider, extendTheme} from "@chakra-ui/react"
-import StockInfoProvider from "./hooks/useStockInfo";
+import StockInfoProvider from "./contexts/useStockInfo";
+import AuthProvider from "./contexts/useAuth";
+import UserProvider from "./contexts/useUser";
 
 const theme = extendTheme({
     config: {
@@ -26,18 +28,20 @@ const theme = extendTheme({
 
 function App() {
     return (
-        <StockInfoProvider>
-            <div className="App">
-                <ChakraProvider theme={theme}>
-                    <BrowserRouter>
-                        <div>
-                            <Main/>
-                        </div>
-                    </BrowserRouter>
-                </ChakraProvider>
-            </div>
-        </StockInfoProvider>
-    );
+        <UserProvider>
+            <AuthProvider>
+                <StockInfoProvider>
+                    <div className="App">
+                        <ChakraProvider theme={theme}>
+                            <BrowserRouter>
+                                <Main/>
+                            </BrowserRouter>
+                        </ChakraProvider>
+                    </div>
+                </StockInfoProvider>
+            </AuthProvider>
+        </UserProvider>
+    )
 }
 
 export default App;

@@ -3,7 +3,7 @@ import {useColorModeValue} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
 import StockInformation from "../../components/StockInformation";
 import StockPredictionDetails from "../../components/StockPredictionDetails"
-import {useStockSymbol} from "../../hooks/useStockInfo";
+import {useStockSymbol} from "../../contexts/useStockInfo";
 
 const StockDetails = ({match}) => {
     const tickerId = match.params.tickerId;
