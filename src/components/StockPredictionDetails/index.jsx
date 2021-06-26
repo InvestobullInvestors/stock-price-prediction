@@ -1,7 +1,7 @@
 import React from "react";
 import {Grid, useColorModeValue} from "@chakra-ui/react";
 import PredictionSlider from "../PredictionSlider";
-import {usePrediction} from "../../hooks/usePredictions";
+import {usePrediction} from "../../contexts/usePredictions";
 
 const StockPredictionDetails = () => {
     const {predictedValue} = usePrediction();
