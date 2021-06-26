@@ -23,7 +23,7 @@ const StockNews = () => {
             <Heading as="h3" size="lg" p={8} textAlign="center">Stock News</Heading>
             <VStack>
                 {stockNews.map(news => (
-                    <CustomNewsLink link={news.src}>
+                    <CustomNewsLink key={news.id} link={news.src}>
                         <CustomNewsBox>
                             {news.title}
                         </CustomNewsBox>
