@@ -5,15 +5,29 @@ const StockNewsContext = createContext({})
 
 const StockNewsProvider = ({children}) => {
     const [stockNews, setStockNews] = useState([]);
+    const [allNewsSources, setAllNewsSources] = useState([]);
+    const [allNewsInfo, setAllNewsInfo] = useState([]);
 
     const setNews = (stockSymbol) => {
-        axios.get(`http://localhost:3000/stock-news/${stockSymbol}`).then((response) => {
+        axios.get(`http://localhost:3000/stock-news/news/${stockSymbol}`).then((response) => {
             setStockNews(response.data.news);
         })
     }
 
+    const setNewsSources = () => {
+        axios.get(`http://localhost:3000/stock-news/allNewsSources`).then((response) => {
+            setAllNewsSources(response.data);
+        })
+    }
+
+    const setNewsInfo = () => {
+        axios.get('http://localhost:3000/stock-news/allNewsInfo').then((response) => {
+            setAllNewsInfo(response.data);
+        })
+    }
+
     return (
-        <StockNewsContext.Provider value={{stockNews, setNews}}>
+        <StockNewsContext.Provider value={{stockNews, allNewsSources, allNewsInfo, setNewsInfo, setNewsSources, setNews}}>
             {children}
         </StockNewsContext.Provider>
     )
