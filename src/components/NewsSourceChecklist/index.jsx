@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
     Checkbox,
     VStack,
@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react"
 
 import {CheckIcon} from "@chakra-ui/icons"
-import {useStockNews} from "../../hooks/useStockNews";
+import {useStockNews} from "../../contexts/useStockNews";
 
 const Source = ({title}) => {
     return (

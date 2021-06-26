@@ -1,7 +1,7 @@
 import React from 'react';
 import {SimpleGrid} from '@chakra-ui/react';
 import NewsCard from "../NewsCard";
-import {useStockNews} from "../../hooks/useStockNews";
+import {useStockNews} from "../../contexts/useStockNews";
 
 const NewsGrid = () => {
 

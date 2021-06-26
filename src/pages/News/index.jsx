@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Button, Flex, Spacer} from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
 import NewsGrid from "../../components/NewsGrid";
 import NewsSourceDrawer from "../../components/NewsSourceDrawer";
 import CustomHeading from "../../components/CustomHeading";
-import {useStockNews} from "../../hooks/useStockNews";
+import {useStockNews} from "../../contexts/useStockNews";
 
 const News = () => {
     const [color, setColor] = useState("green");
