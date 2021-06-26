@@ -3,6 +3,7 @@ import Main from "./components/Main";
 import {ChakraProvider, extendTheme} from "@chakra-ui/react"
 import StockInfoProvider from "./hooks/useStockInfo";
 import PredictionProvider from "./hooks/usePredictions";
+import StockNewsProvider from "./hooks/useStockNews";
 
 const theme = extendTheme({
     config: {
@@ -29,15 +30,17 @@ function App() {
     return (
         <StockInfoProvider>
             <PredictionProvider>
-                <div className="App">
-                    <ChakraProvider theme={theme}>
-                        <BrowserRouter>
-                            <div>
-                                <Main/>
-                            </div>
-                        </BrowserRouter>
-                    </ChakraProvider>
-                </div>
+                <StockNewsProvider>
+                    <div className="App">
+                        <ChakraProvider theme={theme}>
+                            <BrowserRouter>
+                                <div>
+                                    <Main/>
+                                </div>
+                            </BrowserRouter>
+                        </ChakraProvider>
+                    </div>
+                </StockNewsProvider>
             </PredictionProvider>
         </StockInfoProvider>
     );

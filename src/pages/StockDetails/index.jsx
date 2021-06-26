@@ -6,15 +6,19 @@ import {useStockSymbol} from "../../hooks/useStockInfo";
 import StockPredictionOverview from "../../components/StockPredictionOverview";
 import StockPredictionDetails from "../../components/StockPredictionDetails";
 import {usePrediction} from "../../hooks/usePredictions";
+import StockNews from "../../components/StockNews";
+import {useStockNews} from "../../hooks/useStockNews";
 
 const StockDetails = ({match}) => {
     const tickerId = match.params.tickerId;
     const {setSymbol} = useStockSymbol();
     const {setPrediction} = usePrediction();
+    const {setNews} = useStockNews();
 
     useEffect(() => {
         setSymbol(tickerId);
         setPrediction(tickerId);
+        setNews(tickerId);
     }, [tickerId]);
 
     return (
@@ -22,6 +26,7 @@ const StockDetails = ({match}) => {
             <StockInformation/>
             <StockPredictionOverview/>
             <StockPredictionDetails/>
+            <StockNews/>
         </PageTemplate>
     )
 }

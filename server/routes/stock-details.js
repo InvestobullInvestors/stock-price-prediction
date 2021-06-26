@@ -3,7 +3,7 @@ var router = express.Router();
 
 const defaultDetails = {
     company_name: "",
-    symbol: "",
+    ticker: "",
     current_price: 0,
     previous_close: 0,
     open: 0,
@@ -23,7 +23,7 @@ const defaultDetails = {
 const stockInfo = [
     {
         company_name: "Tesla",
-        symbol: "TSLA",
+        ticker: "TSLA",
         current_price: 615.18,
         previous_close: 570.15,
         open: 602.14,
@@ -41,7 +41,7 @@ const stockInfo = [
     },
     {
         company_name: "AMC",
-        symbol: "AMC",
+        ticker: "AMC",
         current_price: 49.11,
         last_price: 49.34,
         previous_close: 49.15,
@@ -61,7 +61,7 @@ const stockInfo = [
 
 /* GET stock details. */
 router.get('/:ticker', function (req, res) {
-    const details = stockInfo.filter((stock) => stock.symbol === req.params.ticker);
+    const details = stockInfo.filter((stock) => stock.ticker === req.params.ticker);
     res.send(details.length === 1 ? details[0] : defaultDetails)
 });
 
