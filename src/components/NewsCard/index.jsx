@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-    Box,
-    Text,
-    VStack,
-    useColorModeValue,
-    Flex,
-    Spacer,
-    Divider, Link
-} from '@chakra-ui/react';
-import { CloseIcon, DragHandleIcon } from "@chakra-ui/icons"
+import {Box, Flex, Link, Spacer, Text, useColorModeValue, VStack} from '@chakra-ui/react';
+import {CloseIcon, DragHandleIcon} from "@chakra-ui/icons"
+import {useStockNews} from "../../hooks/useStockNews";
 
 const NewsArticle = ({date, title, article}) => {
 
@@ -26,22 +19,31 @@ const NewsArticle = ({date, title, article}) => {
 const NewsCard = ({source, price, buttonText, details, ...otherProps}) => {
     const boxColor = useColorModeValue("brand.100", "brand.700");
 
+    const {allNewsInfo} = useStockNews();
+
+    let newsDetails = allNewsInfo.filter(newsInfo => newsInfo.name === source)
+    let newsArticles;
+
+    if (newsDetails.length === 1) {
+        newsArticles = allNewsInfo.filter(newsInfo => newsInfo.name === source)[0].articles
+    } else {
+        newsArticles = [];
+    }
+
     return (
         <Box mx={3} mt={5} px={4} py={4} borderRadius="lg" shadow="md" bg={boxColor} {...otherProps}>
             <Flex>
-                <DragHandleIcon />
-                <Spacer />
-                <CloseIcon />
+                <DragHandleIcon/>
+                <Spacer/>
+                <CloseIcon/>
             </Flex>
             <Text align="center" mt="5px" fontSize="xl" fontWeight="bold">{source}</Text>
+
             <VStack align="flex-start">
-                <NewsArticle date={"2021-06-11"} title={"Fed to Sell Corporate Bonds"} article={"https://www.ft.com/content/ea1da319-98b2-4440-8ea9-471c986502ff"}/>
-                <Divider my={16} orientation="horizontal" variant="dashed"/>
-                <NewsArticle date={"2021-06-11"} title={"Fed to Sell Corporate Bonds"} article={"https://www.ft.com/content/ea1da319-98b2-4440-8ea9-471c986502ff"}/>
-                <Divider my={16} orientation="horizontal" variant="dashed"/>
-                <NewsArticle date={"2021-06-11"} title={"Fed to Sell Corporate Bonds"} article={"https://www.ft.com/content/ea1da319-98b2-4440-8ea9-471c986502ff"}/>
-                <Divider my={16} orientation="horizontal" variant="dashed"/>
-                <NewsArticle date={"2021-06-11"} title={"Fed to Sell Corporate Bonds"} article={"https://www.ft.com/content/ea1da319-98b2-4440-8ea9-471c986502ff"}/>
+                {
+                    newsArticles.map(article => <NewsArticle date={article.date} title={article.title}
+                                                             article={article.src}/>)
+                }
             </VStack>
         </Box>
     )
