@@ -4,25 +4,28 @@ var router = express.Router();
 
 const defaultPredictions = {
     company_name: "",
+    ticker: "",
     inflation: 0,
-    revenueGrowth: 0
+    revenueGrowth: 0,
+    eps: 0,
+    marketCap: 0
 }
 
 const stockPredictions = [
     {
         company_name: "Tesla",
-        symbol: "TSLA",
+        ticker: "TSLA",
         inflation: 50,
         revenueGrowth: 80,
-        eps: 300,
+        eps: 1,
         marketCap: 500
     },
     {
         company_name: "AMC",
-        symbol: "AMC",
+        ticker: "AMC",
         inflation: 15,
         revenueGrowth: 25,
-        eps: 20,
+        eps: -2.5,
         marketCap: 10
     }
 ]
@@ -30,7 +33,7 @@ const stockPredictions = [
 
 /* GET prediction details. */
 router.get('/:ticker', function (req, res) {
-    const details = stockPredictions.filter((stock) => stock.symbol === req.params.ticker);
+    const details = stockPredictions.filter((stock) => stock.ticker === req.params.ticker);
     res.send(details.length === 1 ? details[0] : defaultPredictions)
 });
 
