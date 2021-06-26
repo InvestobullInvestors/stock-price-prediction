@@ -1,20 +1,22 @@
-import { useState } from 'react';
 import WatchlistButton from '../WatchlistButton';
-import { Stack, HStack, VStack, Text } from "@chakra-ui/react"
+import { Link, HStack } from '@chakra-ui/react';
 
-const StockSymbol = () => {
-    const [symbol, setSymbol] = useState("TSLA");
-
-    const loadPage = () => {
-        console.log(symbol + " clicked");
-    }
+const StockSymbol = ({ ticker }) => {
+    const loadPage = () => {};
 
     return (
-        <HStack spacing="24px">
-            <WatchlistButton/>
-            <Text color="blue" fontWeight="bold" _hover={{ textDecoration: "underline", cursor: "pointer" }} onClick={loadPage}>{symbol}</Text>
+        <HStack spacing='24px'>
+            <WatchlistButton />
+            <Link
+                href={ticker}
+                color='blue'
+                fontWeight='bold'
+                onClick={loadPage}
+            >
+                {ticker}
+            </Link>
         </HStack>
-    )
-}
+    );
+};
 
 export default StockSymbol;

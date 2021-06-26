@@ -1,24 +1,22 @@
-import {stockInfo} from "../../shared/stockInfo";
-import StockSymbol from "../StockSymbol";
-import {
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-} from "@chakra-ui/react"
-
+import { stockInfo } from '../../shared/stockInfo';
+import StockSymbol from '../StockSymbol';
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import React from 'react';
+import { useTable, useSortBy } from 'react-table';
 
 const StockTable = () => {
     const stocks = stockInfo;
 
+    // Displays the details for a stock row
     const TableData = () => {
         return stocks.map((stock, index) => {
             return (
                 <Tr key={stock.symbol}>
-                    <Td>{<StockSymbol/>}</Td>
+                    <Td>
+                        <StockSymbol ticker={stock.symbol} />
+                    </Td>
+                    <Td>{stock.previous_close}</Td>
+                    <Td>{stock.open}</Td>
                     <Td>{stock.last_price}</Td>
                     <Td>{stock.change}</Td>
                     <Td>{stock.change_percent}</Td>
@@ -28,37 +26,34 @@ const StockTable = () => {
                     <Td>{stock.avg_vol}</Td>
                     <Td>{stock.market_cap}</Td>
                 </Tr>
-            )
-        })
-    }
-
-    const TableHeader = () => {
-        console.log("stocks: ", stocks);
-        console.log("Hello!")
-        let header = Object.keys(stocks[0])
-
-        return header.map((key, index) => {
-            return <Th key={index}>
-                {key}
-            </Th>
-        })
-    }
+            );
+        });
+    };
 
     return (
         <div>
-            <Table size="sm" variant="striped" colorScheme="facebook">
-                <TableCaption placement="top">Stock Table</TableCaption>
+            <Table size='sm' variant='striped' colorScheme='facebook'>
                 <Thead>
                     <Tr>
-                        <TableHeader/>
+                        <Th></Th>
+                        <Th></Th>
+                        <Th></Th>
+                        <Th>Last Price</Th>
+                        <Th>Change</Th>
+                        <Th>Chg %</Th>
+                        <Th>Currency</Th>
+                        <Th>Volume</Th>
+                        <Th>Shares</Th>
+                        <Th>Avg Vol</Th>
+                        <Th>Market Cap</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
-                    <TableData/>
+                    <TableData />
                 </Tbody>
             </Table>
         </div>
-    )
-}
+    );
+};
 
 export default StockTable;

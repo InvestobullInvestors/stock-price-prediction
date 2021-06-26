@@ -1,11 +1,9 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
-import { AiFillStar } from "react-icons/ai";
+import { BsStar } from "react-icons/bs";
 
 const WatchlistButton = () => {
     return (
-    <Button leftIcon={<AiFillStar />} colorScheme="green" variant="solid">
-        Add to watchlist
-    </Button>
+    <Button leftIcon={<BsStar/>} colorScheme="green" variant="outline"/>
     )
 }
 

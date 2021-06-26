@@ -2,8 +2,6 @@ export const stockInfo = [
     {
         company_name: "Tesla, Inc.",
         symbol: "TSLA",
-        previous_close: 570.15,
-        open: 602.14,
         last_price: 609.89,
         change: -0.23,
         change_percent: "-0.04%",
