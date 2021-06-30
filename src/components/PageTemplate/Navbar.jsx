@@ -3,17 +3,27 @@ import {Link} from 'react-router-dom'
 import {
     Avatar,
     Button,
+    Divider,
+    Drawer,
+    DrawerBody,
+    DrawerContent, DrawerHeader,
+    DrawerOverlay,
     Flex,
+    Image,
     Menu,
     MenuButton,
     MenuDivider,
     MenuItem,
     MenuList,
     useColorMode,
-    useColorModeValue
+    useColorModeValue,
+    useDisclosure
 } from "@chakra-ui/react";
 import {BellIcon, ChevronDownIcon, HamburgerIcon} from "@chakra-ui/icons";
 import NotificationList from "../NotificationList";
+import LoginPopup from "../LoginPopup";
+import {useUser} from "../../contexts/useUser";
+import {useAuth} from "../../contexts/useAuth";
 
 const PADDING = 1
 const MARGIN = 1
@@ -21,26 +31,42 @@ const ICON_SIZE = 6
 const MENU_MAX_WIDTH = 60
 
 const Logo = () => (
-    // TODO: update logo
-    <Button as={Link} to="/" fontSize={24} fontWeight={200} m={MARGIN}>InvestoBull</Button>
+    <Button as={Link} to="/" fontSize={24} fontWeight={200} m={MARGIN}>
+        InvestoBull
+        <Image src="https://image.flaticon.com/icons/png/512/4072/4072641.png" boxSize={8}/>
+    </Button>
 )
 
-const HamburgerMenu = ({bgColor}) => (
+const HamburgerMenu = ({bgColor}) => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     // visible when screen width narrow
-    <Flex display={['flex', 'flex', 'none', 'none']}>
-        <Menu>
-            <MenuButton as={Button} bg="transparent" px={PADDING} m={MARGIN}>
-                <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
-            </MenuButton>
-            <MenuList bg={bgColor}  maxW={MENU_MAX_WIDTH}>
-                <MenuItem as={Link} to="/">Home</MenuItem>
-                <MenuItem as={Link} to="/watchlist">Watchlist</MenuItem>
-                <MenuItem as={Link} to="/news">News</MenuItem>
-                <MenuItem as={Link} to="/about">About</MenuItem>
-            </MenuList>
-        </Menu>
+    return <Flex display={['flex', 'flex', 'none', 'none']}>
+        <Button onClick={onOpen} bg="transparent" px={PADDING} m={MARGIN}>
+            <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
+        </Button>
+        <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
+            <DrawerOverlay/>
+            <DrawerContent bg={bgColor}>
+                <DrawerHeader borderBottomWidth="1px">
+                    <Button onClick={onClose} bg="transparent" px={PADDING} mr={3}>
+                        <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
+                    </Button>
+                    MENU
+                </DrawerHeader>
+                <DrawerBody>
+                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/">Home</Button>
+                    <Divider my={1}/>
+                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/watchlist">Watchlist</Button>
+                    <Divider my={1}/>
+                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/news">News</Button>
+                    <Divider my={1}/>
+                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/about">About</Button>
+                </DrawerBody>
+            </DrawerContent>
+        </Drawer>
     </Flex>
-)
+}
 
 const Links = () => (
     // visible when screen width wide
@@ -54,15 +80,15 @@ const Links = () => (
 
 const sampleNotifications = [
     {
-        text: "Hi! I am the 1st notification! I can take up multiple lines if needed!",
+        text: "AMC jumped by 50%",
         viewed: false
     },
     {
-        text: "Me is 2nd notification!",
+        text: "TSLA fell by 25%",
         viewed: true
     },
     {
-        text: "3rd notification here!",
+        text: "Welcome to Investobull!",
         viewed: false
     }
 ]
@@ -79,32 +105,48 @@ const NotificationMenu = ({bgColor}) => (
     </Menu>
 )
 
-const userName = "pro_sk8ter_boi"
+const UserMenu = ({bgColor, setLogoutError}) => {
+    const {user} = useUser()
+    const {logout} = useAuth()
+    const {toggleColorMode} = useColorMode()
 
-const UserMenu = ({bgColor, toggleColorMode, setLoggedIn}) => (
+    const handleLogout = async () => {
+        try {
+            setLogoutError("")
+            await logout()
+        } catch {
+            return setLogoutError("Failed to log out")
+        }
+    }
+
+    return (
     <Menu>
         <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
             <Avatar size="sm"/>
         </MenuButton>
         <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-            <MenuItem fontWeight="bold" isTruncated>{userName}</MenuItem>
+            <MenuItem fontWeight="bold" isTruncated>{user.email}</MenuItem>
             <MenuDivider/>
-            <MenuItem as={Link} to="/plans">Upgrade Account</MenuItem>
+            <MenuItem as={Link} to="/plans">Plans & Pricing</MenuItem>
             <MenuItem>Help</MenuItem>
             <MenuItem as="button" onClick={toggleColorMode}>
                 Use {useColorMode().colorMode === "light" ? "Dark" : "Light"} Theme
             </MenuItem>
-            <MenuItem as="button" onClick={() => setLoggedIn(false)}>Log Out</MenuItem>
+            <MenuItem as="button" onClick={handleLogout}>Log Out</MenuItem>
         </MenuList>
     </Menu>
-)
+    )
+}
 
 const Navbar = () => {
-    const {toggleColorMode} = useColorMode()
+    const {user} = useUser()
+
     const bgColor = useColorModeValue("brand.400", "brand.900")
     const txtColor = useColorModeValue("brand.900", "brand.100")
-    const [loggedIn, setLoggedIn] = useState(false)
+
+    const [logoutError, setLogoutError] = useState("")
+    // TODO: do something with logoutError
 
     return <Flex zIndex={5} pos="sticky" top={0} w="100%" justify="center" bg={bgColor} color={txtColor}>
         <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
@@ -114,11 +156,14 @@ const Navbar = () => {
             <Links/>
 
             <Flex flex="1" align="center" justify="flex-end">
-                {!loggedIn && <Button onClick={() => setLoggedIn(true)}>Log In</Button>}
-                {loggedIn && <>
-                    <NotificationMenu bgColor={bgColor}/>
-                    <UserMenu bgColor={bgColor} toggleColorMode={toggleColorMode} setLoggedIn={setLoggedIn}/>
-                </>}
+                {user ?
+                    <>
+                        <NotificationMenu bgColor={bgColor}/>
+                        <UserMenu bgColor={bgColor} setLogoutError={setLogoutError}/>
+                    </>
+                    :
+                    <LoginPopup/>
+                }
             </Flex>
 
         </Flex>

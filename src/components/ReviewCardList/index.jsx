@@ -2,7 +2,7 @@ import React from 'react';
 import {SimpleGrid} from '@chakra-ui/react';
 import ReviewCard from "../ReviewCard";
 
-const ReviewCardList = (props) => (
+const ReviewCardList = () => (
     <SimpleGrid columns={{base: 1, sm: 2, md: 4}} spacing={3}>
         <ReviewCard name="Himanshu Goyal" imageUrl="" rating={5} reviewTitle="This is the best"
                     reviewSummary="I do not know what to write"/>

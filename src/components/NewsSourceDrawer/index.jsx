@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react"
 
 import {CheckIcon} from "@chakra-ui/icons"
+import NewsSourceChecklist from "../NewsSourceChecklist";
 
 const Source = ({title}) => {
     return (
@@ -38,11 +39,12 @@ const NewsSourceDrawer = () => {
                 <DrawerContent>
                     <DrawerHeader borderBottomWidth="1px">Sources</DrawerHeader>
                     <DrawerBody>
-                        <Source title={"The New York Times"}/>
-                        <Divider my={3} variant="dashed"/>
-                        <Source title={"Time"}/>
-                        <Divider my={3} variant="dashed"/>
-                        <Source title={"The Economist"}/>
+                        <NewsSourceChecklist/>
+                        {/*<Source title={"The New York Times"}/>*/}
+                        {/*<Divider my={3} variant="dashed"/>*/}
+                        {/*<Source title={"Time"}/>*/}
+                        {/*<Divider my={3} variant="dashed"/>*/}
+                        {/*<Source title={"The Economist"}/>*/}
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>

@@ -55,4 +55,4 @@ We will store user login credentials, user watch lists, and historical stock dat
 - Set up a customer on Stripe 
 - Save the Stripe customer id corresponding to a customer in the database 
 - Build the payments UI using Stripe Elements 
-- Save Credit Cards on Strip 
+- Save Credit Cards on Strip
