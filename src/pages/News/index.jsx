@@ -1,16 +1,10 @@
-import React, {useState} from "react";
-import {Button, Heading, Center, Flex, Spacer} from "@chakra-ui/react";
+import React, {useEffect, useState} from "react";
+import {Flex} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
 import NewsGrid from "../../components/NewsGrid";
 import NewsSourceDrawer from "../../components/NewsSourceDrawer";
-
-const CustomHeading = ({children, ...otherProps}) => (
-    <Center>
-        <Heading as="h2" size="xl" {...otherProps}>
-            {children}
-        </Heading>
-    </Center>
-)
+import CustomHeading from "../../components/CustomHeading";
+import {useStockNews} from "../../contexts/useStockNews";
 
 const News = () => {
     const [color, setColor] = useState("green");
@@ -19,12 +13,20 @@ const News = () => {
         setColor(color === "green" ? "red" : "green");
     }
 
+    const {setNewsSources, setNewsInfo, allNewsInfo} = useStockNews();
+
+    useEffect(() => {
+        setNewsSources();
+        setNewsInfo();
+    }, [])
+
+    //TODO: enable watchlist filter
     return (
         <PageTemplate>
             <Flex>
                 <NewsSourceDrawer/>
-                <Spacer/>
-                <Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>
+                {/*<Spacer/>*/}
+                {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
             </Flex>
             <CustomHeading>News</CustomHeading>
             <NewsGrid/>
