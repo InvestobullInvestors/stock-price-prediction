@@ -1,7 +1,6 @@
 import React from 'react';
-import {Box, Flex, Link, Spacer, Text, useColorModeValue, VStack} from '@chakra-ui/react';
-import {CloseIcon, DragHandleIcon} from "@chakra-ui/icons"
-import {useStockNews} from "../../hooks/useStockNews";
+import {Box, Link, Text, useColorModeValue, VStack} from '@chakra-ui/react';
+import {useStockNews} from "../../contexts/useStockNews";
 
 const NewsArticle = ({date, title, article}) => {
 

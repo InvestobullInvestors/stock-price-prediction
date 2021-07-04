@@ -2,12 +2,12 @@ import React, {useEffect} from "react";
 import {useColorModeValue} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
 import StockInformation from "../../components/StockInformation";
-import {useStockSymbol} from "../../hooks/useStockInfo";
-import StockPredictionOverview from "../../components/StockPredictionOverview";
-import StockPredictionDetails from "../../components/StockPredictionDetails";
-import {usePrediction} from "../../hooks/usePredictions";
 import StockNews from "../../components/StockNews";
-import {useStockNews} from "../../hooks/useStockNews";
+import StockPredictionDetails from "../../components/StockPredictionDetails";
+import StockPredictionOverview from "../../components/StockPredictionOverview";
+import {usePrediction} from "../../contexts/usePredictions";
+import {useStockSymbol} from "../../contexts/useStockInfo";
+import {useStockNews} from "../../contexts/useStockNews";
 
 const StockDetails = ({match}) => {
     const tickerId = match.params.tickerId;
