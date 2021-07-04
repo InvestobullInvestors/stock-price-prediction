@@ -7,20 +7,15 @@ import {
     useColorModeValue,
     Button,
     InputRightElement,
-    Wrap,
-    WrapItem,
 } from '@chakra-ui/react';
-import {
-    AutoComplete,
-    AutoCompleteInput,
-    AutoCompleteItem,
-    AutoCompleteList,
-} from '@choc-ui/chakra-autocomplete';
 import { GoSearch } from 'react-icons/go';
+import { useState } from 'react';
 
 const StockSearchBar = () => {
-    const searchOptions = ['TSLA', 'BB', 'AMC', 'CLOV', 'U', 'FB'];
     const boxColor = useColorModeValue('brand.100', 'brand.700');
+    const [value, setValue] = useState('');
+
+    const handleChange = (event) => setValue(event.target.value);
 
     const handleClick = () => {};
 
@@ -36,40 +31,23 @@ const StockSearchBar = () => {
         >
             <Stack direction='row' spacing={4}>
                 <InputGroup>
-                    <AutoComplete rollNavigation>
-                        <InputGroup>
-                            <AutoCompleteInput
-                                variant='filled'
-                                placeholder='Search for symbol'
-                                defaultValue=''
-                                autoFocus
-                                textAlign='left'
-                                width='1000px'
-                            />
-                            <InputRightElement width='5rem'>
-                                <Button
-                                    h='1.75rem'
-                                    size='lg'
-                                    variant='solid'
-                                    colorScheme='blue'
-                                    onClick={handleClick}
-                                >
-                                    {<GoSearch color='white' />}
-                                </Button>
-                            </InputRightElement>
-                        </InputGroup>
-                        <AutoCompleteList>
-                            {searchOptions.map((option, oid) => (
-                                <AutoCompleteItem
-                                    key={`option-${oid}`}
-                                    value={option}
-                                    textTransform='capitalize'
-                                >
-                                    {option}
-                                </AutoCompleteItem>
-                            ))}
-                        </AutoCompleteList>
-                    </AutoComplete>
+                    <InputLeftElement pointerEvents='none' />
+                    <Input
+                        value={value}
+                        onChange={handleChange}
+                        placeholder='Search for symbol'
+                    />
+                    <InputRightElement width='5rem'>
+                        <Button
+                            h='1.75rem'
+                            size='lg'
+                            variant='solid'
+                            colorScheme='blue'
+                            onClick={handleClick}
+                        >
+                            {<GoSearch color='white' />}
+                        </Button>
+                    </InputRightElement>
                 </InputGroup>
             </Stack>
         </Box>
