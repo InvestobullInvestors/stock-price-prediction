@@ -1,5 +1,5 @@
 import {
-    Stack,
+    HStack,
     InputGroup,
     InputLeftElement,
     Input,
@@ -7,6 +7,7 @@ import {
     useColorModeValue,
     Button,
     InputRightElement,
+    Container,
 } from '@chakra-ui/react';
 import { GoSearch } from 'react-icons/go';
 import { useState } from 'react';
@@ -30,27 +31,29 @@ const StockSearchBar = () => {
             shadow='md'
             bg={boxColor}
         >
-            <Stack direction='row' spacing={4}>
-                <InputGroup>
-                    <InputLeftElement pointerEvents='none' />
-                    <Input
-                        value={value}
-                        onChange={handleChange}
-                        placeholder='Search for symbol'
-                    />
-                    <InputRightElement width='5rem'>
-                        <Button
-                            h='1.75rem'
-                            size='lg'
-                            variant='solid'
-                            colorScheme={color}
-                            onClick={handleClick}
-                        >
-                            {<GoSearch color='white' />}
-                        </Button>
-                    </InputRightElement>
-                </InputGroup>
-            </Stack>
+            <HStack>
+                <Container centerContent maxW='container.lg'>
+                    <InputGroup>
+                        <InputLeftElement pointerEvents='none' />
+                        <Input
+                            value={value}
+                            onChange={handleChange}
+                            placeholder='Search for symbol'
+                        />
+                        <InputRightElement width='5rem'>
+                            <Button
+                                h='1.75rem'
+                                size='lg'
+                                variant='solid'
+                                colorScheme={color}
+                                onClick={handleClick}
+                            >
+                                {<GoSearch color='white' />}
+                            </Button>
+                        </InputRightElement>
+                    </InputGroup>
+                </Container>
+            </HStack>
         </Box>
     );
 };

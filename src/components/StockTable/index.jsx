@@ -8,9 +8,10 @@ import {
     Th,
     Td,
     useColorModeValue,
+    VStack,
+    Container,
 } from '@chakra-ui/react';
 import React from 'react';
-import { useTable, useSortBy } from 'react-table';
 
 const StockTable = () => {
     const stocks = stockInfo;
@@ -40,28 +41,35 @@ const StockTable = () => {
     };
 
     return (
-        <div>
-            <Table size='sm' variant='striped' colorScheme={color}>
-                <Thead>
-                    <Tr>
-                        <Th></Th>
-                        <Th></Th>
-                        <Th></Th>
-                        <Th>Last Price</Th>
-                        <Th>Change</Th>
-                        <Th>Chg %</Th>
-                        <Th>Currency</Th>
-                        <Th>Volume</Th>
-                        <Th>Shares</Th>
-                        <Th>Avg Vol</Th>
-                        <Th>Market Cap</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    <TableData />
-                </Tbody>
-            </Table>
-        </div>
+        <VStack>
+            <Container centerContent>
+                <Table
+                    size='sm'
+                    variant='striped'
+                    colorScheme={color}
+                    width='30%'
+                >
+                    <Thead>
+                        <Tr>
+                            <Th></Th>
+                            <Th></Th>
+                            <Th></Th>
+                            <Th>Last Price</Th>
+                            <Th>Change</Th>
+                            <Th>Chg %</Th>
+                            <Th>Currency</Th>
+                            <Th>Volume</Th>
+                            <Th>Shares</Th>
+                            <Th>Avg Vol</Th>
+                            <Th>Market Cap</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        <TableData />
+                    </Tbody>
+                </Table>
+            </Container>
+        </VStack>
     );
 };
 

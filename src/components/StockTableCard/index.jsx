@@ -4,6 +4,11 @@ import {
     useColorModeValue,
     HStack,
     SimpleGrid,
+    Flex,
+    Stack,
+    Center,
+    Spacer,
+    Container,
 } from '@chakra-ui/react';
 import SearchBar from '../StockSearchBar';
 import StockTable from '../StockTable';
@@ -20,9 +25,11 @@ const StockTableCard = () => {
             shadow='md'
             bg={boxColor}
         >
-            <VStack>
-                <StockTable />
-            </VStack>
+            <HStack>
+                <Container>
+                    <StockTable />
+                </Container>
+            </HStack>
         </Box>
     );
 };
