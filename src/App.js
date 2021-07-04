@@ -4,7 +4,6 @@ import {ChakraProvider, extendTheme} from "@chakra-ui/react"
 import StockInfoProvider from "./hooks/useStockInfo";
 import PredictionProvider from "./hooks/usePredictions";
 import StockNewsProvider from "./hooks/useStockNews";
-import {DragDropContext} from "react-beautiful-dnd"
 
 const theme = extendTheme({
     config: {
@@ -29,23 +28,21 @@ const theme = extendTheme({
 
 function App() {
     return (
-        <DragDropContext onDragEnd={(result) => console.log(result)}>
-            <StockInfoProvider>
-                <PredictionProvider>
-                    <StockNewsProvider>
-                        <div className="App">
-                            <ChakraProvider theme={theme}>
-                                <BrowserRouter>
-                                    <div>
-                                        <Main/>
-                                    </div>
-                                </BrowserRouter>
-                            </ChakraProvider>
-                        </div>
-                    </StockNewsProvider>
-                </PredictionProvider>
-            </StockInfoProvider>
-        </DragDropContext>
+        <StockInfoProvider>
+            <PredictionProvider>
+                <StockNewsProvider>
+                    <div className="App">
+                        <ChakraProvider theme={theme}>
+                            <BrowserRouter>
+                                <div>
+                                    <Main/>
+                                </div>
+                            </BrowserRouter>
+                        </ChakraProvider>
+                    </div>
+                </StockNewsProvider>
+            </PredictionProvider>
+        </StockInfoProvider>
     );
 }
 
