@@ -1,11 +1,20 @@
 import { stockInfo } from '../../shared/stockInfo';
 import StockSymbol from '../StockSymbol';
-import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import {
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    useColorModeValue,
+} from '@chakra-ui/react';
 import React from 'react';
 import { useTable, useSortBy } from 'react-table';
 
 const StockTable = () => {
     const stocks = stockInfo;
+    const color = useColorModeValue('facebook', 'blackAlpha');
 
     // Displays the details for a stock row
     const TableData = () => {
@@ -32,7 +41,7 @@ const StockTable = () => {
 
     return (
         <div>
-            <Table size='sm' variant='striped' colorScheme='facebook'>
+            <Table size='sm' variant='striped' colorScheme={color}>
                 <Thead>
                     <Tr>
                         <Th></Th>

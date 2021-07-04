@@ -14,6 +14,7 @@ import { useState } from 'react';
 const StockSearchBar = () => {
     const boxColor = useColorModeValue('brand.100', 'brand.700');
     const [value, setValue] = useState('');
+    const color = useColorModeValue('blue', 'gray');
 
     const handleChange = (event) => setValue(event.target.value);
 
@@ -42,7 +43,7 @@ const StockSearchBar = () => {
                             h='1.75rem'
                             size='lg'
                             variant='solid'
-                            colorScheme='blue'
+                            colorScheme={color}
                             onClick={handleClick}
                         >
                             {<GoSearch color='white' />}
