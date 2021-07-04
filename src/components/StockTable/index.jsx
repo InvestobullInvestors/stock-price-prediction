@@ -1,5 +1,6 @@
 import { stockInfo } from '../../shared/stockInfo';
 import StockSymbol from '../StockSymbol';
+import { useStockSymbol } from '../../hooks/useStockInfo';
 import {
     Table,
     Thead,
