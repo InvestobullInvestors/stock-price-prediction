@@ -1,6 +1,6 @@
 var express = require('express');
+const {stockPrediction} = require("../dal/stock-prediction");
 var router = express.Router();
-
 
 const defaultPredictions = {
     company_name: "",
@@ -11,30 +11,14 @@ const defaultPredictions = {
     marketCap: 0
 }
 
-const stockPredictions = [
-    {
-        company_name: "Tesla",
-        ticker: "TSLA",
-        inflation: 50,
-        revenueGrowth: 80,
-        eps: 1,
-        marketCap: 500
-    },
-    {
-        company_name: "AMC",
-        ticker: "AMC",
-        inflation: 15,
-        revenueGrowth: 25,
-        eps: -2.5,
-        marketCap: 10
-    }
-]
-
-
 /* GET prediction details. */
 router.get('/:ticker', function (req, res) {
-    const details = stockPredictions.filter((stock) => stock.ticker === req.params.ticker);
-    res.send(details.length === 1 ? details[0] : defaultPredictions)
+    stockPrediction.find().then(stockList => {
+        const details = stockList.filter((stock) => stock.ticker === req.params.ticker);
+        res.send(details.length === 1 ? details[0] : defaultPredictions)
+    }).catch((_) => {
+        res.send(defaultPredictions)
+    })
 });
 
 module.exports = router;
