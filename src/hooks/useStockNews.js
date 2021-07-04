@@ -26,8 +26,15 @@ const StockNewsProvider = ({children}) => {
         })
     }
 
+    const resetNews = (sources) => {
+        axios.post(`http://localhost:3000/stock-news/news/allNewsSources`, {sources}).then((response) => {
+            setAllNewsSources(response.data);
+        })
+        console.log("reset")
+    }
+
     return (
-        <StockNewsContext.Provider value={{stockNews, allNewsSources, allNewsInfo, setNewsInfo, setNewsSources, setNews}}>
+        <StockNewsContext.Provider value={{stockNews, allNewsSources, allNewsInfo, setNewsInfo, setNewsSources, setNews, resetNews}}>
             {children}
         </StockNewsContext.Provider>
     )

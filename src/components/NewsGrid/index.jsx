@@ -1,21 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {SimpleGrid} from '@chakra-ui/react';
 import NewsCard from "../NewsCard";
 import {useStockNews} from "../../hooks/useStockNews";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd"
 
 const NewsGrid = () => {
-    // const {allNewsSources} = useStockNews();
-    var {allNewsSources} = useStockNews();
+    const {allNewsSources} = useStockNews();
+    const {resetNews} = useStockNews();
 
     const reorder = (list, startIndex, endIndex) => {
-        console.log(list)
-        console.log("start index: " + startIndex)
-        console.log("end index: " + endIndex)
         const result = [...list];
         const [removed] = result.splice(startIndex, 1);
         result.splice(endIndex, 0, removed);
-        console.log(result)
         return result;
     }
 
@@ -28,10 +24,7 @@ const NewsGrid = () => {
             if (source.index === destination.index && source.droppableId === destination.droppableId) {
                 return;
             }
-            // setNewsCards((allNewsSources) =>
-            //     reorder(allNewsSources, source.index, destination.index)
-            // );
-            allNewsSources = reorder(allNewsSources, source.index, destination.index);
+            resetNews(reorder(allNewsSources, source.index, destination.index))
         }}>
             <Droppable droppableId="newsGrid">
                 {(droppableProvided) => (
