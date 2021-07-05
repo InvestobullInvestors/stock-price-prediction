@@ -21,7 +21,7 @@ const WatchlistButton = () => {
 
     return (
         <Button
-            leftIcon={icon}
+            rightIcon={icon}
             colorScheme={color}
             variant='outline'
             onClick={handleClick}

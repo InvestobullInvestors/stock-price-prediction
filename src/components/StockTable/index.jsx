@@ -1,6 +1,6 @@
 import { stockInfo } from '../../shared/stockInfo';
 import StockSymbol from '../StockSymbol';
-import { useStockSymbol } from '../../hooks/useStockInfo';
+import { useStockSymbol } from '../../contexts/useStockInfo';
 import {
     Table,
     Thead,
@@ -16,6 +16,10 @@ import React from 'react';
 
 const StockTable = () => {
     const stocks = stockInfo;
+
+    const { stocksDe } = useStockSymbol();
+    console.log('STOCKS', stocksDe);
+    //const {stockDetails} = useStockSymbol();
     const color = useColorModeValue('facebook', 'blackAlpha');
 
     // Displays the details for a stock row
@@ -53,8 +57,8 @@ const StockTable = () => {
                     <Thead>
                         <Tr>
                             <Th></Th>
-                            <Th></Th>
-                            <Th></Th>
+                            <Th>Previous Close</Th>
+                            <Th>Open</Th>
                             <Th>Last Price</Th>
                             <Th>Change</Th>
                             <Th>Chg %</Th>
