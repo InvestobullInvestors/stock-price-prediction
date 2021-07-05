@@ -18,8 +18,9 @@ const SignupForm = () => {
 
         try {
             setError("")
-            await signup(data.email, data.password)
+            await signup(data.firstname, data.lastname, data.email, data.password)
         } catch {
+            // TODO: display errors with more details
             return setError("Failed to create account")
         }
     }
@@ -32,6 +33,14 @@ const SignupForm = () => {
                 {error}
             </Alert>
             }
+            <FormControl id="firstname" isRequired mb={4}>
+                <FormLabel>First Name</FormLabel>
+                <Input type="text" placeholder="John" {...register('firstname', {required: true})}/>
+            </FormControl>
+            <FormControl id="lastname" isRequired mb={4}>
+                <FormLabel>Last Name</FormLabel>
+                <Input type="text" placeholder="Doe" {...register('lastname', {required: true})}/>
+            </FormControl>
             <FormControl id="email" isRequired mb={4}>
                 <FormLabel>Email</FormLabel>
                 <Input type="email" placeholder="email@domain.com" {...register('email', {required: true})}/>

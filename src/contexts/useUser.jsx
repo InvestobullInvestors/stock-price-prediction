@@ -5,6 +5,8 @@ const UserContext = createContext({})
 const UserProvider = ({children}) => {
     const [user, setUser] = useState({})
 
+    // user object structure: refer to useAuth.jsx -> setCurrentUser()
+
     return (
         <UserContext.Provider value={{user, setUser}}>
             {children}

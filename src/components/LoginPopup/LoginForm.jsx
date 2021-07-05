@@ -16,6 +16,7 @@ const LoginForm = () => {
             setError("")
             await login(data.email, data.password)
         } catch {
+            // TODO: display errors with more details
             return setError("Failed to log in")
         }
     }

@@ -126,7 +126,7 @@ const UserMenu = ({bgColor, setLogoutError}) => {
             <Avatar size="sm"/>
         </MenuButton>
         <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-            <MenuItem fontWeight="bold" isTruncated>{user.email}</MenuItem>
+            <MenuItem fontWeight="bold" isTruncated>{user.first_name + " " + user.last_name}</MenuItem>
             <MenuDivider/>
             <MenuItem as={Link} to="/plans">Plans & Pricing</MenuItem>
             <MenuItem>Help</MenuItem>
