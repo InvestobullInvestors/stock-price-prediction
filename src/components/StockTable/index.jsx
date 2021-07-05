@@ -20,7 +20,7 @@ const StockTable = () => {
     const { stocksDe } = useStockSymbol();
     console.log('STOCKS', stocksDe);
     //const {stockDetails} = useStockSymbol();
-    const color = useColorModeValue('facebook', 'blackAlpha');
+    const colorScheme = useColorModeValue('brand.200', 'brand.800');
 
     // Displays the details for a stock row
     const TableData = () => {
@@ -51,8 +51,9 @@ const StockTable = () => {
                 <Table
                     size='sm'
                     variant='striped'
-                    colorScheme={color}
+                    bg={colorScheme}
                     width='30%'
+                    margin='1'
                 >
                     <Thead>
                         <Tr>

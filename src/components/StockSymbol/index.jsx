@@ -10,7 +10,7 @@ const StockSymbol = ({ ticker }) => {
         <HStack spacing='24px'>
             <WatchlistButton />
             <Link
-                href={ticker}
+                href={'/stock-details/' + ticker}
                 color={color}
                 fontWeight='bold'
                 onClick={loadPage}
