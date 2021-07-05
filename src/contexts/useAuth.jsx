@@ -20,6 +20,8 @@ const AuthProvider = ({children}) => {
                 plan: "free",
                 stripe_id: "",
                 watchlist: []
+            }).then(() => {
+                console.log("new user created: " + email)
             })
         })
     }
