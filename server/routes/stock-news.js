@@ -192,7 +192,8 @@ router.get('/allNewsInfo', function (req, res) {
 });
 
 router.post('/allNewsSources', function (req, res) {
-    newsSources = req.body;
+    const {sources} = req.body
+    newsSources = sources;
     res.send(newsSources)
 });
 
