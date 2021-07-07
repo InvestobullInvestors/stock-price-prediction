@@ -1,19 +1,16 @@
 import WatchlistButton from '../WatchlistButton';
-import { Link, HStack, useColorModeValue } from '@chakra-ui/react';
+import { Link, HStack, useColorModeValue, Th, VStack } from '@chakra-ui/react';
 
 const StockSymbol = ({ ticker }) => {
     const color = useColorModeValue('blue', 'blue.400');
 
-    const loadPage = () => {};
-
     return (
         <HStack spacing='24px'>
-            <WatchlistButton />
+            <WatchlistButton symbol={ticker} />
             <Link
                 href={'/stock-details/' + ticker}
                 color={color}
                 fontWeight='bold'
-                onClick={loadPage}
             >
                 {ticker}
             </Link>

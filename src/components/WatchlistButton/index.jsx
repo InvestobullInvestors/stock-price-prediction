@@ -2,7 +2,7 @@ import { IconButton, useColorModeValue } from '@chakra-ui/react';
 import { BsStar, BsStarFill } from 'react-icons/bs';
 import { useState } from 'react';
 
-const WatchlistButton = () => {
+const WatchlistButton = ({ symbol }) => {
     const [icon, setIcon] = useState(<BsStar />);
     const [iconClicked, setIconClicked] = useState(true);
     const color = useColorModeValue('yellow', 'orange');
@@ -12,10 +12,12 @@ const WatchlistButton = () => {
             // Add to watchlist
             setIcon(<BsStarFill />);
             setIconClicked(!iconClicked);
+            console.log('Added stock to watchlist: ', { symbol });
         } else {
             // Remove from watchlist
             setIcon(<BsStar />);
             setIconClicked(!iconClicked);
+            console.log('Removed stock from watchlist: ', { symbol });
         }
     };
 

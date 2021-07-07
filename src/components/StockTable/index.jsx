@@ -1,6 +1,7 @@
 import { stockInfo } from '../../shared/stockInfo';
 import StockSymbol from '../StockSymbol';
-import { useStockSymbol } from '../../contexts/useStockInfo';
+
+import './styles.css';
 import {
     Table,
     Thead,
@@ -15,24 +16,31 @@ import {
     Code,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useStockSymbolList } from '../../hooks/useStockList';
 
 const StockTable = () => {
     const stocks = stockInfo;
-
-    const { stocksDe } = useStockSymbol();
-    console.log('STOCKS', stocksDe);
-    //const {stockDetails} = useStockSymbol();
+    const { stockDetails } = useStockSymbolList();
+    console.log('Stocks Context: ', stockDetails);
     const colorScheme = useColorModeValue('brand.200', 'brand.800');
 
     // Changes color of text to red or green
     const changeTextColor = (text) => {
         const textStr = text.toString();
         if (textStr.includes('-')) {
-            return <Text as='b' color='red'>{textStr}</Text>
+            return (
+                <Text as='b' color='red'>
+                    {textStr}
+                </Text>
+            );
         } else {
-            return <Text as='b' color='green'>{textStr}</Text>
+            return (
+                <Text as='b' color='green'>
+                    {textStr}
+                </Text>
+            );
         }
-    }
+    };
 
     // Displays the details for a stock row
     const TableData = () => {
@@ -51,12 +59,8 @@ const StockTable = () => {
                     <Td>
                         <Text as='b'>{stock.last_price}</Text>
                     </Td>
-                    <Td>
-                        {changeTextColor(stock.change)}
-                    </Td>
-                    <Td>
-                        {changeTextColor(stock.change_percent)}
-                    </Td>
+                    <Td>{changeTextColor(stock.change)}</Td>
+                    <Td>{changeTextColor(stock.change_percent)}</Td>
                     <Td>
                         <Text>{stock.currency}</Text>
                     </Td>
@@ -84,12 +88,12 @@ const StockTable = () => {
                     size='sm'
                     variant='striped'
                     bg={colorScheme}
-                    width='30%'
+                    width='100%'
                     margin='1'
                 >
                     <Thead>
                         <Tr>
-                            <Th></Th>
+                            <Th textAlign='right'>Symbol</Th>
                             <Th>Previous Close</Th>
                             <Th>Open</Th>
                             <Th>Last Price</Th>
