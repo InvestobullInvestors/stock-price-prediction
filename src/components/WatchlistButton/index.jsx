@@ -1,4 +1,4 @@
-import { Button, useColorModeValue } from '@chakra-ui/react';
+import { IconButton, useColorModeValue } from '@chakra-ui/react';
 import { BsStar, BsStarFill } from 'react-icons/bs';
 import { useState } from 'react';
 
@@ -20,10 +20,10 @@ const WatchlistButton = () => {
     };
 
     return (
-        <Button
-            rightIcon={icon}
+        <IconButton
+            icon={icon}
             colorScheme={color}
-            variant='outline'
+            variant='ghost'
             onClick={handleClick}
         />
     );

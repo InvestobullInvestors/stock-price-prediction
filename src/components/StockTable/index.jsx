@@ -11,6 +11,8 @@ import {
     useColorModeValue,
     VStack,
     Container,
+    Text,
+    Code,
 } from '@chakra-ui/react';
 import React from 'react';
 
@@ -22,6 +24,16 @@ const StockTable = () => {
     //const {stockDetails} = useStockSymbol();
     const colorScheme = useColorModeValue('brand.200', 'brand.800');
 
+    // Changes color of text to red or green
+    const changeTextColor = (text) => {
+        const textStr = text.toString();
+        if (textStr.includes('-')) {
+            return <Text as='b' color='red'>{textStr}</Text>
+        } else {
+            return <Text as='b' color='green'>{textStr}</Text>
+        }
+    }
+
     // Displays the details for a stock row
     const TableData = () => {
         return stocks.map((stock, index) => {
@@ -30,16 +42,36 @@ const StockTable = () => {
                     <Td>
                         <StockSymbol ticker={stock.symbol} />
                     </Td>
-                    <Td>{stock.previous_close}</Td>
-                    <Td>{stock.open}</Td>
-                    <Td>{stock.last_price}</Td>
-                    <Td>{stock.change}</Td>
-                    <Td>{stock.change_percent}</Td>
-                    <Td>{stock.currency}</Td>
-                    <Td>{stock.volume}</Td>
-                    <Td>{stock.shares_owned}</Td>
-                    <Td>{stock.avg_vol}</Td>
-                    <Td>{stock.market_cap}</Td>
+                    <Td>
+                        <Text>{stock.previous_close}</Text>
+                    </Td>
+                    <Td>
+                        <Text>{stock.open}</Text>
+                    </Td>
+                    <Td>
+                        <Text as='b'>{stock.last_price}</Text>
+                    </Td>
+                    <Td>
+                        {changeTextColor(stock.change)}
+                    </Td>
+                    <Td>
+                        {changeTextColor(stock.change_percent)}
+                    </Td>
+                    <Td>
+                        <Text>{stock.currency}</Text>
+                    </Td>
+                    <Td>
+                        <Text>{stock.volume}</Text>
+                    </Td>
+                    <Td>
+                        <Text>{stock.shares_owned}</Text>
+                    </Td>
+                    <Td>
+                        <Text>{stock.avg_vol}</Text>
+                    </Td>
+                    <Td>
+                        <Text>{stock.market_cap}</Text>
+                    </Td>
                 </Tr>
             );
         });
