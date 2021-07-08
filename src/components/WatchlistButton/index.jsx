@@ -5,7 +5,7 @@ import { useState } from 'react';
 const WatchlistButton = ({ symbol }) => {
     const [icon, setIcon] = useState(<BsStar />);
     const [iconClicked, setIconClicked] = useState(true);
-    const color = useColorModeValue('yellow', 'orange');
+    const colorScheme = useColorModeValue('yellow', 'orange');
 
     const handleClick = () => {
         if (iconClicked) {
@@ -24,7 +24,7 @@ const WatchlistButton = ({ symbol }) => {
     return (
         <IconButton
             icon={icon}
-            colorScheme={color}
+            colorScheme={colorScheme}
             variant='ghost'
             onClick={handleClick}
         />

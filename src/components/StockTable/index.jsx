@@ -23,19 +23,21 @@ const StockTable = () => {
     const { stockDetails } = useStockSymbolList();
     console.log('Stocks Context: ', stockDetails);
     const colorScheme = useColorModeValue('brand.200', 'brand.800');
+    const redColorScheme = useColorModeValue('#D6333E', '#E64550');
+    const greenColorScheme = useColorModeValue('#00823C', '#12C766');
 
     // Changes color of text to red or green
     const changeTextColor = (text) => {
         const textStr = text.toString();
         if (textStr.includes('-')) {
             return (
-                <Text as='b' color='red'>
+                <Text as='b' color={redColorScheme}>
                     {textStr}
                 </Text>
             );
         } else {
             return (
-                <Text as='b' color='green'>
+                <Text as='b' color={greenColorScheme}>
                     {textStr}
                 </Text>
             );
