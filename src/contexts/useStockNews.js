@@ -27,7 +27,7 @@ const StockNewsProvider = ({children}) => {
     }
 
     const resetNews = (sources) => {
-        axios.post(`http://localhost:3000/stock-news/allNewsSources`, {sources}).then((response) => {
+        axios.post(`http://localhost:3000/stock-news/resetNews`, {sources}).then((response) => {
             setAllNewsSources(response.data);
         })
     }

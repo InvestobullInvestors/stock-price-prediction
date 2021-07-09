@@ -191,7 +191,7 @@ router.get('/allNewsInfo', function (req, res) {
     res.send(newsInfo)
 });
 
-router.post('/allNewsSources', function (req, res) {
+router.post('/resetNews', function (req, res) {
     const {sources} = req.body
     newsSources = sources;
     res.send(newsSources)
