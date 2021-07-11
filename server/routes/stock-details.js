@@ -1,5 +1,5 @@
 var express = require('express');
-const {stockInfo} = require("../dal/stock-info");
+const {stockInfo} = require("../dal/stock-info-old");
 var router = express.Router();
 
 const defaultDetails = {
