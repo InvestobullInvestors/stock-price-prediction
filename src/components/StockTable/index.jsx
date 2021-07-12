@@ -91,7 +91,9 @@ const StockTable = () => {
                     variant='striped'
                     bg={colorScheme}
                     width='100%'
-                    margin='1'
+                    margin='2'
+                    border='4px'
+                    borderColor='blackAlpha.100'
                 >
                     <Thead>
                         <Tr>
