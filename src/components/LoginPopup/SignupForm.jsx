@@ -18,7 +18,7 @@ const SignupForm = () => {
 
         try {
             setError("")
-            await signup(data.firstname, data.lastname, data.email, data.password)
+            await signup(data.firstname + ' ' + data.lastname, data.email, data.password)
         } catch {
             // TODO: display errors with more details
             return setError("Failed to create account")
@@ -58,7 +58,7 @@ const SignupForm = () => {
             <FormControl id="password-confirmation" isRequired mb={4}>
                 <FormLabel>Password Confirmation</FormLabel>
                 <Input type={showPWC ? "text" : "password"}
-                       placeholder="password confirmation" {...register('passwordConfirmation', {required: true})}/>
+                       placeholder="password" {...register('passwordConfirmation', {required: true})}/>
                 <InputRightElement bottom={-8}>
                     <Button onClick={() => setShowPWC(!showPWC)}>
                         {showPWC ? <ViewOffIcon/> : <ViewIcon/>}

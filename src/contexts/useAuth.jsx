@@ -7,22 +7,21 @@ const USERS_COLLECTION_PATH = "users"
 const AuthContext = createContext({})
 
 const AuthProvider = ({children}) => {
-    const {setUser} = useUser()
+    const {user, setUser} = useUser()
 
     const [loading, setLoading] = useState(true)
 
-    const signup = (firstname, lastname, email, password) => {
+    const signup = (name, email, password) => {
         return auth.createUserWithEmailAndPassword(email, password).then(credentials => {
             firestore.collection(USERS_COLLECTION_PATH).doc(credentials.user.uid).set({
-                first_name: firstname,
-                last_name: lastname,
+                name: name,
                 email: email,
                 plan: "free",
-                stripe_id: "",
-                watchlist: []
+                stripe_id: ""
             }).then(() => {
-                console.log("new user created: " + email)
-            })
+                firestore.collection(USERS_COLLECTION_PATH).doc(credentials.user.uid)
+                    .collection('watchlist').doc('watchlist1').set({list: []})
+            }).then(() => console.log())
         })
     }
 
@@ -37,8 +36,7 @@ const AuthProvider = ({children}) => {
     const setCurrentUser = (uid, data) => {
         setUser({
             uid: uid,
-            first_name: data.first_name,
-            last_name: data.last_name,
+            name: data.name,
             email: data.email,
             plan: data.plan,
             stripe_id: data.stripe_id,
@@ -47,16 +45,18 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(() => {
-        return auth.onAuthStateChanged(firebaseUser => {
+        const unsubscribe =  auth.onAuthStateChanged(firebaseUser => {
             if (firebaseUser != null) {
                 firestore.collection(USERS_COLLECTION_PATH).doc(firebaseUser.uid).get().then(doc => {
                     setCurrentUser(firebaseUser.uid, doc.data())
+                    console.log({user})
                 }).catch((err) => console.log(err.message))
             } else {
                 setUser(null)
             }
             setLoading(false)
         })
+        return () => unsubscribe()
     }, [])
 
     return (
