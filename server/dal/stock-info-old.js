@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const dotenv = require('dotenv');
 dotenv.config();
 
-// mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.connect("mongodb+srv://investobull:investobull9876!@stock-price-prediction.bg5zs.mongodb.net/stock-data", { useNewUrlParser: true, useUnifiedTopology: true })
-
-
 var Schema = mongoose.Schema
 
 var stockInfoSchema = new Schema({

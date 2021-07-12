@@ -22,10 +22,10 @@ const StockNews = () => {
         <Box mt={10} bgColor={useColorModeValue("brand.100", "brand.700")} borderRadius="lg" pb={8}>
             <Heading as="h3" size="lg" p={8} textAlign="center">Stock News</Heading>
             <VStack>
-                {stockNews.map(news => (
-                    <CustomNewsLink key={news.id} link={news.src}>
+                {stockNews.map(({_id, url, title}) => (
+                    <CustomNewsLink key={_id} link={url}>
                         <CustomNewsBox>
-                            {news.title}
+                            {title}
                         </CustomNewsBox>
                     </CustomNewsLink>
                 ))}
