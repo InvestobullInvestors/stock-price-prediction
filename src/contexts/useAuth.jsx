@@ -7,7 +7,7 @@ const USERS_COLLECTION_PATH = "users"
 const AuthContext = createContext({})
 
 const AuthProvider = ({children}) => {
-    const {user, setUser} = useUser()
+    const { setUser} = useUser()
 
     const [loading, setLoading] = useState(true)
 
@@ -21,7 +21,7 @@ const AuthProvider = ({children}) => {
             }).then(() => {
                 firestore.collection(USERS_COLLECTION_PATH).doc(credentials.user.uid)
                     .collection('watchlist').doc('watchlist1').set({list: []})
-            }).then(() => console.log())
+            })
         })
     }
 
@@ -39,17 +39,15 @@ const AuthProvider = ({children}) => {
             name: data.name,
             email: data.email,
             plan: data.plan,
-            stripe_id: data.stripe_id,
-            watchlist: data.watchlist
+            stripe_id: data.stripe_id
         })
     }
 
     useEffect(() => {
-        const unsubscribe =  auth.onAuthStateChanged(firebaseUser => {
-            if (firebaseUser != null) {
+        const unsubscribe = auth.onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
                 firestore.collection(USERS_COLLECTION_PATH).doc(firebaseUser.uid).get().then(doc => {
                     setCurrentUser(firebaseUser.uid, doc.data())
-                    console.log({user})
                 }).catch((err) => console.log(err.message))
             } else {
                 setUser(null)

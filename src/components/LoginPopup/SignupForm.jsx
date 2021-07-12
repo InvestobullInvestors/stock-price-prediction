@@ -19,9 +19,8 @@ const SignupForm = () => {
         try {
             setError("")
             await signup(data.firstname + ' ' + data.lastname, data.email, data.password)
-        } catch {
-            // TODO: display errors with more details
-            return setError("Failed to create account")
+        } catch (err) {
+            return setError(err.message)
         }
     }
 
