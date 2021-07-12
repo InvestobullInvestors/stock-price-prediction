@@ -28,7 +28,6 @@ const getRealtimeStockData = async () => {
                 console.log('Save successful')
             }
         }
-
     }
 }
 

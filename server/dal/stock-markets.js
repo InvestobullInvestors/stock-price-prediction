@@ -26,20 +26,12 @@ var realtimeStockInfoSchema = new Schema({
     ticker_id: String,
     stock_id: String,
     stock_details: {
-        timestamp: Date,
-        previous_close: Number,
-        current_price: Number,
+        timestamp: String,
         open: Number,
-        change: Number,
-        change_percentage: Number,
-        currency: String,
-        volume: Number,
-        pe_ratio: Number,
-        shares_owned: Number,
-        avg_vol: Number,
-        market_cap: Number,
-        fifty_two_week_low: Number,
-        fifty_two_week_high: Number
+        high: Number,
+        low: Number,
+        close: Number,
+        volume: Number
     }
 }, {collection: 'RealtimeStockInfo'})
 
