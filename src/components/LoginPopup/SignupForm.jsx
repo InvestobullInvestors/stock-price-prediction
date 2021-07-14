@@ -12,13 +12,13 @@ const SignupForm = () => {
     const [showPWC, setShowPWC] = useState(false)
     const [error, setError] = useState("")
 
-    const onSubmit = async (data) => {
-        if (data.password !== data.passwordConfirmation)
+    const onSubmit = async ({firstname, lastname, email, password, passwordConfirmation}) => {
+        if (password !== passwordConfirmation)
             return setError("Passwords do not match")
 
         try {
             setError("")
-            await signup(data.firstname + ' ' + data.lastname, data.email, data.password)
+            await signup(firstname + ' ' + lastname, email, password)
         } catch (err) {
             return setError(err.message)
         }

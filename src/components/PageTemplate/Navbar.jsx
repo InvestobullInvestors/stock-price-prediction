@@ -32,10 +32,14 @@ const ICON_SIZE = 6
 const MENU_MAX_WIDTH = 60
 
 const Logo = () => (
-    <Button as={Link} to="/" fontSize={24} fontWeight={200} bg="transparent" m={MARGIN}>
+    <Button as={Link} to="/" fontSize={24} fontWeight={200} bg="transparent" _hover={{}} m={MARGIN}>
         InvestoBull
         <Image src="https://image.flaticon.com/icons/png/512/4072/4072641.png" boxSize={8}/>
     </Button>
+)
+
+const CustomButton = ({children, route, ...otherProps}) => (
+    <Button bg="transparent" m={MARGIN} as={Link} {...otherProps} to={route}>{children}</Button>
 )
 
 const HamburgerMenu = ({bgColor}) => {
@@ -56,13 +60,13 @@ const HamburgerMenu = ({bgColor}) => {
                     MENU
                 </DrawerHeader>
                 <DrawerBody>
-                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/">Home</Button>
+                    <CustomButton w="100%" route="/">Home</CustomButton>
                     <Divider my={1}/>
-                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/watchlist">Watchlist</Button>
+                    <CustomButton w="100%" route="/watchlist">Watchlist</CustomButton>
                     <Divider my={1}/>
-                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/news">News</Button>
+                    <CustomButton w="100%" route="/news">News</CustomButton>
                     <Divider my={1}/>
-                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/about">About</Button>
+                    <CustomButton w="100%" route="/about">About</CustomButton>
                 </DrawerBody>
             </DrawerContent>
         </Drawer>
@@ -72,10 +76,10 @@ const HamburgerMenu = ({bgColor}) => {
 const Links = () => (
     // visible when screen width wide
     <Flex display={['none', 'none', 'flex', 'flex']}>
-        <Button bg="transparent" m={MARGIN} as={Link} to="/">Home</Button>
-        <Button bg="transparent" m={MARGIN} as={Link} to="/watchlist">Watchlist</Button>
-        <Button bg="transparent" m={MARGIN} as={Link} to="/news">News</Button>
-        <Button bg="transparent" m={MARGIN} as={Link} to="/plans">Plans</Button>
+        <CustomButton route="/">Home</CustomButton>
+        <CustomButton route="/watchlist">Watchlist</CustomButton>
+        <CustomButton route="/news">News</CustomButton>
+        <CustomButton route="/plans">Plans</CustomButton>
     </Flex>
 )
 
@@ -126,7 +130,7 @@ const UserMenu = ({bgColor, setLogoutError}) => {
             <Avatar size="sm"/>
         </MenuButton>
         <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-            <MenuItem fontWeight="bold" isTruncated>{user.name}</MenuItem>
+            <MenuItem fontWeight="bold" isTruncated>{user.displayName}</MenuItem>
             <MenuItem>Plan: {user.plan}</MenuItem>
             <MenuDivider/>
             <MenuItem>Help</MenuItem>

@@ -14,11 +14,13 @@ import {
 } from "@chakra-ui/react";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
+// import ResetPasswordPopup from "./ResetPasswordPopup";
 
 const LoginPopup = () => {
     const {isOpen, onOpen, onClose} = useDisclosure()
 
     const [hasAccount, setHasAccount] = useState(true)
+    // const [resetPassword, setResetPassword] = useState(false)
 
     return (
         <>
@@ -32,7 +34,7 @@ const LoginPopup = () => {
                     </ModalHeader>
                     <ModalBody>
                         {hasAccount ?
-                            <LoginForm/> :
+                            <LoginForm closeLogin={onClose}/> :
                             <SignupForm/>
                         }
                     </ModalBody>
@@ -50,6 +52,8 @@ const LoginPopup = () => {
                     <ModalCloseButton />
                 </ModalContent>
             </Modal>
+
+            {/*{resetPassword && <ResetPasswordPopup/>}*/}
         </>
     )
 }

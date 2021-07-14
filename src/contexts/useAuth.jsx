@@ -7,20 +7,24 @@ const USERS_COLLECTION_PATH = "users"
 const AuthContext = createContext({})
 
 const AuthProvider = ({children}) => {
-    const { setUser} = useUser()
+    const {setUser} = useUser()
 
     const [loading, setLoading] = useState(true)
 
-    const signup = (name, email, password) => {
+    const signup = (displayName, email, password) => {
         return auth.createUserWithEmailAndPassword(email, password).then(credentials => {
             firestore.collection(USERS_COLLECTION_PATH).doc(credentials.user.uid).set({
-                name: name,
+                displayName: displayName,
                 email: email,
-                plan: "free",
+                plan: "basic",
+                plan_expiry: null,
                 stripe_id: ""
             }).then(() => {
                 firestore.collection(USERS_COLLECTION_PATH).doc(credentials.user.uid)
                     .collection('watchlist').doc('watchlist1').set({list: []})
+            }).then(() => {
+                firestore.collection(USERS_COLLECTION_PATH).doc(credentials.user.uid)
+                    .collection('news_selection').doc('preferences').set({selection: []})
             })
         })
     }
@@ -36,7 +40,7 @@ const AuthProvider = ({children}) => {
     const setCurrentUser = (uid, data) => {
         setUser({
             uid: uid,
-            name: data.name,
+            displayName: data.displayName,
             email: data.email,
             plan: data.plan,
             stripe_id: data.stripe_id
