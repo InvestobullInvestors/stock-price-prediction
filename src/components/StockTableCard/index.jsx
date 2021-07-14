@@ -1,16 +1,5 @@
-import {
-    Box,
-    VStack,
-    useColorModeValue,
-    HStack,
-    SimpleGrid,
-    Flex,
-    Stack,
-    Center,
-    Spacer,
-    Container,
-} from '@chakra-ui/react';
-import SearchBar from '../StockSearchBar';
+import React, { useContext } from 'react';
+import { Box, useColorModeValue, HStack, Container } from '@chakra-ui/react';
 import StockTable from '../StockTable';
 
 const StockTableCard = () => {

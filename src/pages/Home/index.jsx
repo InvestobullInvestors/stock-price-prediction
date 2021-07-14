@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageTemplate from '../../components/PageTemplate';
-import { Heading, useColorModeValue } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 import StockSearchBar from '../../components/StockSearchBar';
 import StockTableCard from '../../components/StockTableCard';
-import StockListProvider from '../../hooks/useStockList';
+import { useStockList } from '../../contexts/useStockList';
 
-const Home = () => (
-    <StockListProvider>
-        <PageTemplate bgColor={useColorModeValue('brand.300', 'brand.800')}>
+const Home = () => {
+    const { setStockList } = useStockList();
+
+    useEffect(() => {
+        setStockList();
+    }, []);
+
+    return (
+        <PageTemplate>
             <Heading>Stock Market Overview</Heading>
             <StockSearchBar />
             <StockTableCard />
         </PageTemplate>
-    </StockListProvider>
-);
+    );
+};
 
 export default Home;

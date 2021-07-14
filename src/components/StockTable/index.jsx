@@ -1,7 +1,5 @@
-import { stockInfo } from '../../shared/stockInfo';
+import React from 'react';
 import StockSymbol from '../StockSymbol';
-
-import './styles.css';
 import {
     Table,
     Thead,
@@ -15,13 +13,11 @@ import {
     Text,
     Code,
 } from '@chakra-ui/react';
-import React from 'react';
-import { useStockSymbolList } from '../../hooks/useStockList';
+import { useStockList } from '../../contexts/useStockList';
 
 const StockTable = () => {
-    const stocks = stockInfo;
-    const { stockDetails } = useStockSymbolList();
-    console.log('Stocks Context: ', stockDetails);
+    const { stocks } = useStockList();
+
     const colorScheme = useColorModeValue('brand.200', 'brand.800');
     const redColorScheme = useColorModeValue('#D6333E', '#E64550');
     const greenColorScheme = useColorModeValue('#00823C', '#12C766');
@@ -48,9 +44,9 @@ const StockTable = () => {
     const TableData = () => {
         return stocks.map((stock, index) => {
             return (
-                <Tr key={stock.symbol}>
+                <Tr key={index}>
                     <Td>
-                        <StockSymbol ticker={stock.symbol} />
+                        <StockSymbol ticker={stock.ticker} />
                     </Td>
                     <Td>
                         <Text>{stock.previous_close}</Text>

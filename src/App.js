@@ -6,6 +6,7 @@ import AuthProvider from './contexts/useAuth';
 import UserProvider from './contexts/useUser';
 import PredictionProvider from './contexts/usePredictions';
 import StockNewsProvider from './contexts/useStockNews';
+import StockListProvider from './contexts/useStockList';
 
 const theme = extendTheme({
     config: {
@@ -32,19 +33,21 @@ function App() {
     return (
         <UserProvider>
             <AuthProvider>
-                <StockInfoProvider>
-                    <PredictionProvider>
-                        <StockNewsProvider>
-                            <div className='App'>
-                                <ChakraProvider theme={theme}>
-                                    <BrowserRouter>
-                                        <Main />
-                                    </BrowserRouter>
-                                </ChakraProvider>
-                            </div>
-                        </StockNewsProvider>
-                    </PredictionProvider>
-                </StockInfoProvider>
+                <StockListProvider>
+                    <StockInfoProvider>
+                        <PredictionProvider>
+                            <StockNewsProvider>
+                                <div className='App'>
+                                    <ChakraProvider theme={theme}>
+                                        <BrowserRouter>
+                                            <Main />
+                                        </BrowserRouter>
+                                    </ChakraProvider>
+                                </div>
+                            </StockNewsProvider>
+                        </PredictionProvider>
+                    </StockInfoProvider>
+                </StockListProvider>
             </AuthProvider>
         </UserProvider>
     );
