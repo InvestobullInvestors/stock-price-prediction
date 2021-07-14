@@ -10,7 +10,7 @@ import {
     Container,
 } from '@chakra-ui/react';
 import { GoSearch } from 'react-icons/go';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const StockSearchBar = () => {
     const boxColor = useColorModeValue('brand.100', 'brand.700');
