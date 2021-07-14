@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const {stockMarketInfo} = require("../dal/stock-markets");
 
 const MARKET_DATA = [{
@@ -26,7 +25,7 @@ const MARKET_DATA = [{
         },
         {
             ticker: 'UBER',
-            name: "Uber Technologies Inc"
+            name: "Uber"
         }
     ]
 }]
@@ -36,7 +35,7 @@ for (const data of MARKET_DATA) {
 
     stockMarketInfo.find({market_name: market_name}).then((doc) => {
         if (doc.length === 0) {
-            var stockMarketData = new stockMarketInfo(data)
+            const stockMarketData = new stockMarketInfo(data)
             stockMarketData.save().then(marketData => {
                 console.log(marketData)
                 process.exit(1)

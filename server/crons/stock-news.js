@@ -26,7 +26,7 @@ cron.schedule("0 0 0 * * *", async () => {
                 })
                 console.log(`Successfully updated news for stock: ${stock_data.name}`)
             } else {
-                var stockNewsData = new stockNewsInfo({
+                const stockNewsData = new stockNewsInfo({
                     market_name: market_data.market_name,
                     market_id: market_data._id,
                     stock_name: stock_data.name,

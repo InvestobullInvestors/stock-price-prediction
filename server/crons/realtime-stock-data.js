@@ -35,7 +35,7 @@ cron.schedule("0 0 */2 * * *", async () => {
                 })
                 console.log('Update successful')
             } else {
-                var realTimeStockData = new realtimeStockInfo({
+                const realTimeStockData = new realtimeStockInfo({
                     market_name: market_data.market_name,
                     market_id: market_data._id,
                     stock_name: stock_data.name,
@@ -51,7 +51,7 @@ cron.schedule("0 0 */2 * * *", async () => {
 }, {})
 
 const getStockDataFromApi = async ({ticker}) => {
-    var url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${ticker}&interval=5min&apikey=${stockDataApiKey}`;
+    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${ticker}&interval=5min&apikey=${stockDataApiKey}`;
     const {data} = await axios.get(url)
     return data
 }
