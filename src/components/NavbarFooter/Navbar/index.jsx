@@ -21,10 +21,10 @@ import {
 } from "@chakra-ui/react";
 import {BellIcon, ChevronDownIcon, HamburgerIcon, Icon} from "@chakra-ui/icons";
 import {FaSun, FaMoon } from 'react-icons/fa';
-import NotificationList from "../NotificationList";
-import LoginPopup from "../LoginPopup";
-import {useUser} from "../../contexts/useUser";
-import {useAuth} from "../../contexts/useAuth";
+import NotificationList from "../../NotificationList";
+import LoginSignupPopup from "../../LoginSignup/LoginSignupPopup";
+import {useUser} from "../../../contexts/useUser";
+import {useAuth} from "../../../contexts/useAuth";
 
 const PADDING = 1
 const MARGIN = 1
@@ -171,7 +171,7 @@ const Navbar = () => {
                         <UserMenu bgColor={bgColor} setLogoutError={setLogoutError}/>
                     </>
                     :
-                    <LoginPopup/>}
+                    <LoginSignupPopup/>}
             </Flex>
 
         </Flex>

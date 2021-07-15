@@ -12,11 +12,11 @@ import {
     Text,
     useDisclosure
 } from "@chakra-ui/react";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
+import LoginForm from "../LoginForm";
+import SignupForm from "../SignupForm";
 // import ResetPasswordPopup from "./ResetPasswordPopup";
 
-const LoginPopup = () => {
+const LoginSignupPopup = () => {
     const {isOpen, onOpen, onClose} = useDisclosure()
 
     const [hasAccount, setHasAccount] = useState(true)
@@ -58,4 +58,4 @@ const LoginPopup = () => {
     )
 }
 
-export default LoginPopup;
+export default LoginSignupPopup;

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Alert, AlertIcon, Button, FormControl, FormLabel, Input, InputRightElement, Link} from "@chakra-ui/react";
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 import {useForm} from "react-hook-form";
-import {useAuth} from "../../contexts/useAuth";
+import {useAuth} from "../../../contexts/useAuth";
 
 const LoginForm = ({closeLogin}) => {
     const {register, handleSubmit, formState} = useForm()

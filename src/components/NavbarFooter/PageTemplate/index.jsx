@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 import {Box, Container, Divider, useColorModeValue} from "@chakra-ui/react";
 
 const PageTemplate = ({children, ...props}) => (
