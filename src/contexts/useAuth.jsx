@@ -1,6 +1,8 @@
 import React, {createContext, useContext, useEffect, useState} from 'react'
-import {auth} from '../auth/firebase.jsx'
+import {auth, firestore} from '../auth/firebase.jsx'
 import {useUser} from "./useUser";
+
+const USERS_COLLECTION_PATH = "users"
 
 const AuthContext = createContext({})
 
@@ -9,8 +11,22 @@ const AuthProvider = ({children}) => {
 
     const [loading, setLoading] = useState(true)
 
-    const signup = (email, password) => {
-        return auth.createUserWithEmailAndPassword(email, password)
+    const signup = (displayName, email, password) => {
+        return auth.createUserWithEmailAndPassword(email, password).then(credentials => {
+            firestore.collection(USERS_COLLECTION_PATH).doc(credentials.user.uid).set({
+                displayName: displayName,
+                email: email,
+                plan: "basic",
+                plan_expiry: null,
+                stripe_id: ""
+            }).then(() => {
+                firestore.collection(USERS_COLLECTION_PATH).doc(credentials.user.uid)
+                    .collection('watchlist').doc('watchlist1').set({list: []})
+            }).then(() => {
+                firestore.collection(USERS_COLLECTION_PATH).doc(credentials.user.uid)
+                    .collection('news_selection').doc('preferences').set({selection: []})
+            })
+        })
     }
 
     const login = (email, password) => {
@@ -21,11 +37,28 @@ const AuthProvider = ({children}) => {
         return auth.signOut()
     }
 
+    const setCurrentUser = (uid, data) => {
+        setUser({
+            uid: uid,
+            displayName: data.displayName,
+            email: data.email,
+            plan: data.plan,
+            stripe_id: data.stripe_id
+        })
+    }
+
     useEffect(() => {
-        return auth.onAuthStateChanged(firebaseUser => {
-            setUser(firebaseUser)
+        const unsubscribe = auth.onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
+                firestore.collection(USERS_COLLECTION_PATH).doc(firebaseUser.uid).get().then(doc => {
+                    setCurrentUser(firebaseUser.uid, doc.data())
+                }).catch((err) => console.log(err.message))
+            } else {
+                setUser(null)
+            }
             setLoading(false)
         })
+        return () => unsubscribe()
     }, [])
 
     return (
