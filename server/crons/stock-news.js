@@ -1,8 +1,8 @@
 const dotenv = require('dotenv');
 dotenv.config();
+require('dotenv').config({path: '../.env'});
 const {stockMarketInfo, stockNewsInfo} = require("../dal/stock-markets");
 const NewsAPI = require('newsapi');
-require('dotenv').config({path: '../.env'});
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
 const cron = require('node-cron')
