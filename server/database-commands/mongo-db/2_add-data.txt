@@ -1,0 +1,9 @@
+#StockInfo collection
+
+db.StockInfo.insert({ company_name:"AMC", ticker:"AMC", current_price:51.01, previous_close:55.80, open:53.28, change: -5.71, change_percent: "-10.37%", currency: "USD",  volume: "138M", pe_ratio: "N/A", shares_owned: 0, avg_vol: "141M", market_cap: "25.33B", fifty_two_week_low: 2.54,fifty_two_week_high: 72.19  })
+db.StockInfo.insert({ company_name:"TESLA", ticker:"TSLA", current_price:500, previous_close:550, open:520, last_price: 609.89,change: -0.23,change_percent: "-0.04%", currency: "USD", volume: "16.205M", pe_ratio: "585", shares_owned: 553, avg_vol: "31.399M", market_cap: "587.525B",  fifty_two_week_low: 321.24, fifty_two_week_high: 900.84  })
+
+#StockPrediction collection
+
+db.StockPrediction.insert({company_name: "AMC", ticker: "AMC",inflation: 15,revenueGrowth: 25,eps: -2.5,marketCap: 10})
+db.StockPrediction.insert({company_name: "Tesla", ticker: "TSLA", inflation: 50, revenueGrowth: 80, eps: 1, marketCap: 500})

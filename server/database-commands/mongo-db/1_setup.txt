@@ -1,0 +1,3 @@
+use stock-data
+db.createCollection("StockInfo")
+db.createCollection("StockPrediction")

@@ -13,7 +13,12 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "mongoose": "^5.13.1",
     "morgan": "~1.9.1",
     "stripe": "^8.156.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "mongodb": "^3.6.9"
   }
 }

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const newsSources = [
+let newsSources = [
     "Bloomberg",
     "Financial Post",
     "Financial Times",
@@ -191,5 +191,10 @@ router.get('/allNewsInfo', function (req, res) {
     res.send(newsInfo)
 });
 
+router.post('/resetNews', function (req, res) {
+    const {sources} = req.body
+    newsSources = sources;
+    res.send(newsSources)
+});
 
 module.exports = router;
