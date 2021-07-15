@@ -1,5 +1,5 @@
 import React from 'react';
-import PageTemplate from "../../components/NavbarFooter/PageTemplate";
+import PageTemplate from "../../components/PageLayout/PageTemplate";
 
 const Watchlist = () => (
     <PageTemplate>

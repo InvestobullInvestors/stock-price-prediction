@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Flex} from "@chakra-ui/react";
-import PageTemplate from "../../components/NavbarFooter/PageTemplate";
+import PageTemplate from "../../components/PageLayout/PageTemplate";
 import NewsGrid from "../../components/NewsGrid";
 import NewsSourceDrawer from "../../components/NewsSourceDrawer";
 import CustomHeading from "../../components/CustomHeading";

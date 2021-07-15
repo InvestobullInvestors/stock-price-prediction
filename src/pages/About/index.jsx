@@ -1,5 +1,5 @@
 import React from 'react';
-import PageTemplate from "../../components/NavbarFooter/PageTemplate";
+import PageTemplate from "../../components/PageLayout/PageTemplate";
 import AboutTeam from "../../components/AboutTeam";
 import {Box, Text, useColorModeValue} from "@chakra-ui/react";
 import CustomHeading from "../../components/CustomHeading";
