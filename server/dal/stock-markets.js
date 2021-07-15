@@ -62,19 +62,20 @@ const quarterlyStockInfoSchema = new Schema({
     stock_id: String,
     stock_details: {
         industry: String,
-        pe_ratio: Number|null,
-        peg_ratio: Number|null,
-        eps: Number|null,
-        quarterly_earning_growth: Number|null,
-        quarterly_revenue_growth: Number|null,
-        beta: Number|null,
-        fifty_two_week_high: Number|null,
-        fifty_two_week_low: Number|null,
-        dividend_payout_ratio: Number|null,
+        currency: String,
+        pe_ratio: Number | null,
+        peg_ratio: Number | null,
+        eps: Number | null,
+        quarterly_earning_growth: Number | null,
+        quarterly_revenue_growth: Number | null,
+        beta: Number | null,
+        fifty_two_week_high: Number | null,
+        fifty_two_week_low: Number | null,
+        dividend_payout_ratio: Number | null,
         dividend_date: String,
-        shares_outstanding: Number|null,
-        shares_float: Number|null,
-        shares_short: Number|null
+        shares_outstanding: Number | null,
+        shares_float: Number | null,
+        shares_short: Number | null
     }
 }, {collection: 'QuarterlyStockInfo'})
 
