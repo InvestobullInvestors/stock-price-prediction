@@ -1,5 +1,5 @@
 import React from 'react';
-import PageTemplate from "../../components/PageTemplate";
+import PageTemplate from "../../components/PageLayout/PageTemplate";
 import StockTable from '../../components/StockTable/StockTable';
 import {Heading} from "@chakra-ui/react";
 
