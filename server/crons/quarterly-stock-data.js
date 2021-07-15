@@ -17,6 +17,7 @@ cron.schedule("0 0 0 */15 * *", async () => {
             const stockDataFromApi = await getStockDataFromApi(stock_data)
             const quarterly_stock_details = {
                 industry: stockDataFromApi['Industry'],
+                currency: stockDataFromApi['Currency'],
                 pe_ratio: Number(stockDataFromApi['PERatio']) || null,
                 peg_ratio: Number(stockDataFromApi['PEGRatio']) || null,
                 eps: Number(stockDataFromApi['EPS']) || null,
