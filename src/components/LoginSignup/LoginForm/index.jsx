@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {Alert, AlertIcon, Button, FormControl, FormLabel, Input, InputRightElement} from "@chakra-ui/react";
+import {Alert, AlertIcon, Button, FormControl, FormLabel, Input, InputRightElement, Link} from "@chakra-ui/react";
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 import {useForm} from "react-hook-form";
-import {useAuth} from "../../contexts/useAuth";
+import {useAuth} from "../../../contexts/useAuth";
 
-const LoginForm = () => {
+const LoginForm = ({closeLogin}) => {
     const {register, handleSubmit, formState} = useForm()
     const {login} = useAuth()
 
@@ -16,8 +16,14 @@ const LoginForm = () => {
             setError("")
             await login(data.email, data.password)
         } catch {
+            // for security reasons, we don't expose why the login failed
             return setError("Failed to log in")
         }
+    }
+
+    const toggleForgotPassword = () => {
+        closeLogin()
+        // TODO: toggle ResetPasswordPopup
     }
 
     return (
@@ -43,6 +49,7 @@ const LoginForm = () => {
                 </InputRightElement>
             </FormControl>
             <Button isLoading={formState.isSubmitting} type="submit">Log In</Button>
+            <Link as="button" onClick={toggleForgotPassword} m={4}>Forgot Password?</Link>
         </form>
     )
 }

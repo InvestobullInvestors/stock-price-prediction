@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useColorModeValue} from "@chakra-ui/react";
-import PageTemplate from "../../components/PageTemplate";
+import PageTemplate from "../../components/PageLayout/PageTemplate";
 import StockInformation from "../../components/StockInformation";
 import StockNews from "../../components/StockNews";
 import StockPredictionDetails from "../../components/StockPredictionDetails";
