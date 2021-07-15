@@ -1,13 +1,12 @@
 const dotenv = require('dotenv');
 dotenv.config();
-const {stockMarketInfo} = require("../dal/stock-markets");
-const NewsAPI = require('newsapi');
 require('dotenv').config({path: '../.env'});
+const {stockMarketInfo, quarterlyStockInfo} = require("../dal/stock-markets");
+const NewsAPI = require('newsapi');
 const stockDataApiKey = new NewsAPI(process.env.STOCK_DATA_API_KEY);
 
 const cron = require('node-cron')
 const axios = require("axios");
-const {quarterlyStockInfo} = require("../dal/stock-markets");
 
 cron.schedule("0 0 0 */15 * *", async () => {
     const doc = await stockMarketInfo.find({})
