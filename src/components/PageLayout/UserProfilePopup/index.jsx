@@ -34,7 +34,7 @@ const UserProfilePopup = () => {
                     </ModalHeader>
                     <ModalBody>
                         <HStack>
-                            <Avatar size="lg" src={user.photoURL} m={4}/>
+                            <Avatar size="lg" name={user.displayName} src={user.photoURL} m={4}/>
                             <Grid templateColumns="repeat(4, 1fr)" h={36} gap={4}>
                                 <GridItem colSpan={1}><Text fontWeight="bold">Name:</Text></GridItem>
                                 <GridItem colSpan={3}>{user.displayName}</GridItem>
