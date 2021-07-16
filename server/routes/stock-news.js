@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-var express = require('express');
-const {stockNewsInfo} = require("../dal/stock-markets");
-=======
 var express = require("express");
->>>>>>> paul/news-temp4_backup
+const { stockNewsInfo } = require("../dal/stock-markets");
+
 var router = express.Router();
 const { newsMasterlist } = require("../dal/stock-news");
 
@@ -208,17 +205,20 @@ const defaultNews = {
   news: [],
 };
 
-<<<<<<< HEAD
 /* GET news details. */
-router.get('/news/:ticker', function (req, res) {
-    const {ticker} = req.params
-    stockNewsInfo.findOne({ticker_id: ticker}).then(({stock_name, stock_news}) => {
-        res.send({company_name: stock_name, news: stock_news.slice(0, 5)})
-    }).catch(error => {
-        console.log(error.message)
-        res.send(defaultNews)
+router.get("/news/:ticker", function (req, res) {
+  const { ticker } = req.params;
+  stockNewsInfo
+    .findOne({ ticker_id: ticker })
+    .then(({ stock_name, stock_news }) => {
+      res.send({ company_name: stock_name, news: stock_news.slice(0, 5) });
     })
-=======
+    .catch((error) => {
+      console.log(error.message);
+      res.send(defaultNews);
+    });
+});
+
 const stockNews = [
   {
     company_name: "Tesla",
@@ -259,15 +259,8 @@ const stockNews = [
   },
 ];
 
-/* GET news details. */
-router.get("/news/:ticker", function (req, res) {
-  const news = stockNews.filter((stock) => stock.ticker === req.params.ticker);
-  res.send(news.length === 1 ? news[0] : defaultNews);
-});
-
 router.get("/newsSelections", function (req, res) {
   res.send(newsSelections);
->>>>>>> paul/news-temp4_backup
 });
 
 router.get("/newsMasterlist", function (req, res) {
