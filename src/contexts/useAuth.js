@@ -34,7 +34,7 @@ const AuthProvider = ({children}) => {
             displayName: displayName,
             email: email,
             photoURL: photoURL,
-            plan: "basic",
+            plan: "Basic",
             plan_expiry: null,
             stripe_id: ""
         })

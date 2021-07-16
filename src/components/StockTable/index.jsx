@@ -18,22 +18,22 @@ import { useStockList } from '../../contexts/useStockList';
 const StockTable = () => {
     const { stocks } = useStockList();
 
-    const colorScheme = useColorModeValue('brand.200', 'brand.800');
-    const redColorScheme = useColorModeValue('#D6333E', '#E64550');
-    const greenColorScheme = useColorModeValue('#00823C', '#12C766');
+    const bgColor = useColorModeValue('brand.200', 'brand.800');
+    const redColor = useColorModeValue('red.light', 'red.dark');
+    const greenColor = useColorModeValue('green.light', 'green.dark');
 
     // Changes color of text to red or green
     const changeTextColor = (text) => {
         const textStr = text.toString();
         if (textStr.includes('-')) {
             return (
-                <Text as='b' color={redColorScheme}>
+                <Text as='b' color={redColor}>
                     {textStr}
                 </Text>
             );
         } else {
             return (
-                <Text as='b' color={greenColorScheme}>
+                <Text as='b' color={greenColor}>
                     {textStr}
                 </Text>
             );
@@ -85,7 +85,7 @@ const StockTable = () => {
                 <Table
                     size='sm'
                     variant='striped'
-                    bg={colorScheme}
+                    bg={bgColor}
                     width='100%'
                     margin='2'
                     border='4px'

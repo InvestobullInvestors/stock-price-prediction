@@ -119,6 +119,8 @@ const LivePrice = () => {
     const {stockName} = useStockSymbol()
     const {realtimeStockDetails: {open, high, low, close, volume}} = useStockSymbol()
     const {quarterlyStockDetails: {currency}} = useStockSymbol()
+    const redColor = useColorModeValue('red.light', 'red.dark');
+    const greenColor = useColorModeValue('green.light', 'green.dark');
 
     return (
         <Tbody>
@@ -127,7 +129,7 @@ const LivePrice = () => {
                     <StatGroup>
                         <Stat>
                             <StatLabel fontSize="xl">{stockName}</StatLabel>
-                            <StatNumber mt={2} color={open >= close ? "lightgreen" : "red"}>
+                            <StatNumber mt={2} color={open >= close ? greenColor : redColor}>
                                 {formatNumber(open)}
                             </StatNumber>
                             <StatHelpText mt={2}>

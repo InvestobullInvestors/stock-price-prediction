@@ -26,6 +26,22 @@ const theme = extendTheme({
             800: '#1A202C',
             900: '#171923',
         },
+        red: {
+            light: '#D6333E',
+            dark: '#E64550'
+        },
+        green: {
+            light: '#00823C',
+            dark: '#12C766'
+        },
+        blue: {
+            light: '#007AFF',
+            dark: '#1489FF'
+        },
+        yellow: {
+            light: '#F0A800',
+            dark: '#FFC01E'
+        },
     },
 });
 
