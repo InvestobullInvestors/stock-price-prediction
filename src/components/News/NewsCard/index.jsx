@@ -68,8 +68,10 @@ const NewsCard = ({ source, children, ...otherProps }) => {
       {children}
       <HStack mt="10px">
         <Square
-          w="150px"
-          h="150px"
+          w={{ base: "100px", sm: "150px" }}
+          h={{ base: "100px", sm: "150px" }}
+          // w="150px"
+          // h="150px"
           border="1px"
           borderColor="brand.400"
           borderRadius="lg"
@@ -81,7 +83,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
             // color="brand.900"
             align="center"
             mt="5px"
-            fontSize="2xl"
+            fontSize={{ base: "md", sm: "2xl" }}
             fontWeight="bold"
             color={boxColor}
           >
@@ -99,7 +101,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
           borderRadius="lg"
           shadow="md"
           bg={notBoxColor}
-          padding="3px"
+          padding="5px"
           overflow="scroll"
         >
           <VStack align="flex-start">
