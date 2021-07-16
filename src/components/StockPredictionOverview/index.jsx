@@ -1,5 +1,7 @@
 import React from 'react'
 import {Box, Grid, GridItem, Heading, SimpleGrid, Spacer, useColorModeValue, VStack} from "@chakra-ui/react";
+import {Line} from "react-chartjs-2";
+import {useStockSymbol} from "../../contexts/useStockInfo";
 
 const CustomGridItem = ({children, ...otherProps}) => (
     <GridItem mx={4} my={4} borderRadius="lg" shadow="md" {...otherProps}>
@@ -40,10 +42,14 @@ const PredictionTable = () => (
     </CustomGridItem>
 )
 
-const PredictionGraph = () => (
-    <CustomGridItem colSpan={3} bg="black">
-    </CustomGridItem>
-)
+const PredictionGraph = () => {
+    const {graphData} = useStockSymbol()
+    return (
+        <CustomGridItem colSpan={3}>
+            <Line data={graphData}/>
+        </CustomGridItem>
+    )
+}
 
 const StockPredictionOverview = () => (
     <Grid mt={10} templateColumns={{base: "repeat(3, 1fr)", lg: "repeat(6, 1fr)"}}

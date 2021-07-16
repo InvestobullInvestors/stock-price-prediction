@@ -8,6 +8,7 @@ const StockInfoProvider = ({children}) => {
     const [realtimeStockDetails, setRealtimeStockDetails] = useState({});
     const [quarterlyStockDetails, setQuarterlyStockDetails] = useState({});
     const [stockName, setStockName] = useState('')
+    const [graphData, setGraphData] = useState('')
 
     const setSymbol = (stockSymbol) => {
         axios.get(`http://localhost:3000/stock-details/${stockSymbol}`).then((response) => {
@@ -29,14 +30,23 @@ const StockInfoProvider = ({children}) => {
         })
     }
 
+    const setRealtimeGraphData = () => {
+        axios.get(`http://localhost:3000/realtime-graph`).then((response) => {
+            console.log(response.data)
+            setGraphData(response.data);
+        })
+    }
+
     return (
         <StockInfoContext.Provider value={{
             stockName,
             stockDetails,
             realtimeStockDetails,
             quarterlyStockDetails,
+            graphData,
             setRealtimeDetails,
             setQuarterlyDetails,
+            setRealtimeGraphData,
             setSymbol
         }}>
             {children}
