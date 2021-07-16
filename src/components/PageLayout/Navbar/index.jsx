@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom'
 import {
     Avatar,
@@ -6,7 +6,8 @@ import {
     Divider,
     Drawer,
     DrawerBody,
-    DrawerContent, DrawerHeader,
+    DrawerContent,
+    DrawerHeader,
     DrawerOverlay,
     Flex,
     Image,
@@ -20,11 +21,12 @@ import {
     useDisclosure
 } from "@chakra-ui/react";
 import {BellIcon, ChevronDownIcon, HamburgerIcon, Icon} from "@chakra-ui/icons";
-import {FaSun, FaMoon } from 'react-icons/fa';
+import {FaSun, FaMoon} from 'react-icons/fa';
 import NotificationList from "../../NotificationList";
 import LoginSignupPopup from "../../LoginSignup/LoginSignupPopup";
 import {useUser} from "../../../contexts/useUser";
 import {useAuth} from "../../../contexts/useAuth";
+import UserProfilePopup from "../UserProfilePopup";
 
 const PADDING = 1
 const MARGIN = 1
@@ -42,10 +44,10 @@ const CustomButton = ({children, route, ...otherProps}) => (
     <Button bg="transparent" m={MARGIN} as={Link} {...otherProps} to={route}>{children}</Button>
 )
 
+// visible when screen is narrow
 const HamburgerMenu = ({bgColor}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
-    // visible when screen width narrow
     return <Flex display={['flex', 'flex', 'none', 'none']}>
         <Button onClick={onOpen} bg="transparent" px={PADDING} m={MARGIN}>
             <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
@@ -73,8 +75,8 @@ const HamburgerMenu = ({bgColor}) => {
     </Flex>
 }
 
+// visible when screen is wide
 const Links = () => (
-    // visible when screen width wide
     <Flex display={['none', 'none', 'flex', 'flex']}>
         <CustomButton route="/">Home</CustomButton>
         <CustomButton route="/watchlist">Watchlist</CustomButton>
@@ -83,61 +85,46 @@ const Links = () => (
     </Flex>
 )
 
-const sampleNotifications = [
-    {
-        text: "AMC jumped by 50%",
-        viewed: false
-    },
-    {
-        text: "TSLA fell by 25%",
-        viewed: true
-    },
-    {
-        text: "Welcome to Investobull!",
-        viewed: false
-    }
-]
+const NotificationMenu = ({bgColor}) => {
+    const {notifications} = useUser()
 
-const NotificationMenu = ({bgColor}) => (
-    <Menu>
+    return <Menu>
         <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
             <BellIcon w={ICON_SIZE} h={ICON_SIZE}/>
         </MenuButton>
         <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-            <NotificationList notificationList={sampleNotifications}/>
+            <NotificationList notificationList={notifications}/>
         </MenuList>
     </Menu>
-)
+}
 
-const UserMenu = ({bgColor, setLogoutError}) => {
+const UserMenu = ({bgColor}) => {
     const {user} = useUser()
     const {logout} = useAuth()
 
     const handleLogout = async () => {
         try {
-            setLogoutError("")
             await logout()
         } catch (err) {
-            return setLogoutError(err.message)
+            console.error(err.message)
         }
     }
 
-    return (
-    <Menu>
+    return <Menu>
         <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
-            <Avatar size="sm"/>
+            <Avatar size="sm" name={user.displayName} src={user.photoURL}/>
         </MenuButton>
         <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-            <MenuItem fontWeight="bold" isTruncated>{user.displayName}</MenuItem>
-            <MenuItem>Plan: {user.plan}</MenuItem>
+            <UserProfilePopup/>
+            <MenuItem as={Link} to="/plans">Plan: {user.plan}</MenuItem>
             <MenuDivider/>
+            <MenuItem as={Link} to="/about">About Us</MenuItem>
             <MenuItem>Help</MenuItem>
             <MenuItem as="button" onClick={handleLogout}>Log Out</MenuItem>
         </MenuList>
     </Menu>
-    )
 }
 
 const Navbar = () => {
@@ -146,9 +133,6 @@ const Navbar = () => {
 
     const bgColor = useColorModeValue("brand.400", "brand.900")
     const txtColor = useColorModeValue("brand.900", "brand.100")
-
-    const [logoutError, setLogoutError] = useState("")
-    // TODO: do something with logoutError
 
     return <Flex zIndex={5} pos="sticky" top={0} w="100%" justify="center" bg={bgColor} color={txtColor}>
         <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
@@ -165,13 +149,16 @@ const Navbar = () => {
                     :
                     <Button bg="transparent" rounded="full" p={0} m={2} onClick={toggleColorMode}>
                         <Icon as={FaSun} w={6} h={6}/>
-                    </Button>}
-                {user ? <>
+                    </Button>
+                }
+                {user ?
+                    <>
                         <NotificationMenu bgColor={bgColor}/>
-                        <UserMenu bgColor={bgColor} setLogoutError={setLogoutError}/>
+                        <UserMenu bgColor={bgColor}/>
                     </>
                     :
-                    <LoginSignupPopup/>}
+                    <LoginSignupPopup/>
+                }
             </Flex>
 
         </Flex>

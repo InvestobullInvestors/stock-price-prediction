@@ -6,8 +6,8 @@ const NotificationList = ({notificationList}) => {
     if (notificationList == null || notificationList.length < 1)
         return <Text m={3}>You have no notifications!</Text>
 
-    return notificationList.map((item) =>
-        <MenuItem icon={<FaDotCircle color={item.viewed ? "transparent" : "brand"} size={8}/>}>
+    return notificationList.map((item, id) =>
+        <MenuItem key={id} icon={<FaDotCircle color={item.viewed ? "transparent" : "brand"} size={8}/>}>
             <Text color={item.viewed ? "brand.500" : "brand"}>
                 {item.text}
             </Text>

@@ -14,46 +14,44 @@ import {
 } from "@chakra-ui/react";
 import LoginForm from "../LoginForm";
 import SignupForm from "../SignupForm";
-// import ResetPasswordPopup from "./ResetPasswordPopup";
+import ResetPasswordForm from "../ResetPasswordForm";
 
 const LoginSignupPopup = () => {
     const {isOpen, onOpen, onClose} = useDisclosure()
 
-    const [hasAccount, setHasAccount] = useState(true)
-    // const [resetPassword, setResetPassword] = useState(false)
+    const [mode, setMode] = useState("login")
 
     return (
         <>
             <Button onClick={onOpen}>Login/Signup</Button>
 
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay/>
                 <ModalContent>
                     <ModalHeader>
-                        {hasAccount ? <Text>Log In to InvestoBull</Text> : <Text>Sign Up for InvestoBull</Text>}
+                        {mode === "login" ? <Text>Log In to InvestoBull</Text>
+                            : mode === "signup" ? <Text>Sign Up for InvestoBull</Text>
+                                : <Text>Password Reset</Text>}
                     </ModalHeader>
                     <ModalBody>
-                        {hasAccount ?
-                            <LoginForm closeLogin={onClose}/> :
-                            <SignupForm/>
-                        }
+                        {mode === "login" ? <LoginForm setMode={setMode}/>
+                            : mode === "signup" ? <SignupForm/>
+                                : <ResetPasswordForm setMode={setMode}/>}
                     </ModalBody>
                     <ModalFooter>
-                        {hasAccount ?
-                            <Text>Don't have an account yet?
-                                <Link as="button" onClick={() => setHasAccount(false)} ml={2}>Sign Up!</Link>
+                        {mode === "signup" ?
+                            <Text>Already have an account?
+                                <Link as="button" onClick={() => setMode("login")} ml={2}>Log In!</Link>
                             </Text>
                             :
-                            <Text>Already have an account?
-                                <Link as="button" onClick={() => setHasAccount(true)} ml={2}>Log In!</Link>
+                            <Text>Don't have an account yet?
+                                <Link as="button" onClick={() => setMode("signup")} ml={2}>Sign Up!</Link>
                             </Text>
                         }
                     </ModalFooter>
                     <ModalCloseButton />
                 </ModalContent>
             </Modal>
-
-            {/*{resetPassword && <ResetPasswordPopup/>}*/}
         </>
     )
 }

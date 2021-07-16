@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 const StockDataEnclosure = ({children}) => (
-    <Box>
+    <Box mx={4}>
         <Table>
             {children}
         </Table>
@@ -24,7 +24,7 @@ const StockDataEnclosure = ({children}) => (
 )
 
 const LabelTd = ({children}) => (
-    <Td fontWeight="bold" alignItems="right">{children}</Td>
+    <Td isNumeric fontWeight="bold">{children}</Td>
 )
 
 const formatNumber = num => (
@@ -158,7 +158,7 @@ const LivePrice = () => {
 }
 
 const StockInformation = () => (
-    <SimpleGrid columns={{base: 1, lg: 3}} spacing={16} bgColor={useColorModeValue("brand.100", "brand.700")}
+    <SimpleGrid columns={{base: 1, lg: 3}} spacing={8} bgColor={useColorModeValue("brand.100", "brand.700")}
                 mt={8} p={4} borderRadius="lg">
         <StockDataEnclosure>
             <LivePrice/>
