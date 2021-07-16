@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, SimpleGrid, Spacer } from "@chakra-ui/react";
 import NewsCard from "../NewsCard";
+
 import { useStockNews } from "../../contexts/useStockNews";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { CloseIcon, DragHandleIcon } from "@chakra-ui/icons";

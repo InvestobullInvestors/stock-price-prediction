@@ -13,11 +13,14 @@ const News = () => {
     setColor(color === "green" ? "red" : "green");
   };
 
-  const { setNewsSelections2, setNewsMasterlist2 } = useStockNews();
+  const {
+    setNewsSelectionsFromFirebase,
+    setNewsMasterlistFromMongo,
+  } = useStockNews();
 
   useEffect(() => {
-    setNewsSelections2();
-    setNewsMasterlist2();
+    setNewsSelectionsFromFirebase();
+    setNewsMasterlistFromMongo();
   }, []);
 
   //TODO: enable watchlist filter

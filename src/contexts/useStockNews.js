@@ -16,7 +16,7 @@ const StockNewsProvider = ({ children }) => {
       });
   };
 
-  const setNewsSelections2 = () => {
+  const setNewsSelectionsFromFirebase = () => {
     axios
       .get(`http://localhost:3000/stock-news/newsSelections`)
       .then((response) => {
@@ -24,7 +24,7 @@ const StockNewsProvider = ({ children }) => {
       });
   };
 
-  const setNewsMasterlist2 = () => {
+  const setNewsMasterlistFromMongo = () => {
     axios
       .get("http://localhost:3000/stock-news/newsMasterlist")
       .then((response) => {
@@ -70,8 +70,8 @@ const StockNewsProvider = ({ children }) => {
         stockNews,
         newsSelections,
         newsMasterlist,
-        setNewsSelections2,
-        setNewsMasterlist2,
+        setNewsSelectionsFromFirebase,
+        setNewsMasterlistFromMongo,
         setNews,
         reorderNews,
         selectSource,
@@ -85,5 +85,4 @@ const StockNewsProvider = ({ children }) => {
 };
 
 export const useStockNews = () => useContext(StockNewsContext);
-
 export default StockNewsProvider;
