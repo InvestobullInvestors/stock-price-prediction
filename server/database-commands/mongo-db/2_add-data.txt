@@ -1,3 +1,13 @@
+#NewsMasterlist collection
+db.NewsMasterlist.insert({
+  name: "Bloomberg",
+  articles:
+  [
+    {date: "2021-06-26", title: "Bitcoin Slips Toward $30,000 as Strategists Flag Near-Term Risks", src: "https://www.bloomberg.com/news/articles/2021-06-26/bitcoin-slips-toward-30-000-as-strategists-flag-near-term-risks?srnd=markets-vp"},
+    {date: "2021-06-25", title: "GameStop Moves to Russell 1000; AMC Stays in Small-Cap Index", src: "https://www.bloomberg.com/news/articles/2021-06-25/gamestop-graduates-to-russell-1000-amc-stays-in-small-cap-index?srnd=markets-vp"}
+  ]
+})
+
 #StockInfo collection
 
 db.StockInfo.insert({ company_name:"AMC", ticker:"AMC", current_price:51.01, previous_close:55.80, open:53.28, change: -5.71, change_percent: "-10.37%", currency: "USD",  volume: "138M", pe_ratio: "N/A", shares_owned: 0, avg_vol: "141M", market_cap: "25.33B", fifty_two_week_low: 2.54,fifty_two_week_high: 72.19  })

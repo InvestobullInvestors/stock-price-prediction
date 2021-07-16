@@ -1,3 +1,4 @@
-use stock-data
+use StockMarket
 db.createCollection("StockInfo")
 db.createCollection("StockPrediction")
+db.createCollection("NewsMasterlist")
