@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 import { CheckIcon } from "@chakra-ui/icons";
-import { useStockNews } from "../../contexts/useStockNews";
+import { useStockNews } from "../../../contexts/useStockNews";
 import { set } from "react-hook-form";
 
 const NewsSourceChecklist = () => {

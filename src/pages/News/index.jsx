@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
 import PageTemplate from "../../components/PageTemplate";
-import NewsGrid from "../../components/NewsGrid";
-import NewsSourceDrawer from "../../components/NewsSourceDrawer";
+import NewsCardList from "../../components/News/NewsCardList";
+import NewsSourceDrawer from "../../components/News/NewsSourceDrawer";
 import CustomHeading from "../../components/CustomHeading";
 import { useStockNews } from "../../contexts/useStockNews";
 
@@ -32,7 +32,7 @@ const News = () => {
         {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
       </Flex>
       <CustomHeading>News</CustomHeading>
-      <NewsGrid />
+      <NewsCardList />
     </PageTemplate>
   );
 };

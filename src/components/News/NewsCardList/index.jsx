@@ -1,12 +1,12 @@
 import React from "react";
-import { Flex, SimpleGrid, Spacer } from "@chakra-ui/react";
+import { Flex, List, Spacer } from "@chakra-ui/react";
 import NewsCard from "../NewsCard";
 
-import { useStockNews } from "../../contexts/useStockNews";
+import { useStockNews } from "../../../contexts/useStockNews";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { CloseIcon, DragHandleIcon } from "@chakra-ui/icons";
 
-const NewsGrid = () => {
+const NewsCardList = () => {
   const { newsSelections } = useStockNews();
   const { reorderNews } = useStockNews();
   const { selectSource } = useStockNews();
@@ -44,7 +44,7 @@ const NewsGrid = () => {
             {...droppableProvided.droppableProps}
             ref={droppableProvided.innerRef}
           >
-            <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing={3}>
+            <List spacing={3}>
               {visibleNewsCards.map((source, index) => (
                 <Draggable
                   key={source.id}
@@ -62,12 +62,14 @@ const NewsGrid = () => {
                             {...draggableProvided.dragHandleProps}
                             style={{ marginTop: "-6px" }}
                           >
-                            <DragHandleIcon />
+                            <DragHandleIcon w={5} h={5} />
                           </div>
                           <Spacer />
                           <CloseIcon
                             cursor={"pointer"}
                             onClick={() => selectSource(source)}
+                            w={5}
+                            h={5}
                           />
                         </Flex>
                       </NewsCard>
@@ -75,7 +77,7 @@ const NewsGrid = () => {
                   )}
                 </Draggable>
               ))}
-            </SimpleGrid>
+            </List>
             {droppableProvided.placeholder}
           </div>
         )}
@@ -84,4 +86,4 @@ const NewsGrid = () => {
   );
 };
 
-export default NewsGrid;
+export default NewsCardList;
