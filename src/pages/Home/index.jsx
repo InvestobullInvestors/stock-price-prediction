@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageTemplate from "../../components/PageLayout/PageTemplate";
-import StockTable from '../../components/StockTable/StockTable';
-import {Heading} from "@chakra-ui/react";
+import { Heading } from '@chakra-ui/react';
+import StockSearchBar from '../../components/StockSearchBar';
+import StockTableCard from '../../components/StockTableCard';
+import { useStockList } from '../../contexts/useStockList';
 
-const Home = () => (
-    <PageTemplate>
-        <Heading>Home</Heading>
-        <StockTable/>
-    </PageTemplate>
-)
+const Home = () => {
+    const { setStockList } = useStockList();
+
+    useEffect(() => {
+        setStockList();
+    }, []);
+
+    return (
+        <PageTemplate>
+            <Heading>Stock Market Overview</Heading>
+            <StockSearchBar />
+            <StockTableCard />
+        </PageTemplate>
+    );
+};
 
 export default Home;
