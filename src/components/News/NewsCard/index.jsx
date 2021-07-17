@@ -13,10 +13,13 @@ import {
 import { useStockNews } from "../../../contexts/useStockNews";
 
 const NewsArticle = ({ date, title, article }) => {
+  const dateColor = useColorModeValue("gray.600", "gray.500");
+  const linkColor = useColorModeValue("brand.900", "brand.800");
+
   return (
     <VStack spacing="0px" align="flex-start">
-      <Text color="gray.500">{date}</Text>
-      <Link color="black" href={article}>
+      <Text color={dateColor}>{date}</Text>
+      <Link color={linkColor} href={article}>
         {title}
       </Link>
     </VStack>
@@ -24,15 +27,10 @@ const NewsArticle = ({ date, title, article }) => {
 };
 
 const NewsCard = ({ source, children, ...otherProps }) => {
-  const boxColor = useColorModeValue("brand.100", "brand.700");
-
-  let notBoxColor;
-
-  if (boxColor === "brand.100") {
-    notBoxColor = "brand.700";
-  } else {
-    notBoxColor = "brand.100";
-  }
+  const cardColor = useColorModeValue("brand.100", "brand.700");
+  const cardBorderColor = useColorModeValue("brand.700", "brand.400");
+  const textBoxColor = useColorModeValue("brand.400", "brand.300");
+  const textColor = useColorModeValue("brand.900", "brand.700");
 
   const { newsMasterlist } = useStockNews();
 
@@ -59,10 +57,10 @@ const NewsCard = ({ source, children, ...otherProps }) => {
       px={4}
       py={4}
       border="1px"
-      borderColor="brand.400"
+      borderColor={cardBorderColor}
       borderRadius="lg"
       shadow="md"
-      bg={boxColor}
+      bg={cardColor}
       {...otherProps}
     >
       {children}
@@ -70,22 +68,18 @@ const NewsCard = ({ source, children, ...otherProps }) => {
         <Square
           w={{ base: "100px", sm: "150px" }}
           h={{ base: "100px", sm: "150px" }}
-          // w="150px"
-          // h="150px"
           border="1px"
-          borderColor="brand.400"
+          borderColor={cardColor}
           borderRadius="lg"
           shadow="md"
-          bg={notBoxColor}
+          bg={textBoxColor}
         >
-          {/*<Square w="20%" h="15%">*/}
           <Text
-            // color="brand.900"
             align="center"
             mt="5px"
             fontSize={{ base: "md", sm: "2xl" }}
             fontWeight="bold"
-            color={boxColor}
+            color={textColor}
           >
             {name}
           </Text>
@@ -97,10 +91,10 @@ const NewsCard = ({ source, children, ...otherProps }) => {
           w="full"
           h="150px"
           border="1px"
-          borderColor="brand.400"
+          borderColor={textBoxColor}
           borderRadius="lg"
           shadow="md"
-          bg={notBoxColor}
+          bg={textBoxColor}
           padding="5px"
           overflow="scroll"
         >
