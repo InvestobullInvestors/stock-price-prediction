@@ -1,7 +1,7 @@
 import React from 'react';
 import PageTemplate from "../../components/PageLayout/PageTemplate";
 import CustomHeading from "../../components/CustomHeading";
-import {Box, Text, useColorModeValue} from "@chakra-ui/react";
+import {Box, Center, Text, useColorModeValue} from "@chakra-ui/react";
 import {useUser} from "../../contexts/useUser";
 
 const CustomBox = ({children, ...otherProps}) => {
@@ -28,12 +28,13 @@ const WatchlistItem = ({ticker}) => (
 )
 
 const Watchlist = () => {
-    const {watchlist} = useUser()
+    const {user, watchlist} = useUser()
 
     return <PageTemplate>
         <CustomHeading>Watchlist</CustomHeading>
         <CustomBox>
-            {watchlist.map(doc => <WatchlistItem ticker={doc.ticker}/>)}
+            {!user && <Center fontSize="xl" mx={8} my={4}>Sign in to use watchlist</Center>}
+            {user && watchlist.map(doc => <WatchlistItem ticker={doc.ticker}/>)}
         </CustomBox>
     </PageTemplate>
 }
