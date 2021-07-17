@@ -3,11 +3,10 @@ import firebase from "firebase";
 import {auth, firestore} from '../auth/firebase.jsx'
 import {useUser} from "./useUser";
 
-const USERS = 'users'
+const USERS = firestore.collection('users')
 const NEWS = 'news'
 const NOTIFICATIONS = 'notifications'
 const WATCHLIST = 'watchlist'
-const DEFAULT = 'default'
 
 const AuthContext = createContext({})
 
@@ -18,11 +17,11 @@ const AuthProvider = ({children}) => {
 
     const signup = (displayName, email, password) => {
         return auth.createUserWithEmailAndPassword(email, password)
-            .then(credentials => setupUserDetails(credentials.user.uid, displayName, email, ""))
+            .then(credentials => createUser(credentials.user.uid, displayName, email, ""))
     }
 
-    const setupUserDetails = async (uid, displayName, email, photoURL) => {
-        const currentUser = firestore.collection(USERS).doc(uid)
+    const createUser = async (uid, displayName, email, photoURL) => {
+        const currentUser = USERS.doc(uid)
 
         const welcomeMessage = {
             text: "Welcome to InvestoBull",
@@ -38,9 +37,10 @@ const AuthProvider = ({children}) => {
             plan_expiry: null,
             stripe_id: ""
         })
-        await currentUser.collection(NEWS).doc(DEFAULT).set({list: []})
-        await currentUser.collection(NOTIFICATIONS).doc(DEFAULT).set({list: [welcomeMessage]})
-        await currentUser.collection(WATCHLIST).doc(DEFAULT).set({list: []})
+
+        await currentUser.collection(NEWS).add({})
+        await currentUser.collection(NOTIFICATIONS).add(welcomeMessage)
+        await currentUser.collection(WATCHLIST).add({})
     }
 
     const login = (email, password) => {
@@ -63,7 +63,7 @@ const AuthProvider = ({children}) => {
                     const displayName = authResult.user.displayName
                     const email = authResult.user.email
                     const photoURL = authResult.user.photoURL
-                    await setupUserDetails(uid, displayName, email, photoURL)
+                    await createUser(uid, displayName, email, photoURL)
                 }
                 return true;
             }
@@ -74,42 +74,24 @@ const AuthProvider = ({children}) => {
         return auth.signOut()
     }
 
-    const setCurrentUser = (uid, data) => {
-        setUser({
-            uid: uid,
-            displayName: data.displayName,
-            email: data.email,
-            photoURL: data.photoURL,
-            plan: data.plan,
-            plan_expiry: data.plan_expiry,
-            stripe_id: data.stripe_id
-        })
-    }
-
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(async firebaseUser => {
-            if (firebaseUser) {
-                const currentUser = firestore.collection(USERS).doc(firebaseUser.uid)
+        const unsubscribe = auth.onAuthStateChanged(firebaseUser => {
+            const currentUser = USERS.doc(firebaseUser?.uid)
 
-                await currentUser.get()
-                    .then(doc => setCurrentUser(firebaseUser.uid, doc.data()))
-                    .catch(err => console.error(err.message))
+            currentUser.onSnapshot(snapshot => setUser(snapshot.data()))
 
-                await currentUser.collection(NEWS).doc(DEFAULT).get()
-                    .then(doc => setNews(doc.data()?.list ? doc.data().list : []))
-                    .catch(err => console.error(err.message))
+            currentUser.collection(NEWS).onSnapshot(snapshot => {
+                setNews(snapshot.docs.map(doc => doc.data()))
+            })
 
-                await currentUser.collection(NOTIFICATIONS).doc(DEFAULT).get()
-                    .then(doc => setNotifications(doc.data()?.list ? doc.data().list : []))
-                    .catch(err => console.error(err.message))
+            currentUser.collection(NOTIFICATIONS).onSnapshot(snapshot => {
+                setNotifications(snapshot.docs.map(doc => doc.data()))
+            })
 
-                await currentUser.collection(WATCHLIST).doc(DEFAULT).get()
-                    .then(doc => setWatchlist(doc.data()?.list ? doc.data().list : []))
-                    .catch(err => console.error(err.message))
+            currentUser.collection(WATCHLIST).onSnapshot(snapshot => {
+                setWatchlist(snapshot.docs.map(doc => doc.data()))
+            })
 
-            } else {
-                setUser(null)
-            }
             setLoading(false)
         })
         return () => unsubscribe()
