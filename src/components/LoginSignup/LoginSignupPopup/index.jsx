@@ -21,6 +21,30 @@ const LoginSignupPopup = () => {
 
     const [mode, setMode] = useState("login")
 
+    const modalContent = {
+        login: {
+            header: 'Log In to InvestoBull',
+            body: <LoginForm setMode={setMode}/>,
+            footer: <Text>Don't have an account yet?
+                <Link as="button" onClick={() => setMode("signup")} ml={2}>Sign Up!</Link>
+            </Text>
+        },
+        signup: {
+            header: 'Sign Up for InvestoBull',
+            body: <SignupForm/>,
+            footer: <Text>Already have an account?
+                <Link as="button" onClick={() => setMode("login")} ml={2}>Log In!</Link>
+            </Text>
+        },
+        resetPassword: {
+            header: 'Password Reset',
+            body: <ResetPasswordForm setMode={setMode}/>,
+            footer: <Text>Don't have an account yet?
+                <Link as="button" onClick={() => setMode("signup")} ml={2}>Sign Up!</Link>
+            </Text>
+        }
+    }
+
     return (
         <>
             <Button onClick={onOpen}>Login/Signup</Button>
@@ -29,27 +53,15 @@ const LoginSignupPopup = () => {
                 <ModalOverlay/>
                 <ModalContent>
                     <ModalHeader>
-                        {mode === "login" ? <Text>Log In to InvestoBull</Text>
-                            : mode === "signup" ? <Text>Sign Up for InvestoBull</Text>
-                                : <Text>Password Reset</Text>}
+                        {modalContent[mode].header}
                     </ModalHeader>
                     <ModalBody>
-                        {mode === "login" ? <LoginForm setMode={setMode}/>
-                            : mode === "signup" ? <SignupForm/>
-                                : <ResetPasswordForm setMode={setMode}/>}
+                        {modalContent[mode].body}
                     </ModalBody>
                     <ModalFooter>
-                        {mode === "signup" ?
-                            <Text>Already have an account?
-                                <Link as="button" onClick={() => setMode("login")} ml={2}>Log In!</Link>
-                            </Text>
-                            :
-                            <Text>Don't have an account yet?
-                                <Link as="button" onClick={() => setMode("signup")} ml={2}>Sign Up!</Link>
-                            </Text>
-                        }
+                        {modalContent[mode].footer}
                     </ModalFooter>
-                    <ModalCloseButton />
+                    <ModalCloseButton/>
                 </ModalContent>
             </Modal>
         </>

@@ -21,7 +21,7 @@ import {
     useDisclosure
 } from "@chakra-ui/react";
 import {BellIcon, ChevronDownIcon, HamburgerIcon, Icon} from "@chakra-ui/icons";
-import {FaSun, FaMoon} from 'react-icons/fa';
+import {FaMoon, FaSun} from 'react-icons/fa';
 import NotificationList from "../../NotificationList";
 import LoginSignupPopup from "../../LoginSignup/LoginSignupPopup";
 import {useUser} from "../../../contexts/useUser";
@@ -44,9 +44,8 @@ const CustomButton = ({children, route, ...otherProps}) => (
     <Button bg="transparent" m={MARGIN} as={Link} {...otherProps} to={route}>{children}</Button>
 )
 
-// visible when screen is narrow
-const HamburgerMenu = ({bgColor}) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+const NarrowScreenHamburgerMenu = ({bgColor}) => {
+    const {isOpen, onOpen, onClose} = useDisclosure()
 
     return <Flex display={['flex', 'flex', 'none', 'none']}>
         <Button onClick={onOpen} bg="transparent" px={PADDING} m={MARGIN}>
@@ -75,8 +74,7 @@ const HamburgerMenu = ({bgColor}) => {
     </Flex>
 }
 
-// visible when screen is wide
-const Links = () => (
+const WideScreenLinks = () => (
     <Flex display={['none', 'none', 'flex', 'flex']}>
         <CustomButton route="/">Home</CustomButton>
         <CustomButton route="/watchlist">Watchlist</CustomButton>
@@ -85,19 +83,17 @@ const Links = () => (
     </Flex>
 )
 
-const NotificationMenu = ({bgColor}) => {
-    const {notifications} = useUser()
-
-    return <Menu>
+const NotificationMenu = ({bgColor}) => (
+    <Menu>
         <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
             <BellIcon w={ICON_SIZE} h={ICON_SIZE}/>
         </MenuButton>
         <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-            <NotificationList notificationList={notifications}/>
+            <NotificationList/>
         </MenuList>
     </Menu>
-}
+)
 
 const UserMenu = ({bgColor}) => {
     const {user} = useUser()
@@ -137,9 +133,9 @@ const Navbar = () => {
     return <Flex zIndex={5} pos="sticky" top={0} w="100%" justify="center" bg={bgColor} color={txtColor}>
         <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
 
-            <HamburgerMenu bgColor={bgColor}/>
+            <NarrowScreenHamburgerMenu bgColor={bgColor}/>
             <Logo/>
-            <Links/>
+            <WideScreenLinks/>
 
             <Flex flex="1" align="center" justify="flex-end">
                 {useColorMode().colorMode === "light" ?
