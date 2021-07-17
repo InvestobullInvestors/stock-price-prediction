@@ -30,8 +30,8 @@ const StockInfoProvider = ({children}) => {
         })
     }
 
-    const setRealtimeGraphData = () => {
-        axios.get(`http://localhost:3000/realtime-graph`).then((response) => {
+    const setRealtimeGraphData = ticker => {
+        axios.get(`http://localhost:3000/realtime-graph/${ticker}`).then((response) => {
             console.log(response.data)
             setGraphData(response.data);
         })
