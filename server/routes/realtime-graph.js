@@ -5,7 +5,9 @@ var router = express.Router();
 /* GET realtime data. */
 router.get('/:ticker', function (req, res) {
     const {ticker} = req.params;
-    dailyGraphInfo.findOne({ticker_id: ticker}).then(({stock_name, stock_details}) => {
+    dailyGraphInfo.findOne({ticker_id: ticker}).then(({stock_details}) => {
+        stock_details.reverse()
+
         const labels = []
         const open = []
         const close = []
