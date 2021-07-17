@@ -33,8 +33,11 @@ const Watchlist = () => {
     return <PageTemplate>
         <CustomHeading>Watchlist</CustomHeading>
         <CustomBox>
-            {!user && <Center fontSize="xl" mx={8} my={4}>Sign in to use watchlist</Center>}
-            {user && watchlist.map(doc => <WatchlistItem ticker={doc.ticker}/>)}
+            {
+                user ?
+                    watchlist.map(({ticker}) => <WatchlistItem ticker={ticker}/>) :
+                    <Center fontSize="xl" mx={8} my={4}>Sign in to use watchlist</Center>
+            }
         </CustomBox>
     </PageTemplate>
 }
