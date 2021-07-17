@@ -1,108 +1,108 @@
-import {Box, Container, HStack, useColorModeValue} from '@chakra-ui/react';
-import {IoClose, IoSearch} from 'react-icons/io5';
-import React, {useEffect, useRef, useState} from 'react';
+import { Box, Container, HStack, useColorModeValue } from '@chakra-ui/react';
+import { IoClose, IoSearch } from 'react-icons/io5';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import {AnimatePresence, motion} from 'framer-motion';
-import {useClickOutside} from 'react-click-outside-hook';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useClickOutside } from 'react-click-outside-hook';
 import MoonLoader from 'react-spinners/MoonLoader';
 import useDebounce from '../../hooks/debounce';
 import axios from 'axios';
 import ShowStock from './ShowStock';
 
 const SearchBarContainer = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  width: 34em;
-  height: 3.8em;
-  background-color: boxColor;
-  border-radius: 6px;
-  box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
+    display: flex;
+    flex-direction: column;
+    width: 34em;
+    height: 3.8em;
+    background-color: boxColor;
+    border-radius: 6px;
+    box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
 `;
 
 const SearchInputContainer = styled.div`
-  width: 100%;
-  min-height: 4em;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 2px 15px;
+    width: 100%;
+    min-height: 4em;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 2px 15px;
 `;
 
 const SearchInput = styled.input`
-  width: 100%;
-  height: 100%;
-  outline: none;
-  border: none;
-  font-size: 21px;
-  color: textColor;
-  font-weight: 500;
-  border-radius: 6px;
-  background-color: transparent;
-
-  &:focus {
+    width: 100%;
+    height: 100%;
     outline: none;
+    border: none;
+    font-size: 21px;
+    color: textColor;
+    font-weight: 500;
+    border-radius: 6px;
+    background-color: transparent;
+
+    &:focus {
+        outline: none;
+
+        &::placeholder {
+            opacity: 0;
+        }
+    }
 
     &::placeholder {
-      opacity: 0;
+        color: #bebebe;
+        transition: all 250ms ease-in-out;
     }
-  }
-
-  &::placeholder {
-    color: #bebebe;
-    transition: all 250ms ease-in-out;
-  }
 `;
 
 const SearchIcon = styled.span`
-  color: #bebebe;
-  font-size: 27px;
-  margin-right: 10px;
-  margin-top: 6px;
-  vertical-align: middle;
+    color: #bebebe;
+    font-size: 27px;
+    margin-right: 10px;
+    margin-top: 6px;
+    vertical-align: middle;
 `;
 
 const CloseIcon = styled(motion.span)`
-  color: #bebebe;
-  font-size: 23px;
-  vertical-align: middle;
-  transition: all 200ms ease-in-out;
-  cursor: pointer;
+    color: #bebebe;
+    font-size: 23px;
+    vertical-align: middle;
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
 
-  &:hover {
-    color: #dfdfdf;
-  }
+    &:hover {
+        color: #dfdfdf;
+    }
 `;
 
 const LineSeperator = styled.span`
-  display: flex;
-  min-width: 100%;
-  min-height: 2px;
-  background-color: #d8d8d878;
+    display: flex;
+    min-width: 100%;
+    min-height: 2px;
+    background-color: #d8d8d878;
 `;
 
 const SearchContent = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 1em;
-  overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    overflow-y: auto;
 `;
 
 const LoadingWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const WarningMessage = styled.span`
-  color: #a1a1a1;
-  font-size: 14px;
-  display: flex;
-  align-self: center;
-  justify-self: center;
+    color: #a1a1a1;
+    font-size: 14px;
+    display: flex;
+    align-self: center;
+    justify-self: center;
 `;
 
 const containerVariants = {
@@ -114,7 +114,7 @@ const containerVariants = {
     },
 };
 
-const containerTransition = {type: 'spring', damping: 22, stiffness: 150};
+const containerTransition = { type: 'spring', damping: 22, stiffness: 150 };
 
 const StockSearchBar = (props) => {
     const [isExpanded, setExpanded] = useState(false);
@@ -197,7 +197,7 @@ const StockSearchBar = (props) => {
                     >
                         <SearchInputContainer>
                             <SearchIcon>
-                                <IoSearch/>
+                                <IoSearch />
                             </SearchIcon>
                             <SearchInput
                                 placeholder='Search for stock'
@@ -210,18 +210,18 @@ const StockSearchBar = (props) => {
                                 {isExpanded && (
                                     <CloseIcon
                                         key='close-icon'
-                                        initial={{opacity: 0}}
-                                        animate={{opacity: 1}}
-                                        exit={{opacity: 0}}
-                                        transition={{duration: 0.2}}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
                                         onClick={collapseContainer}
                                     >
-                                        <IoClose/>
+                                        <IoClose />
                                     </CloseIcon>
                                 )}
                             </AnimatePresence>
                         </SearchInputContainer>
-                        {isExpanded && <LineSeperator/>}
+                        {isExpanded && <LineSeperator />}
                         {isExpanded && (
                             <SearchContent>
                                 {isLoading && (
