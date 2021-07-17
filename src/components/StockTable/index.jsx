@@ -1,22 +1,10 @@
 import React from 'react';
 import StockSymbol from '../StockSymbol';
-import {
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    useColorModeValue,
-    VStack,
-    Container,
-    Text,
-    Code,
-} from '@chakra-ui/react';
-import { useStockList } from '../../contexts/useStockList';
+import {Container, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, VStack,} from '@chakra-ui/react';
+import {useStockList} from '../../contexts/useStockList';
 
 const StockTable = () => {
-    const { stocks } = useStockList();
+    const {stocks} = useStockList();
 
     const bgColor = useColorModeValue('brand.200', 'brand.800');
     const redColor = useColorModeValue('red.light', 'red.dark');
@@ -46,7 +34,7 @@ const StockTable = () => {
             return (
                 <Tr key={index}>
                     <Td>
-                        <StockSymbol ticker={stock.ticker} />
+                        <StockSymbol ticker={stock.ticker}/>
                     </Td>
                     <Td>
                         <Text>{stock.previous_close}</Text>
@@ -107,7 +95,7 @@ const StockTable = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <TableData />
+                        <TableData/>
                     </Tbody>
                 </Table>
             </Container>

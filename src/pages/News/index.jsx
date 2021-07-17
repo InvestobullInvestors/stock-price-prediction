@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Flex} from "@chakra-ui/react";
 import PageTemplate from "../../components/PageLayout/PageTemplate";
-import NewsGrid from "../../components/NewsGrid";
-import NewsSourceDrawer from "../../components/NewsSourceDrawer";
+import NewsCardList from "../../components/News/NewsCardList";
+import NewsSourceDrawer from "../../components/News/NewsSourceDrawer";
+
 import CustomHeading from "../../components/CustomHeading";
 import {useStockNews} from "../../contexts/useStockNews";
 
@@ -11,14 +12,14 @@ const News = () => {
 
     const handleChangeColor = (e) => {
         setColor(color === "green" ? "red" : "green");
-    }
+    };
 
-    const {setNewsSources, setNewsInfo, allNewsInfo} = useStockNews();
+    const {setNewsSelectionsFromFirebase, setNewsMasterlistFromMongo} = useStockNews();
 
     useEffect(() => {
-        setNewsSources();
-        setNewsInfo();
-    }, [])
+        setNewsSelectionsFromFirebase();
+        setNewsMasterlistFromMongo();
+    }, []);
 
     //TODO: enable watchlist filter
     return (
@@ -29,9 +30,9 @@ const News = () => {
                 {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
             </Flex>
             <CustomHeading>News</CustomHeading>
-            <NewsGrid/>
+            <NewsCardList/>
         </PageTemplate>
-    )
-}
+    );
+};
 
 export default News;

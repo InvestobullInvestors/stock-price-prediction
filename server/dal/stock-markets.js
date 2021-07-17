@@ -4,9 +4,9 @@ require('dotenv').config({path: '../.env'});
 mongoose.connect(process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-})
+});
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const stockMarketSchema = new Schema({
     market_name: String,
@@ -101,3 +101,17 @@ const stockNewsInfoSchema = new Schema({
 }, {collection: 'StockNewsInfo'})
 
 exports.stockNewsInfo = mongoose.model('StockNewsInfo', stockNewsInfoSchema)
+
+var newsMasterlistSchema = new Schema(
+    {
+        name: String,
+        articles: Array({
+            date: Date,
+            title: String,
+            src: String,
+        }),
+    },
+    {collection: "NewsMasterlist"}
+);
+
+exports.newsMasterlist = mongoose.model("NewsMasterlist", newsMasterlistSchema);
