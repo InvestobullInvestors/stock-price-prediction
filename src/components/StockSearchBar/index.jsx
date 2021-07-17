@@ -14,7 +14,7 @@ const SearchBarContainer = styled(motion.div)`
     flex-direction: column;
     width: 34em;
     height: 3.8em;
-    background-color: #fff;
+    background-color: boxColor;
     border-radius: 6px;
     box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
 `;
@@ -34,7 +34,7 @@ const SearchInput = styled.input`
     outline: none;
     border: none;
     font-size: 21px;
-    color: #12112e;
+    color: textColor;
     font-weight: 500;
     border-radius: 6px;
     background-color: transparent;
@@ -122,7 +122,7 @@ const StockSearchBar = (props) => {
     const isEmpty = !stocks || stocks.length === 0;
     const inputRef = useRef();
     const boxColor = useColorModeValue('brand.100', 'brand.700');
-    const color = useColorModeValue('#000', '#fff');
+    const textColor = useColorModeValue('#000', '#fff');
 
     const expandContainer = () => {
         setExpanded(true);
@@ -224,7 +224,7 @@ const StockSearchBar = (props) => {
                                     <LoadingWrapper>
                                         <MoonLoader
                                             loading={true}
-                                            color={color}
+                                            color={textColor}
                                             size={20}
                                         />
                                     </LoadingWrapper>

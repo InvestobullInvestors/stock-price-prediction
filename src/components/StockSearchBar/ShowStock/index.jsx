@@ -1,3 +1,4 @@
+import { useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -13,7 +14,7 @@ const StockContainer = styled.div`
 const Symbol = styled.h3`
     font-size: 15px;
     font-weight: bold;
-    color: #000;
+    color: textColor;
     margin-left: 10px;
     flex: 1;
     display: flex;
@@ -21,7 +22,7 @@ const Symbol = styled.h3`
 
 const Name = styled.h3`
     font-size: 15px;
-    color: #000;
+    color: textColor;
     margin-left: 10px;
     flex: 2;
     display: flex;
@@ -29,6 +30,7 @@ const Name = styled.h3`
 
 const ShowStock = (props) => {
     const { symbol, name } = props;
+    const textColor = useColorModeValue('#000', '#fff');
 
     return (
         <StockContainer>
