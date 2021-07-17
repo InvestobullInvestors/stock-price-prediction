@@ -1,34 +1,30 @@
 var express = require('express');
-const {stockInfo} = require("../dal/stock-info-old");
+const {quarterlyStockInfo, realtimeStockInfo} = require("../dal/stock-markets");
 var router = express.Router();
 
-const defaultDetails = {
-    company_name: "",
-    ticker: "",
-    current_price: 0,
-    previous_close: 0,
-    open: 0,
-    last_price: 0,
-    change: 0,
-    change_percent: "",
-    currency: "",
-    volume: "",
-    pe_ratio: 0,
-    shares_owned: 0,
-    avg_vol: "",
-    market_cap: "",
-    fifty_two_week_low: 0,
-    fifty_two_week_high: 0
+const defaultData = {
+    stock_details: {}
 }
 
+/* GET realtime stock details. */
+router.get('/realtime-data/:ticker', function (req, res) {
+    const {ticker} = req.params
+    realtimeStockInfo.findOne({ticker_id: ticker}).then(({stock_name, stock_details}) => {
+        res.send({stock_name, stock_details})
+    }).catch(error => {
+        console.log(error.message)
+        res.send(defaultData)
+    })
+});
 
-/* GET stock details. */
-router.get('/:ticker', function (req, res) {
-    stockInfo.find().then(stockList => {
-        const details = stockList.filter((stock) => stock.ticker === req.params.ticker);
-        res.send(details.length === 1 ? details[0] : defaultDetails)
-    }).catch((_) => {
-        res.send(defaultDetails)
+/* GET quarterly stock details. */
+router.get('/quarterly-data/:ticker', function (req, res) {
+    const {ticker} = req.params
+    quarterlyStockInfo.findOne({ticker_id: ticker}).then(({stock_name, stock_details}) => {
+        res.send({stock_name, stock_details})
+    }).catch(error => {
+        console.log(error.message)
+        res.send(defaultData)
     })
 });
 

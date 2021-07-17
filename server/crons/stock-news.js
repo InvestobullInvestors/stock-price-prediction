@@ -1,20 +1,18 @@
 const dotenv = require('dotenv');
 dotenv.config();
-const {stockMarketInfo} = require("../dal/stock-markets");
-const NewsAPI = require('newsapi');
 require('dotenv').config({path: '../.env'});
+const {stockMarketInfo, stockNewsInfo} = require("../dal/stock-markets");
+const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
 const cron = require('node-cron')
-const {stockNewsInfo} = require("../dal/stock-markets");
 
-cron.schedule("0 0 0 * * *", async () => {
+cron.schedule("0 16 21 * * *", async () => {
     const doc = await stockMarketInfo.find({})
     for (let market_data of doc) {
         for (let stock_data of market_data.stocks) {
             const result = await stockNewsInfo.findOne({ticker_id: stock_data.ticker})
-            const news_data = await getStockNewsFromApi(stock_data)
-            const {articles} = news_data
+            const {articles} = await getStockNewsFromApi(stock_data)
             if (result) {
                 const {stock_news} = result
                 const filteredArticles = articles.filter((article) => {
@@ -26,7 +24,7 @@ cron.schedule("0 0 0 * * *", async () => {
                 })
                 console.log(`Successfully updated news for stock: ${stock_data.name}`)
             } else {
-                var stockNewsData = new stockNewsInfo({
+                const stockNewsData = new stockNewsInfo({
                     market_name: market_data.market_name,
                     market_id: market_data._id,
                     stock_name: stock_data.name,

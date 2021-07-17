@@ -1,21 +1,34 @@
 import React, {useState} from 'react';
-import {Alert, AlertIcon, Button, FormControl, FormLabel, Input, InputRightElement} from "@chakra-ui/react";
+import {
+    Alert,
+    AlertIcon,
+    Button,
+    Flex,
+    FormControl,
+    FormLabel,
+    Input,
+    InputRightElement,
+    Link
+} from "@chakra-ui/react";
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 import {useForm} from "react-hook-form";
-import {useAuth} from "../../contexts/useAuth";
+import {useAuth} from "../../../contexts/useAuth";
+import {StyledFirebaseAuth} from "react-firebaseui";
+import {auth} from "../../../auth/firebase";
 
-const LoginForm = () => {
+const LoginForm = ({setMode}) => {
     const {register, handleSubmit, formState} = useForm()
-    const {login} = useAuth()
+    const {login, uiConfig} = useAuth()
 
     const [showPW, setShowPW] = useState(false)
     const [error, setError] = useState("")
 
-    const onSubmit = async (data) => {
+    const onSubmit = async ({email, password}) => {
         try {
             setError("")
-            await login(data.email, data.password)
+            await login(email, password)
         } catch {
+            // for security reasons, we don't expose why the login failed
             return setError("Failed to log in")
         }
     }
@@ -43,6 +56,10 @@ const LoginForm = () => {
                 </InputRightElement>
             </FormControl>
             <Button isLoading={formState.isSubmitting} type="submit">Log In</Button>
+            <Flex>
+                <Link fontSize="sm" as="button" onClick={() => setMode("resetPassword")} m={3}>Forgot Password?</Link>
+            </Flex>
+            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>
         </form>
     )
 }

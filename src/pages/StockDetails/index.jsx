@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import {useColorModeValue} from "@chakra-ui/react";
-import PageTemplate from "../../components/PageTemplate";
 import StockInformation from "../../components/StockInformation";
 import StockNews from "../../components/StockNews";
 import StockPredictionDetails from "../../components/StockPredictionDetails";
@@ -8,15 +7,18 @@ import StockPredictionOverview from "../../components/StockPredictionOverview";
 import {usePrediction} from "../../contexts/usePredictions";
 import {useStockSymbol} from "../../contexts/useStockInfo";
 import {useStockNews} from "../../contexts/useStockNews";
+import PageTemplate from "../../components/PageLayout/PageTemplate";
 
 const StockDetails = ({match}) => {
     const tickerId = match.params.tickerId;
-    const {setSymbol} = useStockSymbol();
+    const {setRealtimeDetails, setQuarterlyDetails, setRealtimeGraphData} = useStockSymbol()
     const {setPrediction} = usePrediction();
     const {setNews} = useStockNews();
 
     useEffect(() => {
-        setSymbol(tickerId);
+        setRealtimeDetails(tickerId);
+        setQuarterlyDetails(tickerId);
+        setRealtimeGraphData();
         setPrediction(tickerId);
         setNews(tickerId);
     }, [tickerId]);

@@ -6,10 +6,16 @@ mongoose.connect(process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING, {
   useUnifiedTopology: true,
 });
 
+<<<<<<< HEAD
 var Schema = mongoose.Schema;
 
 var stockMarketSchema = new Schema(
   {
+=======
+const Schema = mongoose.Schema
+
+const stockMarketSchema = new Schema({
+>>>>>>> origin/progress-4
     market_name: String,
     stocks: Array({
       name: String,
@@ -21,8 +27,13 @@ var stockMarketSchema = new Schema(
 
 exports.stockMarketInfo = mongoose.model("StockMarket", stockMarketSchema);
 
+<<<<<<< HEAD
 var realtimeStockInfoSchema = new Schema(
   {
+=======
+
+const realtimeStockInfoSchema = new Schema({
+>>>>>>> origin/progress-4
     market_name: String,
     market_id: String,
     stock_name: String,
@@ -45,8 +56,12 @@ exports.realtimeStockInfo = mongoose.model(
   realtimeStockInfoSchema
 );
 
+<<<<<<< HEAD
 var predictedStockInfoSchema = new Schema(
   {
+=======
+const predictedStockInfoSchema = new Schema({
+>>>>>>> origin/progress-4
     market_name: String,
     market_id: String,
     stock_name: String,
@@ -66,13 +81,19 @@ exports.predictedStockInfo = mongoose.model(
   predictedStockInfoSchema
 );
 
+<<<<<<< HEAD
 var historicalStockInfoSchema = new Schema(
   {
+=======
+const quarterlyStockInfoSchema = new Schema({
+>>>>>>> origin/progress-4
     market_name: String,
     market_id: String,
     stock_name: String,
+    ticker_id: String,
     stock_id: String,
     stock_details: {
+<<<<<<< HEAD
       timestamp: Date,
       open: Number,
       close: Number,
@@ -89,6 +110,30 @@ exports.historicalStockInfo = mongoose.model(
 
 var stockNewsInfoSchema = new Schema(
   {
+=======
+        industry: String,
+        currency: String,
+        pe_ratio: Number | null,
+        peg_ratio: Number | null,
+        eps: Number | null,
+        quarterly_earning_growth: Number | null,
+        quarterly_revenue_growth: Number | null,
+        beta: Number | null,
+        fifty_two_week_high: Number | null,
+        fifty_two_week_low: Number | null,
+        dividend_payout_ratio: Number | null,
+        dividend_date: String,
+        shares_outstanding: Number | null,
+        shares_float: Number | null,
+        shares_short: Number | null
+    }
+}, {collection: 'QuarterlyStockInfo'})
+
+exports.quarterlyStockInfo = mongoose.model('QuarterlyStockInfo', quarterlyStockInfoSchema)
+
+
+const stockNewsInfoSchema = new Schema({
+>>>>>>> origin/progress-4
     market_name: String,
     market_id: String,
     stock_name: String,
