@@ -13,13 +13,13 @@ import {
 import { useStockNews } from "../../../contexts/useStockNews";
 
 const NewsArticle = ({ date, title, article }) => {
-  const dateColor = useColorModeValue("gray.600", "gray.500");
-  const linkColor = useColorModeValue("brand.900", "brand.800");
+  const dateColor = useColorModeValue("gray.600", "gray.400");
+  const linkColor = useColorModeValue("brand.900", "brand.100");
 
   return (
     <VStack spacing="0px" align="flex-start">
       <Text color={dateColor}>{date}</Text>
-      <Link color={linkColor} href={article}>
+      <Link color={linkColor} href={article} isExternal={true}>
         {title}
       </Link>
     </VStack>
@@ -27,10 +27,10 @@ const NewsArticle = ({ date, title, article }) => {
 };
 
 const NewsCard = ({ source, children, ...otherProps }) => {
-  const cardColor = useColorModeValue("brand.100", "brand.700");
+  const cardColor = useColorModeValue("brand.400", "brand.700");
   const cardBorderColor = useColorModeValue("brand.700", "brand.400");
-  const textBoxColor = useColorModeValue("brand.400", "brand.300");
-  const textColor = useColorModeValue("brand.900", "brand.700");
+  const textBoxColor = useColorModeValue("brand.300", "brand.600");
+  const textColor = useColorModeValue("brand.900", "brand.100");
 
   const { newsMasterlist } = useStockNews();
 
