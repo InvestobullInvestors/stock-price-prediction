@@ -81,6 +81,23 @@ const quarterlyStockInfoSchema = new Schema({
 
 exports.quarterlyStockInfo = mongoose.model('QuarterlyStockInfo', quarterlyStockInfoSchema)
 
+const dailyGraphInfoSchema = new Schema({
+    market_name: String,
+    market_id: String,
+    stock_name: String,
+    ticker_id: String,
+    stock_id: String,
+    stock_details: Array({
+        timestamp: String,
+        open: Number,
+        high: Number,
+        low: Number,
+        close: Number,
+        volume: Number
+    })
+}, {collection: 'DailyGraphInfo'})
+
+exports.dailyGraphInfo = mongoose.model('DailyGraphInfo', dailyGraphInfoSchema)
 
 const stockNewsInfoSchema = new Schema({
     market_name: String,

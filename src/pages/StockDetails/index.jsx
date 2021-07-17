@@ -18,7 +18,7 @@ const StockDetails = ({match}) => {
     useEffect(() => {
         setRealtimeDetails(tickerId);
         setQuarterlyDetails(tickerId);
-        setRealtimeGraphData();
+        setRealtimeGraphData(tickerId);
         setPrediction(tickerId);
         setNews(tickerId);
     }, [tickerId]);
