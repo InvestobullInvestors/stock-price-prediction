@@ -32,7 +32,7 @@ const NewsSourceDrawer = () => {
   return (
     <>
       <Button colorScheme="blue" onClick={onOpen} mt={7}>
-        sources
+        Sources
       </Button>
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
