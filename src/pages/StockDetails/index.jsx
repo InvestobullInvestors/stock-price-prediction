@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import PageTemplate from "../../components/pagetemplate/PageTemplate";
 import {useColorModeValue} from "@chakra-ui/react";
 import StockInformation from "../../components/StockInformation";
 import StockNews from "../../components/StockNews";
@@ -7,7 +8,6 @@ import StockPredictionOverview from "../../components/StockPredictionOverview";
 import {usePrediction} from "../../contexts/usePredictions";
 import {useStockSymbol} from "../../contexts/useStockInfo";
 import {useStockNews} from "../../contexts/useStockNews";
-import PageTemplate from "../../components/PageLayout/PageTemplate";
 
 const StockDetails = ({match}) => {
     const tickerId = match.params.tickerId;

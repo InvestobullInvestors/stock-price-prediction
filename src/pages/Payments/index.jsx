@@ -1,9 +1,9 @@
 import React from "react";
-import {Divider, useColorModeValue} from "@chakra-ui/react";
-import PageTemplate from "../../components/PageLayout/PageTemplate";
+import PageTemplate from "../../components/pagetemplate/PageTemplate";
 import PaymentPlanList from "../../components/PaymentPlanList";
 import ReviewCardList from "../../components/ReviewCardList";
 import CustomHeading from "../../components/CustomHeading";
+import {Divider, useColorModeValue} from "@chakra-ui/react";
 
 const Payments = () => (
     <PageTemplate bgColor={useColorModeValue("brand.300", "brand.800")}>

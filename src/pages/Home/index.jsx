@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import PageTemplate from "../../components/PageLayout/PageTemplate";
+import PageTemplate from "../../components/pagetemplate/PageTemplate";
 import CustomHeading from "../../components/CustomHeading";
 import StockSearchBar from '../../components/StockSearchBar';
 import StockTableCard from '../../components/StockTableCard';

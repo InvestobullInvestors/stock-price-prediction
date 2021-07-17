@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {Flex} from "@chakra-ui/react";
-import PageTemplate from "../../components/PageLayout/PageTemplate";
+import PageTemplate from "../../components/pagetemplate/PageTemplate";
 import NewsCardList from "../../components/News/NewsCardList";
 import NewsSourceDrawer from "../../components/News/NewsSourceDrawer";
-
 import CustomHeading from "../../components/CustomHeading";
+import {Flex} from "@chakra-ui/react";
 import {useStockNews} from "../../contexts/useStockNews";
 
 const News = () => {

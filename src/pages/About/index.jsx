@@ -1,8 +1,8 @@
 import React from 'react';
-import PageTemplate from "../../components/PageLayout/PageTemplate";
+import PageTemplate from "../../components/pagetemplate/PageTemplate";
 import AboutTeam from "../../components/AboutTeam";
-import {Box, Text, useColorModeValue} from "@chakra-ui/react";
 import CustomHeading from "../../components/CustomHeading";
+import {Box, Text, useColorModeValue} from "@chakra-ui/react";
 
 const AboutInvestobull = () => {
     const bgColor = useColorModeValue("brand.300", "brand.700")
