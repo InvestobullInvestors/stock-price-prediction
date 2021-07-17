@@ -14,7 +14,7 @@ const Home = () => {
 
     return (
         <PageTemplate>
-            <CustomHeading mt={10} mb={6}>Stock Market Overview</CustomHeading>
+            <CustomHeading>Stock Market Overview</CustomHeading>
             <StockSearchBar />
             <StockTableCard />
         </PageTemplate>

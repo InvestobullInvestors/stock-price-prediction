@@ -1,9 +1,10 @@
 import React from 'react';
 import PageTemplate from "../../components/PageLayout/PageTemplate";
+import CustomHeading from "../../components/CustomHeading";
 
 const Watchlist = () => (
     <PageTemplate>
-        This is watchlist!
+        <CustomHeading>Watchlist</CustomHeading>
     </PageTemplate>
 )
 

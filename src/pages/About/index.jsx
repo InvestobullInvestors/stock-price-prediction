@@ -22,9 +22,9 @@ const AboutInvestobull = () => {
 
 const About = () => (
     <PageTemplate>
-        <CustomHeading mt={10} mb={6}>About InvestoBull</CustomHeading>
+        <CustomHeading>About InvestoBull</CustomHeading>
         <AboutInvestobull/>
-        <CustomHeading mt={10} mb={6}>About Our Team</CustomHeading>
+        <CustomHeading>About Our Team</CustomHeading>
         <AboutTeam/>
     </PageTemplate>
 )
