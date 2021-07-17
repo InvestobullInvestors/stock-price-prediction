@@ -29,7 +29,7 @@ const News = () => {
                 {/*<Spacer/>*/}
                 {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
             </Flex>
-            <CustomHeading>News</CustomHeading>
+            <CustomHeading mt={0}>News</CustomHeading>
             <NewsCardList/>
         </PageTemplate>
     );

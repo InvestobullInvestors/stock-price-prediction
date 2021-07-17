@@ -85,7 +85,7 @@ const AuthProvider = ({children}) => {
             })
 
             currentUser.collection(NOTIFICATIONS).onSnapshot(snapshot => {
-                setNotifications(snapshot.docs.map(doc => doc.data()))
+                setNotifications(snapshot.docs.reverse().map(doc => doc.data()))
             })
 
             currentUser.collection(WATCHLIST).onSnapshot(snapshot => {

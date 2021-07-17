@@ -7,7 +7,7 @@ import CustomHeading from "../../components/CustomHeading";
 
 const Payments = () => (
     <PageTemplate bgColor={useColorModeValue("brand.300", "brand.800")}>
-        <CustomHeading mt={7}>Select A Plan</CustomHeading>
+        <CustomHeading>Select A Plan</CustomHeading>
         <PaymentPlanList/>
         <Divider my={16} orientation="horizontal"/>
         <CustomHeading>A Brand That Investors Trust</CustomHeading>
