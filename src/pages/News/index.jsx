@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
-import PageTemplate from "../../components/PageTemplate";
+import PageTemplate from "../../components/PageLayout/PageTemplate";
 import NewsCardList from "../../components/News/NewsCardList";
 import NewsSourceDrawer from "../../components/News/NewsSourceDrawer";
 
