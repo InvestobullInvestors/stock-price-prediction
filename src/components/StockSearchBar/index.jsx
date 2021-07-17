@@ -1,27 +1,13 @@
-import {
-    HStack,
-    InputGroup,
-    InputLeftElement,
-    Input,
-    Box,
-    useColorModeValue,
-    Button,
-    InputRightElement,
-    Container,
-} from '@chakra-ui/react';
-import { GoSearch } from 'react-icons/go';
-import React, { useState } from 'react';
+import { HStack, Box, useColorModeValue, Container } from '@chakra-ui/react';
+import { IoSearch, IoClose } from 'react-icons/io5';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
-
-// const StockSearchBar = () => {
-//     const boxColor = useColorModeValue('brand.100', 'brand.700');
-//     const [value, setValue] = useState('');
-//     const color = useColorModeValue('blue', 'gray');
-
-//     const handleChange = (event) => setValue(event.target.value);
-
-//     const handleClick = () => {};
+import { useClickOutside } from 'react-click-outside-hook';
+import MoonLoader from 'react-spinners/MoonLoader';
+import useDebounce from '../../hooks/debounceHook';
+import axios from 'axios';
+import ShowStock from './ShowStock';
 
 const SearchBarContainer = styled(motion.div)`
     display: flex;
@@ -117,7 +103,7 @@ const WarningMessage = styled.span`
 
 const containerVariants = {
     expanded: {
-        height: '30em',
+        height: '20em',
     },
     collapsed: {
         height: '3.8em',
@@ -126,44 +112,148 @@ const containerVariants = {
 
 const containerTransition = { type: 'spring', damping: 22, stiffness: 150 };
 
-const StockSearchBar = () => {
-    return <div></div>;
+const StockSearchBar = (props) => {
+    const [isExpanded, setExpanded] = useState(false);
+    const [parentRef, isClickedOutside] = useClickOutside();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isLoading, setLoading] = useState(false);
+    const [stocks, setStocks] = useState([]);
+    const [noStocksFound, setNoStocksFound] = useState(false);
+    const isEmpty = !stocks || stocks.length === 0;
+    const inputRef = useRef();
+    const boxColor = useColorModeValue('brand.100', 'brand.700');
+    const color = useColorModeValue('#000', '#fff');
 
-    // return (
-    //     <Box
-    //         mx={3}
-    //         mt={5}
-    //         px={4}
-    //         py={10}
-    //         borderRadius='lg'
-    //         shadow='md'
-    //         bg={boxColor}
-    //     >
-    //         <HStack>
-    //             <Container centerContent maxW='container.lg'>
-    //                 <InputGroup>
-    //                     <InputLeftElement pointerEvents='none' />
-    //                     <Input
-    //                         value={value}
-    //                         onChange={handleChange}
-    //                         placeholder='Search for symbol'
-    //                     />
-    //                     <InputRightElement width='5rem'>
-    //                         <Button
-    //                             h='1.75rem'
-    //                             size='lg'
-    //                             variant='solid'
-    //                             colorScheme={color}
-    //                             onClick={handleClick}
-    //                         >
-    //                             {<GoSearch color='white' />}
-    //                         </Button>
-    //                     </InputRightElement>
-    //                 </InputGroup>
-    //             </Container>
-    //         </HStack>
-    //     </Box>
-    // );
+    const expandContainer = () => {
+        setExpanded(true);
+    };
+
+    const collapseContainer = () => {
+        setExpanded(false);
+        setSearchQuery('');
+        setLoading(false);
+        setNoStocksFound(false);
+        setStocks([]);
+        if (inputRef.current) inputRef.current.value = '';
+    };
+
+    const changeHandler = (event) => {
+        event.preventDefault();
+        if (event.target.value.trim() === '') {
+            setNoStocksFound(false);
+            setStocks([]); // show empty results when search field is blank
+        }
+        setSearchQuery(event.target.value);
+    };
+
+    useEffect(() => {
+        if (isClickedOutside) collapseContainer();
+    }, [isClickedOutside]);
+
+    const prepareSearchQuery = (query) => {
+        const url = `https://ticker-2e1ica8b9.now.sh/keyword/${query}`;
+        return encodeURI(url);
+    };
+
+    const searchStock = async () => {
+        if (!searchQuery || searchQuery.trim() === '') return;
+        setNoStocksFound(false);
+        setLoading(true);
+        const URL = prepareSearchQuery(searchQuery);
+        console.log('URL: ', URL);
+        const res = await axios.get(URL).catch((err) => {
+            console.log('Error: ', err);
+        });
+        if (res) {
+            if (res.data && res.data.length === 0) setNoStocksFound(true);
+            setStocks(res.data);
+        }
+        setLoading(false);
+    };
+
+    useDebounce(searchQuery, 500, searchStock); // call api endpoint after 500 ms of no user input
+
+    return (
+        <Box
+            mx={3}
+            mt={5}
+            px={4}
+            py={10}
+            borderRadius='lg'
+            shadow='md'
+            bg={boxColor}
+        >
+            <HStack>
+                <Container centerContent maxW='container.lg'>
+                    <SearchBarContainer
+                        animate={isExpanded ? 'expanded' : 'collapsed'}
+                        variants={containerVariants}
+                        transition={containerTransition}
+                        ref={parentRef}
+                    >
+                        <SearchInputContainer>
+                            <SearchIcon>
+                                <IoSearch />
+                            </SearchIcon>
+                            <SearchInput
+                                placeholder='Search for stock'
+                                onFocus={expandContainer}
+                                ref={inputRef}
+                                value={searchQuery}
+                                onChange={changeHandler}
+                            />
+                            <AnimatePresence>
+                                {isExpanded && (
+                                    <CloseIcon
+                                        key='close-icon'
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                        onClick={collapseContainer}
+                                    >
+                                        <IoClose />
+                                    </CloseIcon>
+                                )}
+                            </AnimatePresence>
+                        </SearchInputContainer>
+                        {isExpanded && <LineSeperator />}
+                        {isExpanded && (
+                            <SearchContent>
+                                {isLoading && (
+                                    <LoadingWrapper>
+                                        <MoonLoader
+                                            loading={true}
+                                            color={color}
+                                            size={20}
+                                        />
+                                    </LoadingWrapper>
+                                )}
+                                {!isLoading && noStocksFound && (
+                                    <LoadingWrapper>
+                                        <WarningMessage>
+                                            No Stocks Found!
+                                        </WarningMessage>
+                                    </LoadingWrapper>
+                                )}
+                                {!isLoading && !isEmpty && (
+                                    <>
+                                        {stocks.map((stock) => (
+                                            <ShowStock
+                                                key={stock.symbol}
+                                                symbol={stock.symbol}
+                                                name={stock.name}
+                                            />
+                                        ))}
+                                    </>
+                                )}
+                            </SearchContent>
+                        )}
+                    </SearchBarContainer>
+                </Container>
+            </HStack>
+        </Box>
+    );
 };
 
 export default StockSearchBar;
