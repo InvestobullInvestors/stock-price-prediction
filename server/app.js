@@ -9,6 +9,7 @@ var chargeCardRouter = require('./routes/charge-card')
 var predictStockPriceRouter = require('./routes/stock-prediction')
 var stockNewsRouter = require('./routes/stock-news')
 var stockDetailsRouter = require('./routes/stock-details')
+var realtimeGraphRouter = require('./routes/realtime-graph')
 var cors = require('cors');
 
 var app = express();
@@ -29,6 +30,7 @@ app.use('/charge-card', chargeCardRouter);
 app.use('/stock-prediction', predictStockPriceRouter);
 app.use('/stock-news', stockNewsRouter);
 app.use('/stock-details', stockDetailsRouter)
+app.use('/realtime-graph', realtimeGraphRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

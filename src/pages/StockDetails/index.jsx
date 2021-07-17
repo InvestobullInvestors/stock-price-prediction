@@ -11,13 +11,14 @@ import PageTemplate from "../../components/PageLayout/PageTemplate";
 
 const StockDetails = ({match}) => {
     const tickerId = match.params.tickerId;
-    const {setRealtimeDetails, setQuarterlyDetails} = useStockSymbol()
+    const {setRealtimeDetails, setQuarterlyDetails, setRealtimeGraphData} = useStockSymbol()
     const {setPrediction} = usePrediction();
     const {setNews} = useStockNews();
 
     useEffect(() => {
         setRealtimeDetails(tickerId);
         setQuarterlyDetails(tickerId);
+        setRealtimeGraphData();
         setPrediction(tickerId);
         setNews(tickerId);
     }, [tickerId]);
