@@ -4,7 +4,7 @@ import PaymentPlanCard from '../PaymentPlanCard'
 
 const PaymentPlanList = () => (
     <SimpleGrid columns={{base: 1, md: 3}} spacing={5}>
-        <PaymentPlanCard type="Free" price={0} buttonText="Start Exploring"
+        <PaymentPlanCard type="Basic" price={0} buttonText="Start Exploring"
                          details={["This plan is the best in the world",
                              " This plan does nothing"]}/>
         <PaymentPlanCard type="Premium" price={5} buttonText="Subscribe Now"

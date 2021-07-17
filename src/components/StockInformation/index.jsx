@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 const StockDataEnclosure = ({children}) => (
-    <Box>
+    <Box mx={4}>
         <Table>
             {children}
         </Table>
@@ -24,7 +24,7 @@ const StockDataEnclosure = ({children}) => (
 )
 
 const LabelTd = ({children}) => (
-    <Td fontWeight="bold" alignItems="right">{children}</Td>
+    <Td isNumeric fontWeight="bold">{children}</Td>
 )
 
 const formatNumber = num => (
@@ -119,6 +119,8 @@ const LivePrice = () => {
     const {stockName} = useStockSymbol()
     const {realtimeStockDetails: {open, high, low, close, volume}} = useStockSymbol()
     const {quarterlyStockDetails: {currency}} = useStockSymbol()
+    const redColor = useColorModeValue('red.light', 'red.dark');
+    const greenColor = useColorModeValue('green.light', 'green.dark');
 
     return (
         <Tbody>
@@ -127,7 +129,7 @@ const LivePrice = () => {
                     <StatGroup>
                         <Stat>
                             <StatLabel fontSize="xl">{stockName}</StatLabel>
-                            <StatNumber mt={2} color={open >= close ? "lightgreen" : "red"}>
+                            <StatNumber mt={2} color={open >= close ? greenColor : redColor}>
                                 {formatNumber(open)}
                             </StatNumber>
                             <StatHelpText mt={2}>
@@ -158,7 +160,7 @@ const LivePrice = () => {
 }
 
 const StockInformation = () => (
-    <SimpleGrid columns={{base: 1, lg: 3}} spacing={16} bgColor={useColorModeValue("brand.100", "brand.700")}
+    <SimpleGrid columns={{base: 1, lg: 3}} spacing={8} bgColor={useColorModeValue("brand.100", "brand.700")}
                 mt={8} p={4} borderRadius="lg">
         <StockDataEnclosure>
             <LivePrice/>

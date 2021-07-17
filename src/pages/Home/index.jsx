@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import PageTemplate from '../../components/PageTemplate';
-import { Heading } from '@chakra-ui/react';
+import PageTemplate from "../../components/PageLayout/PageTemplate";
+import CustomHeading from "../../components/CustomHeading";
 import StockSearchBar from '../../components/StockSearchBar';
 import StockTableCard from '../../components/StockTableCard';
 import { useStockList } from '../../contexts/useStockList';
@@ -14,7 +14,7 @@ const Home = () => {
 
     return (
         <PageTemplate>
-            <Heading>Stock Market Overview</Heading>
+            <CustomHeading mt={10} mb={6}>Stock Market Overview</CustomHeading>
             <StockSearchBar />
             <StockTableCard />
         </PageTemplate>

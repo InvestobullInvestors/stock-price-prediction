@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link as ReactRouterLink} from 'react-router-dom'
 import {Flex, Link, Text} from "@chakra-ui/react";
 import {Icon} from "@chakra-ui/icons";
 import {FaGithub, FaFacebookSquare, FaEnvelope} from 'react-icons/fa';
@@ -18,7 +19,7 @@ const CustomIcon = ({icon}) => (
 const Footer = () => (
     <Flex direction="column" p={16} align="center">
         <Flex align="center">
-            <Link href="/about" m={MARGIN}>About Us</Link>
+            <Link as={ReactRouterLink} to="/about" m={MARGIN}>About Us</Link>
             <Link m={MARGIN}>Help</Link>
         </Flex>
         <Flex align="center">

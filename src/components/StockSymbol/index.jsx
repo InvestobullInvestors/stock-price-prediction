@@ -1,15 +1,17 @@
 import WatchlistButton from '../WatchlistButton';
-import { Link, HStack, useColorModeValue, Th, VStack } from '@chakra-ui/react';
+import {HStack, Link, useColorModeValue} from '@chakra-ui/react';
+import {Link as ReactRouterLink} from 'react-router-dom';
 
 const StockSymbol = ({ ticker }) => {
-    const colorScheme = useColorModeValue('#007AFF', '#1489FF');
+    const blueColor = useColorModeValue('blue.light', 'blue.dark');
 
     return (
         <HStack spacing='24px'>
             <WatchlistButton symbol={ticker} />
             <Link
-                href={`/stock-details/${ticker}`}
-                color={colorScheme}
+                as={ReactRouterLink}
+                to={`/stock-details/${ticker}`}
+                color={blueColor}
                 fontWeight='bold'
             >
                 {ticker}
