@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {loadStripe} from "@stripe/stripe-js";
 import {CardElement, Elements, useElements, useStripe} from "@stripe/react-stripe-js";
 import {AlertDialogHeader, Box, Button, Center} from "@chakra-ui/react";
-import useHandlePayment from "../../contexts/useHandlePayment";
+import useHandlePayment from "../../hooks/useHandlePayment";
 import AlertDialogBox from "../AlertDialogBox";
 
 const stripePublicKey = loadStripe('pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4');
