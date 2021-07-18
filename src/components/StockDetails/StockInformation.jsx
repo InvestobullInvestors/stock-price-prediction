@@ -1,5 +1,5 @@
 import React from "react";
-import {useStockSymbol} from "../contexts/useStockInfo";
+import {useStockSymbol} from "../../contexts/useStockInfo";
 import {
     Box,
     SimpleGrid,

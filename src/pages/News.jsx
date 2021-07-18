@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import PageTemplate from "../components/pagetemplate/PageTemplate";
+import PageTemplate from "../components/PageTemplate/PageTemplate";
 import NewsCardList from "../components/News/NewsCardList";
 import NewsSourceDrawer from "../components/News/NewsSourceDrawer";
 import CustomHeading from "../components/CustomHeading";

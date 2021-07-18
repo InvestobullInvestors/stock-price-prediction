@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
-import PageTemplate from "../components/pagetemplate/PageTemplate";
+import PageTemplate from "../components/PageTemplate/PageTemplate";
 import {useColorModeValue} from "@chakra-ui/react";
-import StockInformation from "../components/StockInformation";
-import StockNews from "../components/StockNews";
-import StockPredictionDetails from "../components/StockPredictionDetails";
-import StockPredictionOverview from "../components/StockPredictionOverview";
+import StockInformation from "../components/StockDetails/StockInformation";
+import StockNews from "../components/StockDetails/StockNews";
+import StockPredictionDetails from "../components/StockDetails/StockPredictionDetails";
+import StockPredictionOverview from "../components/StockDetails/StockPredictionOverview";
 import {usePrediction} from "../contexts/usePredictions";
 import {useStockSymbol} from "../contexts/useStockInfo";
 import {useStockNews} from "../contexts/useStockNews";

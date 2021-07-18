@@ -13,7 +13,7 @@ import {
     ModalOverlay,
     ModalHeader,
 } from '@chakra-ui/react';
-import CreditCardInformation from './CreditCardInformation';
+import CreditCardInformation from '../CreditCardInformation';
 
 const PaymentPlanCard = ({
     type,

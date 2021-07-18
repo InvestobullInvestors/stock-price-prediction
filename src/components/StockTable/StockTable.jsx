@@ -1,7 +1,7 @@
 import React from 'react';
 import StockSymbol from './StockSymbol';
 import {Container, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, VStack,} from '@chakra-ui/react';
-import {useStockList} from '../contexts/useStockList';
+import {useStockList} from '../../contexts/useStockList';
 
 const StockTable = () => {
     const {stocks} = useStockList();

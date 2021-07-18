@@ -1,4 +1,4 @@
-import WatchlistButton from './WatchlistButton';
+import WatchlistButton from '../WatchlistButton';
 import {HStack, Link, useColorModeValue} from '@chakra-ui/react';
 import {Link as ReactRouterLink} from 'react-router-dom';
 

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import PageTemplate from "../components/pagetemplate/PageTemplate";
+import PageTemplate from "../components/PageTemplate/PageTemplate";
 import CustomHeading from "../components/CustomHeading";
-import StockSearchBar from '../components/StockSearchBar';
-import StockTableCard from '../components/StockTableCard';
+import StockSearchBar from '../components/StockTable/StockSearchBar';
+import StockTableCard from '../components/StockTable/StockTableCard';
 import { useStockList } from '../contexts/useStockList';
 
 const Home = () => {

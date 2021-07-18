@@ -1,7 +1,7 @@
 import React from 'react'
 import {Box, Grid, GridItem, Heading, SimpleGrid, Spacer, useColorModeValue, VStack} from "@chakra-ui/react";
 import {Line} from "react-chartjs-2";
-import {useStockSymbol} from "../contexts/useStockInfo";
+import {useStockSymbol} from "../../contexts/useStockInfo";
 
 const CustomGridItem = ({children, ...otherProps}) => (
     <GridItem mx={4} my={4} borderRadius="lg" shadow="md" {...otherProps}>

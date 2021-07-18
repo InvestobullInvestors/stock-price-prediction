@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Divider, Heading, Link, useColorModeValue, VStack} from "@chakra-ui/react";
-import {useStockNews} from "../contexts/useStockNews";
+import {useStockNews} from "../../contexts/useStockNews";
 
 const CustomNewsLink = ({children, url, ...otherProps}) => (
     <Link href={url} isExternal w="100%" align="center" {...otherProps}>
