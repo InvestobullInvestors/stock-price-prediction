@@ -22,29 +22,27 @@ const PaymentPlanCard = ({
     ...otherProps
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const PaymentModal = ({ payableAmount }) => {
-        return (
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay>
-                    <ModalContent>
-                        <ModalHeader>
-                            Thank you for using Investobull
-                        </ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
-                            {payableAmount ? (
-                                <CreditCardInformation
-                                    payableAmount={payableAmount}
-                                />
-                            ) : (
-                                'Redirecting'
-                            )}
-                        </ModalBody>
-                    </ModalContent>
-                </ModalOverlay>
-            </Modal>
-        );
-    };
+    const PaymentModal = ({payableAmount}) => (
+        <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay>
+                <ModalContent>
+                    <ModalHeader>
+                        Thank you for using Investobull
+                    </ModalHeader>
+                    <ModalCloseButton/>
+                    <ModalBody>
+                        {payableAmount ? (
+                            <CreditCardInformation
+                                payableAmount={payableAmount}
+                            />
+                        ) : (
+                            'Redirecting'
+                        )}
+                    </ModalBody>
+                </ModalContent>
+            </ModalOverlay>
+        </Modal>
+    );
 
     return (
         <CustomBox {...otherProps}>
@@ -54,10 +52,8 @@ const PaymentPlanCard = ({
                 <Button colorScheme='brand' onClick={onOpen}>
                     {buttonText}
                 </Button>
-                <PaymentModal payableAmount={price} />
-                {details.map((detail) => (
-                    <Text key={detail}>{detail}</Text>
-                ))}
+                <PaymentModal payableAmount={price}/>
+                {details.map(detail => <Text key={detail}>{detail}</Text>)}
             </VStack>
         </CustomBox>
     );
