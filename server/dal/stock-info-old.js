@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const dotenv = require('dotenv');
 dotenv.config();
 
-var Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-var stockInfoSchema = new Schema({
+const stockInfoSchema = new Schema({
     company_name: String,
     ticker: String,
     current_price: Number,
@@ -21,6 +21,6 @@ var stockInfoSchema = new Schema({
     market_cap: String,
     fifty_two_week_low: Number,
     fifty_two_week_high: Number
-}, {collection: 'StockInfo'})
+}, {collection: 'StockInfo'});
 
 exports.stockInfo = mongoose.model('StockInfo', stockInfoSchema)

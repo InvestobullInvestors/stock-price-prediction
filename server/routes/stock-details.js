@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const {quarterlyStockInfo, realtimeStockInfo} = require("../dal/stock-markets");
-var router = express.Router();
+const router = express.Router();
 
 const defaultData = {
     stock_details: {}

@@ -50,7 +50,7 @@ We will store user login credentials, user watch lists, and historical stock dat
 - Store this data onto a database 
 - Create an API to deliver that data to the frontend 
 - Display the data to the end user
-- Payments page to subscribe to plans 
+- Plans page to subscribe to plans 
 - Create a list of plans that one can subscribe to 
 - Set up a customer on Stripe 
 - Save the Stripe customer id corresponding to a customer in the database 

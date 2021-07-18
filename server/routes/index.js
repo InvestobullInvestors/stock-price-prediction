@@ -1,6 +1,5 @@
-var express = require('express');
-var router = express.Router();
-// const { quarterlyStockInfo } = require('../dal/stock-markets');
+const express = require('express');
+const router = express.Router();
 
 const stockList = [
     {
@@ -26,7 +25,7 @@ const stockList = [
         ticker: 'AMZN',
         current_price: 3717.25,
         last_price: 3713.32,
-        previous_close: 43723.21,
+        previous_close: 3723.21,
         open: 52.14,
         change: -5.71,
         change_percent: '-10.37%',

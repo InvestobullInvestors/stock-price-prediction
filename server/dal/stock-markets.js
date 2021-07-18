@@ -119,7 +119,7 @@ const stockNewsInfoSchema = new Schema({
 
 exports.stockNewsInfo = mongoose.model('StockNewsInfo', stockNewsInfoSchema)
 
-var newsMasterlistSchema = new Schema(
+const newsMasterlistSchema = new Schema(
     {
         name: String,
         articles: Array({
