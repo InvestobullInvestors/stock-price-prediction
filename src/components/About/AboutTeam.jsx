@@ -1,11 +1,11 @@
 import React from 'react';
-import {Avatar, Box, Divider, HStack, SimpleGrid, Text, useColorModeValue, VStack} from "@chakra-ui/react";
+import {Avatar, Divider, HStack, SimpleGrid, Text, VStack} from "@chakra-ui/react";
+import CustomBox from "../CustomBox";
 
 const TeamMemberCard = ({name, imageUrl, title, summary, ...otherProps}) => {
-    const bgColor = useColorModeValue("brand.300", "brand.700")
 
     return (
-        <Box m={5} px={4} py={8} borderRadius="lg" shadow="md" bg={bgColor} {...otherProps}>
+        <CustomBox {...otherProps}>
             <VStack>
                 <HStack>
                     <Avatar name={name} src={imageUrl}/>
@@ -18,7 +18,7 @@ const TeamMemberCard = ({name, imageUrl, title, summary, ...otherProps}) => {
                 </VStack>
 
             </VStack>
-        </Box>
+        </CustomBox>
     )
 }
 

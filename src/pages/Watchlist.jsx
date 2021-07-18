@@ -1,25 +1,9 @@
 import React from 'react';
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 import CustomHeading from "../components/CustomHeading";
-import {Box, Center, Text, useColorModeValue} from "@chakra-ui/react";
+import {Center, Text} from "@chakra-ui/react";
 import {useUser} from "../contexts/useUser";
-
-const CustomBox = ({children, ...otherProps}) => {
-    const bgColor = useColorModeValue("brand.300", "brand.700")
-
-    return <Box
-        mx={3}
-        mt={5}
-        px={4}
-        py={10}
-        borderRadius='lg'
-        shadow='md'
-        bg={bgColor}
-        {...otherProps}
-    >
-        {children}
-    </Box>
-}
+import CustomBox from "../components/CustomBox";
 
 const WatchlistItem = ({ticker}) => (
     <Text fontSize="xl" mx={8} my={4}>

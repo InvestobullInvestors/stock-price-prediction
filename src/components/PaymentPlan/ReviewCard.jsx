@@ -1,6 +1,7 @@
 import React from 'react';
-import {Box, Text, VStack, useColorModeValue, HStack, Avatar, Divider} from '@chakra-ui/react';
+import {Text, VStack, HStack, Avatar, Divider} from '@chakra-ui/react';
 import {StarIcon} from '@chakra-ui/icons'
+import CustomBox from "../CustomBox";
 
 const StartRatings = ({rating}) => {
     const ratingStars = [];
@@ -15,9 +16,8 @@ const StartRatings = ({rating}) => {
 }
 
 const ReviewCard = ({name, imageUrl, rating, reviewTitle, reviewSummary, ...otherProps}) => {
-    const boxColor = useColorModeValue("brand.100", "brand.700");
     return (
-        <Box mx={3} mt={5} px={4} py={10} borderRadius="lg" shadow="md" bg={boxColor} {...otherProps}>
+        <CustomBox {...otherProps}>
             <VStack>
                 <HStack>
                     <Avatar name={name} src={imageUrl}/>
@@ -35,7 +35,7 @@ const ReviewCard = ({name, imageUrl, rating, reviewTitle, reviewSummary, ...othe
                 </HStack>
                 <Text>{reviewSummary}</Text>
             </VStack>
-        </Box>
+        </CustomBox>
     )
 }
 

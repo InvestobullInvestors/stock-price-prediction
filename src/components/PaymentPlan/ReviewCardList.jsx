@@ -3,7 +3,7 @@ import {SimpleGrid} from '@chakra-ui/react';
 import ReviewCard from "./ReviewCard";
 
 const ReviewCardList = () => (
-    <SimpleGrid columns={{base: 1, sm: 2, md: 4}} spacing={3}>
+    <SimpleGrid columns={{base: 1, sm: 2, md: 3, lg:4}} spacing={3}>
         <ReviewCard name="Himanshu Goyal" imageUrl="" rating={5} reviewTitle="This is the best"
                     reviewSummary="I do not know what to write"/>
         <ReviewCard name="Weiyoung Tan" imageUrl="" rating={4} reviewTitle="I love it"

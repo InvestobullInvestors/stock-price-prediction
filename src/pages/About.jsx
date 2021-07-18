@@ -2,12 +2,12 @@ import React from 'react';
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 import AboutTeam from "../components/About/AboutTeam";
 import CustomHeading from "../components/CustomHeading";
-import {Box, Text, useColorModeValue} from "@chakra-ui/react";
+import {Text} from "@chakra-ui/react";
+import CustomBox from "../components/CustomBox";
 
 const AboutInvestobull = () => {
-    const bgColor = useColorModeValue("brand.300", "brand.700")
     return (
-        <Box m={4} p={8} borderRadius="lg" shadow="md" bg={bgColor}>
+        <CustomBox>
             <Text lineHeight={8}>
                 (Placeholder)
                 This web app will be used by everyday investors who have a limited understanding of the technical and fundamental
@@ -16,7 +16,7 @@ const AboutInvestobull = () => {
                 service from competitors’ offerings by providing users with transparents metrics that explain how we derive our
                 projections. Our goal is to help users make better-informed decisions with their investments.
             </Text>
-        </Box>
+        </CustomBox>
     )
 }
 
