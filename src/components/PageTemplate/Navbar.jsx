@@ -140,11 +140,11 @@ const Navbar = () => {
             <Flex flex="1" align="center" justify="flex-end">
                 {useColorMode().colorMode === "light" ?
                     <Button bg="transparent" rounded="full" p={0} m={2} onClick={toggleColorMode}>
-                        <Icon as={FaMoon} w={6} h={6}/>
+                        <Icon as={FaMoon} w={5} h={5}/>
                     </Button>
                     :
                     <Button bg="transparent" rounded="full" p={0} m={2} onClick={toggleColorMode}>
-                        <Icon as={FaSun} w={6} h={6}/>
+                        <Icon as={FaSun} w={5} h={5}/>
                     </Button>
                 }
                 {user ?
