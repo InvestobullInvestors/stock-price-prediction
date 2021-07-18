@@ -8,6 +8,7 @@ import {
     MenuItem,
     Modal,
     ModalBody,
+    ModalCloseButton,
     ModalContent,
     ModalFooter,
     ModalHeader,
@@ -50,6 +51,7 @@ const UserProfilePopup = () => {
                     <ModalFooter>
                         <Button onClick={onClose} as={Link} to="/plans">Upgrade Account</Button>
                     </ModalFooter>
+                    <ModalCloseButton/>
                 </ModalContent>
             </Modal>
         </>
