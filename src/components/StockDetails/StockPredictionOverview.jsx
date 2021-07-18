@@ -9,7 +9,7 @@ const CustomGridItem = ({children, ...otherProps}) => (
     </GridItem>
 )
 
-const CustomBox = ({children, ...otherProps}) => (
+const CustomContainer = ({children, ...otherProps}) => (
     <Box p={4} w="80%" textAlign="center" bgColor={useColorModeValue("brand.300", "brand.600")}
          borderRadius="lg" {...otherProps}>
         {children}
@@ -19,10 +19,10 @@ const CustomBox = ({children, ...otherProps}) => (
 const PredictionTable = () => (
     <CustomGridItem colSpan={2} shadow="none">
         <VStack spacing={4}>
-            <CustomBox>
+            <CustomContainer>
                 Prediction
-            </CustomBox>
-            <CustomBox p={4} w="80%" bgColor={useColorModeValue("brand.300", "brand.600")} borderRadius="lg">
+            </CustomContainer>
+            <CustomContainer p={4} w="80%" bgColor={useColorModeValue("brand.300", "brand.600")} borderRadius="lg">
                 <VStack spacing={4}>
                     <Box p={4} w="100%" bgColor={useColorModeValue("brand.100", "brand.500")} borderRadius="lg">
                         <SimpleGrid columns={{base: 1, lg: 2}} spacing={1}>
@@ -37,7 +37,7 @@ const PredictionTable = () => (
                         </SimpleGrid>
                     </Box>
                 </VStack>
-            </CustomBox>
+            </CustomContainer>
         </VStack>
     </CustomGridItem>
 )
