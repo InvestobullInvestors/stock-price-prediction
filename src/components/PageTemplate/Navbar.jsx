@@ -83,6 +83,14 @@ const WideScreenLinks = () => (
     </Flex>
 )
 
+const ThemeSwitchButton = ({icon}) => {
+    const {toggleColorMode} = useColorMode()
+
+    return <Button bg="transparent" rounded="full" p={0} m={2} onClick={toggleColorMode}>
+        <Icon as={icon} w={5} h={5}/>
+    </Button>
+}
+
 const NotificationMenu = ({bgColor}) => (
     <Menu>
         <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
@@ -125,7 +133,6 @@ const UserMenu = ({bgColor}) => {
 
 const Navbar = () => {
     const {user} = useUser()
-    const {toggleColorMode} = useColorMode()
 
     const bgColor = useColorModeValue("brand.400", "brand.900")
     const txtColor = useColorModeValue("brand.900", "brand.100")
@@ -139,21 +146,15 @@ const Navbar = () => {
 
             <Flex flex="1" align="center" justify="flex-end">
                 {useColorMode().colorMode === "light" ?
-                    <Button bg="transparent" rounded="full" p={0} m={2} onClick={toggleColorMode}>
-                        <Icon as={FaMoon} w={5} h={5}/>
-                    </Button>
-                    :
-                    <Button bg="transparent" rounded="full" p={0} m={2} onClick={toggleColorMode}>
-                        <Icon as={FaSun} w={5} h={5}/>
-                    </Button>
+                    <ThemeSwitchButton icon={FaMoon}/>
+                    : <ThemeSwitchButton icon={FaSun}/>
                 }
                 {user ?
                     <>
                         <NotificationMenu bgColor={bgColor}/>
                         <UserMenu bgColor={bgColor}/>
                     </>
-                    :
-                    <LoginSignupPopup/>
+                    : <LoginSignupPopup/>
                 }
             </Flex>
 
