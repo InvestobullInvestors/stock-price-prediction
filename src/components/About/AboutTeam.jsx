@@ -2,25 +2,22 @@ import React from 'react';
 import {Avatar, Divider, HStack, SimpleGrid, Text, VStack} from "@chakra-ui/react";
 import CustomBox from "../CustomBox";
 
-const TeamMemberCard = ({name, imageUrl, title, summary, ...otherProps}) => {
-
-    return (
-        <CustomBox {...otherProps}>
+const TeamMemberCard = ({name, imageUrl, title, summary, ...otherProps}) => (
+    <CustomBox {...otherProps}>
+        <VStack>
+            <HStack>
+                <Avatar name={name} src={imageUrl}/>
+                <Text>{name}</Text>
+            </HStack>
+            <Divider py={3} orientation="horizontal"/>
             <VStack>
-                <HStack>
-                    <Avatar name={name} src={imageUrl}/>
-                    <Text>{name}</Text>
-                </HStack>
-                <Divider py={3} orientation="horizontal"/>
-                <VStack>
-                    <Text fontSize="lg">{title}</Text>
-                    <Text>{summary}</Text>
-                </VStack>
-
+                <Text fontSize="lg">{title}</Text>
+                <Text>{summary}</Text>
             </VStack>
-        </CustomBox>
-    )
-}
+
+        </VStack>
+    </CustomBox>
+)
 
 const AboutTeam = () => (
     <SimpleGrid columns={{base: 1, md: 2}} spacing={3}>
