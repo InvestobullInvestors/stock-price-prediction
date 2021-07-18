@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const dotenv = require('dotenv');
 dotenv.config();
 
-var Schema = mongoose.Schema
+const Schema = mongoose.Schema
 
-var stockPredictionSchema = new Schema({
+const stockPredictionSchema = new Schema({
     company_name: String,
     ticker: String,
     inflation: Number,

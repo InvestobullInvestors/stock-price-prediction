@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const {stockPrediction} = require("../dal/stock-prediction");
-var router = express.Router();
+const router = express.Router();
 
 const defaultPredictions = {
     company_name: "",

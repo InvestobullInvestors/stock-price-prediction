@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const {dailyGraphInfo} = require("../dal/stock-markets");
-var router = express.Router();
+const router = express.Router();
 
 /* GET realtime data. */
 router.get('/:ticker', function (req, res) {
