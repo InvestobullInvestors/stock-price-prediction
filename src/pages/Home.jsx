@@ -1,24 +1,36 @@
-import React, { useEffect } from 'react';
+import React, {useState} from 'react';
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 import CustomHeading from "../components/CustomHeading";
-import StockSearchBar from '../components/StockTable/StockSearchBar';
-import StockTableCard from '../components/StockTable/StockTableCard';
-import { useStockList } from '../contexts/useStockList';
+import {VStack} from "@chakra-ui/react";
+import StockSearchBar from "../components/StockTable/StockSearchBar";
+import StockInfoTable from "../components/StockTable/StockInfoTable";
+import {useStockSymbol} from "../contexts/useStockInfo";
 
 const Home = () => {
-    const { setStockList } = useStockList();
+    const {basicStockInfo, filterStocks} = useStockSymbol()
+    const [filterKeyword, setFilterKeyword] = useState()
 
-    useEffect(() => {
-        setStockList();
-    }, []);
+    const handleChange = (event) => {
+        event.preventDefault();
+        setFilterKeyword(event?.target?.value)
+        filterStocks(event?.target?.value)
+    }
+
+    const handleCancel = event => {
+        event.preventDefault()
+        setFilterKeyword('')
+        filterStocks('')
+    }
 
     return (
         <PageTemplate>
-            <CustomHeading>Stock Market Overview</CustomHeading>
-            <StockSearchBar />
-            <StockTableCard />
+            <VStack spacing={16} m={4}>
+                <CustomHeading>Stock Market Overview</CustomHeading>
+                <StockSearchBar handleChange={handleChange} handleCancel={handleCancel} keyword={{filterKeyword}}/>
+                <StockInfoTable stocks={basicStockInfo}/>
+            </VStack>
         </PageTemplate>
-    );
+    )
 };
 
 export default Home;

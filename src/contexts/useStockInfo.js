@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from 'react'
+import React, {createContext, useContext, useEffect, useState} from 'react'
 import axios from "axios";
 
 const StockInfoContext = createContext({});
@@ -9,6 +9,14 @@ const StockInfoProvider = ({children}) => {
     const [quarterlyStockDetails, setQuarterlyStockDetails] = useState({});
     const [stockName, setStockName] = useState('')
     const [graphData, setGraphData] = useState('')
+    const [basicStockInfo, setBasicStockInfo] = useState([])
+
+    useEffect(() => {
+        axios.get(`http://localhost:3000/stock-details/`).then((response) => {
+            setBasicStockInfo(response.data)
+        })
+    }, []);
+
 
     const setSymbol = (stockSymbol) => {
         axios.get(`http://localhost:3000/stock-details/${stockSymbol}`).then((response) => {
@@ -37,6 +45,14 @@ const StockInfoProvider = ({children}) => {
         })
     }
 
+    const filterStocks = key_word => {
+        axios.post('http://localhost:3000/stock-details/filter-stocks', JSON.stringify({
+            key_word
+        }), {headers: {'Content-Type': 'application/json'}}).then(response => {
+            setBasicStockInfo(response.data)
+        })
+    }
+
     return (
         <StockInfoContext.Provider value={{
             stockName,
@@ -44,10 +60,12 @@ const StockInfoProvider = ({children}) => {
             realtimeStockDetails,
             quarterlyStockDetails,
             graphData,
+            basicStockInfo,
             setRealtimeDetails,
             setQuarterlyDetails,
             setRealtimeGraphData,
-            setSymbol
+            setSymbol,
+            filterStocks
         }}>
             {children}
         </StockInfoContext.Provider>
