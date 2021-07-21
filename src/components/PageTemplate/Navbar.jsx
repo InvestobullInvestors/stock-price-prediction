@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom'
 import {
     Avatar,
@@ -6,7 +6,8 @@ import {
     Divider,
     Drawer,
     DrawerBody,
-    DrawerContent, DrawerHeader,
+    DrawerContent,
+    DrawerHeader,
     DrawerOverlay,
     Flex,
     Image,
@@ -19,11 +20,13 @@ import {
     useColorModeValue,
     useDisclosure
 } from "@chakra-ui/react";
-import {BellIcon, ChevronDownIcon, HamburgerIcon} from "@chakra-ui/icons";
+import {BellIcon, ChevronDownIcon, HamburgerIcon, Icon} from "@chakra-ui/icons";
+import {FaMoon, FaSun} from 'react-icons/fa';
 import NotificationList from "../NotificationList";
-import LoginPopup from "../LoginPopup";
+import LoginSignupPopup from "../LoginSignup/LoginSignupPopup";
 import {useUser} from "../../contexts/useUser";
 import {useAuth} from "../../contexts/useAuth";
+import UserProfilePopup from "./UserProfilePopup";
 
 const PADDING = 1
 const MARGIN = 1
@@ -31,16 +34,19 @@ const ICON_SIZE = 6
 const MENU_MAX_WIDTH = 60
 
 const Logo = () => (
-    <Button as={Link} to="/" fontSize={24} fontWeight={200} m={MARGIN}>
+    <Button as={Link} to="/" fontSize={24} fontWeight={200} bg="transparent" _hover={{}} m={MARGIN}>
         InvestoBull
-        <Image src="https://image.flaticon.com/icons/png/512/4072/4072641.png" boxSize={8}/>
+        <Image src="/bull_logo_512.png" boxSize={8}/>
     </Button>
 )
 
-const HamburgerMenu = ({bgColor}) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+const CustomButton = ({children, route, ...otherProps}) => (
+    <Button bg="transparent" m={MARGIN} as={Link} {...otherProps} to={route}>{children}</Button>
+)
 
-    // visible when screen width narrow
+const NarrowScreenHamburgerMenu = ({bgColor}) => {
+    const {isOpen, onOpen, onClose} = useDisclosure()
+
     return <Flex display={['flex', 'flex', 'none', 'none']}>
         <Button onClick={onOpen} bg="transparent" px={PADDING} m={MARGIN}>
             <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE}/>
@@ -55,43 +61,35 @@ const HamburgerMenu = ({bgColor}) => {
                     MENU
                 </DrawerHeader>
                 <DrawerBody>
-                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/">Home</Button>
+                    <CustomButton w="100%" route="/">Home</CustomButton>
                     <Divider my={1}/>
-                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/watchlist">Watchlist</Button>
+                    <CustomButton w="100%" route="/watchlist">Watchlist</CustomButton>
                     <Divider my={1}/>
-                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/news">News</Button>
+                    <CustomButton w="100%" route="/news">News</CustomButton>
                     <Divider my={1}/>
-                    <Button bg="transparent" m={MARGIN} w="100%" as={Link} to="/about">About</Button>
+                    <CustomButton w="100%" route="/about">About</CustomButton>
                 </DrawerBody>
             </DrawerContent>
         </Drawer>
     </Flex>
 }
 
-const Links = () => (
-    // visible when screen width wide
+const WideScreenLinks = () => (
     <Flex display={['none', 'none', 'flex', 'flex']}>
-        <Button bg="transparent" m={MARGIN} as={Link} to="/">Home</Button>
-        <Button bg="transparent" m={MARGIN} as={Link} to="/watchlist">Watchlist</Button>
-        <Button bg="transparent" m={MARGIN} as={Link} to="/news">News</Button>
-        <Button bg="transparent" m={MARGIN} as={Link} to="/about">About</Button>
+        <CustomButton route="/">Home</CustomButton>
+        <CustomButton route="/watchlist">Watchlist</CustomButton>
+        <CustomButton route="/news">News</CustomButton>
+        <CustomButton route="/plans">Plans</CustomButton>
     </Flex>
 )
 
-const sampleNotifications = [
-    {
-        text: "AMC jumped by 50%",
-        viewed: false
-    },
-    {
-        text: "TSLA fell by 25%",
-        viewed: true
-    },
-    {
-        text: "Welcome to Investobull!",
-        viewed: false
-    }
-]
+const ThemeSwitchButton = ({icon}) => {
+    const {toggleColorMode} = useColorMode()
+
+    return <Button bg="transparent" rounded="full" p={0} m={2} onClick={toggleColorMode}>
+        <Icon as={icon} w={5} h={5}/>
+    </Button>
+}
 
 const NotificationMenu = ({bgColor}) => (
     <Menu>
@@ -100,43 +98,37 @@ const NotificationMenu = ({bgColor}) => (
             <BellIcon w={ICON_SIZE} h={ICON_SIZE}/>
         </MenuButton>
         <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-            <NotificationList notificationList={sampleNotifications}/>
+            <NotificationList/>
         </MenuList>
     </Menu>
 )
 
-const UserMenu = ({bgColor, setLogoutError}) => {
+const UserMenu = ({bgColor}) => {
     const {user} = useUser()
     const {logout} = useAuth()
-    const {toggleColorMode} = useColorMode()
 
     const handleLogout = async () => {
         try {
-            setLogoutError("")
             await logout()
-        } catch {
-            return setLogoutError("Failed to log out")
+        } catch (err) {
+            console.error(err.message)
         }
     }
 
-    return (
-    <Menu>
+    return <Menu>
         <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
-            <Avatar size="sm"/>
+            <Avatar size="sm" name={user.displayName} src={user.photoURL}/>
         </MenuButton>
         <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-            <MenuItem fontWeight="bold" isTruncated>{user.email}</MenuItem>
+            <UserProfilePopup/>
+            <MenuItem as={Link} to="/plans">Plan: {user.plan}</MenuItem>
             <MenuDivider/>
-            <MenuItem as={Link} to="/plans">Plans & Pricing</MenuItem>
+            <MenuItem as={Link} to="/about">About Us</MenuItem>
             <MenuItem>Help</MenuItem>
-            <MenuItem as="button" onClick={toggleColorMode}>
-                Use {useColorMode().colorMode === "light" ? "Dark" : "Light"} Theme
-            </MenuItem>
             <MenuItem as="button" onClick={handleLogout}>Log Out</MenuItem>
         </MenuList>
     </Menu>
-    )
 }
 
 const Navbar = () => {
@@ -145,24 +137,24 @@ const Navbar = () => {
     const bgColor = useColorModeValue("brand.400", "brand.900")
     const txtColor = useColorModeValue("brand.900", "brand.100")
 
-    const [logoutError, setLogoutError] = useState("")
-    // TODO: do something with logoutError
-
     return <Flex zIndex={5} pos="sticky" top={0} w="100%" justify="center" bg={bgColor} color={txtColor}>
         <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
 
-            <HamburgerMenu bgColor={bgColor}/>
+            <NarrowScreenHamburgerMenu bgColor={bgColor}/>
             <Logo/>
-            <Links/>
+            <WideScreenLinks/>
 
             <Flex flex="1" align="center" justify="flex-end">
+                {useColorMode().colorMode === "light" ?
+                    <ThemeSwitchButton icon={FaMoon}/>
+                    : <ThemeSwitchButton icon={FaSun}/>
+                }
                 {user ?
                     <>
                         <NotificationMenu bgColor={bgColor}/>
-                        <UserMenu bgColor={bgColor} setLogoutError={setLogoutError}/>
+                        <UserMenu bgColor={bgColor}/>
                     </>
-                    :
-                    <LoginPopup/>
+                    : <LoginSignupPopup/>
                 }
             </Flex>
 

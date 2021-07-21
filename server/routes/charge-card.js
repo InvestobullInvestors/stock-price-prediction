@@ -1,10 +1,10 @@
-var express = require('express');
-var Stripe = require('stripe')
-var router = express.Router();
-var bodyParser = require('body-parser')
+const express = require('express');
+const Stripe = require('stripe')
+const router = express.Router();
+const bodyParser = require('body-parser')
 
 const stripe = new Stripe('sk_test_51IweHkKvAxvZ5kVetx3UiymBoyjtPixhy4q72vX0lh5MaPQfI9r9zilffbnSnOXRsfbJKbYSNQAkTCB9vPWyTBOO00WrHtvZsQ');
-var jsonParser = bodyParser.json()
+const jsonParser = bodyParser.json()
 
 /* Create charges on Stripe. */
 router.post('/', jsonParser, async function (req, res) {
