@@ -12,35 +12,34 @@ const StockInfoProvider = ({children}) => {
     const [basicStockInfo, setBasicStockInfo] = useState([])
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/stock-details/`).then((response) => {
+        axios.get(`http://localhost:3000/stock-details/`).then(response => {
             setBasicStockInfo(response.data)
         })
     }, []);
 
 
     const setSymbol = (stockSymbol) => {
-        axios.get(`http://localhost:3000/stock-details/${stockSymbol}`).then((response) => {
+        axios.get(`http://localhost:3000/stock-details/${stockSymbol}`).then(response => {
             setStockDetails(response.data);
         })
     }
 
     const setRealtimeDetails = ticker => {
-        axios.get(`http://localhost:3000/stock-details/realtime-data/${ticker}`).then((response) => {
+        axios.get(`http://localhost:3000/stock-details/realtime-data/${ticker}`).then(response => {
             setRealtimeStockDetails(response.data.stock_details);
             setStockName(response.data.stock_name)
         })
     }
 
     const setQuarterlyDetails = ticker => {
-        axios.get(`http://localhost:3000/stock-details/quarterly-data/${ticker}`).then((response) => {
+        axios.get(`http://localhost:3000/stock-details/quarterly-data/${ticker}`).then(response => {
             setQuarterlyStockDetails(response.data.stock_details);
             setStockName(response.data.stock_name)
         })
     }
 
     const setRealtimeGraphData = ticker => {
-        axios.get(`http://localhost:3000/realtime-graph/${ticker}`).then((response) => {
-            console.log(response.data)
+        axios.get(`http://localhost:3000/realtime-graph/${ticker}`).then(response => {
             setGraphData(response.data);
         })
     }

@@ -8,7 +8,7 @@ const defaultData = {
 
 /* GET all quarterly stock details. */
 router.get('/', function (req, res) {
-    quarterlyStockInfo.find({}).then((stock_details) => {
+    quarterlyStockInfo.find({}).then(stock_details => {
         const result = []
         for (let stocks of stock_details) {
             const {stock_details} = stocks
@@ -26,8 +26,8 @@ router.get('/', function (req, res) {
             })
         }
         res.send(result)
-    }).catch(({message}) => {
-        console.log(message)
+    }).catch(error => {
+        console.log(error.message)
         res.send([])
     })
 });
@@ -58,7 +58,7 @@ router.get('/quarterly-data/:ticker', function (req, res) {
 /* GET filtered stock details. */
 router.post('/filter-stocks', function (req, res) {
     const {key_word} = req.body;
-    quarterlyStockInfo.find({ticker_id: {$regex: key_word, $options: "si"}}).then((stock_details) => {
+    quarterlyStockInfo.find({ticker_id: {$regex: key_word, $options: "si"}}).then(stock_details => {
         console.log(stock_details)
         const result = []
         for (let stocks of stock_details) {
@@ -77,8 +77,8 @@ router.post('/filter-stocks', function (req, res) {
             })
         }
         res.send(result)
-    }).catch(({message}) => {
-        console.log(message)
+    }).catch(error => {
+        console.log(error.message)
         res.send([])
     })
 });

@@ -21,22 +21,21 @@ const StockInfoTable = ({stocks}) => (
             </Tr>
         </Thead>
         <Tbody>
-            {
-                stocks.map((stockDetails) =>
-                    <Tr key={stockDetails.ticker_id}>
-                        <Td><Link as={ReactRouterLink}
-                                  to={`/stock-details/${stockDetails.ticker_id}`}>{stockDetails.ticker_id}</Link></Td>
-                        <Td>{stockDetails.dividend_payout_ratio}</Td>
-                        <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.pe_ratio}</Td>
-                        <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.peg_ratio}</Td>
-                        <Td isNumeric
-                            display={{base: 'none', lg: 'table-cell'}}>{stockDetails.quarterly_earning_growth}</Td>
-                        <Td isNumeric
-                            display={{base: 'none', lg: 'table-cell'}}>{stockDetails.quarterly_revenue_growth}</Td>
-                        <Td isNumeric>{stockDetails.fifty_two_week_low}</Td>
-                        <Td isNumeric>{stockDetails.fifty_two_week_high}</Td>
-                    </Tr>
-                )}
+            {stocks.map(stockDetails =>
+                <Tr key={stockDetails.ticker_id}>
+                    <Td><Link as={ReactRouterLink}
+                              to={`/stock-details/${stockDetails.ticker_id}`}>{stockDetails.ticker_id}</Link></Td>
+                    <Td>{stockDetails.dividend_payout_ratio}</Td>
+                    <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.pe_ratio}</Td>
+                    <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.peg_ratio}</Td>
+                    <Td isNumeric
+                        display={{base: 'none', lg: 'table-cell'}}>{stockDetails.quarterly_earning_growth}</Td>
+                    <Td isNumeric
+                        display={{base: 'none', lg: 'table-cell'}}>{stockDetails.quarterly_revenue_growth}</Td>
+                    <Td isNumeric>{stockDetails.fifty_two_week_low}</Td>
+                    <Td isNumeric>{stockDetails.fifty_two_week_high}</Td>
+                </Tr>
+            )}
         </Tbody>
     </Table>
 )
