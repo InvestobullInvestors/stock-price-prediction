@@ -213,8 +213,8 @@ router.get("/news/:ticker", function (req, res) {
         .then(({stock_name, stock_news}) => {
             res.send({company_name: stock_name, news: stock_news.slice(0, 5)});
         })
-        .catch((error) => {
-            console.log(error.message);
+        .catch(({message}) => {
+            console.log(message);
             res.send(defaultNews);
         });
 });

@@ -16,8 +16,8 @@ const StockInfoTable = ({stocks}) => (
                 <Th display={{base: 'none', md: 'table-cell'}}>PEG Ratio</Th>
                 <Th display={{base: 'none', lg: 'table-cell'}}>Quarterly Earning Growth</Th>
                 <Th display={{base: 'none', lg: 'table-cell'}}>Quarterly Revenue Growth</Th>
-                <Th>Fifty-two Week Low</Th>
-                <Th>Fifty-two Week High</Th>
+                <Th>52-week Low</Th>
+                <Th>52-week High</Th>
             </Tr>
         </Thead>
         <Tbody>

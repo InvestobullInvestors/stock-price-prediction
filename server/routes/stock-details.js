@@ -8,9 +8,9 @@ const defaultData = {
 
 /* GET all quarterly stock details. */
 router.get('/', function (req, res) {
-    quarterlyStockInfo.find({}).then(stock_details => {
+    quarterlyStockInfo.find({}).then(stock_info => {
         const result = []
-        for (let stocks of stock_details) {
+        for (let stocks of stock_info) {
             const {stock_details} = stocks
             result.push({
                 stock_name: stocks.stock_name,
@@ -26,8 +26,8 @@ router.get('/', function (req, res) {
             })
         }
         res.send(result)
-    }).catch(error => {
-        console.log(error.message)
+    }).catch(({message}) => {
+        console.log(message)
         res.send([])
     })
 });
@@ -38,8 +38,8 @@ router.get('/realtime-data/:ticker', function (req, res) {
     const {ticker} = req.params
     realtimeStockInfo.findOne({ticker_id: ticker}).then(({stock_name, stock_details}) => {
         res.send({stock_name, stock_details})
-    }).catch(error => {
-        console.log(error.message)
+    }).catch(({message}) => {
+        console.log(message)
         res.send(defaultData)
     })
 });
@@ -49,8 +49,8 @@ router.get('/quarterly-data/:ticker', function (req, res) {
     const {ticker} = req.params
     quarterlyStockInfo.findOne({ticker_id: ticker}).then(({stock_name, stock_details}) => {
         res.send({stock_name, stock_details})
-    }).catch(error => {
-        console.log(error.message)
+    }).catch(({message}) => {
+        console.log(message)
         res.send(defaultData)
     })
 });
@@ -77,8 +77,8 @@ router.post('/filter-stocks', function (req, res) {
             })
         }
         res.send(result)
-    }).catch(error => {
-        console.log(error.message)
+    }).catch(({message}) => {
+        console.log(message)
         res.send([])
     })
 });
