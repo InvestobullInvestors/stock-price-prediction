@@ -19,9 +19,9 @@ router.post('/', jsonParser, async function (req, res) {
             confirm: true
         })
         return res.send("confirmed payment");
-    } catch (error) {
+    } catch ({message}) {
         return res.status(400).send({
-            message: error.message
+            message: message
         })
     }
 });

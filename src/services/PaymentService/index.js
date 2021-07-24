@@ -6,7 +6,7 @@ export const chargeCard = async (paymentId, amount) => {
             paymentId: paymentId,
             amount: amount
         }), {headers: {'Content-Type': 'application/json'}})
-    } catch (error) {
-        console.log(error.message)
+    } catch ({message}) {
+        console.log(message)
     }
 }

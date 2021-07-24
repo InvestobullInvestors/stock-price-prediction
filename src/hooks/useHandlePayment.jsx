@@ -13,8 +13,8 @@ const useHandlePayment = (payableAmount, stripe, elements, callback) => {
                 const status = await chargeCard(id, payableAmount);
                 callback(status)
             }
-        } catch (error) {
-            console.log(error.message)
+        } catch ({message}) {
+            console.log(message)
         }
     })
 }
