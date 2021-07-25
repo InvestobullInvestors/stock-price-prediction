@@ -7,7 +7,7 @@ const stripe = new Stripe('sk_test_51IweHkKvAxvZ5kVetx3UiymBoyjtPixhy4q72vX0lh5M
 const jsonParser = bodyParser.json()
 
 /* Create charges on Stripe. */
-router.post('/', jsonParser, async function (req, res) {
+router.post('/charge-card', jsonParser, async function (req, res) {
     const {paymentId, amount} = req.body;
 
     try {

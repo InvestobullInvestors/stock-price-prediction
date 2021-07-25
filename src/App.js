@@ -1,12 +1,11 @@
-import { BrowserRouter } from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import Main from './components/Main';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import {ChakraProvider, extendTheme} from '@chakra-ui/react';
 import StockInfoProvider from './contexts/useStockInfo';
 import AuthProvider from './contexts/useAuth';
 import UserProvider from './contexts/useUser';
 import PredictionProvider from './contexts/usePredictions';
 import StockNewsProvider from './contexts/useStockNews';
-import StockListProvider from './contexts/useStockList';
 
 const theme = extendTheme({
     config: {
@@ -49,21 +48,19 @@ function App() {
     return (
         <UserProvider>
             <AuthProvider>
-                <StockListProvider>
-                    <StockInfoProvider>
-                        <PredictionProvider>
-                            <StockNewsProvider>
-                                <div className='App'>
-                                    <ChakraProvider theme={theme}>
-                                        <BrowserRouter>
-                                            <Main />
-                                        </BrowserRouter>
-                                    </ChakraProvider>
-                                </div>
-                            </StockNewsProvider>
-                        </PredictionProvider>
-                    </StockInfoProvider>
-                </StockListProvider>
+                <StockInfoProvider>
+                    <PredictionProvider>
+                        <StockNewsProvider>
+                            <div className='App'>
+                                <ChakraProvider theme={theme}>
+                                    <BrowserRouter>
+                                        <Main/>
+                                    </BrowserRouter>
+                                </ChakraProvider>
+                            </div>
+                        </StockNewsProvider>
+                    </PredictionProvider>
+                </StockInfoProvider>
             </AuthProvider>
         </UserProvider>
     );

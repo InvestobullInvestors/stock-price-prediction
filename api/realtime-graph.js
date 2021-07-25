@@ -3,7 +3,7 @@ const {dailyGraphInfo} = require("../dal/stock-markets");
 const router = express.Router();
 
 /* GET realtime data. */
-router.get('/:ticker', function (req, res) {
+router.get('/realtime-graph/:ticker', function (req, res) {
     const {ticker} = req.params;
     dailyGraphInfo.findOne({ticker_id: ticker}).then(({stock_details}) => {
         stock_details.reverse()

@@ -7,7 +7,7 @@ const defaultData = {
 }
 
 /* GET all quarterly stock details. */
-router.get('/', function (req, res) {
+router.get('/stock-details', function (req, res) {
     quarterlyStockInfo.find({}).then(stock_info => {
         const result = []
         for (let stocks of stock_info) {
@@ -34,7 +34,7 @@ router.get('/', function (req, res) {
 
 
 /* GET realtime stock details. */
-router.get('/realtime-data/:ticker', function (req, res) {
+router.get('/stock-details/realtime-data/:ticker', function (req, res) {
     const {ticker} = req.params
     realtimeStockInfo.findOne({ticker_id: ticker}).then(({stock_name, stock_details}) => {
         res.send({stock_name, stock_details})
@@ -45,7 +45,7 @@ router.get('/realtime-data/:ticker', function (req, res) {
 });
 
 /* GET quarterly stock details. */
-router.get('/quarterly-data/:ticker', function (req, res) {
+router.get('/stock-details/quarterly-data/:ticker', function (req, res) {
     const {ticker} = req.params
     quarterlyStockInfo.findOne({ticker_id: ticker}).then(({stock_name, stock_details}) => {
         res.send({stock_name, stock_details})
@@ -56,10 +56,9 @@ router.get('/quarterly-data/:ticker', function (req, res) {
 });
 
 /* GET filtered stock details. */
-router.post('/filter-stocks', function (req, res) {
+router.post('/stock-details/filter-stocks', function (req, res) {
     const {key_word} = req.body;
     quarterlyStockInfo.find({ticker_id: {$regex: key_word, $options: "si"}}).then(stock_details => {
-        console.log(stock_details)
         const result = []
         for (let stocks of stock_details) {
             const {stock_details} = stocks

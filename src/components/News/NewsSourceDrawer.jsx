@@ -1,29 +1,6 @@
 import React from "react";
-import {
-    Button,
-    Drawer,
-    DrawerBody,
-    DrawerContent,
-    DrawerHeader,
-    DrawerOverlay,
-    HStack,
-    Spacer,
-    Text,
-    useDisclosure,
-} from "@chakra-ui/react";
-
-import {CheckIcon} from "@chakra-ui/icons";
+import {Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, useDisclosure,} from "@chakra-ui/react";
 import NewsSourceChecklist from "./NewsSourceChecklist";
-
-const Source = ({title}) => {
-    return (
-        <HStack>
-            <Text>{title}</Text>
-            <Spacer/>
-            <CheckIcon/>
-        </HStack>
-    );
-};
 
 const NewsSourceDrawer = () => {
     const {isOpen, onOpen, onClose} = useDisclosure();
