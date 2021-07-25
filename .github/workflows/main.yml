@@ -1,9 +1,9 @@
 name: deploy website
 on:
   push:
-    branches: [ Himanshu/vercel-deployment ]
+    branches: [ progress-5 ]
   pull_request:
-    branches: [ Himanshu/vercel-deployment ]
+    branches: [ progress-5 ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
