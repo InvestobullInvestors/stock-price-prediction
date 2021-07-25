@@ -1,6 +1,17 @@
 import React from "react";
-import {Link, Table, Tbody, Td, Th, Thead, Tr, useColorModeValue} from "@chakra-ui/react";
+import {HStack, Link, Table, Tbody, Td, Th, Thead, Tr, useColorModeValue} from "@chakra-ui/react";
 import {Link as ReactRouterLink} from "react-router-dom";
+import WatchlistButton from "../WatchlistButton";
+
+const StockSymbol = ({ticker}) => (
+    <HStack spacing='24px'>
+        <WatchlistButton ticker={ticker} />
+        <Link as={ReactRouterLink}
+              to={`/stock-details/${ticker}`}
+              color='blue.dark'
+              fontWeight='bold'>{ticker}</Link>
+    </HStack>
+)
 
 const StockInfoTable = ({stocks}) => (
     <Table variant="striped"
@@ -10,7 +21,7 @@ const StockInfoTable = ({stocks}) => (
     >
         <Thead>
             <Tr>
-                <Th>Ticker Id</Th>
+                <Th textAlign='right'>Ticker Id</Th>
                 <Th>Dividend Payout Ratio</Th>
                 <Th display={{base: 'none', md: 'table-cell'}}>PE Ratio</Th>
                 <Th display={{base: 'none', md: 'table-cell'}}>PEG Ratio</Th>
@@ -23,17 +34,18 @@ const StockInfoTable = ({stocks}) => (
         <Tbody>
             {stocks.map(stockDetails =>
                 <Tr key={stockDetails.ticker_id}>
-                    <Td><Link as={ReactRouterLink}
-                              to={`/stock-details/${stockDetails.ticker_id}`}>{stockDetails.ticker_id}</Link></Td>
-                    <Td>{stockDetails.dividend_payout_ratio}</Td>
-                    <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.pe_ratio}</Td>
-                    <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.peg_ratio}</Td>
+                    {/*<Td><Link as={ReactRouterLink}*/}
+                    {/*          to={`/stock-details/${stockDetails.ticker_id}`}>{stockDetails.ticker_id}</Link></Td>*/}
+                    <Td>{<StockSymbol ticker={stockDetails.ticker_id}/>}</Td>
+                    <Td isNumeric>{stockDetails.dividend_payout_ratio ?? "-"}</Td>
+                    <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.pe_ratio ?? "-"}</Td>
+                    <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.peg_ratio ?? "-"}</Td>
                     <Td isNumeric
-                        display={{base: 'none', lg: 'table-cell'}}>{stockDetails.quarterly_earning_growth}</Td>
+                        display={{base: 'none', lg: 'table-cell'}}>{stockDetails.quarterly_earning_growth ?? "-"}</Td>
                     <Td isNumeric
-                        display={{base: 'none', lg: 'table-cell'}}>{stockDetails.quarterly_revenue_growth}</Td>
-                    <Td isNumeric>{stockDetails.fifty_two_week_low}</Td>
-                    <Td isNumeric>{stockDetails.fifty_two_week_high}</Td>
+                        display={{base: 'none', lg: 'table-cell'}}>{stockDetails.quarterly_revenue_growth ?? "-"}</Td>
+                    <Td isNumeric>{stockDetails.fifty_two_week_low ?? "-"}</Td>
+                    <Td isNumeric>{stockDetails.fifty_two_week_high ?? "-"}</Td>
                 </Tr>
             )}
         </Tbody>
