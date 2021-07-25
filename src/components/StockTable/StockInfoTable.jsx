@@ -5,7 +5,7 @@ import WatchlistButton from "../WatchlistButton";
 
 const StockSymbol = ({ticker}) => (
     <HStack spacing='24px'>
-        <WatchlistButton ticker={ticker} />
+        <WatchlistButton ticker={ticker}/>
         <Link as={ReactRouterLink}
               to={`/stock-details/${ticker}`}
               color='blue.dark'
@@ -34,8 +34,6 @@ const StockInfoTable = ({stocks}) => (
         <Tbody>
             {stocks.map(stockDetails =>
                 <Tr key={stockDetails.ticker_id}>
-                    {/*<Td><Link as={ReactRouterLink}*/}
-                    {/*          to={`/stock-details/${stockDetails.ticker_id}`}>{stockDetails.ticker_id}</Link></Td>*/}
                     <Td>{<StockSymbol ticker={stockDetails.ticker_id}/>}</Td>
                     <Td isNumeric>{stockDetails.dividend_payout_ratio ?? "-"}</Td>
                     <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.pe_ratio ?? "-"}</Td>
