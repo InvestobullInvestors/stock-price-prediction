@@ -1,27 +1,39 @@
 import React from "react";
-import {HStack, Link, Table, Tbody, Td, Th, Thead, Tr, useColorModeValue} from "@chakra-ui/react";
-import {Link as ReactRouterLink} from "react-router-dom";
+import {Link, Table, Tbody, Td, Th, Thead, Tr, useColorModeValue} from "@chakra-ui/react";
+import {Link as ReactRouterLink, useHistory} from "react-router-dom";
 import WatchlistButton from "../WatchlistButton";
 
 const StockSymbol = ({ticker}) => (
-    <HStack spacing='24px'>
-        <WatchlistButton ticker={ticker}/>
-        <Link as={ReactRouterLink}
-              to={`/stock-details/${ticker}`}
-              color='blue.dark'
-              fontWeight='bold'>{ticker}</Link>
-    </HStack>
+    <Link as={ReactRouterLink}
+          to={`/stock-details/${ticker}`}
+          color='blue.dark'
+          fontWeight='bold'>{ticker}</Link>
 )
+
+const ClickableTd = ({ticker_id, children, ...otherProps}) => {
+    const history = useHistory()
+
+    const handleClick = () => {
+        history.push(`/stock-details/${ticker_id}`)
+    }
+
+    return (
+        <Td onClick={handleClick} isNumeric {...otherProps}>
+            {children}
+        </Td>
+    )
+}
+
 
 const StockInfoTable = ({stocks}) => (
     <Table variant="striped"
            border='4px'
            borderColor={useColorModeValue('brand.200', 'brand.600')}
-           colorScheme='brand'
-    >
+           colorScheme='brand'>
         <Thead>
             <Tr>
-                <Th textAlign='right'>Ticker Id</Th>
+                <th/>
+                <Th>Ticker Id</Th>
                 <Th>Dividend Payout Ratio</Th>
                 <Th display={{base: 'none', md: 'table-cell'}}>PE Ratio</Th>
                 <Th display={{base: 'none', md: 'table-cell'}}>PEG Ratio</Th>
@@ -32,22 +44,52 @@ const StockInfoTable = ({stocks}) => (
             </Tr>
         </Thead>
         <Tbody>
-            {stocks.map(stockDetails =>
-                <Tr key={stockDetails.ticker_id}>
-                    <Td>{<StockSymbol ticker={stockDetails.ticker_id}/>}</Td>
-                    <Td isNumeric>{stockDetails.dividend_payout_ratio ?? "-"}</Td>
-                    <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.pe_ratio ?? "-"}</Td>
-                    <Td isNumeric display={{base: 'none', md: 'table-cell'}}>{stockDetails.peg_ratio ?? "-"}</Td>
-                    <Td isNumeric
-                        display={{base: 'none', lg: 'table-cell'}}>{stockDetails.quarterly_earning_growth ?? "-"}</Td>
-                    <Td isNumeric
-                        display={{base: 'none', lg: 'table-cell'}}>{stockDetails.quarterly_revenue_growth ?? "-"}</Td>
-                    <Td isNumeric>{stockDetails.fifty_two_week_low ?? "-"}</Td>
-                    <Td isNumeric>{stockDetails.fifty_two_week_high ?? "-"}</Td>
+            {stocks.map(({
+                             ticker_id,
+                             dividend_payout_ratio,
+                             pe_ratio,
+                             peg_ratio,
+                             quarterly_earning_growth,
+                             quarterly_revenue_growth,
+                             fifty_two_week_low,
+                             fifty_two_week_high
+                         }) =>
+                <Tr
+                    key={ticker_id}
+                    _hover={{cursor: 'pointer'}}
+                >
+                    <Td>
+                        {<WatchlistButton ticker={ticker_id}/>}
+                    </Td>
+                    <ClickableTd isNumeric='false' ticker_id={ticker_id}>
+                        {<StockSymbol ticker={ticker_id}/>}
+                    </ClickableTd>
+                    <ClickableTd ticker_id={ticker_id}>
+                        {dividend_payout_ratio ?? "-"}
+                    </ClickableTd>
+                    <ClickableTd display={{base: 'none', md: 'table-cell'}} ticker_id={ticker_id}>
+                        {pe_ratio ?? "-"}
+                    </ClickableTd>
+                    <ClickableTd display={{base: 'none', md: 'table-cell'}} ticker_id={ticker_id}>
+                        {peg_ratio ?? "-"}
+                    </ClickableTd>
+                    <ClickableTd ticker_id={ticker_id} display={{base: 'none', lg: 'table-cell'}}>
+                        {quarterly_earning_growth ?? "-"}
+                    </ClickableTd>
+                    <ClickableTd ticker_id={ticker_id} display={{base: 'none', lg: 'table-cell'}}>
+                        {quarterly_revenue_growth ?? "-"}
+                    </ClickableTd>
+                    <ClickableTd ticker_id={ticker_id}>
+                        {fifty_two_week_low ?? "-"}
+                    </ClickableTd>
+                    <ClickableTd ticker_id={ticker_id}>
+                        {fifty_two_week_high ?? "-"}
+                    </ClickableTd>
                 </Tr>
             )}
         </Tbody>
     </Table>
 )
+
 
 export default StockInfoTable;
