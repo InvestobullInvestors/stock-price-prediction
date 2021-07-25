@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 import NewsCardList from "../components/News/NewsCardList";
 import NewsSourceDrawer from "../components/News/NewsSourceDrawer";
@@ -7,12 +7,6 @@ import {Flex} from "@chakra-ui/react";
 import {useStockNews} from "../contexts/useStockNews";
 
 const News = () => {
-    const [color, setColor] = useState("green");
-
-    const handleChangeColor = (e) => {
-        setColor(color === "green" ? "red" : "green");
-    };
-
     const {setNewsSelectionsFromFirebase, setNewsMasterlistFromMongo} = useStockNews();
 
     useEffect(() => {

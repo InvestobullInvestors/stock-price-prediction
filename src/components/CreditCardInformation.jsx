@@ -7,6 +7,7 @@ import AlertDialogBox from "./AlertDialogBox";
 
 const stripePublicKey = loadStripe('pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4');
 
+
 const CheckoutForm = ({payableAmount}) => {
     const stripe = useStripe();
     const elements = useElements();

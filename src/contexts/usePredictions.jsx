@@ -7,7 +7,7 @@ const PredictionProvider = ({children}) => {
     const [predictedValue, setPredictedValue] = useState({})
 
     const setPrediction = (stockSymbol) => {
-        axios.get(`http://localhost:3000/stock-prediction/${stockSymbol}`).then((response) => {
+        axios.get(`/stock-prediction/${stockSymbol}`).then((response) => {
             setPredictedValue(response.data);
         })
     }

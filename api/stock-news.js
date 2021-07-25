@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const {stockNewsInfo} = require("../dal/stock-markets");
-const {newsMasterlist} = require("../dal/stock-markets");
 
 let newsSelections = [
     {
@@ -206,7 +205,7 @@ const defaultNews = {
 };
 
 /* GET news details. */
-router.get("/news/:ticker", function (req, res) {
+router.get("/stock-news/news/:ticker", function (req, res) {
     const {ticker} = req.params;
     stockNewsInfo
         .findOne({ticker_id: ticker})
@@ -219,21 +218,21 @@ router.get("/news/:ticker", function (req, res) {
         });
 });
 
-router.get("/newsSelections", function (req, res) {
+router.get("/stock-news/newsSelections", function (req, res) {
     res.send(newsSelections);
 });
 
-router.get("/newsMasterlist", function (req, res) {
+router.get("/stock-news/newsMasterlist", function (req, res) {
     res.send(newsMasterlist2);
 });
 
-router.post("/reorderNews", function (req, res) {
+router.post("/stock-news/reorderNews", function (req, res) {
     const {sources} = req.body;
     newsSelections = sources;
     res.send(newsSelections);
 });
 
-router.post("/selectSource", function (req, res) {
+router.post("/stock-news/selectSource", function (req, res) {
     const {source} = req.body;
     let selectedSource = newsSelections.find(
         (currSource) => currSource.id === source.id
@@ -242,7 +241,7 @@ router.post("/selectSource", function (req, res) {
     res.send(newsSelections);
 });
 
-router.post("/selectAllSources", function (req, res) {
+router.post("/stock-news/selectAllSources", function (req, res) {
     newsSelections = newsSelections.map(({selected, ...rest}) => ({
         ...rest,
         selected: true,
@@ -250,7 +249,7 @@ router.post("/selectAllSources", function (req, res) {
     res.send(newsSelections);
 });
 
-router.post("/unselectAllSources", function (req, res) {
+router.post("/stock-news/unselectAllSources", function (req, res) {
     newsSelections = newsSelections.map(({selected, ...rest}) => ({
         ...rest,
         selected: false,

@@ -12,7 +12,7 @@ const defaultPredictions = {
 }
 
 /* GET prediction details. */
-router.get('/:ticker', function (req, res) {
+router.get('/stock-prediction/:ticker', function (req, res) {
     stockPrediction.find().then(stockList => {
         const details = stockList.filter((stock) => stock.ticker === req.params.ticker);
         res.send(details.length === 1 ? details[0] : defaultPredictions)

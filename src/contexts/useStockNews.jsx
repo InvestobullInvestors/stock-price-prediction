@@ -10,7 +10,7 @@ const StockNewsProvider = ({children}) => {
 
     const setNews = (stockSymbol) => {
         axios
-            .get(`http://localhost:3000/stock-news/news/${stockSymbol}`)
+            .get(`/stock-news/news/${stockSymbol}`)
             .then((response) => {
                 setStockNews(response.data.news);
             });
@@ -18,7 +18,7 @@ const StockNewsProvider = ({children}) => {
 
     const setNewsSelectionsFromFirebase = () => {
         axios
-            .get(`http://localhost:3000/stock-news/newsSelections`)
+            .get('/stock-news/newsSelections')
             .then((response) => {
                 setNewsSelections(response.data);
             });
@@ -26,7 +26,7 @@ const StockNewsProvider = ({children}) => {
 
     const setNewsMasterlistFromMongo = () => {
         axios
-            .get("http://localhost:3000/stock-news/newsMasterlist")
+            .get('/stock-news/newsMasterlist')
             .then((response) => {
                 setNewsMasterlist(response.data);
             });
@@ -34,7 +34,7 @@ const StockNewsProvider = ({children}) => {
 
     const reorderNews = (sources) => {
         axios
-            .post(`http://localhost:3000/stock-news/reorderNews`, {sources})
+            .post('/stock-news/reorderNews', {sources})
             .then((response) => {
                 setNewsSelections(response.data);
             });
@@ -42,7 +42,7 @@ const StockNewsProvider = ({children}) => {
 
     const selectSource = (source) => {
         axios
-            .post(`http://localhost:3000/stock-news/selectSource`, {source})
+            .post('/stock-news/selectSource', {source})
             .then((response) => {
                 setNewsSelections(response.data);
             });
@@ -50,7 +50,7 @@ const StockNewsProvider = ({children}) => {
 
     const selectAllSources = () => {
         axios
-            .post(`http://localhost:3000/stock-news/selectAllSources`)
+            .post('/stock-news/selectAllSources')
             .then((response) => {
                 setNewsSelections(response.data);
             });
@@ -58,7 +58,7 @@ const StockNewsProvider = ({children}) => {
 
     const unselectAllSources = () => {
         axios
-            .post(`http://localhost:3000/stock-news/unselectAllSources`)
+            .post('/stock-news/unselectAllSources')
             .then((response) => {
                 setNewsSelections(response.data);
             });
