@@ -4,6 +4,7 @@ import {
   Center,
   Divider,
   HStack,
+  Image,
   Square,
   Text,
   useColorModeValue,
@@ -21,6 +22,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
   const { newsMasterlist } = useStockNews();
 
   let name;
+  let logo;
   let articles;
 
   let targetSource = newsMasterlist.find(
@@ -28,6 +30,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
   );
   if (targetSource) {
     name = targetSource.name;
+    logo = targetSource.logoSrc;
     articles = targetSource.articles;
   } else {
     name = "";
@@ -56,16 +59,9 @@ const NewsCard = ({ source, children, ...otherProps }) => {
           borderRadius="lg"
           shadow="md"
           bg={textBoxColor}
+          p="10px"
         >
-          <Text
-            align="center"
-            mt="5px"
-            fontSize={{ base: "md", sm: "2xl" }}
-            fontWeight="bold"
-            color={textColor}
-          >
-            {name}
-          </Text>
+          <Image src={logo} alt="logo" />
         </Square>
         <Center height="150px">
           <Divider orientation="vertical" />
