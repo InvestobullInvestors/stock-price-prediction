@@ -14,7 +14,7 @@ const ClickableTd = ({ticker_id, children, ...otherProps}) => {
     const history = useHistory()
 
     const handleClick = () => {
-        history.push(`/stock-details/${ticker_id}`)
+        history.push(`/stock-info/${ticker_id}`)
     }
 
     return (
