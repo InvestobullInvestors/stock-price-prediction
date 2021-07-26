@@ -42,10 +42,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
       mt={5}
       px={4}
       py={4}
-      border="1px"
-      borderColor={cardBorderColor}
       borderRadius="lg"
-      shadow="md"
       bg={cardColor}
       {...otherProps}
     >
