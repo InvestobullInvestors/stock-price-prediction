@@ -4,7 +4,6 @@ import {
   Center,
   Divider,
   HStack,
-  Link,
   Square,
   Text,
   useColorModeValue,
@@ -16,7 +15,7 @@ import NewsArticle from "../NewsArticle";
 const NewsCard = ({ source, children, ...otherProps }) => {
   const cardColor = useColorModeValue("brand.400", "brand.700");
   const cardBorderColor = useColorModeValue("brand.700", "brand.400");
-  const textBoxColor = useColorModeValue("brand.300", "brand.600");
+  const textBoxColor = useColorModeValue("brand.100", "brand.600");
   const textColor = useColorModeValue("brand.900", "brand.100");
 
   const { newsMasterlist } = useStockNews();

@@ -3,7 +3,6 @@ import {
   Box,
   Divider,
   Heading,
-  Link,
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
