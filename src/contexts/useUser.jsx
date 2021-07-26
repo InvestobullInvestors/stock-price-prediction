@@ -7,6 +7,7 @@ const UserProvider = ({children}) => {
     const [news, setNews] = useState([])
     const [notifications, setNotifications] = useState([])
     const [watchlist, setWatchlist] = useState([])
+    const [paymentDetails, setPaymentDetails] = useState({})
 
     const addToWatchlist = ticker => {
         console.log(`Adding stock: ${ticker} to watchlist`)
@@ -14,6 +15,11 @@ const UserProvider = ({children}) => {
 
     const removeFromWatchlist = ticker => {
         console.log(`Removing stock: ${ticker} from watchlist`)
+    }
+
+    const setUserPaymentDetails = details => {
+        setPaymentDetails(details)
+        console.log(paymentDetails)
     }
 
     return (
@@ -28,7 +34,8 @@ const UserProvider = ({children}) => {
                 notifications,
                 setNotifications,
                 addToWatchlist,
-                removeFromWatchlist
+                removeFromWatchlist,
+                setUserPaymentDetails
             }}>
             {children}
         </UserContext.Provider>
