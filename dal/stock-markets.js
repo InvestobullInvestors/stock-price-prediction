@@ -1,9 +1,15 @@
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING, {
+// mongoose.connect(process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// });
+
+mongoose.connect('mongodb+srv://investobull:investobull9876!@stock-price-prediction.bg5zs.mongodb.net/StockMarket', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+
 
 const Schema = mongoose.Schema;
 
@@ -97,6 +103,32 @@ const dailyGraphInfoSchema = new Schema({
 }, {collection: 'DailyGraphInfo'})
 
 exports.dailyGraphInfo = mongoose.model('DailyGraphInfo', dailyGraphInfoSchema)
+
+const stockNewsListSchema = new Schema({
+    country: String,
+    news_sources: Array({
+        id: String,
+        name: String
+    })
+}, {collection: 'StockNewsList'})
+
+exports.stockNewsList = mongoose.model('StockNewsList', stockNewsListSchema)
+
+const newsSourceInfoSchema = new Schema({
+    source: String,
+    stock_news: Array({
+        source: Object,
+        author: String,
+        title: String,
+        description: String,
+        url: String,
+        urlToImage: String,
+        publishedAt: String,
+        content: String
+    })
+}, {collection: 'NewsSourceInfo'})
+
+exports.newsSourceInfo = mongoose.model('NewsSourceInfo', newsSourceInfoSchema)
 
 const stockNewsInfoSchema = new Schema({
     market_name: String,
