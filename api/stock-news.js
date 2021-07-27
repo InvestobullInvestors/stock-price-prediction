@@ -50,8 +50,6 @@ let newsMasterlist2 = [
   {
     id: "0",
     name: "Bloomberg",
-    logoSrc:
-      "https://www.logo.wine/a/logo/Bloomberg_L.P./Bloomberg_L.P.-Logo.wine.svg",
     articles: [
       {
         title:
@@ -71,8 +69,6 @@ let newsMasterlist2 = [
   {
     id: "1",
     name: "Financial Post",
-    logoSrc:
-      "https://static.creditcardgenius.ca/5.67.0/client/assets/img/media-logos/financial-post.png",
     articles: [
       {
         title:
@@ -93,6 +89,7 @@ let newsMasterlist2 = [
   {
     id: "2",
     name: "Financial Times",
+    logo: "financial-times.png",
     articles: [
       {
         title:
@@ -111,6 +108,7 @@ let newsMasterlist2 = [
   {
     id: "3",
     name: "The Economist",
+    logo: "the-economist.png",
     articles: [
       {
         title: "Big miners’ capital discipline is good news for investors",
@@ -128,7 +126,8 @@ let newsMasterlist2 = [
   },
   {
     id: "4",
-    name: "The Global and Mail",
+    name: "The Globe and Mail",
+    logo: "the-globe-and-mail.png",
     articles: [
       {
         title:
@@ -148,6 +147,7 @@ let newsMasterlist2 = [
   {
     id: "5",
     name: "The New York Times",
+    logo: "the-new-york-times.png",
     articles: [
       {
         title:
@@ -168,6 +168,7 @@ let newsMasterlist2 = [
   {
     id: "6",
     name: "The Wall Street Journal",
+    logo: "the-wall-street-journal.png",
     articles: [
       {
         title: "S&P 500 Closes Higher to Extend Weekly Gains",
@@ -186,6 +187,7 @@ let newsMasterlist2 = [
   {
     id: "7",
     name: "Time",
+    logo: "time.png",
     articles: [
       {
         title:

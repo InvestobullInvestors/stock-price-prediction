@@ -22,20 +22,30 @@ const NewsCard = ({ source, children, ...otherProps }) => {
   const { newsMasterlist } = useStockNews();
 
   let name;
-  let logo;
   let articles;
+  let logoBlack;
+  let logoWhite;
+  let logo;
 
   let targetSource = newsMasterlist.find(
     (currSource) => currSource.id === source.id
   );
   if (targetSource) {
     name = targetSource.name;
-    logo = targetSource.logoSrc;
     articles = targetSource.articles;
+    logoBlack = process.env.PUBLIC_URL + targetSource.name + ".png";
+    logoWhite = process.env.PUBLIC_URL + targetSource.name + "_white.png";
   } else {
     name = "";
     articles = [];
+    logoBlack = "";
+    logoWhite = "";
   }
+
+  logoBlack = logoBlack.replace(/\s+/g, "-").toLowerCase();
+  logoWhite = logoWhite.replace(/\s+/g, "-").toLowerCase();
+  logo = useColorModeValue(logoBlack, logoWhite);
+  console.log(logo);
 
   return (
     <Box
@@ -61,7 +71,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
           bg={textBoxColor}
           p="10px"
         >
-          <Image src={logo} alt="logo" />
+          <Image src={logo} />
         </Square>
         <Center height="150px">
           <Divider orientation="vertical" />
