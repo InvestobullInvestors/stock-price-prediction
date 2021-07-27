@@ -31,7 +31,7 @@ const StockInfoTable = ({stocks}) => (
                colorScheme='brand'>
             <Thead>
                 <Tr>
-                    <th/>
+                    <Th/>
                     <Th>Ticker Id</Th>
                     <Th>Dividend Payout Ratio</Th>
                     <Th display={{base: 'none', md: 'table-cell'}}>PE Ratio</Th>
