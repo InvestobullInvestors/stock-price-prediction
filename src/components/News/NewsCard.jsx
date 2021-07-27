@@ -15,9 +15,7 @@ import NewsArticle from "../NewsArticle";
 
 const NewsCard = ({ source, children, ...otherProps }) => {
   const cardColor = useColorModeValue("brand.400", "brand.700");
-  const cardBorderColor = useColorModeValue("brand.700", "brand.400");
   const textBoxColor = useColorModeValue("brand.100", "brand.600");
-  const textColor = useColorModeValue("brand.900", "brand.100");
 
   const { newsMasterlist } = useStockNews();
 
@@ -33,8 +31,8 @@ const NewsCard = ({ source, children, ...otherProps }) => {
   if (targetSource) {
     name = targetSource.name;
     articles = targetSource.articles;
-    logoBlack = process.env.PUBLIC_URL + targetSource.name + ".png";
-    logoWhite = process.env.PUBLIC_URL + targetSource.name + "_white.png";
+    logoBlack = process.env.PUBLIC_URL + name + ".png";
+    logoWhite = process.env.PUBLIC_URL + name + "_white.png";
   } else {
     name = "";
     articles = [];
@@ -57,6 +55,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
       py={4}
       borderRadius="lg"
       bg={cardColor}
+      className="my-box"
       {...otherProps}
     >
       {children}
@@ -85,7 +84,12 @@ const NewsCard = ({ source, children, ...otherProps }) => {
           shadow="md"
           bg={textBoxColor}
           padding="5px"
-          overflow="scroll"
+          css={{
+            margin: "0",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            overflow: "scroll",
+          }}
         >
           <VStack align="flex-start">
             {articles.map((article) => (
