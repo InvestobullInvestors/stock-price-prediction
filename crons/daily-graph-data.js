@@ -8,7 +8,7 @@ const cron = require('node-cron')
 const axios = require("axios");
 const {dailyGraphInfo} = require("../dal/stock-markets");
 
-cron.schedule("0 0 0 */1 * *", async () => {
+cron.schedule("0 0 0 * * *", async () => {
     const doc = await stockMarketInfo.find({})
     for (let market_data of doc) {
         for (let stock_data of market_data.stocks) {

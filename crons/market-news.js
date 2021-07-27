@@ -6,7 +6,7 @@ const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 const cron = require('node-cron')
 const {newsSourceInfo, stockNewsList} = require("../dal/stock-markets");
 
-cron.schedule("0 30 1 */1 * *", async () => {
+cron.schedule("0 30 1 * * *", async () => {
     const stockNewsInfo = await stockNewsList.find({})
     for (const {news_sources} of stockNewsInfo) {
         for (const {id, name} of news_sources) {
