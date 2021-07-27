@@ -6,7 +6,7 @@ const StockNewsContext = createContext({});
 const StockNewsProvider = ({children}) => {
     const [stockNews, setStockNews] = useState([]);
     const [newsSelections, setNewsSelections] = useState([]);
-    const [newsMasterlist, setNewsMasterlist] = useState([]);
+    const [newsInfo, setNewsInfo] = useState([])
 
     const setNews = (stockSymbol) => {
         axios
@@ -18,17 +18,17 @@ const StockNewsProvider = ({children}) => {
 
     const setNewsSelectionsFromFirebase = () => {
         axios
-            .get('/stock-news/newsSelections')
+            .get('/stock-news/newsSourceList')
             .then((response) => {
                 setNewsSelections(response.data);
             });
     };
 
-    const setNewsMasterlistFromMongo = () => {
+    const setNewsInfoFromMongo = () => {
         axios
-            .get('/stock-news/newsMasterlist')
+            .get('/stock-news/newsSourceInfo')
             .then((response) => {
-                setNewsMasterlist(response.data);
+                setNewsInfo(response.data);
             });
     };
 
@@ -69,9 +69,9 @@ const StockNewsProvider = ({children}) => {
             value={{
                 stockNews,
                 newsSelections,
-                newsMasterlist,
+                newsInfo,
                 setNewsSelectionsFromFirebase,
-                setNewsMasterlistFromMongo,
+                setNewsInfoFromMongo,
                 setNews,
                 reorderNews,
                 selectSource,

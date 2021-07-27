@@ -22,14 +22,13 @@ const NewsCard = ({source, children, ...otherProps}) => {
     const textBoxColor = useColorModeValue("brand.300", "brand.600");
     const textColor = useColorModeValue("brand.900", "brand.100");
 
-    const {newsMasterlist} = useStockNews();
+    const {newsInfo} = useStockNews();
 
     let name;
     let articles;
 
-    let targetSource = newsMasterlist.find(
-        (currSource) => currSource.id === source.id
-    );
+    let targetSource = newsInfo.find(currSource => currSource.id === source.id);
+
     if (targetSource) {
         name = targetSource.name;
         articles = targetSource.articles;
@@ -91,9 +90,9 @@ const NewsCard = ({source, children, ...otherProps}) => {
                     <VStack align="flex-start">
                         {articles.map((article) => (
                             <NewsArticle
-                                date={article.date}
+                                date={article.publishedAt}
                                 title={article.title}
-                                article={article.src}
+                                article={article.url}
                             />
                         ))}
                     </VStack>
