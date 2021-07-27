@@ -6,7 +6,7 @@ import {useUser} from "../contexts/useUser";
 const WatchlistButton = ({ticker}) => {
     const [icon, setIcon] = useState(<BsStar/>);
     const [addedToWatchlist, setAddedToWatchlist] = useState(false);
-    const {addToWatchlist, removeFromWatchlist, watchlist} = useUser()
+    const {addToWatchlist, removeFromWatchlist, watchlist} = useUser();
 
     useEffect(() => {
         if (watchlist.includes(ticker)) {
@@ -14,7 +14,6 @@ const WatchlistButton = ({ticker}) => {
             setAddedToWatchlist(true)
         }
     }, [watchlist]);
-
 
     const handleClick = () => {
         if (addedToWatchlist) {
