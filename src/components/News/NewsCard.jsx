@@ -6,7 +6,6 @@ import {
   HStack,
   Image,
   Square,
-  Text,
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";

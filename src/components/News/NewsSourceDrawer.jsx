@@ -9,7 +9,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { BiFilterAlt } from "react-icons/bi";
-import NewsSourceChecklist from "./NewsSourceChecklist";
+import DrawerNewsChecklist from "./DrawerNewsChecklist";
 
 const NewsSourceDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -19,9 +19,11 @@ const NewsSourceDrawer = () => {
       <Button
         colorScheme="blue"
         onClick={onOpen}
-        mt={7}
-        ml={3}
+        mt={5}
+        ml={2}
+        px={6}
         rightIcon={<BiFilterAlt />}
+        minW={20}
       >
         Filter
       </Button>
@@ -30,7 +32,7 @@ const NewsSourceDrawer = () => {
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">Sources</DrawerHeader>
           <DrawerBody>
-            <NewsSourceChecklist />
+            <DrawerNewsChecklist />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
