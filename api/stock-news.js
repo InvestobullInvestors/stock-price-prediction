@@ -108,7 +108,6 @@ router.get("/stock-news/newsSourceInfo", function (req, res) {
         });
 });
 
-
 router.post("/stock-news/reorderNews", function (req, res) {
     const {sources} = req.body;
     newsSelections = sources;
