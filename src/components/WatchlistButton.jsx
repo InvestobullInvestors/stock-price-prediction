@@ -1,30 +1,35 @@
-import { IconButton, useColorModeValue } from '@chakra-ui/react';
-import { BsStar, BsStarFill } from 'react-icons/bs';
-import { useState } from 'react';
+import {IconButton} from '@chakra-ui/react';
+import {BsStar, BsStarFill} from 'react-icons/bs';
+import {useEffect, useState} from 'react';
+import {useUser} from "../contexts/useUser";
 
-const WatchlistButton = ({ symbol }) => {
-    const [icon, setIcon] = useState(<BsStar />);
-    const [iconClicked, setIconClicked] = useState(true);
-    const yellowColorScheme = useColorModeValue('yellow', 'orange');
+const WatchlistButton = ({ticker}) => {
+    const [icon, setIcon] = useState(<BsStar/>);
+    const [addedToWatchlist, setAddedToWatchlist] = useState(false);
+    const {addToWatchlist, removeFromWatchlist, watchlist} = useUser();
+
+    useEffect(() => {
+        if (watchlist.includes(ticker)) {
+            setIcon(<BsStarFill/>)
+            setAddedToWatchlist(true)
+        }
+    }, [watchlist]);
 
     const handleClick = () => {
-        if (iconClicked) {
-            // Add to watchlist
-            setIcon(<BsStarFill />);
-            setIconClicked(!iconClicked);
-            console.log('Added stock to watchlist: ', { symbol });
+        if (addedToWatchlist) {
+            setIcon(<BsStar/>);
+            removeFromWatchlist(ticker)
         } else {
-            // Remove from watchlist
-            setIcon(<BsStar />);
-            setIconClicked(!iconClicked);
-            console.log('Removed stock from watchlist: ', { symbol });
+            setIcon(<BsStarFill/>);
+            addToWatchlist(ticker)
         }
+        setAddedToWatchlist(!addedToWatchlist);
     };
 
     return (
         <IconButton
             icon={icon}
-            colorScheme={yellowColorScheme}
+            colorScheme='yellow'
             variant='ghost'
             onClick={handleClick}
         />
