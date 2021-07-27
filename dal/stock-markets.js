@@ -1,15 +1,9 @@
 const mongoose = require("mongoose");
 
-// mongoose.connect(process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// });
-
-mongoose.connect('mongodb+srv://investobull:investobull9876!@stock-price-prediction.bg5zs.mongodb.net/StockMarket', {
+mongoose.connect(process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-
 
 const Schema = mongoose.Schema;
 
