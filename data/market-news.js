@@ -3,7 +3,7 @@ const MARKET_NEWS = [{
     country: 'USA',
     news_sources: [
         {
-            id: "Bloomberg",
+            id: "bloomberg",
             name: "Bloomberg"
         },
         {
