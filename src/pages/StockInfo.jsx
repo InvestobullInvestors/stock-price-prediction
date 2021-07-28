@@ -4,7 +4,7 @@ import {useColorModeValue} from "@chakra-ui/react";
 import StockInformation from "../components/StockDetails/StockInformation";
 import StockNews from "../components/StockDetails/StockNews";
 import StockPredictionDetails from "../components/StockDetails/StockPredictionDetails";
-import StockPredictionOverview from "../components/StockDetails/StockPredictionOverview";
+import StockDataGraph from "../components/StockDetails/StockPredictionOverview";
 import {usePrediction} from "../contexts/usePredictions";
 import {useStockSymbol} from "../contexts/useStockInfo";
 import {useStockNews} from "../contexts/useStockNews";
@@ -26,7 +26,7 @@ const StockDetails = ({match}) => {
     return (
         <PageTemplate bgColor={useColorModeValue("brand.300", "brand.800")}>
             <StockInformation/>
-            <StockPredictionOverview/>
+            <StockDataGraph/>
             <StockPredictionDetails/>
             <StockNews/>
         </PageTemplate>
