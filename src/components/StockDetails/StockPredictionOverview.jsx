@@ -1,13 +1,15 @@
 import React from 'react'
 import {Box, useColorModeValue} from "@chakra-ui/react";
-import {Line} from "react-chartjs-2";
+import {defaults, Line} from "react-chartjs-2";
 import {useStockSymbol} from "../../contexts/useStockInfo";
 
 const StockDataGraph = () => {
     const {graphData} = useStockSymbol()
+    defaults.color = useColorModeValue("#000", "#FFF")
+    defaults.borderColor = useColorModeValue("#CCC", "#555")
+
     return (
-        <Box w='80%' mt={8} p={4} bgColor={useColorModeValue("brand.100", "brand.200")} borderRadius='xl'
-             marginX='auto'>
+        <Box mt={10} p={4} bgColor={useColorModeValue("brand.100", "brand.700")} borderRadius='xl'>
             <Line data={graphData}/>
         </Box>
     )
