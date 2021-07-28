@@ -23,7 +23,6 @@ const ClickableTd = ({ticker_id, children, ...otherProps}) => {
     )
 }
 
-
 const StockInfoTable = ({stocks}) => {
     const lightMode = useColorMode().colorMode === "light"
 
@@ -89,6 +88,5 @@ const StockInfoTable = ({stocks}) => {
         </Table>
     </Box>
 }
-
 
 export default StockInfoTable;
