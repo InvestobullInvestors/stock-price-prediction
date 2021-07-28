@@ -32,7 +32,7 @@ const StockInfoTable = ({stocks}) => {
             <Thead>
                 <Tr>
                     <Th/>
-                    <Th>Ticker Id</Th>
+                    <Th>Ticker</Th>
                     <Th display={{base: 'none', sm: 'table-cell'}}>Dividend Payout Ratio</Th>
                     <Th display={{base: 'none', md: 'table-cell'}}>PE Ratio</Th>
                     <Th display={{base: 'none', md: 'table-cell'}}>PEG Ratio</Th>
