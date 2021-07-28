@@ -28,6 +28,7 @@ const WatchlistButton = ({ticker}) => {
 
     return (
         <IconButton
+            aria-label='watchlist-button'
             icon={icon}
             colorScheme='yellow'
             variant='ghost'

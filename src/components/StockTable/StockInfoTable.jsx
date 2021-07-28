@@ -1,13 +1,12 @@
 import React from "react";
 import {Box, Link, Table, Tbody, Td, Th, Thead, Tr, useColorMode, useColorModeValue} from "@chakra-ui/react";
-import {Link as ReactRouterLink, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import WatchlistButton from "../WatchlistButton";
 
 const StockSymbol = ({ticker}) => (
-    <Link as={ReactRouterLink}
-          to={`/stock-details/${ticker}`}
-          color='blue.dark'
-          fontWeight='bold'>{ticker}</Link>
+    <Link color={useColorModeValue('blue.light', 'blue.dark')} fontWeight='bold'>
+        {ticker}
+    </Link>
 )
 
 const ClickableTd = ({ticker_id, children, ...otherProps}) => {
@@ -27,13 +26,13 @@ const ClickableTd = ({ticker_id, children, ...otherProps}) => {
 const StockInfoTable = ({stocks}) => {
     const lightMode = useColorMode().colorMode === "light"
 
-    return <Box borderRadius="lg" shadow="md" border='2px' borderColor={useColorModeValue('brand.200', 'brand.600')}>
+    return <Box borderRadius="xl" border='2px' padding={2} borderColor={useColorModeValue('brand.400', 'brand.600')}>
         <Table variant="simple">
             <Thead>
                 <Tr>
                     <Th/>
                     <Th>Ticker</Th>
-                    <Th display={{base: 'none', sm: 'table-cell'}}>Dividend Payout Ratio</Th>
+                    <Th display={{base: 'none', md: 'table-cell'}}>Dividend Payout Ratio</Th>
                     <Th display={{base: 'none', md: 'table-cell'}}>PE Ratio</Th>
                     <Th display={{base: 'none', md: 'table-cell'}}>PEG Ratio</Th>
                     <Th display={{base: 'none', lg: 'table-cell'}}>Quarterly Earning Growth</Th>
@@ -57,12 +56,12 @@ const StockInfoTable = ({stocks}) => {
                         _hover={lightMode ? {cursor: 'pointer', bg: 'brand.200'} : {cursor: 'pointer', bg: 'brand.700'}}
                     >
                         <Td>
-                            {<WatchlistButton ticker={ticker_id}/>}
+                            <WatchlistButton ticker={ticker_id}/>
                         </Td>
                         <ClickableTd isNumeric='false' ticker_id={ticker_id}>
-                            {<StockSymbol ticker={ticker_id}/>}
+                            <StockSymbol ticker={ticker_id}/>
                         </ClickableTd>
-                        <ClickableTd display={{base: 'none', sm: 'table-cell'}} ticker_id={ticker_id}>
+                        <ClickableTd display={{base: 'none', md: 'table-cell'}} ticker_id={ticker_id}>
                             {dividend_payout_ratio ?? "-"}
                         </ClickableTd>
                         <ClickableTd display={{base: 'none', md: 'table-cell'}} ticker_id={ticker_id}>
@@ -89,6 +88,5 @@ const StockInfoTable = ({stocks}) => {
         </Table>
     </Box>
 }
-
 
 export default StockInfoTable;
