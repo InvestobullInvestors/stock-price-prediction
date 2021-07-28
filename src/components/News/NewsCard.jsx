@@ -8,9 +8,11 @@ import {
   Square,
   useColorModeValue,
   VStack,
+  Flex,
 } from "@chakra-ui/react";
 import { useStockNews } from "../../contexts/useStockNews";
 import NewsArticle from "../NewsArticle";
+import CustomBox from "../CustomBox";
 
 const NewsCard = ({ source, children, ...otherProps }) => {
   const cardColor = useColorModeValue("brand.400", "brand.700");
@@ -58,52 +60,95 @@ const NewsCard = ({ source, children, ...otherProps }) => {
       {...otherProps}
     >
       {children}
-      <HStack mt="10px">
-        <Square
-          w={{ base: "100px", sm: "150px" }}
-          h={{ base: "100px", sm: "150px" }}
-          border="1px"
-          borderColor={cardColor}
-          borderRadius="lg"
-          shadow="md"
-          bg={textBoxColor}
-          p="10px"
-        >
-          <Image src={logo} />
-        </Square>
-        <Center height="150px">
-          <Divider orientation="vertical" />
-        </Center>
-        <Box
-          w="full"
-          h="150px"
-          border="1px"
-          borderColor={textBoxColor}
-          borderRadius="lg"
-          shadow="md"
-          bg={textBoxColor}
-          padding="5px"
-          css={{
-            margin: "0",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            overflow: "scroll",
-          }}
-        >
-          <VStack align="flex-start">
-            {articles.map((article) => (
-              <Box key={article.src} w="80%">
-                <NewsArticle
-                  date={article.date}
-                  title={article.title}
-                  url={article.src}
-                />
-                <Divider my={2} orientation="horizontal" />
-              </Box>
-            ))}
-          </VStack>
-        </Box>
-      </HStack>
+      <Flex display={["none", "none", "flex", "flex"]} align="flex-start">
+        <HStack mt="10px" w="full">
+          <Square
+            w={{ base: "100px", sm: "150px" }}
+            h={{ base: "100px", sm: "150px" }}
+            borderRadius="lg"
+            shadow="md"
+            bg={textBoxColor}
+            p="10px"
+          >
+            <Image src={logo} />
+          </Square>
+          <Center height="150px">
+            <Divider orientation="vertical" />
+          </Center>
+          <Box
+            w="full"
+            h="150px"
+            borderRadius="lg"
+            shadow="md"
+            bg={textBoxColor}
+            padding="5px"
+            css={{
+              margin: "0",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+              overflow: "scroll",
+            }}
+          >
+            <VStack align="flex-start">
+              {articles.map((article) => (
+                <Box key={article.src} w="100%">
+                  <NewsArticle
+                    date={article.date}
+                    title={article.title}
+                    url={article.src}
+                  />
+                  <Divider my={2} orientation="horizontal" />
+                </Box>
+              ))}
+            </VStack>
+          </Box>
+        </HStack>
+      </Flex>
+      <Flex display={["flex", "flex", "none", "none"]} align="flex-start">
+        <VStack mt="10px" align="center" w="full">
+          <CustomBox
+            w="100px"
+            borderRadius="lg"
+            shadow="md"
+            bg={textBoxColor}
+            p="10px"
+            mb={0}
+            mt={-9}
+          >
+            <Image src={logo} />
+          </CustomBox>
+          <Divider orientation="horizontal" />
+          <Box
+            w="full"
+            h="150px"
+            border="1px"
+            borderColor={textBoxColor}
+            borderRadius="lg"
+            shadow="md"
+            bg={textBoxColor}
+            padding="5px"
+            css={{
+              margin: "0",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+              overflow: "scroll",
+            }}
+          >
+            <VStack align="flex-start">
+              {articles.map((article) => (
+                <Box key={article.src} w="100%">
+                  <NewsArticle
+                    date={article.date}
+                    title={article.title}
+                    url={article.src}
+                  />
+                  <Divider my={2} orientation="horizontal" />
+                </Box>
+              ))}
+            </VStack>
+          </Box>
+        </VStack>
+      </Flex>
     </Box>
   );
 };

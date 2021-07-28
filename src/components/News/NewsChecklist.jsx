@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Checkbox, HStack, VStack } from "@chakra-ui/react";
 import { useStockNews } from "../../contexts/useStockNews";
 
-const DrawerNewsChecklist = () => {
+const NewsChecklist = () => {
   const { newsSelections } = useStockNews();
   const { selectSource } = useStockNews();
   const { selectAllSources } = useStockNews();
@@ -30,4 +30,4 @@ const DrawerNewsChecklist = () => {
   );
 };
 
-export default DrawerNewsChecklist;
+export default NewsChecklist;
