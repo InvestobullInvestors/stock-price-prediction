@@ -7,11 +7,11 @@ import {Flex} from "@chakra-ui/react";
 import {useStockNews} from "../contexts/useStockNews";
 
 const News = () => {
-    const {setNewsSelectionsFromFirebase, setNewsMasterlistFromMongo} = useStockNews();
+    const {setNewsSelectionsFromFirebase, setNewsInfoFromMongo} = useStockNews();
 
     useEffect(() => {
         setNewsSelectionsFromFirebase();
-        setNewsMasterlistFromMongo();
+        setNewsInfoFromMongo();
     }, []);
 
     //TODO: enable watchlist filter

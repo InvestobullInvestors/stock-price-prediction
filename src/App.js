@@ -10,7 +10,7 @@ import StockNewsProvider from './contexts/useStockNews';
 const theme = extendTheme({
     config: {
         initialColorMode: 'system',
-        useSystemColorMode: false,
+        useSystemColorMode: true,
     },
     colors: {
         brand: {
