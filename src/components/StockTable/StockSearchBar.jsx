@@ -11,7 +11,9 @@ const StockSearchBar = ({handleChange, handleCancel, keyword: {filterKeyword}}) 
                 children={<SearchIcon color={useColorModeValue('brand.400', 'brand.600')}/>}
             />
             <Input placeholder="Stock Ticker" onChange={handleChange} value={filterKeyword}/>
-            <InputRightElement children={<CloseIcon color={useColorModeValue('brand.400', 'brand.600')} onClick={handleCancel}/>}/>
+            <InputRightElement
+                children={<CloseIcon color={useColorModeValue('brand.400', 'brand.600')} _hover={{cursor: 'pointer'}}
+                                     onClick={handleCancel}/>}/>
         </InputGroup>
     )
 }

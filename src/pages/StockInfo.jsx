@@ -10,7 +10,7 @@ import {useStockSymbol} from "../contexts/useStockInfo";
 import {useStockNews} from "../contexts/useStockNews";
 
 const StockDetails = ({match}) => {
-    const tickerId = match.params.tickerId;
+    const {tickerId} = match.params;
     const {setRealtimeDetails, setQuarterlyDetails, setRealtimeGraphData} = useStockSymbol()
     const {setPrediction} = usePrediction();
     const {setNews} = useStockNews();
