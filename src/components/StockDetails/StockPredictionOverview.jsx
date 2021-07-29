@@ -9,7 +9,7 @@ const StockDataGraph = () => {
     defaults.borderColor = useColorModeValue("#CCC", "#555")
 
     return (
-        <Box mt={10} p={4} bgColor={useColorModeValue("brand.100", "brand.700")} borderRadius='xl'>
+        <Box mt={10} p={4} bgColor={useColorModeValue("brand.100", "brand.700")} borderRadius='lg'>
             <Line data={graphData}/>
         </Box>
     )
