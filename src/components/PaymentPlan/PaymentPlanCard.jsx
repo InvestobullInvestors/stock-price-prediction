@@ -10,6 +10,7 @@ import {
     ModalContent,
     ModalOverlay,
     ModalHeader,
+    useColorModeValue,
 } from '@chakra-ui/react';
 import CreditCardInformation from '../CreditCardInformation';
 import CustomBox from "../CustomBox";
@@ -45,7 +46,7 @@ const PaymentPlanCard = ({
     );
 
     return (
-        <CustomBox {...otherProps}>
+        <CustomBox bg={useColorModeValue("brand.400", "brand.700")} {...otherProps}>
             <VStack>
                 <Text>{type}</Text>
                 <Text>USD ${price}/month</Text>
