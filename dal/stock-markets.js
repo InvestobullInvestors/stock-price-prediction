@@ -98,6 +98,32 @@ const dailyGraphInfoSchema = new Schema({
 
 exports.dailyGraphInfo = mongoose.model('DailyGraphInfo', dailyGraphInfoSchema)
 
+const stockNewsListSchema = new Schema({
+    country: String,
+    news_sources: Array({
+        id: String,
+        name: String
+    })
+}, {collection: 'StockNewsList'})
+
+exports.stockNewsList = mongoose.model('StockNewsList', stockNewsListSchema)
+
+const newsSourceInfoSchema = new Schema({
+    source: String,
+    stock_news: Array({
+        source: Object,
+        author: String,
+        title: String,
+        description: String,
+        url: String,
+        urlToImage: String,
+        publishedAt: String,
+        content: String
+    })
+}, {collection: 'NewsSourceInfo'})
+
+exports.newsSourceInfo = mongoose.model('NewsSourceInfo', newsSourceInfoSchema)
+
 const stockNewsInfoSchema = new Schema({
     market_name: String,
     market_id: String,

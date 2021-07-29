@@ -4,14 +4,17 @@ import {Input, InputGroup, InputLeftElement, InputRightElement, useColorModeValu
 
 
 const StockSearchBar = ({handleChange, handleCancel, keyword: {filterKeyword}}) => {
+    const color = useColorModeValue('brand.400', 'brand.600')
+
     return (
-        <InputGroup w='40%' borderRadius='lg' border='1px' borderColor={useColorModeValue('brand.200', 'brand.600')}>
-            <InputLeftElement
-                pointerEvents="none"
-                children={<SearchIcon color={useColorModeValue('brand.400', 'brand.600')}/>}
-            />
+        <InputGroup w="sm" borderRadius='lg' border='1px' borderColor={color}>
+            <InputLeftElement pointerEvents="none">
+                <SearchIcon color={color}/>
+            </InputLeftElement>
             <Input placeholder="Stock Ticker" onChange={handleChange} value={filterKeyword}/>
-            <InputRightElement children={<CloseIcon color={useColorModeValue('brand.400', 'brand.600')} onClick={handleCancel}/>}/>
+            <InputRightElement>
+                <CloseIcon color={color} _hover={{cursor: 'pointer'}} onClick={handleCancel}/>
+            </InputRightElement>
         </InputGroup>
     )
 }

@@ -14,11 +14,21 @@ import { useStockNews } from "../../contexts/useStockNews";
 import NewsArticle from "../NewsArticle";
 import CustomBox from "../CustomBox";
 
+function formatDate(date) {
+  let year = parseInt(date.slice(0, 4));
+  let month = parseInt(date.slice(6, 7));
+  let day = parseInt(date.slice(9, 10));
+  let dateObj = new Date(year, month - 1, day);
+
+  let options = { year: "numeric", month: "long", day: "2-digit" };
+  return new Intl.DateTimeFormat("en-US", options).format(dateObj);
+}
+
 const NewsCard = ({ source, children, ...otherProps }) => {
   const cardColor = useColorModeValue("brand.400", "brand.700");
   const textBoxColor = useColorModeValue("brand.100", "brand.600");
 
-  const { newsMasterlist } = useStockNews();
+  const { newsInfo } = useStockNews();
 
   let name;
   let articles;
@@ -26,9 +36,8 @@ const NewsCard = ({ source, children, ...otherProps }) => {
   let logoWhite;
   let logo;
 
-  let targetSource = newsMasterlist.find(
-    (currSource) => currSource.id === source.id
-  );
+  let targetSource = newsInfo.find((currSource) => currSource.id === source.id);
+
   if (targetSource) {
     name = targetSource.name;
     articles = targetSource.articles;
@@ -44,7 +53,6 @@ const NewsCard = ({ source, children, ...otherProps }) => {
   logoBlack = logoBlack.replace(/\s+/g, "-").toLowerCase();
   logoWhite = logoWhite.replace(/\s+/g, "-").toLowerCase();
   logo = useColorModeValue(logoBlack, logoWhite);
-  console.log(logo);
 
   return (
     <Box
@@ -93,9 +101,9 @@ const NewsCard = ({ source, children, ...otherProps }) => {
               {articles.map((article) => (
                 <Box key={article.src} w="100%">
                   <NewsArticle
-                    date={article.date}
+                    date={formatDate(article.publishedAt)}
                     title={article.title}
-                    url={article.src}
+                    url={article.url}
                   />
                   <Divider my={2} orientation="horizontal" />
                 </Box>

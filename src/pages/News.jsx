@@ -10,12 +10,12 @@ import { useStockNews } from "../contexts/useStockNews";
 const News = () => {
   const {
     setNewsSelectionsFromFirebase,
-    setNewsMasterlistFromMongo,
+    setNewsInfoFromMongo,
   } = useStockNews();
 
   useEffect(() => {
     setNewsSelectionsFromFirebase();
-    setNewsMasterlistFromMongo();
+    setNewsInfoFromMongo();
   }, []);
 
   //TODO: enable watchlist filter
