@@ -33,6 +33,35 @@ router.get('/stock-details', function (req, res) {
 });
 
 
+/* GET quarterly stock details with string of tickers. */
+router.get('/stock-details/:tickerString', function (req, res) {
+    const {tickerString} = req.params
+    const tickerArray = tickerString.split('-')
+    quarterlyStockInfo.find({ticker_id: tickerArray}).then(stocks => {
+        const result = []
+        stocks.forEach(stock => {
+            const {stock_details} = stock
+            result.push({
+                stock_name: stock.stock_name,
+                ticker_id: stock.ticker_id,
+                currency: stock_details.currency,
+                pe_ratio: stock_details.pe_ratio,
+                peg_ratio: stock_details.peg_ratio,
+                quarterly_earning_growth: stock_details.quarterly_earning_growth,
+                quarterly_revenue_growth: stock_details.quarterly_revenue_growth,
+                fifty_two_week_high: stock_details.fifty_two_week_high,
+                fifty_two_week_low: stock_details.fifty_two_week_low,
+                dividend_payout_ratio: stock_details.dividend_payout_ratio
+            })
+        })
+        res.send(result)
+    }).catch(({message}) => {
+        console.log(message)
+        res.send([])
+    })
+});
+
+
 /* GET realtime stock details. */
 router.get('/stock-details/realtime-data/:ticker', function (req, res) {
     const {ticker} = req.params
