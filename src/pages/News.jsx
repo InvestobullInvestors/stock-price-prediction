@@ -24,24 +24,17 @@ const News = () => {
     <PageTemplate bgColor={useColorModeValue("brand.300", "brand.800")}>
       <VStack>
         <CustomHeading mb={3}>News</CustomHeading>
-        <Button
-          colorScheme="blue"
-          // onClick={onOpen}
-          rightIcon={<BiFilterAlt />}
-          minW={20}
-          display={["flex", "flex", "none", "none"]}
-        >
-          Filter
-        </Button>
+        <Grid display={["flex", "flex", "none", "none"]}>
+          <ChecklistDrawer/>
+        </Grid>
       </VStack>
       {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
       <Grid display={["none", "none", "flex", "flex"]}>
-        <StaticChecklistContainer />
-        <NewsCardList />
+        <StaticChecklistContainer/>
+        <NewsCardList/>
       </Grid>
-      <Grid display={["flex", "flex", "none", "none"]} gap={2}>
-        <ChecklistDrawer />
-        <NewsCardList />
+      <Grid display={["flex", "flex", "none", "none"]}>
+        <NewsCardList/>
       </Grid>
     </PageTemplate>
   );
