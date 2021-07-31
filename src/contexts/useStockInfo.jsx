@@ -52,6 +52,14 @@ const StockInfoProvider = ({children}) => {
         })
     }
 
+    const sortStocks = (table_header_key) => {
+        axios.post('/stock-details/sort-stocks', JSON.stringify({
+            table_header_key
+        }), {headers: {'Content-Type': 'application/json'}}).then(response => {
+            setBasicStockInfo(response.data)
+        })
+    }
+
     return (
         <StockInfoContext.Provider value={{
             stockName,
@@ -64,7 +72,8 @@ const StockInfoProvider = ({children}) => {
             setQuarterlyDetails,
             setRealtimeGraphData,
             setSymbol,
-            filterStocks
+            filterStocks,
+            sortStocks
         }}>
             {children}
         </StockInfoContext.Provider>

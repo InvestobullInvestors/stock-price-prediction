@@ -82,4 +82,33 @@ router.post('/stock-details/filter-stocks', function (req, res) {
     })
 });
 
+
+/* GET sorted stock details. */
+router.post('/stock-details/sort-stocks', function (req, res) {
+    const {table_header_key} = req.body;
+    quarterlyStockInfo.find({}).sort({[`stock_details.${table_header_key}`]: -1})
+        .then(stock_details => {
+            const result = []
+            for (let stocks of stock_details) {
+                const {stock_details} = stocks
+                result.push({
+                    stock_name: stocks.stock_name,
+                    ticker_id: stocks.ticker_id,
+                    currency: stock_details.currency,
+                    pe_ratio: stock_details.pe_ratio,
+                    peg_ratio: stock_details.peg_ratio,
+                    quarterly_earning_growth: stock_details.quarterly_earning_growth,
+                    quarterly_revenue_growth: stock_details.quarterly_revenue_growth,
+                    fifty_two_week_high: stock_details.fifty_two_week_high,
+                    fifty_two_week_low: stock_details.fifty_two_week_low,
+                    dividend_payout_ratio: stock_details.dividend_payout_ratio
+                })
+            }
+            res.send(result)
+        }).catch(({message}) => {
+        console.log(message)
+        res.send([])
+    })
+});
+
 module.exports = router;
