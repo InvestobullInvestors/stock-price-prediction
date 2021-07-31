@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 import NewsCardList from "../components/News/NewsCardList";
 import ChecklistDrawer from "../components/News/ChecklistDrawer";
 import CustomHeading from "../components/CustomHeading";
 import StaticChecklistContainer from "../components/News/StaticChecklistContainer";
-import { Button, Grid, useColorModeValue, VStack } from "@chakra-ui/react";
-import { useStockNews } from "../contexts/useStockNews";
-import { BiFilterAlt } from "react-icons/bi";
+import {Grid, VStack} from "@chakra-ui/react";
+import {useStockNews} from "../contexts/useStockNews";
 
 const News = () => {
   const {
