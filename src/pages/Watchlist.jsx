@@ -22,6 +22,7 @@ const Watchlist = () => {
         {user ?
             <StockInfoTable stocks={watchlistStockInfo}/>
             : <CustomBox>
+                {/*TODO: trigger sign in popup from 'Sign in'*/}
                 <Center fontSize="xl" mx={8} my={4}>Sign in to use watchlist</Center>
             </CustomBox>
         }

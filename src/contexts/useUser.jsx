@@ -1,4 +1,5 @@
 import React, {createContext, useContext, useState} from 'react'
+import {firestore} from '../auth/firebase.jsx'
 
 const UserContext = createContext({})
 
@@ -9,14 +10,23 @@ const UserProvider = ({children}) => {
     const [watchlist, setWatchlist] = useState([])
     const [paymentDetails, setPaymentDetails] = useState({})
 
+    const WATCHLIST = firestore.collection('users').doc(user?.uid).collection('watchlist')
+
     const addToWatchlist = ticker => {
-        console.log(`Adding stock: ${ticker} to watchlist`)
+        if (!user) return
+        WATCHLIST.doc(ticker).set({ticker: ticker})
+            .then(() => console.log(`Added stock: ${ticker} to watchlist`))
+        // TODO: send notification when watchlist added
     }
 
     const removeFromWatchlist = ticker => {
-        console.log(`Removing stock: ${ticker} from watchlist`)
+        if (!user) return
+        WATCHLIST.doc(ticker).delete()
+            .then(() => console.log(`Removed stock: ${ticker} from watchlist`))
+        // TODO: send notification when watchlist removed
     }
 
+    // TODO: rename this function and update user based on payment
     const setUserPaymentDetails = details => {
         setPaymentDetails(details)
         console.log(paymentDetails)
