@@ -23,7 +23,7 @@ const ClickableTd = ({ticker_id, children, ...otherProps}) => {
     )
 }
 
-const StockInfoTable = ({stocks}) => {
+const StockInfoTable = ({stocks, handleSortClick}) => {
     const lightMode = useColorMode().colorMode === "light"
 
     return <Box borderRadius="xl" border='2px' padding={2} borderColor={useColorModeValue('brand.400', 'brand.600')}>
@@ -32,13 +32,33 @@ const StockInfoTable = ({stocks}) => {
                 <Tr>
                     <Th/>
                     <Th>Ticker</Th>
-                    <Th display={{base: 'none', md: 'table-cell'}}>Dividend Payout Ratio</Th>
-                    <Th display={{base: 'none', md: 'table-cell'}}>PE Ratio</Th>
-                    <Th display={{base: 'none', md: 'table-cell'}}>PEG Ratio</Th>
-                    <Th display={{base: 'none', lg: 'table-cell'}}>Quarterly Earning Growth</Th>
-                    <Th display={{base: 'none', lg: 'table-cell'}}>Quarterly Revenue Growth</Th>
-                    <Th>52-week Low</Th>
-                    <Th>52-week High</Th>
+                    <Th display={{base: 'none', md: 'table-cell'}}
+                        onClick={() => handleSortClick('dividend_payout_ratio')}
+                        _hover={{cursor: 'pointer'}}
+                    >
+                        Dividend Payout Ratio
+                    </Th>
+                    <Th display={{base: 'none', md: 'table-cell'}} onClick={() => handleSortClick('pe_ratio')}
+                        _hover={{cursor: 'pointer'}}>
+                        PE Ratio
+                    </Th>
+                    <Th display={{base: 'none', md: 'table-cell'}} onClick={() => handleSortClick('peg_ratio')}
+                        _hover={{cursor: 'pointer'}}>
+                        PEG Ratio
+                    </Th>
+                    <Th display={{base: 'none', lg: 'table-cell'}}
+                        onClick={() => handleSortClick('quarterly_earning_growth')} _hover={{cursor: 'pointer'}}>
+                        Quarterly Earning Growth</Th>
+                    <Th display={{base: 'none', lg: 'table-cell'}}
+                        onClick={() => handleSortClick('quarterly_revenue_growth')} _hover={{cursor: 'pointer'}}>
+                        Quarterly Revenue Growth
+                    </Th>
+                    <Th onClick={() => handleSortClick('fifty_two_week_low')} _hover={{cursor: 'pointer'}}>
+                        52-week Low
+                    </Th>
+                    <Th onClick={() => handleSortClick('fifty_two_week_high')} _hover={{cursor: 'pointer'}}>
+                        52-week High
+                    </Th>
                 </Tr>
             </Thead>
             <Tbody>

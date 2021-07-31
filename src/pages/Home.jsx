@@ -9,6 +9,11 @@ import {useStockSymbol} from "../contexts/useStockInfo";
 const Home = () => {
     const {basicStockInfo, filterStocks} = useStockSymbol()
     const [filterKeyword, setFilterKeyword] = useState()
+    const {sortStocks} = useStockSymbol()
+
+    const handleSortClick = key => {
+        sortStocks(key)
+    }
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -27,7 +32,7 @@ const Home = () => {
             <VStack spacing={16} m={4}>
                 <CustomHeading>Stock Market Overview</CustomHeading>
                 <StockSearchBar handleChange={handleChange} handleCancel={handleCancel} keyword={{filterKeyword}}/>
-                <StockInfoTable stocks={basicStockInfo}/>
+                <StockInfoTable stocks={basicStockInfo} handleSortClick={handleSortClick}/>
             </VStack>
         </PageTemplate>
     )
