@@ -5,25 +5,29 @@ import {useUser} from "../contexts/useUser";
 
 const WatchlistButton = ({ticker}) => {
     const [icon, setIcon] = useState(<BsStar/>);
-    const [addedToWatchlist, setAddedToWatchlist] = useState(false);
-    const {addToWatchlist, removeFromWatchlist, watchlist} = useUser();
+    const [isWatchlisted, setIsWatchlisted] = useState(false);
+    const {addToWatchlist, removeFromWatchlist, watchlist, user} = useUser();
 
     useEffect(() => {
-        if (watchlist.includes(ticker)) {
+        const tickers = []
+        watchlist.forEach(({ticker}) => tickers.push(ticker))
+        if (tickers.includes(ticker)) {
             setIcon(<BsStarFill/>)
-            setAddedToWatchlist(true)
+            setIsWatchlisted(true)
         }
     }, [watchlist]);
 
     const handleClick = () => {
-        if (addedToWatchlist) {
+        if (!user) return // TODO: trigger sign in popup
+
+        if (isWatchlisted) {
             setIcon(<BsStar/>);
             removeFromWatchlist(ticker)
         } else {
             setIcon(<BsStarFill/>);
             addToWatchlist(ticker)
         }
-        setAddedToWatchlist(!addedToWatchlist);
+        setIsWatchlisted(!isWatchlisted);
     };
 
     return (

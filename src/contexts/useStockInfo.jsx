@@ -4,12 +4,13 @@ import axios from "axios";
 const StockInfoContext = createContext({});
 
 const StockInfoProvider = ({children}) => {
+    const [basicStockInfo, setBasicStockInfo] = useState([])
+    const [watchlistStockInfo, setWatchlistStockInfo] = useState([])
     const [stockDetails, setStockDetails] = useState({});
     const [realtimeStockDetails, setRealtimeStockDetails] = useState({});
     const [quarterlyStockDetails, setQuarterlyStockDetails] = useState({});
     const [stockName, setStockName] = useState('')
     const [graphData, setGraphData] = useState('')
-    const [basicStockInfo, setBasicStockInfo] = useState([])
 
     useEffect(() => {
         axios.get(`/stock-details/`).then(response => {
@@ -17,8 +18,17 @@ const StockInfoProvider = ({children}) => {
         })
     }, []);
 
+    const getWatchlistStockInfo = watchlist => {
+        const tickerString = watchlist.join('-')
+        if (!tickerString)
+            return setWatchlistStockInfo([])
 
-    const setSymbol = (stockSymbol) => {
+        axios.get(`/stock-details/${tickerString}`).then(response => {
+            setWatchlistStockInfo(response.data)
+        })
+    }
+
+    const setSymbol = stockSymbol => {
         axios.get(`/stock-details/${stockSymbol}`).then(response => {
             setStockDetails(response.data);
         })
@@ -68,6 +78,8 @@ const StockInfoProvider = ({children}) => {
             quarterlyStockDetails,
             graphData,
             basicStockInfo,
+            watchlistStockInfo,
+            getWatchlistStockInfo,
             setRealtimeDetails,
             setQuarterlyDetails,
             setRealtimeGraphData,

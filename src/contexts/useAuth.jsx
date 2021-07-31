@@ -30,6 +30,7 @@ const AuthProvider = ({children}) => {
         }
 
         await currentUser.set({
+            uid: uid,
             displayName: displayName,
             email: email,
             photoURL: photoURL,
@@ -59,10 +60,10 @@ const AuthProvider = ({children}) => {
         callbacks: {
             signInSuccessWithAuthResult: async (authResult) => {
                 if (authResult.additionalUserInfo.isNewUser) {
-                    const uid = authResult.user.uid
-                    const displayName = authResult.user.displayName
-                    const email = authResult.user.email
-                    const photoURL = authResult.user.photoURL
+                    const {uid} = authResult.user
+                    const {displayName} = authResult.user
+                    const {email} = authResult.user
+                    const {photoURL} = authResult.user
                     await createUser(uid, displayName, email, photoURL)
                 }
                 return true;
