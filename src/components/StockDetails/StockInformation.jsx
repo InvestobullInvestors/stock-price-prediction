@@ -23,8 +23,8 @@ const StockDataEnclosure = ({children}) => (
     </Box>
 )
 
-const LabelTd = ({children}) => (
-    <Td isNumeric fontWeight="bold">{children}</Td>
+const NumberTd = ({children}) => (
+    <Td isNumeric fontWeight="bold">{formatNumber(children)}</Td>
 )
 
 const formatNumber = num => (
@@ -47,27 +47,27 @@ const QuarterlyStockDataContinued = () => {
         <Tbody>
             <Tr>
                 <Td>52 Weeks High</Td>
-                <LabelTd>{formatNumber(fifty_two_week_high)}</LabelTd>
+                <NumberTd>{fifty_two_week_high}</NumberTd>
             </Tr>
             <Tr>
                 <Td>52 Weeks Low</Td>
-                <LabelTd>{formatNumber(fifty_two_week_low)}</LabelTd>
+                <NumberTd>{fifty_two_week_low}</NumberTd>
             </Tr>
             <Tr>
                 <Td>Dividend Payout Ratio</Td>
-                <LabelTd>{formatNumber(dividend_payout_ratio) ?? 0}</LabelTd>
+                <NumberTd>{dividend_payout_ratio ?? 0}</NumberTd>
             </Tr>
             <Tr>
                 <Td>Shares Outstanding</Td>
-                <LabelTd>{formatNumber(shares_outstanding)}</LabelTd>
+                <NumberTd>{shares_outstanding}</NumberTd>
             </Tr>
             <Tr>
                 <Td>Shares Float</Td>
-                <LabelTd>{formatNumber(shares_float)}</LabelTd>
+                <NumberTd>{shares_float}</NumberTd>
             </Tr>
             <Tr>
                 <Td>Shares Short</Td>
-                <LabelTd>{formatNumber(shares_short)}</LabelTd>
+                <NumberTd>{shares_short}</NumberTd>
             </Tr>
         </Tbody>
     )
@@ -89,27 +89,27 @@ const QuarterlyStockData = () => {
         <Tbody>
             <Tr>
                 <Td>PE Ratio</Td>
-                <LabelTd>{formatNumber(pe_ratio)}</LabelTd>
+                <NumberTd>{pe_ratio}</NumberTd>
             </Tr>
             <Tr>
                 <Td>PEG Ratio</Td>
-                <LabelTd>{formatNumber(peg_ratio)}</LabelTd>
+                <NumberTd>{peg_ratio}</NumberTd>
             </Tr>
             <Tr>
                 <Td>EPS</Td>
-                <LabelTd>{formatNumber(eps)}</LabelTd>
+                <NumberTd>{eps}</NumberTd>
             </Tr>
             <Tr>
                 <Td>Quarterly Earning Growth</Td>
-                <LabelTd>{formatNumber(quarterly_earning_growth)}</LabelTd>
+                <NumberTd>{quarterly_earning_growth}</NumberTd>
             </Tr>
             <Tr>
                 <Td>Quarterly Revenue Growth</Td>
-                <LabelTd>{formatNumber(quarterly_revenue_growth)}</LabelTd>
+                <NumberTd>{quarterly_revenue_growth}</NumberTd>
             </Tr>
             <Tr>
                 <Td>Beta</Td>
-                <LabelTd>{formatNumber(beta)}</LabelTd>
+                <NumberTd>{beta}</NumberTd>
             </Tr>
         </Tbody>
     )
@@ -141,19 +141,19 @@ const LivePrice = () => {
             </Tr>
             <Tr>
                 <Td>Close</Td>
-                <LabelTd>{formatNumber(close)}</LabelTd>
+                <NumberTd>{close}</NumberTd>
             </Tr>
             <Tr>
                 <Td>High</Td>
-                <LabelTd>{formatNumber(high)}</LabelTd>
+                <NumberTd>{high}</NumberTd>
             </Tr>
             <Tr>
                 <Td>Low</Td>
-                <LabelTd>{formatNumber(low)}</LabelTd>
+                <NumberTd>{low}</NumberTd>
             </Tr>
             <Tr>
                 <Td>Volume</Td>
-                <LabelTd>{formatNumber(volume)}</LabelTd>
+                <NumberTd>{volume}</NumberTd>
             </Tr>
         </Tbody>
     )

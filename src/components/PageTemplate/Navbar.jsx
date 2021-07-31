@@ -10,12 +10,14 @@ import {
     DrawerHeader,
     DrawerOverlay,
     Flex,
+    HStack,
     Image,
     Menu,
     MenuButton,
     MenuDivider,
     MenuItem,
     MenuList,
+    Text,
     useColorMode,
     useColorModeValue,
     useDisclosure
@@ -34,10 +36,10 @@ const ICON_SIZE = 6
 const MENU_MAX_WIDTH = 60
 
 const Logo = () => (
-    <Button as={Link} to="/" fontSize={24} fontWeight={200} bg="transparent" _hover={{}} m={MARGIN}>
-        InvestoBull
+    <HStack as={Link} to="/" m={MARGIN}>
+        <Text display={{base: 'none', sm: 'flex'}} fontSize={24} fontWeight={200}>InvestoBull</Text>
         <Image src="/bull_logo_512.png" boxSize={8}/>
-    </Button>
+    </HStack>
 )
 
 const CustomButton = ({children, route, ...otherProps}) => (
@@ -86,14 +88,14 @@ const WideScreenLinks = () => (
 const ThemeSwitchButton = ({icon}) => {
     const {toggleColorMode} = useColorMode()
 
-    return <Button bg="transparent" rounded="full" p={0} m={2} onClick={toggleColorMode}>
+    return <Button bg="transparent" rounded="full" p={PADDING} m={MARGIN} onClick={toggleColorMode}>
         <Icon as={icon} w={5} h={5}/>
     </Button>
 }
 
 const NotificationMenu = ({bgColor}) => (
     <Menu>
-        <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
+        <MenuButton as={Button} bg="transparent" rounded="full" p={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
             <BellIcon w={ICON_SIZE} h={ICON_SIZE}/>
         </MenuButton>
@@ -116,7 +118,7 @@ const UserMenu = ({bgColor}) => {
     }
 
     return <Menu>
-        <MenuButton as={Button} bg="transparent" rounded="full" px={PADDING} m={MARGIN}
+        <MenuButton as={Button} bg="transparent" rounded="full" p={PADDING} m={MARGIN}
                     rightIcon={<ChevronDownIcon/>}>
             <Avatar size="sm" name={user.displayName} src={user.photoURL}/>
         </MenuButton>

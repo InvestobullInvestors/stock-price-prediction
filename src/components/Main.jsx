@@ -4,7 +4,7 @@ import About from '../pages/About';
 import Home from '../pages/Home';
 import News from '../pages/News';
 import Plans from '../pages/Plans';
-import StockDetails from '../pages/StockDetails';
+import StockInfo from '../pages/StockInfo';
 import Watchlist from '../pages/Watchlist';
 
 const Main = () => {
@@ -16,7 +16,7 @@ const Main = () => {
             <Route path='/about' component={About} /> {/*Weiyoung*/}
             <Route path='/news' component={News} /> {/*Paul*/}
             {/*<Route path="/help" component={Help}/> /!*Himanshu*!/*/}
-            <Route path='/stock-details/:tickerId' component={StockDetails} />
+            <Route path='/stock-info/:tickerId' component={StockInfo} />
             {/*<Route component={() => <Redirect to="/home"/>}/>*/}
         </>
     );
