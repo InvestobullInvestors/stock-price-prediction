@@ -23,12 +23,12 @@ router.get('/realtime-graph/:ticker', function (req, res) {
                 {
                     label: 'Open',
                     data: open,
-                    borderColor: "rgba(75,192,192,1)"
+                    borderColor: "#4BC0C0"
                 },
                 {
                     label: 'Close',
                     data: close,
-                    borderColor: "#742774"
+                    borderColor: "#FFA500"
                 }
             ]
         })
