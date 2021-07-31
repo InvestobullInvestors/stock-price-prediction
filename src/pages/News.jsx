@@ -21,7 +21,7 @@ const News = () => {
 
   //TODO: enable watchlist filter
   return (
-    <PageTemplate bgColor={useColorModeValue("brand.300", "brand.800")}>
+    <PageTemplate>
       <VStack>
         <CustomHeading mb={3}>News</CustomHeading>
         <Grid display={["flex", "flex", "none", "none"]}>

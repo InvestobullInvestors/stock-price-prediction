@@ -6,7 +6,7 @@ import CustomHeading from "../components/CustomHeading";
 import {Divider, useColorModeValue} from "@chakra-ui/react";
 
 const Plans = () => (
-    <PageTemplate bgColor={useColorModeValue("brand.300", "brand.800")}>
+    <PageTemplate>
         <CustomHeading>Select A Plan</CustomHeading>
         <PaymentPlanList/>
         <Divider my={16} orientation="horizontal"/>
