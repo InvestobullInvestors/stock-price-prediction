@@ -7,12 +7,11 @@ import StockInfoTable from "../components/StockTable/StockInfoTable";
 import {useStockSymbol} from "../contexts/useStockInfo";
 
 const Home = () => {
-    const {basicStockInfo, filterStocks} = useStockSymbol()
+    const {basicStockInfo, filterStocks, sortStocks, setBasicStockInfo} = useStockSymbol()
     const [filterKeyword, setFilterKeyword] = useState()
-    const {sortStocks} = useStockSymbol()
 
     const handleSortClick = key => {
-        sortStocks(key)
+        sortStocks(basicStockInfo, key, setBasicStockInfo)
     }
 
     const handleChange = (event) => {
