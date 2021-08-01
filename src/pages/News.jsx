@@ -1,37 +1,42 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 import NewsCardList from "../components/News/NewsCardList";
-import NewsSourceDrawer from "../components/News/NewsSourceDrawer";
+import ChecklistDrawer from "../components/News/ChecklistDrawer";
 import CustomHeading from "../components/CustomHeading";
-import {Flex} from "@chakra-ui/react";
+import StaticChecklistContainer from "../components/News/StaticChecklistContainer";
+import {Grid, VStack} from "@chakra-ui/react";
 import {useStockNews} from "../contexts/useStockNews";
 
 const News = () => {
-    const [color, setColor] = useState("green");
+  const {
+    setNewsSelectionsFromFirebase,
+    setNewsInfoFromMongo,
+  } = useStockNews();
 
-    const handleChangeColor = (e) => {
-        setColor(color === "green" ? "red" : "green");
-    };
+  useEffect(() => {
+    setNewsSelectionsFromFirebase();
+    setNewsInfoFromMongo();
+  }, []);
 
-    const {setNewsSelectionsFromFirebase, setNewsMasterlistFromMongo} = useStockNews();
-
-    useEffect(() => {
-        setNewsSelectionsFromFirebase();
-        setNewsMasterlistFromMongo();
-    }, []);
-
-    //TODO: enable watchlist filter
-    return (
-        <PageTemplate>
-            <Flex>
-                <NewsSourceDrawer/>
-                {/*<Spacer/>*/}
-                {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
-            </Flex>
-            <CustomHeading mt={0}>News</CustomHeading>
-            <NewsCardList/>
-        </PageTemplate>
-    );
+  //TODO: enable watchlist filter
+  return (
+    <PageTemplate>
+      <VStack>
+        <CustomHeading mb={3}>News</CustomHeading>
+        <Grid display={["flex", "flex", "none", "none"]}>
+          <ChecklistDrawer/>
+        </Grid>
+      </VStack>
+      {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
+      <Grid display={["none", "none", "flex", "flex"]}>
+        <StaticChecklistContainer/>
+        <NewsCardList/>
+      </Grid>
+      <Grid display={["flex", "flex", "none", "none"]}>
+        <NewsCardList/>
+      </Grid>
+    </PageTemplate>
+  );
 };
 
 export default News;

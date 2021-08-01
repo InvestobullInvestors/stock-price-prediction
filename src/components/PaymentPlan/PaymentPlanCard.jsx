@@ -1,27 +1,29 @@
 import React from 'react';
 import {
-    Text,
-    VStack,
     Button,
-    useDisclosure,
+    Heading,
     Modal,
     ModalBody,
     ModalCloseButton,
     ModalContent,
-    ModalOverlay,
     ModalHeader,
+    ModalOverlay,
+    Text,
+    useColorModeValue,
+    useDisclosure,
+    VStack,
 } from '@chakra-ui/react';
 import CreditCardInformation from '../CreditCardInformation';
 import CustomBox from "../CustomBox";
 
 const PaymentPlanCard = ({
-    type,
-    price,
-    buttonText,
-    details,
-    ...otherProps
-}) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+                             type,
+                             price,
+                             buttonText,
+                             details,
+                             ...otherProps
+                         }) => {
+    const {isOpen, onOpen, onClose} = useDisclosure();
     const PaymentModal = ({payableAmount}) => (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay>
@@ -45,15 +47,17 @@ const PaymentPlanCard = ({
     );
 
     return (
-        <CustomBox {...otherProps}>
-            <VStack>
-                <Text>{type}</Text>
+        <CustomBox bg={useColorModeValue("brand.400", "brand.700")} {...otherProps}>
+            <VStack spacing={4}>
+                <Heading as="h4" size="md">{type}</Heading>
                 <Text>USD ${price}/month</Text>
                 <Button colorScheme='brand' onClick={onOpen}>
                     {buttonText}
                 </Button>
                 <PaymentModal payableAmount={price}/>
-                {details.map(detail => <Text key={detail}>{detail}</Text>)}
+                <VStack align="flex-start" spacing={6}>
+                    {details.map(detail => <Text key={detail}>{detail}</Text>)}
+                </VStack>
             </VStack>
         </CustomBox>
     );

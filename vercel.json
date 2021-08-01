@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source":  "/charge-card/(.*)", "destination": "/api/charge-card"},
+    { "source":  "/realtime-graph/(.*)", "destination": "/api/realtime-graph"},
+    { "source":  "/stock-details/(.*)", "destination": "/api/stock-details"},
+    { "source":  "/stock-news/(.*)", "destination": "/api/stock-news"},
+    { "source":  "/stock-prediction/(.*)", "destination": "/api/stock-prediction"}
+  ]
+}

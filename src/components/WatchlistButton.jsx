@@ -1,30 +1,40 @@
-import { IconButton, useColorModeValue } from '@chakra-ui/react';
-import { BsStar, BsStarFill } from 'react-icons/bs';
-import { useState } from 'react';
+import {IconButton} from '@chakra-ui/react';
+import {BsStar, BsStarFill} from 'react-icons/bs';
+import {useEffect, useState} from 'react';
+import {useUser} from "../contexts/useUser";
 
-const WatchlistButton = ({ symbol }) => {
-    const [icon, setIcon] = useState(<BsStar />);
-    const [iconClicked, setIconClicked] = useState(true);
-    const yellowColorScheme = useColorModeValue('yellow', 'orange');
+const WatchlistButton = ({ticker}) => {
+    const [icon, setIcon] = useState(<BsStar/>);
+    const [isWatchlisted, setIsWatchlisted] = useState(false);
+    const {addToWatchlist, removeFromWatchlist, watchlist, user} = useUser();
+
+    useEffect(() => {
+        const tickers = []
+        watchlist.forEach(({ticker}) => tickers.push(ticker))
+        if (tickers.includes(ticker)) {
+            setIcon(<BsStarFill/>)
+            setIsWatchlisted(true)
+        }
+    }, [watchlist]);
 
     const handleClick = () => {
-        if (iconClicked) {
-            // Add to watchlist
-            setIcon(<BsStarFill />);
-            setIconClicked(!iconClicked);
-            console.log('Added stock to watchlist: ', { symbol });
+        if (!user) return // TODO: trigger sign in popup
+
+        if (isWatchlisted) {
+            setIcon(<BsStar/>);
+            removeFromWatchlist(ticker)
         } else {
-            // Remove from watchlist
-            setIcon(<BsStar />);
-            setIconClicked(!iconClicked);
-            console.log('Removed stock from watchlist: ', { symbol });
+            setIcon(<BsStarFill/>);
+            addToWatchlist(ticker)
         }
+        setIsWatchlisted(!isWatchlisted);
     };
 
     return (
         <IconButton
+            aria-label='watchlist-button'
             icon={icon}
-            colorScheme={yellowColorScheme}
+            colorScheme='yellow'
             variant='ghost'
             onClick={handleClick}
         />

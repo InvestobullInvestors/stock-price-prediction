@@ -1,59 +1,22 @@
-import {
-    HStack,
-    InputGroup,
-    InputLeftElement,
-    Input,
-    Box,
-    useColorModeValue,
-    Button,
-    InputRightElement,
-    Container,
-} from '@chakra-ui/react';
-import { GoSearch } from 'react-icons/go';
-import React, { useState } from 'react';
+import React from "react";
+import {CloseIcon, SearchIcon} from "@chakra-ui/icons";
+import {Input, InputGroup, InputLeftElement, InputRightElement, useColorModeValue} from "@chakra-ui/react";
 
-const StockSearchBar = () => {
-    const boxColor = useColorModeValue('brand.100', 'brand.700');
-    const [value, setValue] = useState('');
-    const color = useColorModeValue('blue', 'gray');
 
-    const handleChange = (event) => setValue(event.target.value);
+const StockSearchBar = ({handleChange, handleCancel, keyword: {filterKeyword}}) => {
+    const color = useColorModeValue('brand.400', 'brand.600')
 
     return (
-        <Box
-            mx={3}
-            mt={5}
-            px={4}
-            py={10}
-            borderRadius='lg'
-            shadow='md'
-            bg={boxColor}
-        >
-            <HStack>
-                <Container centerContent maxW='container.lg'>
-                    <InputGroup>
-                        <InputLeftElement pointerEvents='none' />
-                        <Input
-                            value={value}
-                            onChange={handleChange}
-                            placeholder='Search for symbol'
-                        />
-                        <InputRightElement width='5rem'>
-                            <Button
-                                h='1.75rem'
-                                size='lg'
-                                variant='solid'
-                                colorScheme={color}
-                                onClick={() => {}}
-                            >
-                                {<GoSearch color='white' />}
-                            </Button>
-                        </InputRightElement>
-                    </InputGroup>
-                </Container>
-            </HStack>
-        </Box>
-    );
-};
+        <InputGroup w="sm" borderRadius='lg' border='1px' borderColor={color}>
+            <InputLeftElement pointerEvents="none">
+                <SearchIcon color={color}/>
+            </InputLeftElement>
+            <Input placeholder="Stock Ticker" onChange={handleChange} value={filterKeyword}/>
+            <InputRightElement>
+                <CloseIcon color={color} _hover={{cursor: 'pointer'}} onClick={handleCancel}/>
+            </InputRightElement>
+        </InputGroup>
+    )
+}
 
 export default StockSearchBar;
