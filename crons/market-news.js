@@ -21,7 +21,7 @@ cron.schedule(
                             source: name,
                             stock_news: articles,
                         });
-                        newsInfo.save().then((_) => {
+                        newsInfo.save().then(() => {
                             console.log("Save successful");
                         });
                     } else {
@@ -32,7 +32,7 @@ cron.schedule(
                                     stock_news: articles,
                                 }
                             )
-                            .then((_) => {
+                            .then(() => {
                                 console.log("Update successful");
                             });
                     }
