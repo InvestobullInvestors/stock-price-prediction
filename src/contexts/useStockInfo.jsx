@@ -62,11 +62,13 @@ const StockInfoProvider = ({children}) => {
         })
     }
 
-    const sortStocks = (table_header_key) => {
+    const sortStocks = (stock_list, table_header_key, setInfo) => {
+        const ticker_list = stock_list.map(({ticker_id}) => ticker_id)
         axios.post('/stock-details/sort-stocks', JSON.stringify({
+            ticker_list,
             table_header_key
         }), {headers: {'Content-Type': 'application/json'}}).then(response => {
-            setBasicStockInfo(response.data)
+            setInfo(response.data)
         })
     }
 
@@ -79,6 +81,8 @@ const StockInfoProvider = ({children}) => {
             graphData,
             basicStockInfo,
             watchlistStockInfo,
+            setBasicStockInfo,
+            setWatchlistStockInfo,
             getWatchlistStockInfo,
             setRealtimeDetails,
             setQuarterlyDetails,
