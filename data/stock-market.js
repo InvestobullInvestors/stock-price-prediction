@@ -50,7 +50,7 @@ for (const data of MARKET_DATA) {
                         stocks: stocks,
                     }
                 )
-                .then((_) => {
+                .then(() => {
                     console.log("Update successful");
                     process.exit(1);
                 });

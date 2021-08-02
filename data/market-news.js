@@ -43,7 +43,7 @@ for (const data of MARKET_NEWS) {
                         news_sources: news_sources,
                     }
                 )
-                .then((_) => {
+                .then(() => {
                     console.log("Update successful");
                 });
         }
