@@ -21,7 +21,7 @@ router.get("/stock-prediction/:ticker", function (req, res) {
             );
             res.send(details.length === 1 ? details[0] : defaultPredictions);
         })
-        .catch((_) => {
+        .catch(() => {
             res.send(defaultPredictions);
         });
 });
