@@ -1,22 +1,25 @@
-import {CardElement} from "@stripe/react-stripe-js";
-import {chargeCard} from "../services/paymentService";
+import { CardElement } from "@stripe/react-stripe-js";
+import { chargeCard } from "../services/paymentService";
 
 const useHandlePayment = (payableAmount, stripe, elements, callback) => {
-    return (async (event) => {
+    return async (event) => {
         event.preventDefault();
         try {
-            const {error, paymentMethod: {id}} = await stripe.createPaymentMethod({
+            const {
+                error,
+                paymentMethod: { id },
+            } = await stripe.createPaymentMethod({
                 type: "card",
-                card: elements.getElement(CardElement)
-            })
+                card: elements.getElement(CardElement),
+            });
             if (!error) {
                 const status = await chargeCard(id, payableAmount);
-                callback(status)
+                callback(status);
             }
-        } catch ({message}) {
-            console.log(message)
+        } catch ({ message }) {
+            console.log(message);
         }
-    })
-}
+    };
+};
 
 export default useHandlePayment;
