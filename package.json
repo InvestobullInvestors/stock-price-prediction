@@ -78,11 +78,5 @@
     "newsapi": "^2.4.1",
     "node-cron": "^3.0.0",
     "stripe": "^8.156.0"
-  },
-  "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 4,
-    "semi": true,
-    "singleQuote": false
   }
 }
