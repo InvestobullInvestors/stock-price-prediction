@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
     Avatar,
     Button,
@@ -14,48 +14,73 @@ import {
     ModalHeader,
     ModalOverlay,
     Text,
-    useDisclosure
+    useDisclosure,
 } from "@chakra-ui/react";
-import {useUser} from "../../contexts/useUser";
-import {Link} from "react-router-dom";
+import { useUser } from "../../contexts/useUser";
+import { Link } from "react-router-dom";
 
 const UserProfilePopup = () => {
-    const {user} = useUser()
-    const {isOpen, onOpen, onClose} = useDisclosure()
+    const { user } = useUser();
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
         <>
-            <MenuItem onClick={onOpen} fontWeight="bold" isTruncated>{user.displayName}</MenuItem>
+            <MenuItem onClick={onOpen} fontWeight="bold" isTruncated>
+                {user.displayName}
+            </MenuItem>
 
             <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay/>
+                <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>
                         <Text>User Profile</Text>
                     </ModalHeader>
                     <ModalBody>
                         <HStack>
-                            <Avatar size="lg" name={user.displayName} src={user.photoURL} m={4}/>
-                            <Grid templateColumns="repeat(4, 1fr)" h={36} gap={4}>
-                                <GridItem colSpan={1}><Text fontWeight="bold">Name:</Text></GridItem>
-                                <GridItem colSpan={3}>{user.displayName}</GridItem>
-                                <GridItem colSpan={1}><Text fontWeight="bold">Email:</Text></GridItem>
+                            <Avatar
+                                size="lg"
+                                name={user.displayName}
+                                src={user.photoURL}
+                                m={4}
+                            />
+                            <Grid
+                                templateColumns="repeat(4, 1fr)"
+                                h={36}
+                                gap={4}
+                            >
+                                <GridItem colSpan={1}>
+                                    <Text fontWeight="bold">Name:</Text>
+                                </GridItem>
+                                <GridItem colSpan={3}>
+                                    {user.displayName}
+                                </GridItem>
+                                <GridItem colSpan={1}>
+                                    <Text fontWeight="bold">Email:</Text>
+                                </GridItem>
                                 <GridItem colSpan={3}>{user.email}</GridItem>
-                                <GridItem colSpan={1}><Text fontWeight="bold">Plan:</Text></GridItem>
+                                <GridItem colSpan={1}>
+                                    <Text fontWeight="bold">Plan:</Text>
+                                </GridItem>
                                 <GridItem colSpan={3}>{user.plan}</GridItem>
-                                <GridItem colSpan={1}><Text fontWeight="bold">Expiry:</Text></GridItem>
-                                <GridItem colSpan={3}>{user.plan_expiry ? user.plan_expiry : "-"}</GridItem>
+                                <GridItem colSpan={1}>
+                                    <Text fontWeight="bold">Expiry:</Text>
+                                </GridItem>
+                                <GridItem colSpan={3}>
+                                    {user.plan_expiry ? user.plan_expiry : "-"}
+                                </GridItem>
                             </Grid>
                         </HStack>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={onClose} as={Link} to="/plans">Upgrade Account</Button>
+                        <Button onClick={onClose} as={Link} to="/plans">
+                            Upgrade Account
+                        </Button>
                     </ModalFooter>
-                    <ModalCloseButton/>
+                    <ModalCloseButton />
                 </ModalContent>
             </Modal>
         </>
-    )
-}
+    );
+};
 
 export default UserProfilePopup;
