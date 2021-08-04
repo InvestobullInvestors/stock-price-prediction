@@ -1,12 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import firebase from "firebase";
-import { auth, firestore } from "../auth/firebase.jsx";
-import { useUser } from "./useUser";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import firebase from 'firebase';
+import { auth, firestore } from '../auth/firebase.jsx';
+import { useUser } from './useUser';
 
-const USERS = firestore.collection("users");
-const NEWS = "news";
-const NOTIFICATIONS = "notifications";
-const WATCHLIST = "watchlist";
+const USERS = firestore.collection('users');
+const NEWS = 'news';
+const NOTIFICATIONS = 'notifications';
+const WATCHLIST = 'watchlist';
 
 const AuthContext = createContext({});
 
@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
         return auth
             .createUserWithEmailAndPassword(email, password)
             .then((credentials) =>
-                createUser(credentials.user.uid, displayName, email, "")
+                createUser(credentials.user.uid, displayName, email, '')
             );
     };
 
@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
         const currentUser = USERS.doc(uid);
 
         const welcomeMessage = {
-            text: "Welcome to InvestoBull",
+            text: 'Welcome to InvestoBull',
             viewed: false,
             timestamp: Date.now(),
         };
@@ -37,9 +37,9 @@ const AuthProvider = ({ children }) => {
             displayName: displayName,
             email: email,
             photoURL: photoURL,
-            plan: "Basic",
+            plan: 'Basic',
             plan_expiry: null,
-            stripe_id: "",
+            stripe_id: '',
         });
 
         await currentUser.collection(NEWS).add({});
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
     };
 
     const uiConfig = {
-        signInFlow: "popup",
+        signInFlow: 'popup',
         signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
         callbacks: {
             signInSuccessWithAuthResult: async (authResult) => {

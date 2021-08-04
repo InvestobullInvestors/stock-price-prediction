@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import PageTemplate from "../components/PageTemplate/PageTemplate";
-import CustomHeading from "../components/CustomHeading";
-import { VStack } from "@chakra-ui/react";
-import StockSearchBar from "../components/StockTable/StockSearchBar";
-import StockInfoTable from "../components/StockTable/StockInfoTable";
-import { useStockSymbol } from "../contexts/useStockInfo";
+import React, { useState } from 'react';
+import PageTemplate from '../components/PageTemplate/PageTemplate';
+import CustomHeading from '../components/CustomHeading';
+import { VStack } from '@chakra-ui/react';
+import StockSearchBar from '../components/StockTable/StockSearchBar';
+import StockInfoTable from '../components/StockTable/StockInfoTable';
+import { useStockSymbol } from '../contexts/useStockInfo';
 
 const Home = () => {
     const { basicStockInfo, filterStocks, sortStocks, setBasicStockInfo } =
@@ -23,8 +23,8 @@ const Home = () => {
 
     const handleCancel = (event) => {
         event.preventDefault();
-        setFilterKeyword("");
-        filterStocks("");
+        setFilterKeyword('');
+        filterStocks('');
     };
 
     return (

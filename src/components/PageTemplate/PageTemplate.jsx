@@ -1,11 +1,11 @@
-import React from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import { Box, Container, Divider, useColorModeValue } from "@chakra-ui/react";
+import React from 'react';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import { Box, Container, Divider, useColorModeValue } from '@chakra-ui/react';
 
 const PageTemplate = ({ children, ...props }) => (
     <Box
-        bgColor={useColorModeValue("brand.50", "brand.800")}
+        bgColor={useColorModeValue('brand.50', 'brand.800')}
         minH="100vH"
         {...props}
     >

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 mongoose.connect(process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING, {
     useNewUrlParser: true,
@@ -15,10 +15,10 @@ const stockMarketSchema = new Schema(
             ticker: String,
         }),
     },
-    { collection: "StockMarket" }
+    { collection: 'StockMarket' }
 );
 
-exports.stockMarketInfo = mongoose.model("StockMarket", stockMarketSchema);
+exports.stockMarketInfo = mongoose.model('StockMarket', stockMarketSchema);
 
 const realtimeStockInfoSchema = new Schema(
     {
@@ -36,11 +36,11 @@ const realtimeStockInfoSchema = new Schema(
             volume: Number,
         },
     },
-    { collection: "RealtimeStockInfo" }
+    { collection: 'RealtimeStockInfo' }
 );
 
 exports.realtimeStockInfo = mongoose.model(
-    "RealtimeStockInfo",
+    'RealtimeStockInfo',
     realtimeStockInfoSchema
 );
 
@@ -57,11 +57,11 @@ const predictedStockInfoSchema = new Schema(
             volume_traded: Number,
         },
     },
-    { collection: "PredictedStockInfo" }
+    { collection: 'PredictedStockInfo' }
 );
 
 exports.predictedStockInfo = mongoose.model(
-    "PredictedStockInfo",
+    'PredictedStockInfo',
     predictedStockInfoSchema
 );
 
@@ -90,11 +90,11 @@ const quarterlyStockInfoSchema = new Schema(
             shares_short: Number | null,
         },
     },
-    { collection: "QuarterlyStockInfo" }
+    { collection: 'QuarterlyStockInfo' }
 );
 
 exports.quarterlyStockInfo = mongoose.model(
-    "QuarterlyStockInfo",
+    'QuarterlyStockInfo',
     quarterlyStockInfoSchema
 );
 
@@ -114,10 +114,10 @@ const dailyGraphInfoSchema = new Schema(
             volume: Number,
         }),
     },
-    { collection: "DailyGraphInfo" }
+    { collection: 'DailyGraphInfo' }
 );
 
-exports.dailyGraphInfo = mongoose.model("DailyGraphInfo", dailyGraphInfoSchema);
+exports.dailyGraphInfo = mongoose.model('DailyGraphInfo', dailyGraphInfoSchema);
 
 const stockNewsListSchema = new Schema(
     {
@@ -127,10 +127,10 @@ const stockNewsListSchema = new Schema(
             name: String,
         }),
     },
-    { collection: "StockNewsList" }
+    { collection: 'StockNewsList' }
 );
 
-exports.stockNewsList = mongoose.model("StockNewsList", stockNewsListSchema);
+exports.stockNewsList = mongoose.model('StockNewsList', stockNewsListSchema);
 
 const newsSourceInfoSchema = new Schema(
     {
@@ -146,10 +146,10 @@ const newsSourceInfoSchema = new Schema(
             content: String,
         }),
     },
-    { collection: "NewsSourceInfo" }
+    { collection: 'NewsSourceInfo' }
 );
 
-exports.newsSourceInfo = mongoose.model("NewsSourceInfo", newsSourceInfoSchema);
+exports.newsSourceInfo = mongoose.model('NewsSourceInfo', newsSourceInfoSchema);
 
 const stockNewsInfoSchema = new Schema(
     {
@@ -169,10 +169,10 @@ const stockNewsInfoSchema = new Schema(
             content: String,
         }),
     },
-    { collection: "StockNewsInfo" }
+    { collection: 'StockNewsInfo' }
 );
 
-exports.stockNewsInfo = mongoose.model("StockNewsInfo", stockNewsInfoSchema);
+exports.stockNewsInfo = mongoose.model('StockNewsInfo', stockNewsInfoSchema);
 
 const newsMasterlistSchema = new Schema(
     {
@@ -183,7 +183,7 @@ const newsMasterlistSchema = new Schema(
             src: String,
         }),
     },
-    { collection: "NewsMasterlist" }
+    { collection: 'NewsMasterlist' }
 );
 
-exports.newsMasterlist = mongoose.model("NewsMasterlist", newsMasterlistSchema);
+exports.newsMasterlist = mongoose.model('NewsMasterlist', newsMasterlistSchema);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
     Alert,
     AlertIcon,
@@ -8,23 +8,23 @@ import {
     FormLabel,
     Input,
     Link,
-} from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { useAuth } from "../../contexts/useAuth";
+} from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
+import { useAuth } from '../../contexts/useAuth';
 
 const ResetPasswordPopup = ({ setMode }) => {
     const { register, handleSubmit, formState } = useForm();
     const { resetPassword } = useAuth();
 
-    const [message, setMessage] = useState("");
-    const [error, setError] = useState("");
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
     const onSubmit = async ({ email }) => {
         try {
-            setMessage("");
-            setError("");
+            setMessage('');
+            setError('');
             await resetPassword(email);
-            setMessage("Check your inbox for further instructions.");
+            setMessage('Check your inbox for further instructions.');
         } catch (err) {
             return setError(err.message);
         }
@@ -49,7 +49,7 @@ const ResetPasswordPopup = ({ setMode }) => {
                 <Input
                     type="email"
                     placeholder="email@domain.com"
-                    {...register("email", { required: true })}
+                    {...register('email', { required: true })}
                 />
             </FormControl>
             <Button isLoading={formState.isSubmitting} type="submit">
@@ -59,7 +59,7 @@ const ResetPasswordPopup = ({ setMode }) => {
                 <Link
                     fontSize="sm"
                     as="button"
-                    onClick={() => setMode("login")}
+                    onClick={() => setMode('login')}
                     m={3}
                 >
                     Back to Login

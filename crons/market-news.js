@@ -1,13 +1,13 @@
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
 dotenv.config();
-const NewsAPI = require("newsapi");
+const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
-const cron = require("node-cron");
-const { newsSourceInfo, stockNewsList } = require("../dal/stock-markets");
+const cron = require('node-cron');
+const { newsSourceInfo, stockNewsList } = require('../dal/stock-markets');
 
 cron.schedule(
-    "0 30 1 * * *",
+    '0 30 1 * * *',
     async () => {
         const stockNewsInfo = await stockNewsList.find({});
         for (const { news_sources } of stockNewsInfo) {
@@ -22,7 +22,7 @@ cron.schedule(
                             stock_news: articles,
                         });
                         newsInfo.save().then(() => {
-                            console.log("Save successful");
+                            console.log('Save successful');
                         });
                     } else {
                         newsSourceInfo
@@ -33,7 +33,7 @@ cron.schedule(
                                 }
                             )
                             .then(() => {
-                                console.log("Update successful");
+                                console.log('Update successful');
                             });
                     }
                 });
@@ -47,5 +47,5 @@ cron.schedule(
 const getNewsFromApi = async (id) =>
     await newsapi.v2.topHeadlines({
         sources: `${id}`,
-        language: "en",
+        language: 'en',
     });

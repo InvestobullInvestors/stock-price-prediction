@@ -1,32 +1,32 @@
-const { stockMarketInfo } = require("../dal/stock-markets");
+const { stockMarketInfo } = require('../dal/stock-markets');
 
 const MARKET_DATA = [
     {
-        market_name: "Nasdaq",
+        market_name: 'Nasdaq',
         stocks: [
             {
-                ticker: "TSLA",
-                name: "Tesla",
+                ticker: 'TSLA',
+                name: 'Tesla',
             },
             {
-                ticker: "AMZN",
-                name: "Amazon",
+                ticker: 'AMZN',
+                name: 'Amazon',
             },
             {
-                ticker: "GOOGL",
-                name: "Google",
+                ticker: 'GOOGL',
+                name: 'Google',
             },
             {
-                ticker: "FB",
-                name: "Facebook",
+                ticker: 'FB',
+                name: 'Facebook',
             },
             {
-                ticker: "TWTR",
-                name: "Twitter",
+                ticker: 'TWTR',
+                name: 'Twitter',
             },
             {
-                ticker: "UBER",
-                name: "Uber",
+                ticker: 'UBER',
+                name: 'Uber',
             },
         ],
     },
@@ -51,7 +51,7 @@ for (const data of MARKET_DATA) {
                     }
                 )
                 .then(() => {
-                    console.log("Update successful");
+                    console.log('Update successful');
                     process.exit(1);
                 });
         }

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Box,
     Heading,
@@ -12,8 +12,8 @@ import {
     SliderThumb,
     SliderTrack,
     VStack,
-} from "@chakra-ui/react";
-import { MdGraphicEq } from "react-icons/all";
+} from '@chakra-ui/react';
+import { MdGraphicEq } from 'react-icons/all';
 
 const PredictionSlider = ({ value, tag, ...otherProps }) => {
     let predictedVal = 0;

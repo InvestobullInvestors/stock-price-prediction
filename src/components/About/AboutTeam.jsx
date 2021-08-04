@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Avatar,
     Divider,
@@ -6,8 +6,8 @@ import {
     SimpleGrid,
     Text,
     VStack,
-} from "@chakra-ui/react";
-import CustomBox from "../CustomBox";
+} from '@chakra-ui/react';
+import CustomBox from '../CustomBox';
 
 const TeamMemberCard = ({ name, imageUrl, title, summary, ...otherProps }) => (
     <CustomBox {...otherProps}>

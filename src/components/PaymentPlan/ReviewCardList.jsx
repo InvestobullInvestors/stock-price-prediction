@@ -1,6 +1,6 @@
-import React from "react";
-import { SimpleGrid } from "@chakra-ui/react";
-import ReviewCard from "./ReviewCard";
+import React from 'react';
+import { SimpleGrid } from '@chakra-ui/react';
+import ReviewCard from './ReviewCard';
 
 const ReviewCardList = () => (
     <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing={3}>

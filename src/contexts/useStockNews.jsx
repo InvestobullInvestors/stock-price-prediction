@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
-import axios from "axios";
+import React, { createContext, useContext, useState } from 'react';
+import axios from 'axios';
 
 const StockNewsContext = createContext({});
 
@@ -15,37 +15,37 @@ const StockNewsProvider = ({ children }) => {
     };
 
     const setNewsSelectionsFromFirebase = () => {
-        axios.get("/stock-news/newsSourceList").then((response) => {
+        axios.get('/stock-news/newsSourceList').then((response) => {
             setNewsSelections(response.data);
         });
     };
 
     const setNewsInfoFromMongo = () => {
-        axios.get("/stock-news/newsSourceInfo").then((response) => {
+        axios.get('/stock-news/newsSourceInfo').then((response) => {
             setNewsInfo(response.data);
         });
     };
 
     const reorderNews = (sources) => {
-        axios.post("/stock-news/reorderNews", { sources }).then((response) => {
+        axios.post('/stock-news/reorderNews', { sources }).then((response) => {
             setNewsSelections(response.data);
         });
     };
 
     const selectSource = (source) => {
-        axios.post("/stock-news/selectSource", { source }).then((response) => {
+        axios.post('/stock-news/selectSource', { source }).then((response) => {
             setNewsSelections(response.data);
         });
     };
 
     const selectAllSources = () => {
-        axios.post("/stock-news/selectAllSources").then((response) => {
+        axios.post('/stock-news/selectAllSources').then((response) => {
             setNewsSelections(response.data);
         });
     };
 
     const unselectAllSources = () => {
-        axios.post("/stock-news/unselectAllSources").then((response) => {
+        axios.post('/stock-news/unselectAllSources').then((response) => {
             setNewsSelections(response.data);
         });
     };

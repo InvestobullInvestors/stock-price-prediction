@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
     Alert,
     AlertIcon,
@@ -9,27 +9,27 @@ import {
     Input,
     InputRightElement,
     Link,
-} from "@chakra-ui/react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { useForm } from "react-hook-form";
-import { useAuth } from "../../contexts/useAuth";
-import { StyledFirebaseAuth } from "react-firebaseui";
-import { auth } from "../../auth/firebase";
+} from '@chakra-ui/react';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { useForm } from 'react-hook-form';
+import { useAuth } from '../../contexts/useAuth';
+import { StyledFirebaseAuth } from 'react-firebaseui';
+import { auth } from '../../auth/firebase';
 
 const LoginForm = ({ setMode }) => {
     const { register, handleSubmit, formState } = useForm();
     const { login, uiConfig } = useAuth();
 
     const [showPW, setShowPW] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState('');
 
     const onSubmit = async ({ email, password }) => {
         try {
-            setError("");
+            setError('');
             await login(email, password);
         } catch {
             // for security reasons, we don't expose why the login failed
-            return setError("Failed to log in");
+            return setError('Failed to log in');
         }
     };
 
@@ -46,15 +46,15 @@ const LoginForm = ({ setMode }) => {
                 <Input
                     type="email"
                     placeholder="email@domain.com"
-                    {...register("email", { required: true })}
+                    {...register('email', { required: true })}
                 />
             </FormControl>
             <FormControl id="password" isRequired mb={4}>
                 <FormLabel>Password</FormLabel>
                 <Input
-                    type={showPW ? "text" : "password"}
+                    type={showPW ? 'text' : 'password'}
                     placeholder="password"
-                    {...register("password", { required: true })}
+                    {...register('password', { required: true })}
                 />
                 <InputRightElement bottom={-8}>
                     <Button onClick={() => setShowPW(!showPW)}>
@@ -69,7 +69,7 @@ const LoginForm = ({ setMode }) => {
                 <Link
                     fontSize="sm"
                     as="button"
-                    onClick={() => setMode("resetPassword")}
+                    onClick={() => setMode('resetPassword')}
                     m={3}
                 >
                     Forgot Password?

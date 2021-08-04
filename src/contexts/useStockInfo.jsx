@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 
 const StockInfoContext = createContext({});
 
@@ -9,8 +9,8 @@ const StockInfoProvider = ({ children }) => {
     const [stockDetails, setStockDetails] = useState({});
     const [realtimeStockDetails, setRealtimeStockDetails] = useState({});
     const [quarterlyStockDetails, setQuarterlyStockDetails] = useState({});
-    const [stockName, setStockName] = useState("");
-    const [graphData, setGraphData] = useState("");
+    const [stockName, setStockName] = useState('');
+    const [graphData, setGraphData] = useState('');
 
     useEffect(() => {
         axios.get(`/stock-details/`).then((response) => {
@@ -19,7 +19,7 @@ const StockInfoProvider = ({ children }) => {
     }, []);
 
     const getWatchlistStockInfo = (watchlist) => {
-        const tickerString = watchlist.join("-");
+        const tickerString = watchlist.join('-');
         if (!tickerString) return setWatchlistStockInfo([]);
 
         axios.get(`/stock-details/${tickerString}`).then((response) => {
@@ -58,11 +58,11 @@ const StockInfoProvider = ({ children }) => {
     const filterStocks = (key_word) => {
         axios
             .post(
-                "/stock-details/filter-stocks",
+                '/stock-details/filter-stocks',
                 JSON.stringify({
                     key_word,
                 }),
-                { headers: { "Content-Type": "application/json" } }
+                { headers: { 'Content-Type': 'application/json' } }
             )
             .then((response) => {
                 setBasicStockInfo(response.data);
@@ -73,12 +73,12 @@ const StockInfoProvider = ({ children }) => {
         const ticker_list = stock_list.map(({ ticker_id }) => ticker_id);
         axios
             .post(
-                "/stock-details/sort-stocks",
+                '/stock-details/sort-stocks',
                 JSON.stringify({
                     ticker_list,
                     table_header_key,
                 }),
-                { headers: { "Content-Type": "application/json" } }
+                { headers: { 'Content-Type': 'application/json' } }
             )
             .then((response) => {
                 setInfo(response.data);

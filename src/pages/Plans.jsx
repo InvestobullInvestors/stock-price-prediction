@@ -1,9 +1,9 @@
-import React from "react";
-import PageTemplate from "../components/PageTemplate/PageTemplate";
-import PaymentPlanList from "../components/PaymentPlan/PaymentPlanList";
-import ReviewCardList from "../components/PaymentPlan/ReviewCardList";
-import CustomHeading from "../components/CustomHeading";
-import { Divider } from "@chakra-ui/react";
+import React from 'react';
+import PageTemplate from '../components/PageTemplate/PageTemplate';
+import PaymentPlanList from '../components/PaymentPlan/PaymentPlanList';
+import ReviewCardList from '../components/PaymentPlan/ReviewCardList';
+import CustomHeading from '../components/CustomHeading';
+import { Divider } from '@chakra-ui/react';
 
 const Plans = () => (
     <PageTemplate>

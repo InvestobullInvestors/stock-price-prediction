@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Avatar,
     Button,
@@ -15,9 +15,9 @@ import {
     ModalOverlay,
     Text,
     useDisclosure,
-} from "@chakra-ui/react";
-import { useUser } from "../../contexts/useUser";
-import { Link } from "react-router-dom";
+} from '@chakra-ui/react';
+import { useUser } from '../../contexts/useUser';
+import { Link } from 'react-router-dom';
 
 const UserProfilePopup = () => {
     const { user } = useUser();
@@ -66,7 +66,7 @@ const UserProfilePopup = () => {
                                     <Text fontWeight="bold">Expiry:</Text>
                                 </GridItem>
                                 <GridItem colSpan={3}>
-                                    {user.plan_expiry ? user.plan_expiry : "-"}
+                                    {user.plan_expiry ? user.plan_expiry : '-'}
                                 </GridItem>
                             </Grid>
                         </HStack>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Box,
     Grid,
@@ -7,9 +7,9 @@ import {
     SimpleGrid,
     useColorModeValue,
     VStack,
-} from "@chakra-ui/react";
-import { usePrediction } from "../../contexts/usePredictions";
-import PredictionSlider from "./PredictionSlider";
+} from '@chakra-ui/react';
+import { usePrediction } from '../../contexts/usePredictions';
+import PredictionSlider from './PredictionSlider';
 
 const CustomGridItem = ({ children, ...otherProps }) => (
     <GridItem
@@ -29,7 +29,7 @@ const CustomContainer = ({ children, ...otherProps }) => (
         p={4}
         w="80%"
         textAlign="center"
-        bgColor={useColorModeValue("brand.300", "brand.600")}
+        bgColor={useColorModeValue('brand.300', 'brand.600')}
         borderRadius="lg"
         {...otherProps}
     >
@@ -44,14 +44,14 @@ const PricePrediction = () => (
             <CustomContainer
                 p={4}
                 w="80%"
-                bgColor={useColorModeValue("brand.300", "brand.600")}
+                bgColor={useColorModeValue('brand.300', 'brand.600')}
                 borderRadius="lg"
             >
                 <VStack spacing={4}>
                     <Box
                         p={4}
                         w="100%"
-                        bgColor={useColorModeValue("brand.100", "brand.500")}
+                        bgColor={useColorModeValue('brand.100', 'brand.500')}
                         borderRadius="lg"
                     >
                         <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={1}>
@@ -66,7 +66,7 @@ const PricePrediction = () => (
                     <Box
                         p={4}
                         w="100%"
-                        bgColor={useColorModeValue("brand.100", "brand.500")}
+                        bgColor={useColorModeValue('brand.100', 'brand.500')}
                         borderRadius="lg"
                     >
                         <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={1}>
@@ -81,7 +81,7 @@ const PricePrediction = () => (
                     <Box
                         p={4}
                         w="100%"
-                        bgColor={useColorModeValue("brand.100", "brand.500")}
+                        bgColor={useColorModeValue('brand.100', 'brand.500')}
                         borderRadius="lg"
                     >
                         <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={1}>
@@ -96,7 +96,7 @@ const PricePrediction = () => (
                     <Box
                         p={4}
                         w="100%"
-                        bgColor={useColorModeValue("brand.100", "brand.500")}
+                        bgColor={useColorModeValue('brand.100', 'brand.500')}
                         borderRadius="lg"
                     >
                         <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={1}>
@@ -135,10 +135,10 @@ const SlidablePredictions = () => {
 const StockPredictionDetails = () => (
     <Grid
         mt={10}
-        templateColumns={{ base: "repeat(3, 1fr)", lg: "repeat(6, 1fr)" }}
+        templateColumns={{ base: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }}
         borderRadius="lg"
         gap={2}
-        bgColor={useColorModeValue("brand.100", "brand.700")}
+        bgColor={useColorModeValue('brand.100', 'brand.700')}
     >
         <PricePrediction />
         <SlidablePredictions />

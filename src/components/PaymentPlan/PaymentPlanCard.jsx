@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Button,
     Heading,
@@ -12,9 +12,9 @@ import {
     useColorModeValue,
     useDisclosure,
     VStack,
-} from "@chakra-ui/react";
-import CreditCardInformation from "../CreditCardInformation";
-import CustomBox from "../CustomBox";
+} from '@chakra-ui/react';
+import CreditCardInformation from '../CreditCardInformation';
+import CustomBox from '../CustomBox';
 
 const PaymentPlanCard = ({
     type,
@@ -36,7 +36,7 @@ const PaymentPlanCard = ({
                                 payableAmount={payableAmount}
                             />
                         ) : (
-                            "Redirecting"
+                            'Redirecting'
                         )}
                     </ModalBody>
                 </ModalContent>
@@ -46,7 +46,7 @@ const PaymentPlanCard = ({
 
     return (
         <CustomBox
-            bg={useColorModeValue("brand.400", "brand.700")}
+            bg={useColorModeValue('brand.400', 'brand.700')}
             {...otherProps}
         >
             <VStack spacing={4}>
