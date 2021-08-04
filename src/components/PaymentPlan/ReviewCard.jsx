@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Text,
     VStack,
@@ -6,9 +6,9 @@ import {
     Avatar,
     Divider,
     useColorModeValue,
-} from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
-import CustomBox from "../CustomBox";
+} from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
+import CustomBox from '../CustomBox';
 
 const StartRatings = ({ rating }) => {
     const ratingStars = [];
@@ -28,7 +28,7 @@ const ReviewCard = ({
 }) => {
     return (
         <CustomBox
-            bg={useColorModeValue("brand.400", "brand.700")}
+            bg={useColorModeValue('brand.400', 'brand.700')}
             {...otherProps}
         >
             <VStack>

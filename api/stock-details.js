@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 const {
     quarterlyStockInfo,
     realtimeStockInfo,
-} = require("../dal/stock-markets");
+} = require('../dal/stock-markets');
 const router = express.Router();
 
 const defaultData = {
@@ -10,7 +10,7 @@ const defaultData = {
 };
 
 /* GET all quarterly stock details. */
-router.get("/stock-details", function (req, res) {
+router.get('/stock-details', function (req, res) {
     quarterlyStockInfo
         .find({})
         .then((stock_info) => {
@@ -41,9 +41,9 @@ router.get("/stock-details", function (req, res) {
 });
 
 /* GET quarterly stock details with string of tickers. */
-router.get("/stock-details/:tickerString", function (req, res) {
+router.get('/stock-details/:tickerString', function (req, res) {
     const { tickerString } = req.params;
-    const tickerArray = tickerString.split("-");
+    const tickerArray = tickerString.split('-');
     quarterlyStockInfo
         .find({ ticker_id: tickerArray })
         .then((stocks) => {
@@ -74,7 +74,7 @@ router.get("/stock-details/:tickerString", function (req, res) {
 });
 
 /* GET realtime stock details. */
-router.get("/stock-details/realtime-data/:ticker", function (req, res) {
+router.get('/stock-details/realtime-data/:ticker', function (req, res) {
     const { ticker } = req.params;
     realtimeStockInfo
         .findOne({ ticker_id: ticker })
@@ -88,7 +88,7 @@ router.get("/stock-details/realtime-data/:ticker", function (req, res) {
 });
 
 /* GET quarterly stock details. */
-router.get("/stock-details/quarterly-data/:ticker", function (req, res) {
+router.get('/stock-details/quarterly-data/:ticker', function (req, res) {
     const { ticker } = req.params;
     quarterlyStockInfo
         .findOne({ ticker_id: ticker })
@@ -102,10 +102,10 @@ router.get("/stock-details/quarterly-data/:ticker", function (req, res) {
 });
 
 /* GET filtered stock details. */
-router.post("/stock-details/filter-stocks", function (req, res) {
+router.post('/stock-details/filter-stocks', function (req, res) {
     const { key_word } = req.body;
     quarterlyStockInfo
-        .find({ ticker_id: { $regex: key_word, $options: "si" } })
+        .find({ ticker_id: { $regex: key_word, $options: 'si' } })
         .then((stock_details) => {
             const result = [];
             for (let stocks of stock_details) {
@@ -134,7 +134,7 @@ router.post("/stock-details/filter-stocks", function (req, res) {
 });
 
 /* GET sorted stock details. */
-router.post("/stock-details/sort-stocks", function (req, res) {
+router.post('/stock-details/sort-stocks', function (req, res) {
     const { ticker_list, table_header_key } = req.body;
     quarterlyStockInfo
         .find({ ticker_id: ticker_list })

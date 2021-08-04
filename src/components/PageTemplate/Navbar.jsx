@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {
     Avatar,
     Button,
@@ -21,19 +21,19 @@ import {
     useColorMode,
     useColorModeValue,
     useDisclosure,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
     BellIcon,
     ChevronDownIcon,
     HamburgerIcon,
     Icon,
-} from "@chakra-ui/icons";
-import { FaMoon, FaSun } from "react-icons/fa";
-import NotificationList from "../NotificationList";
-import LoginSignupPopup from "../LoginSignup/LoginSignupPopup";
-import { useUser } from "../../contexts/useUser";
-import { useAuth } from "../../contexts/useAuth";
-import UserProfilePopup from "./UserProfilePopup";
+} from '@chakra-ui/icons';
+import { FaMoon, FaSun } from 'react-icons/fa';
+import NotificationList from '../NotificationList';
+import LoginSignupPopup from '../LoginSignup/LoginSignupPopup';
+import { useUser } from '../../contexts/useUser';
+import { useAuth } from '../../contexts/useAuth';
+import UserProfilePopup from './UserProfilePopup';
 
 const PADDING = 1;
 const MARGIN = 1;
@@ -43,7 +43,7 @@ const MENU_MAX_WIDTH = 60;
 const Logo = () => (
     <HStack as={Link} to="/" m={MARGIN}>
         <Text
-            display={{ base: "none", sm: "flex" }}
+            display={{ base: 'none', sm: 'flex' }}
             fontSize={24}
             fontWeight={200}
         >
@@ -63,7 +63,7 @@ const NarrowScreenHamburgerMenu = ({ bgColor }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
-        <Flex display={["flex", "flex", "none", "none"]}>
+        <Flex display={['flex', 'flex', 'none', 'none']}>
             <Button onClick={onOpen} bg="transparent" px={PADDING} m={MARGIN}>
                 <HamburgerIcon w={ICON_SIZE} h={ICON_SIZE} />
             </Button>
@@ -105,7 +105,7 @@ const NarrowScreenHamburgerMenu = ({ bgColor }) => {
 };
 
 const WideScreenLinks = () => (
-    <Flex display={["none", "none", "flex", "flex"]}>
+    <Flex display={['none', 'none', 'flex', 'flex']}>
         <CustomButton route="/">Home</CustomButton>
         <CustomButton route="/watchlist">Watchlist</CustomButton>
         <CustomButton route="/news">News</CustomButton>
@@ -192,8 +192,8 @@ const UserMenu = ({ bgColor }) => {
 const Navbar = () => {
     const { user } = useUser();
 
-    const bgColor = useColorModeValue("brand.400", "brand.900");
-    const txtColor = useColorModeValue("brand.900", "brand.100");
+    const bgColor = useColorModeValue('brand.400', 'brand.900');
+    const txtColor = useColorModeValue('brand.900', 'brand.100');
 
     return (
         <Flex
@@ -211,7 +211,7 @@ const Navbar = () => {
                 <WideScreenLinks />
 
                 <Flex flex="1" align="center" justify="flex-end">
-                    {useColorMode().colorMode === "light" ? (
+                    {useColorMode().colorMode === 'light' ? (
                         <ThemeSwitchButton icon={FaMoon} />
                     ) : (
                         <ThemeSwitchButton icon={FaSun} />

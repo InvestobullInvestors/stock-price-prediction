@@ -1,10 +1,10 @@
-import React from "react";
-import { Flex, List, Spacer } from "@chakra-ui/react";
-import NewsCard from "./NewsCard";
+import React from 'react';
+import { Flex, List, Spacer } from '@chakra-ui/react';
+import NewsCard from './NewsCard';
 
-import { useStockNews } from "../../contexts/useStockNews";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { CloseIcon, DragHandleIcon } from "@chakra-ui/icons";
+import { useStockNews } from '../../contexts/useStockNews';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons';
 
 const NewsCardList = () => {
     const { newsSelections } = useStockNews();
@@ -66,7 +66,7 @@ const NewsCardList = () => {
                                                     <div
                                                         {...draggableProvided.dragHandleProps}
                                                         style={{
-                                                            marginTop: "-6px",
+                                                            marginTop: '-6px',
                                                         }}
                                                     >
                                                         <DragHandleIcon
@@ -76,7 +76,7 @@ const NewsCardList = () => {
                                                     </div>
                                                     <Spacer />
                                                     <CloseIcon
-                                                        cursor={"pointer"}
+                                                        cursor={'pointer'}
                                                         onClick={() =>
                                                             selectSource(source)
                                                         }

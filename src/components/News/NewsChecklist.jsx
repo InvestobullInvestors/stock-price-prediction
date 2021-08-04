@@ -1,6 +1,6 @@
-import React from "react";
-import { Button, Checkbox, HStack, VStack } from "@chakra-ui/react";
-import { useStockNews } from "../../contexts/useStockNews";
+import React from 'react';
+import { Button, Checkbox, HStack, VStack } from '@chakra-ui/react';
+import { useStockNews } from '../../contexts/useStockNews';
 
 const NewsChecklist = () => {
     const { newsSelections } = useStockNews();

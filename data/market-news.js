@@ -1,27 +1,27 @@
-const { stockNewsList } = require("../dal/stock-markets");
+const { stockNewsList } = require('../dal/stock-markets');
 const MARKET_NEWS = [
     {
-        country: "USA",
+        country: 'USA',
         news_sources: [
             {
-                id: "bloomberg",
-                name: "Bloomberg",
+                id: 'bloomberg',
+                name: 'Bloomberg',
             },
             {
-                id: "financial-post",
-                name: "Financial Post",
+                id: 'financial-post',
+                name: 'Financial Post',
             },
             {
-                id: "abc-news",
-                name: "ABC News",
+                id: 'abc-news',
+                name: 'ABC News',
             },
             {
-                id: "google-news",
-                name: "Google News",
+                id: 'google-news',
+                name: 'Google News',
             },
             {
-                id: "the-verge",
-                name: "The Verge",
+                id: 'the-verge',
+                name: 'The Verge',
             },
         ],
     },
@@ -44,7 +44,7 @@ for (const data of MARKET_NEWS) {
                     }
                 )
                 .then(() => {
-                    console.log("Update successful");
+                    console.log('Update successful');
                 });
         }
     });

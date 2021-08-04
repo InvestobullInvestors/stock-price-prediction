@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
-import { firestore } from "../auth/firebase.jsx";
+import React, { createContext, useContext, useState } from 'react';
+import { firestore } from '../auth/firebase.jsx';
 
 const UserContext = createContext({});
 
@@ -11,9 +11,9 @@ const UserProvider = ({ children }) => {
     const [paymentDetails, setPaymentDetails] = useState({});
 
     const WATCHLIST = firestore
-        .collection("users")
+        .collection('users')
         .doc(user?.uid)
-        .collection("watchlist");
+        .collection('watchlist');
 
     const addToWatchlist = (ticker) => {
         if (!user) return;

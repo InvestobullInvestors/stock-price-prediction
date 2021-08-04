@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 dotenv.config();
 
 const Schema = mongoose.Schema;
@@ -13,10 +13,10 @@ const stockPredictionSchema = new Schema(
         eps: Number,
         marketCap: Number,
     },
-    { collection: "StockPrediction" }
+    { collection: 'StockPrediction' }
 );
 
 exports.stockPrediction = mongoose.model(
-    "StockPrediction",
+    'StockPrediction',
     stockPredictionSchema
 );

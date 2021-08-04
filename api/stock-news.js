@@ -1,59 +1,59 @@
-const express = require("express");
-const { newsSourceInfo } = require("../dal/stock-markets");
+const express = require('express');
+const { newsSourceInfo } = require('../dal/stock-markets');
 const router = express.Router();
 
-const { stockNewsInfo } = require("../dal/stock-markets");
+const { stockNewsInfo } = require('../dal/stock-markets');
 
 let newsSelections = [
     {
-        id: "0",
-        name: "Bloomberg",
+        id: '0',
+        name: 'Bloomberg',
         selected: true,
     },
     {
-        id: "1",
-        name: "Financial Post",
+        id: '1',
+        name: 'Financial Post',
         selected: true,
     },
     {
-        id: "2",
-        name: "Financial Times",
+        id: '2',
+        name: 'Financial Times',
         selected: true,
     },
     {
-        id: "3",
-        name: "The Economist",
+        id: '3',
+        name: 'The Economist',
         selected: true,
     },
     {
-        id: "4",
-        name: "The Global and Mail",
+        id: '4',
+        name: 'The Global and Mail',
         selected: true,
     },
     {
-        id: "5",
-        name: "The New York Times",
+        id: '5',
+        name: 'The New York Times',
         selected: true,
     },
     {
-        id: "6",
-        name: "The Wall Street Journal",
+        id: '6',
+        name: 'The Wall Street Journal',
         selected: true,
     },
     {
-        id: "7",
-        name: "Time",
+        id: '7',
+        name: 'Time',
         selected: true,
     },
 ];
 
 const defaultNews = {
-    company_name: "",
+    company_name: '',
     news: [],
 };
 
 /* GET news details. */
-router.get("/stock-news/news/:ticker", function (req, res) {
+router.get('/stock-news/news/:ticker', function (req, res) {
     const { ticker } = req.params;
     stockNewsInfo
         .findOne({ ticker_id: ticker })
@@ -70,7 +70,7 @@ router.get("/stock-news/news/:ticker", function (req, res) {
 });
 
 /* GET list of all news sources. */
-router.get("/stock-news/newsSourceList", function (req, res) {
+router.get('/stock-news/newsSourceList', function (req, res) {
     newsSourceInfo
         .find({})
         .then((newsDetails) => {
@@ -92,7 +92,7 @@ router.get("/stock-news/newsSourceList", function (req, res) {
 });
 
 /* GET information from each news source. */
-router.get("/stock-news/newsSourceInfo", function (req, res) {
+router.get('/stock-news/newsSourceInfo', function (req, res) {
     newsSourceInfo
         .find({})
         .then((newsDetails) => {
@@ -113,13 +113,13 @@ router.get("/stock-news/newsSourceInfo", function (req, res) {
         });
 });
 
-router.post("/stock-news/reorderNews", function (req, res) {
+router.post('/stock-news/reorderNews', function (req, res) {
     const { sources } = req.body;
     newsSelections = sources;
     res.send(newsSelections);
 });
 
-router.post("/stock-news/selectSource", function (req, res) {
+router.post('/stock-news/selectSource', function (req, res) {
     const { source } = req.body;
     let selectedSource = newsSelections.find(
         (currSource) => currSource.id === source.id
@@ -128,7 +128,7 @@ router.post("/stock-news/selectSource", function (req, res) {
     res.send(newsSelections);
 });
 
-router.post("/stock-news/selectAllSources", function (req, res) {
+router.post('/stock-news/selectAllSources', function (req, res) {
     newsSelections = newsSelections.map(({ selected, ...rest }) => ({
         ...rest,
         selected: true,
@@ -136,7 +136,7 @@ router.post("/stock-news/selectAllSources", function (req, res) {
     res.send(newsSelections);
 });
 
-router.post("/stock-news/unselectAllSources", function (req, res) {
+router.post('/stock-news/unselectAllSources', function (req, res) {
     newsSelections = newsSelections.map(({ selected, ...rest }) => ({
         ...rest,
         selected: false,

@@ -1,14 +1,14 @@
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
 dotenv.config();
-const { stockMarketInfo, quarterlyStockInfo } = require("../dal/stock-markets");
-const NewsAPI = require("newsapi");
+const { stockMarketInfo, quarterlyStockInfo } = require('../dal/stock-markets');
+const NewsAPI = require('newsapi');
 const stockDataApiKey = new NewsAPI(process.env.STOCK_DATA_API_KEY);
 
-const cron = require("node-cron");
-const axios = require("axios");
+const cron = require('node-cron');
+const axios = require('axios');
 
 cron.schedule(
-    "0 0 0 */15 * *",
+    '0 0 0 */15 * *',
     async () => {
         const doc = await stockMarketInfo.find({});
         for (let market_data of doc) {
@@ -20,32 +20,32 @@ cron.schedule(
                     });
                 const stockDataFromApi = await getStockDataFromApi(stock_data);
                 const quarterly_stock_details = {
-                    industry: stockDataFromApi["Industry"],
-                    currency: stockDataFromApi["Currency"],
-                    pe_ratio: Number(stockDataFromApi["PERatio"]) || null,
-                    peg_ratio: Number(stockDataFromApi["PEGRatio"]) || null,
-                    eps: Number(stockDataFromApi["EPS"]) || null,
+                    industry: stockDataFromApi['Industry'],
+                    currency: stockDataFromApi['Currency'],
+                    pe_ratio: Number(stockDataFromApi['PERatio']) || null,
+                    peg_ratio: Number(stockDataFromApi['PEGRatio']) || null,
+                    eps: Number(stockDataFromApi['EPS']) || null,
                     quarterly_earning_growth:
                         Number(
-                            stockDataFromApi["QuarterlyEarningsGrowthYOY"]
+                            stockDataFromApi['QuarterlyEarningsGrowthYOY']
                         ) || null,
                     quarterly_revenue_growth:
-                        Number(stockDataFromApi["QuarterlyRevenueGrowthYOY"]) ||
+                        Number(stockDataFromApi['QuarterlyRevenueGrowthYOY']) ||
                         null,
-                    beta: Number(stockDataFromApi["Beta"]) || null,
+                    beta: Number(stockDataFromApi['Beta']) || null,
                     fifty_two_week_high:
-                        Number(stockDataFromApi["52WeekHigh"]) || null,
+                        Number(stockDataFromApi['52WeekHigh']) || null,
                     fifty_two_week_low:
-                        Number(stockDataFromApi["52WeekLow"]) || null,
+                        Number(stockDataFromApi['52WeekLow']) || null,
                     dividend_payout_ratio:
-                        Number(stockDataFromApi["PayoutRatio"]) || null,
-                    dividend_date: stockDataFromApi["DividendDate"],
+                        Number(stockDataFromApi['PayoutRatio']) || null,
+                    dividend_date: stockDataFromApi['DividendDate'],
                     shares_outstanding:
-                        Number(stockDataFromApi["SharesOutstanding"]) || null,
+                        Number(stockDataFromApi['SharesOutstanding']) || null,
                     shares_float:
-                        Number(stockDataFromApi["SharesFloat"]) || null,
+                        Number(stockDataFromApi['SharesFloat']) || null,
                     shares_short:
-                        Number(stockDataFromApi["SharesShort"]) || null,
+                        Number(stockDataFromApi['SharesShort']) || null,
                 };
 
                 if (quarterlyStockInfoForTicker) {
@@ -56,7 +56,7 @@ cron.schedule(
                             stock_details: quarterly_stock_details,
                         }
                     );
-                    console.log("Update successful");
+                    console.log('Update successful');
                 } else {
                     const quarterlyStockData = new quarterlyStockInfo({
                         market_name: market_data.market_name,
@@ -67,7 +67,7 @@ cron.schedule(
                         stock_details: quarterly_stock_details,
                     });
                     await quarterlyStockData.save();
-                    console.log("Save successful");
+                    console.log('Save successful');
                 }
             }
         }

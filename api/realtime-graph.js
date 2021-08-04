@@ -1,9 +1,9 @@
-const express = require("express");
-const { dailyGraphInfo } = require("../dal/stock-markets");
+const express = require('express');
+const { dailyGraphInfo } = require('../dal/stock-markets');
 const router = express.Router();
 
 /* GET realtime data. */
-router.get("/realtime-graph/:ticker", function (req, res) {
+router.get('/realtime-graph/:ticker', function (req, res) {
     const { ticker } = req.params;
     dailyGraphInfo
         .findOne({ ticker_id: ticker })
@@ -23,14 +23,14 @@ router.get("/realtime-graph/:ticker", function (req, res) {
                 labels,
                 datasets: [
                     {
-                        label: "Open",
+                        label: 'Open',
                         data: open,
-                        borderColor: "#4BC0C0",
+                        borderColor: '#4BC0C0',
                     },
                     {
-                        label: "Close",
+                        label: 'Close',
                         data: close,
-                        borderColor: "#FFA500",
+                        borderColor: '#FFA500',
                     },
                 ],
             });

@@ -1,5 +1,5 @@
-import React from "react";
-import { useStockSymbol } from "../../contexts/useStockInfo";
+import React from 'react';
+import { useStockSymbol } from '../../contexts/useStockInfo';
 import {
     Box,
     SimpleGrid,
@@ -13,7 +13,7 @@ import {
     Td,
     Tr,
     useColorModeValue,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const StockDataEnclosure = ({ children }) => (
     <Box mx={4}>
@@ -28,7 +28,7 @@ const NumberTd = ({ children }) => (
 );
 
 const formatNumber = (num) =>
-    num?.toLocaleString("en-US", { maximumFractionDigits: 2 });
+    num?.toLocaleString('en-US', { maximumFractionDigits: 2 });
 
 const QuarterlyStockDataContinued = () => {
     const {
@@ -122,8 +122,8 @@ const LivePrice = () => {
     const {
         quarterlyStockDetails: { currency },
     } = useStockSymbol();
-    const redColor = useColorModeValue("red.light", "red.dark");
-    const greenColor = useColorModeValue("green.light", "green.dark");
+    const redColor = useColorModeValue('red.light', 'red.dark');
+    const greenColor = useColorModeValue('green.light', 'green.dark');
 
     return (
         <Tbody>
@@ -167,7 +167,7 @@ const StockInformation = () => (
     <SimpleGrid
         columns={{ base: 1, lg: 3 }}
         spacing={8}
-        bgColor={useColorModeValue("brand.100", "brand.700")}
+        bgColor={useColorModeValue('brand.100', 'brand.700')}
         mt={8}
         p={4}
         borderRadius="lg"

@@ -1,9 +1,9 @@
-import React from "react";
-import PageTemplate from "../components/PageTemplate/PageTemplate";
-import AboutTeam from "../components/About/AboutTeam";
-import CustomHeading from "../components/CustomHeading";
-import { Text } from "@chakra-ui/react";
-import CustomBox from "../components/CustomBox";
+import React from 'react';
+import PageTemplate from '../components/PageTemplate/PageTemplate';
+import AboutTeam from '../components/About/AboutTeam';
+import CustomHeading from '../components/CustomHeading';
+import { Text } from '@chakra-ui/react';
+import CustomBox from '../components/CustomBox';
 
 const AboutInvestobull = () => {
     return (

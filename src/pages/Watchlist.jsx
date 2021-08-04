@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import PageTemplate from "../components/PageTemplate/PageTemplate";
-import CustomHeading from "../components/CustomHeading";
-import { Center } from "@chakra-ui/react";
-import { useUser } from "../contexts/useUser";
-import CustomBox from "../components/CustomBox";
-import StockInfoTable from "../components/StockTable/StockInfoTable";
-import { useStockSymbol } from "../contexts/useStockInfo";
+import React, { useEffect } from 'react';
+import PageTemplate from '../components/PageTemplate/PageTemplate';
+import CustomHeading from '../components/CustomHeading';
+import { Center } from '@chakra-ui/react';
+import { useUser } from '../contexts/useUser';
+import CustomBox from '../components/CustomBox';
+import StockInfoTable from '../components/StockTable/StockInfoTable';
+import { useStockSymbol } from '../contexts/useStockInfo';
 
 const Watchlist = () => {
     const { user, watchlist } = useUser();

@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
+import React, { useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
 import {
     CardElement,
     Elements,
     useElements,
     useStripe,
-} from "@stripe/react-stripe-js";
-import { AlertDialogHeader, Box, Button, Center } from "@chakra-ui/react";
-import useHandlePayment from "../hooks/useHandlePayment";
-import AlertDialogBox from "./AlertDialogBox";
-import { useUser } from "../contexts/useUser";
+} from '@stripe/react-stripe-js';
+import { AlertDialogHeader, Box, Button, Center } from '@chakra-ui/react';
+import useHandlePayment from '../hooks/useHandlePayment';
+import AlertDialogBox from './AlertDialogBox';
+import { useUser } from '../contexts/useUser';
 
 const stripePublicKey = loadStripe(
-    "pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4"
+    'pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4'
 );
 
 const CheckoutForm = ({ payableAmount }) => {
@@ -69,8 +69,8 @@ const CheckoutForm = ({ payableAmount }) => {
             <AlertDialogBox isOpen={isOpen} onClose={onClose}>
                 <AlertDialogHeader fontSize="lg" fontWeight="bold">
                     {paymentSuccessful
-                        ? "Payment Successful"
-                        : "Payment Failed"}
+                        ? 'Payment Successful'
+                        : 'Payment Failed'}
                 </AlertDialogHeader>
             </AlertDialogBox>
         </>

@@ -1,7 +1,7 @@
-import React from "react";
-import { MenuItem, Text } from "@chakra-ui/react";
-import { FaDotCircle } from "react-icons/fa";
-import { useUser } from "../contexts/useUser";
+import React from 'react';
+import { MenuItem, Text } from '@chakra-ui/react';
+import { FaDotCircle } from 'react-icons/fa';
+import { useUser } from '../contexts/useUser';
 
 const NotificationList = () => {
     const { notifications } = useUser();
@@ -14,12 +14,12 @@ const NotificationList = () => {
             key={id}
             icon={
                 <FaDotCircle
-                    color={item.viewed ? "transparent" : "brand"}
+                    color={item.viewed ? 'transparent' : 'brand'}
                     size={8}
                 />
             }
         >
-            <Text color={item.viewed ? "brand.500" : "brand"}>{item.text}</Text>
+            <Text color={item.viewed ? 'brand.500' : 'brand'}>{item.text}</Text>
         </MenuItem>
     ));
 };

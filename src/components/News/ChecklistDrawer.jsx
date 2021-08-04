@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Button,
     Drawer,
@@ -7,9 +7,9 @@ import {
     DrawerHeader,
     DrawerOverlay,
     useDisclosure,
-} from "@chakra-ui/react";
-import { BiFilterAlt } from "react-icons/bi";
-import NewsChecklist from "./NewsChecklist";
+} from '@chakra-ui/react';
+import { BiFilterAlt } from 'react-icons/bi';
+import NewsChecklist from './NewsChecklist';
 
 const ChecklistDrawer = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();

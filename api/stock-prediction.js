@@ -1,10 +1,10 @@
-const express = require("express");
-const { stockPrediction } = require("../dal/stock-prediction");
+const express = require('express');
+const { stockPrediction } = require('../dal/stock-prediction');
 const router = express.Router();
 
 const defaultPredictions = {
-    company_name: "",
-    ticker: "",
+    company_name: '',
+    ticker: '',
     inflation: 0,
     revenueGrowth: 0,
     eps: 0,
@@ -12,7 +12,7 @@ const defaultPredictions = {
 };
 
 /* GET prediction details. */
-router.get("/stock-prediction/:ticker", function (req, res) {
+router.get('/stock-prediction/:ticker', function (req, res) {
     stockPrediction
         .find()
         .then((stockList) => {

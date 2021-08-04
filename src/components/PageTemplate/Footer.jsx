@@ -1,8 +1,8 @@
-import React from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
-import { Flex, Link, Text } from "@chakra-ui/react";
-import { Icon } from "@chakra-ui/icons";
-import { FaGithub, FaFacebookSquare, FaEnvelope } from "react-icons/fa";
+import React from 'react';
+import { Link as ReactRouterLink } from 'react-router-dom';
+import { Flex, Link, Text } from '@chakra-ui/react';
+import { Icon } from '@chakra-ui/icons';
+import { FaGithub, FaFacebookSquare, FaEnvelope } from 'react-icons/fa';
 
 const MARGIN = 2;
 
@@ -12,7 +12,7 @@ const CustomLink = ({ children, url }) => (
         isExternal
         p={0}
         bg="transparent"
-        _hover={{ color: "brand.500" }}
+        _hover={{ color: 'brand.500' }}
     >
         {children}
     </Link>

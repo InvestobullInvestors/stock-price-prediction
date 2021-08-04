@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 import {
     Box,
     Divider,
     Heading,
     useColorModeValue,
     VStack,
-} from "@chakra-ui/react";
-import { useStockNews } from "../../contexts/useStockNews";
-import NewsArticle from "../NewsArticle";
+} from '@chakra-ui/react';
+import { useStockNews } from '../../contexts/useStockNews';
+import NewsArticle from '../NewsArticle';
 
 const StockNews = () => {
     const { stockNews } = useStockNews();
@@ -15,7 +15,7 @@ const StockNews = () => {
         <Box
             mt={10}
             pb={8}
-            bgColor={useColorModeValue("brand.100", "brand.700")}
+            bgColor={useColorModeValue('brand.100', 'brand.700')}
             borderRadius="lg"
         >
             <Heading as="h3" size="lg" p={8} textAlign="center">

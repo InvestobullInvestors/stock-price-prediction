@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 
 const PredictionContext = createContext({});
 
@@ -13,19 +13,19 @@ const PredictionProvider = ({ children }) => {
     };
 
     const setInflation = (inflation) => {
-        predictedValue["inflation"] = inflation;
+        predictedValue['inflation'] = inflation;
     };
 
     const setRevenueGrowth = (revenueGrowth) => {
-        predictedValue["revenueGrowth"] = revenueGrowth;
+        predictedValue['revenueGrowth'] = revenueGrowth;
     };
 
     const setEps = (eps) => {
-        predictedValue["eps"] = eps;
+        predictedValue['eps'] = eps;
     };
 
     const setMarketCap = (marketCap) => {
-        predictedValue["marketCap"] = marketCap;
+        predictedValue['marketCap'] = marketCap;
     };
 
     return (

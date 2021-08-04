@@ -1,7 +1,7 @@
-import { IconButton } from "@chakra-ui/react";
-import { BsStar, BsStarFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
-import { useUser } from "../contexts/useUser";
+import { IconButton } from '@chakra-ui/react';
+import { BsStar, BsStarFill } from 'react-icons/bs';
+import { useEffect, useState } from 'react';
+import { useUser } from '../contexts/useUser';
 
 const WatchlistButton = ({ ticker }) => {
     const [icon, setIcon] = useState(<BsStar />);

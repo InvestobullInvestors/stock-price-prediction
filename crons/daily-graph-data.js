@@ -1,15 +1,15 @@
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
 dotenv.config();
-const { stockMarketInfo } = require("../dal/stock-markets");
-const NewsAPI = require("newsapi");
+const { stockMarketInfo } = require('../dal/stock-markets');
+const NewsAPI = require('newsapi');
 const stockDataApiKey = new NewsAPI(process.env.STOCK_DATA_API_KEY);
 
-const cron = require("node-cron");
-const axios = require("axios");
-const { dailyGraphInfo } = require("../dal/stock-markets");
+const cron = require('node-cron');
+const axios = require('axios');
+const { dailyGraphInfo } = require('../dal/stock-markets');
 
 cron.schedule(
-    "0 0 0 * * *",
+    '0 0 0 * * *',
     async () => {
         const doc = await stockMarketInfo.find({});
         for (let market_data of doc) {
@@ -23,7 +23,7 @@ cron.schedule(
                     stock_data
                 );
                 const timeSeriesData =
-                    dailyStockDataFromApi["Time Series (Daily)"];
+                    dailyStockDataFromApi['Time Series (Daily)'];
 
                 const timestamps = Object.keys(timeSeriesData);
                 if (dailyGraphData) {
@@ -34,11 +34,11 @@ cron.schedule(
                         const timeStampData = timeSeriesData[timestamp];
                         stock_details.push({
                             timestamp: timestamp,
-                            open: timeStampData["1. open"],
-                            high: timeStampData["2. high"],
-                            low: timeStampData["3. low"],
-                            close: timeStampData["4. close"],
-                            volume: timeStampData["5. volume"],
+                            open: timeStampData['1. open'],
+                            high: timeStampData['2. high'],
+                            low: timeStampData['3. low'],
+                            close: timeStampData['4. close'],
+                            volume: timeStampData['5. volume'],
                         });
                     });
 
@@ -51,7 +51,7 @@ cron.schedule(
                         stock_details: stock_details,
                     });
                     await dailyStockData.save();
-                    console.log("Save successful");
+                    console.log('Save successful');
                 }
             }
         }

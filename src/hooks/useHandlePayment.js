@@ -1,5 +1,5 @@
-import { CardElement } from "@stripe/react-stripe-js";
-import { chargeCard } from "../services/paymentService";
+import { CardElement } from '@stripe/react-stripe-js';
+import { chargeCard } from '../services/paymentService';
 
 const useHandlePayment = (payableAmount, stripe, elements, callback) => {
     return async (event) => {
@@ -9,7 +9,7 @@ const useHandlePayment = (payableAmount, stripe, elements, callback) => {
                 error,
                 paymentMethod: { id },
             } = await stripe.createPaymentMethod({
-                type: "card",
+                type: 'card',
                 card: elements.getElement(CardElement),
             });
             if (!error) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Box,
     Center,
@@ -9,10 +9,10 @@ import {
     useColorModeValue,
     VStack,
     Flex,
-} from "@chakra-ui/react";
-import { useStockNews } from "../../contexts/useStockNews";
-import NewsArticle from "../NewsArticle";
-import CustomBox from "../CustomBox";
+} from '@chakra-ui/react';
+import { useStockNews } from '../../contexts/useStockNews';
+import NewsArticle from '../NewsArticle';
+import CustomBox from '../CustomBox';
 
 function formatDate(date) {
     let year = parseInt(date.slice(0, 4));
@@ -20,13 +20,13 @@ function formatDate(date) {
     let day = parseInt(date.slice(9, 10));
     let dateObj = new Date(year, month - 1, day);
 
-    let options = { year: "numeric", month: "long", day: "2-digit" };
-    return new Intl.DateTimeFormat("en-US", options).format(dateObj);
+    let options = { year: 'numeric', month: 'long', day: '2-digit' };
+    return new Intl.DateTimeFormat('en-US', options).format(dateObj);
 }
 
 const NewsCard = ({ source, children, ...otherProps }) => {
-    const cardColor = useColorModeValue("brand.400", "brand.700");
-    const textBoxColor = useColorModeValue("brand.100", "brand.600");
+    const cardColor = useColorModeValue('brand.400', 'brand.700');
+    const textBoxColor = useColorModeValue('brand.100', 'brand.600');
 
     const { newsInfo } = useStockNews();
 
@@ -43,17 +43,17 @@ const NewsCard = ({ source, children, ...otherProps }) => {
     if (targetSource) {
         name = targetSource.name;
         articles = targetSource.articles;
-        logoBlack = process.env.PUBLIC_URL + name + ".png";
-        logoWhite = process.env.PUBLIC_URL + name + "_white.png";
+        logoBlack = process.env.PUBLIC_URL + name + '.png';
+        logoWhite = process.env.PUBLIC_URL + name + '_white.png';
     } else {
-        name = "";
+        name = '';
         articles = [];
-        logoBlack = "";
-        logoWhite = "";
+        logoBlack = '';
+        logoWhite = '';
     }
 
-    logoBlack = logoBlack.replace(/\s+/g, "-").toLowerCase();
-    logoWhite = logoWhite.replace(/\s+/g, "-").toLowerCase();
+    logoBlack = logoBlack.replace(/\s+/g, '-').toLowerCase();
+    logoWhite = logoWhite.replace(/\s+/g, '-').toLowerCase();
     logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
@@ -70,11 +70,11 @@ const NewsCard = ({ source, children, ...otherProps }) => {
             {...otherProps}
         >
             {children}
-            <Flex display={["none", "none", "flex", "flex"]} align="flex-start">
+            <Flex display={['none', 'none', 'flex', 'flex']} align="flex-start">
                 <HStack mt="10px" w="full">
                     <Square
-                        w={{ base: "100px", sm: "150px" }}
-                        h={{ base: "100px", sm: "150px" }}
+                        w={{ base: '100px', sm: '150px' }}
+                        h={{ base: '100px', sm: '150px' }}
                         borderRadius="lg"
                         shadow="md"
                         bg={textBoxColor}
@@ -93,10 +93,10 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                         bg={textBoxColor}
                         padding="5px"
                         css={{
-                            margin: "0",
-                            scrollbarWidth: "none",
-                            msOverflowStyle: "none",
-                            overflow: "scroll",
+                            margin: '0',
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                            overflow: 'scroll',
                         }}
                     >
                         <VStack align="flex-start">
@@ -114,7 +114,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                     </Box>
                 </HStack>
             </Flex>
-            <Flex display={["flex", "flex", "none", "none"]} align="flex-start">
+            <Flex display={['flex', 'flex', 'none', 'none']} align="flex-start">
                 <VStack mt="10px" align="center" w="full">
                     <CustomBox
                         w="100px"
@@ -138,10 +138,10 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                         bg={textBoxColor}
                         padding="5px"
                         css={{
-                            margin: "0",
-                            scrollbarWidth: "none",
-                            msOverflowStyle: "none",
-                            overflow: "scroll",
+                            margin: '0',
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                            overflow: 'scroll',
                         }}
                     >
                         <VStack align="flex-start">
