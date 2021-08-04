@@ -1,5 +1,5 @@
-import React from "react";
-import {useStockSymbol} from "../../contexts/useStockInfo";
+import React from 'react';
+import { useStockSymbol } from '../../contexts/useStockInfo';
 import {
     Box,
     SimpleGrid,
@@ -12,24 +12,23 @@ import {
     Tbody,
     Td,
     Tr,
-    useColorModeValue
-} from "@chakra-ui/react";
+    useColorModeValue,
+} from '@chakra-ui/react';
 
-const StockDataEnclosure = ({children}) => (
+const StockDataEnclosure = ({ children }) => (
     <Box mx={4}>
-        <Table>
-            {children}
-        </Table>
+        <Table>{children}</Table>
     </Box>
-)
+);
 
-const NumberTd = ({children}) => (
-    <Td isNumeric fontWeight="bold">{formatNumber(children)}</Td>
-)
+const NumberTd = ({ children }) => (
+    <Td isNumeric fontWeight="bold">
+        {formatNumber(children)}
+    </Td>
+);
 
-const formatNumber = num => (
-    num?.toLocaleString('en-US', {maximumFractionDigits: 2})
-)
+const formatNumber = (num) =>
+    num?.toLocaleString('en-US', { maximumFractionDigits: 2 });
 
 const QuarterlyStockDataContinued = () => {
     const {
@@ -39,9 +38,9 @@ const QuarterlyStockDataContinued = () => {
             dividend_payout_ratio,
             shares_outstanding,
             shares_float,
-            shares_short
-        }
-    } = useStockSymbol()
+            shares_short,
+        },
+    } = useStockSymbol();
 
     return (
         <Tbody>
@@ -70,8 +69,8 @@ const QuarterlyStockDataContinued = () => {
                 <NumberTd>{shares_short}</NumberTd>
             </Tr>
         </Tbody>
-    )
-}
+    );
+};
 
 const QuarterlyStockData = () => {
     const {
@@ -81,9 +80,9 @@ const QuarterlyStockData = () => {
             eps,
             quarterly_earning_growth,
             quarterly_revenue_growth,
-            beta
-        }
-    } = useStockSymbol()
+            beta,
+        },
+    } = useStockSymbol();
 
     return (
         <Tbody>
@@ -112,13 +111,17 @@ const QuarterlyStockData = () => {
                 <NumberTd>{beta}</NumberTd>
             </Tr>
         </Tbody>
-    )
-}
+    );
+};
 
 const LivePrice = () => {
-    const {stockName} = useStockSymbol()
-    const {realtimeStockDetails: {open, high, low, close, volume}} = useStockSymbol()
-    const {quarterlyStockDetails: {currency}} = useStockSymbol()
+    const { stockName } = useStockSymbol();
+    const {
+        realtimeStockDetails: { open, high, low, close, volume },
+    } = useStockSymbol();
+    const {
+        quarterlyStockDetails: { currency },
+    } = useStockSymbol();
     const redColor = useColorModeValue('red.light', 'red.dark');
     const greenColor = useColorModeValue('green.light', 'green.dark');
 
@@ -129,12 +132,13 @@ const LivePrice = () => {
                     <StatGroup>
                         <Stat>
                             <StatLabel fontSize="xl">{stockName}</StatLabel>
-                            <StatNumber mt={2} color={open >= close ? greenColor : redColor}>
+                            <StatNumber
+                                mt={2}
+                                color={open >= close ? greenColor : redColor}
+                            >
                                 {formatNumber(open)}
                             </StatNumber>
-                            <StatHelpText mt={2}>
-                                {currency}
-                            </StatHelpText>
+                            <StatHelpText mt={2}>{currency}</StatHelpText>
                         </Stat>
                     </StatGroup>
                 </Td>
@@ -156,22 +160,28 @@ const LivePrice = () => {
                 <NumberTd>{volume}</NumberTd>
             </Tr>
         </Tbody>
-    )
-}
+    );
+};
 
 const StockInformation = () => (
-    <SimpleGrid columns={{base: 1, lg: 3}} spacing={8} bgColor={useColorModeValue("brand.100", "brand.700")}
-                mt={8} p={4} borderRadius="lg">
+    <SimpleGrid
+        columns={{ base: 1, lg: 3 }}
+        spacing={8}
+        bgColor={useColorModeValue('brand.100', 'brand.700')}
+        mt={8}
+        p={4}
+        borderRadius="lg"
+    >
         <StockDataEnclosure>
-            <LivePrice/>
+            <LivePrice />
         </StockDataEnclosure>
         <StockDataEnclosure>
-            <QuarterlyStockData/>
+            <QuarterlyStockData />
         </StockDataEnclosure>
         <StockDataEnclosure>
-            <QuarterlyStockDataContinued/>
+            <QuarterlyStockDataContinued />
         </StockDataEnclosure>
     </SimpleGrid>
-)
+);
 
 export default StockInformation;
