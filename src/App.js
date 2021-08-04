@@ -1,6 +1,6 @@
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Main from './components/Main';
-import {ChakraProvider, extendTheme} from '@chakra-ui/react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import StockInfoProvider from './contexts/useStockInfo';
 import AuthProvider from './contexts/useAuth';
 import UserProvider from './contexts/useUser';
@@ -9,8 +9,8 @@ import StockNewsProvider from './contexts/useStockNews';
 
 const theme = extendTheme({
     config: {
-        initialColorMode: 'system',
-        useSystemColorMode: true,
+        initialColorMode: 'light',
+        useSystemColorMode: false,
     },
     colors: {
         brand: {
@@ -27,19 +27,19 @@ const theme = extendTheme({
         },
         red: {
             light: '#D6333E',
-            dark: '#E64550'
+            dark: '#E64550',
         },
         green: {
             light: '#00823C',
-            dark: '#12C766'
+            dark: '#12C766',
         },
         blue: {
             light: '#007AFF',
-            dark: '#1489FF'
+            dark: '#1489FF',
         },
         yellow: {
             light: '#F0A800',
-            dark: '#FFC01E'
+            dark: '#FFC01E',
         },
     },
 });
@@ -51,10 +51,10 @@ function App() {
                 <StockInfoProvider>
                     <PredictionProvider>
                         <StockNewsProvider>
-                            <div className='App'>
+                            <div className="App">
                                 <ChakraProvider theme={theme}>
                                     <BrowserRouter>
-                                        <Main/>
+                                        <Main />
                                     </BrowserRouter>
                                 </ChakraProvider>
                             </div>
