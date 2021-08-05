@@ -41,9 +41,8 @@ const QuarterlyStockDataContinued = () => {
             shares_float,
             shares_short,
         },
+        isQuarterlyDataLoading,
     } = useStockSymbol();
-
-    const { isQuarterlyDataLoading } = useStockSymbol();
 
     return (
         <Box>
