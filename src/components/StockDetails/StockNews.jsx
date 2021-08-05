@@ -11,10 +11,13 @@ import NewsArticle from '../NewsArticle';
 import LoadingSpinner from '../LoadingSpinner';
 import CustomBox from '../CustomBox';
 
-const StockNews = () => {
+const StockNews = ({ ...otherProps }) => {
     const { stockNews, isStockNewsLoading } = useStockNews();
     return (
-        <CustomBox bgColor={useColorModeValue('brand.100', 'brand.700')}>
+        <CustomBox
+            bgColor={useColorModeValue('brand.100', 'brand.700')}
+            {...otherProps}
+        >
             <Heading as="h3" size="lg" p={8} textAlign="center">
                 Stock News
             </Heading>

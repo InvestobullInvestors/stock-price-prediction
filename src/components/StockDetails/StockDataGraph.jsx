@@ -5,13 +5,16 @@ import { useStockSymbol } from '../../contexts/useStockInfo';
 import LoadingSpinner from '../LoadingSpinner';
 import CustomBox from '../CustomBox';
 
-const StockDataGraph = () => {
+const StockDataGraph = ({ ...otherProps }) => {
     const { graphData, isStockGraphLoading } = useStockSymbol();
     defaults.color = useColorModeValue('#000', '#FFF');
     defaults.borderColor = useColorModeValue('#CCC', '#555');
 
     return (
-        <CustomBox bgColor={useColorModeValue('brand.100', 'brand.700')}>
+        <CustomBox
+            bgColor={useColorModeValue('brand.100', 'brand.700')}
+            {...otherProps}
+        >
             {isStockGraphLoading ? (
                 <LoadingSpinner />
             ) : (

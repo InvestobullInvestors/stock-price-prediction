@@ -26,10 +26,10 @@ const StockDetails = ({ match }) => {
 
     return (
         <PageTemplate bgColor={useColorModeValue('brand.300', 'brand.800')}>
-            <StockInformation />
-            <StockDataGraph />
-            <StockPredictionDetails />
-            <StockNews />
+            <StockInformation my={16} />
+            <StockDataGraph my={16} />
+            <StockPredictionDetails my={16} />
+            <StockNews my={16} />
         </PageTemplate>
     );
 };
