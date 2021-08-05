@@ -9,16 +9,12 @@ import {
 import { useStockNews } from '../../contexts/useStockNews';
 import NewsArticle from '../NewsArticle';
 import LoadingSpinner from '../LoadingSpinner';
+import CustomBox from '../CustomBox';
 
 const StockNews = () => {
     const { stockNews, isStockNewsLoading } = useStockNews();
     return (
-        <Box
-            mt={10}
-            pb={8}
-            bgColor={useColorModeValue('brand.100', 'brand.700')}
-            borderRadius="lg"
-        >
+        <CustomBox bgColor={useColorModeValue('brand.100', 'brand.700')}>
             <Heading as="h3" size="lg" p={8} textAlign="center">
                 Stock News
             </Heading>
@@ -38,7 +34,7 @@ const StockNews = () => {
                     ))}
                 </VStack>
             )}
-        </Box>
+        </CustomBox>
     );
 };
 

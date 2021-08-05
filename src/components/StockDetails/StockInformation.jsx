@@ -15,12 +15,7 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 import LoadingSpinner from '../LoadingSpinner';
-
-const StockDataEnclosure = ({ children }) => (
-    <Box mx={4}>
-        <Table>{children}</Table>
-    </Box>
-);
+import CustomBox from '../CustomBox';
 
 const NumberTd = ({ children }) => (
     <Td isNumeric fontWeight="bold">
@@ -49,7 +44,7 @@ const QuarterlyStockDataContinued = () => {
             {isQuarterlyDataLoading ? (
                 <LoadingSpinner />
             ) : (
-                <StockDataEnclosure>
+                <Table>
                     <Tbody>
                         <Tr>
                             <Td>52 Weeks High</Td>
@@ -76,7 +71,7 @@ const QuarterlyStockDataContinued = () => {
                             <NumberTd>{shares_short}</NumberTd>
                         </Tr>
                     </Tbody>
-                </StockDataEnclosure>
+                </Table>
             )}
         </Box>
     );
@@ -101,7 +96,7 @@ const QuarterlyStockData = () => {
             {isQuarterlyDataLoading ? (
                 <LoadingSpinner />
             ) : (
-                <StockDataEnclosure>
+                <Table>
                     <Tbody>
                         <Tr>
                             <Td>PE Ratio</Td>
@@ -128,7 +123,7 @@ const QuarterlyStockData = () => {
                             <NumberTd>{beta}</NumberTd>
                         </Tr>
                     </Tbody>
-                </StockDataEnclosure>
+                </Table>
             )}
         </Box>
     );
@@ -151,7 +146,7 @@ const LivePrice = () => {
             {isRealtimeDataLoading || isQuarterlyDataLoading ? (
                 <LoadingSpinner />
             ) : (
-                <StockDataEnclosure>
+                <Table>
                     <Tbody>
                         <Tr>
                             <Td>
@@ -194,25 +189,20 @@ const LivePrice = () => {
                             <NumberTd>{volume}</NumberTd>
                         </Tr>
                     </Tbody>
-                </StockDataEnclosure>
+                </Table>
             )}
         </Box>
     );
 };
 
 const StockInformation = () => (
-    <SimpleGrid
-        columns={{ base: 1, lg: 3 }}
-        spacing={8}
-        bgColor={useColorModeValue('brand.100', 'brand.700')}
-        mt={8}
-        p={4}
-        borderRadius="lg"
-    >
-        <LivePrice />
-        <QuarterlyStockData />
-        <QuarterlyStockDataContinued />
-    </SimpleGrid>
+    <CustomBox bgColor={useColorModeValue('brand.100', 'brand.700')}>
+        <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={8}>
+            <LivePrice />
+            <QuarterlyStockData />
+            <QuarterlyStockDataContinued />
+        </SimpleGrid>
+    </CustomBox>
 );
 
 export default StockInformation;
