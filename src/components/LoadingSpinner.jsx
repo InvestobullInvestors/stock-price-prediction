@@ -1,6 +1,10 @@
 import React from 'react';
-import { Spinner } from '@chakra-ui/react';
+import { Center, Spinner } from '@chakra-ui/react';
 
-const LoadingSpinner = () => <Spinner size="xl" />;
+const LoadingSpinner = () => (
+    <Center p={20}>
+        <Spinner size="xl" />
+    </Center>
+);
 
 export default LoadingSpinner;

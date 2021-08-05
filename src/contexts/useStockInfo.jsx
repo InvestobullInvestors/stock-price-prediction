@@ -12,7 +12,8 @@ const StockInfoProvider = ({ children }) => {
     const [quarterlyStockDetails, setQuarterlyStockDetails] = useState({});
     const [stockName, setStockName] = useState('');
     const [graphData, setGraphData] = useState('');
-    const [isLoading, setIsLoading] = useStateWithCallbackLazy(false);
+    const [isWatchlistDataLoading, setIsWatchlistDataLoading] =
+        useStateWithCallbackLazy(false);
     const [isStockInfoTableLoading, setIsStockInfoTableLoading] =
         useStateWithCallbackLazy(false);
     const [isRealtimeDataLoading, setIsRealtimeDataLoading] =
@@ -35,10 +36,10 @@ const StockInfoProvider = ({ children }) => {
         const tickerString = watchlist.join('-');
         if (!tickerString) return setWatchlistStockInfo([]);
 
-        setIsLoading(true, () => {
+        setIsWatchlistDataLoading(true, () => {
             axios.get(`/stock-details/${tickerString}`).then((response) => {
                 setWatchlistStockInfo(response.data);
-                setIsLoading(false, null);
+                setIsWatchlistDataLoading(false, null);
             });
         });
     };
@@ -124,7 +125,7 @@ const StockInfoProvider = ({ children }) => {
                 watchlistStockInfo,
                 setBasicStockInfo,
                 setWatchlistStockInfo,
-                isLoading,
+                isWatchlistDataLoading,
                 isStockInfoTableLoading,
                 isRealtimeDataLoading,
                 isStockGraphLoading,
