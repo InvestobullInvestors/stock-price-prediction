@@ -1,17 +1,40 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
+import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 const StockNewsContext = createContext({});
 
 const StockNewsProvider = ({ children }) => {
     const [stockNews, setStockNews] = useState([]);
+    const [stockListNews, setStockListNews] = useState([]);
     const [newsSelections, setNewsSelections] = useState([]);
     const [newsInfo, setNewsInfo] = useState([]);
+    const [isStockNewsLoading, setIsStockNewsLoading] =
+        useStateWithCallbackLazy(false);
+    const [isDisplayingWatchlistStockNews, setDisplayingWatchlistStockNews] =
+        useState(false);
 
     const setNews = (stockSymbol) => {
-        axios.get(`/stock-news/news/${stockSymbol}`).then((response) => {
-            setStockNews(response.data.news);
+        setIsStockNewsLoading(true, () => {
+            axios.get(`/stock-news/news/${stockSymbol}`).then((response) => {
+                setStockNews(response.data.news);
+                setIsStockNewsLoading(false, null);
+            });
         });
+    };
+
+    const getStockListNews = (stockSymbols) => {
+        axios
+            .post(
+                `/stock-news/stocks`,
+                JSON.stringify({
+                    stockSymbols,
+                }),
+                { headers: { 'Content-Type': 'application/json' } }
+            )
+            .then((response) => {
+                setStockListNews(response.data);
+            });
     };
 
     const setNewsSelectionsFromFirebase = () => {
@@ -50,14 +73,23 @@ const StockNewsProvider = ({ children }) => {
         });
     };
 
+    const setDisplayWatchlistNews = (state) => {
+        setDisplayingWatchlistStockNews(state);
+    };
+
     return (
         <StockNewsContext.Provider
             value={{
                 stockNews,
+                stockListNews,
                 newsSelections,
                 newsInfo,
+                isStockNewsLoading,
+                isDisplayingWatchlistStockNews,
+                setDisplayWatchlistNews,
                 setNewsSelectionsFromFirebase,
                 setNewsInfoFromMongo,
+                getStockListNews,
                 setNews,
                 reorderNews,
                 selectSource,

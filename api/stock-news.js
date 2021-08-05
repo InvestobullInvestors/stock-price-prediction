@@ -69,6 +69,28 @@ router.get('/stock-news/news/:ticker', function (req, res) {
         });
 });
 
+/* GET news details for multiple stocks. */
+router.post('/stock-news/stocks/', function (req, res) {
+    const { stockSymbols } = req.body;
+
+    stockNewsInfo
+        .find({ ticker_id: stockSymbols })
+        .sort({ ticker_id: 1 })
+        .then((newsInfo) => {
+            res.send(
+                newsInfo.map(({ ticker_id, stock_name, stock_news }) => ({
+                    ticker_id: ticker_id,
+                    stock_name: stock_name,
+                    news: stock_news.slice(0, 5),
+                }))
+            );
+        })
+        .catch(({ message }) => {
+            console.log(message);
+            res.send({});
+        });
+});
+
 /* GET list of all news sources. */
 router.get('/stock-news/newsSourceList', function (req, res) {
     newsSourceInfo

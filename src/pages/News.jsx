@@ -1,22 +1,35 @@
 import React, { useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
-import NewsCardList from '../components/News/NewsCardList';
 import ChecklistDrawer from '../components/News/ChecklistDrawer';
 import CustomHeading from '../components/CustomHeading';
 import StaticChecklistContainer from '../components/News/StaticChecklistContainer';
-import { Grid, VStack } from '@chakra-ui/react';
+import { Grid, Text, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../contexts/useStockNews';
+import { useUser } from '../contexts/useUser';
+import StockNewsCard from '../components/News/StockNewsCard';
+import NewsCardList from '../components/News/NewsCardList';
 
 const News = () => {
-    const { setNewsSelectionsFromFirebase, setNewsInfoFromMongo } =
-        useStockNews();
+    const {
+        setNewsSelectionsFromFirebase,
+        setNewsInfoFromMongo,
+        isDisplayingWatchlistStockNews,
+    } = useStockNews();
+
+    const { user, watchlist } = useUser();
+    const { stockListNews, getStockListNews } = useStockNews();
 
     useEffect(() => {
         setNewsSelectionsFromFirebase();
         setNewsInfoFromMongo();
     }, []);
 
-    //TODO: enable watchlist filter
+    useEffect(() => {
+        const tickers = [];
+        watchlist.forEach(({ ticker }) => tickers.push(ticker));
+        getStockListNews(tickers);
+    }, [watchlist]);
+
     return (
         <PageTemplate>
             <VStack>
@@ -25,13 +38,32 @@ const News = () => {
                     <ChecklistDrawer />
                 </Grid>
             </VStack>
-            {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
             <Grid display={['none', 'none', 'flex', 'flex']}>
                 <StaticChecklistContainer />
-                <NewsCardList />
+                <VStack>
+                    {user && isDisplayingWatchlistStockNews ? (
+                        stockListNews.map(({ stock_name, news }) => {
+                            return (
+                                <StockNewsCard name={stock_name} news={news} />
+                            );
+                        })
+                    ) : (
+                        <NewsCardList />
+                    )}
+                </VStack>
             </Grid>
             <Grid display={['flex', 'flex', 'none', 'none']}>
-                <NewsCardList />
+                <VStack>
+                    {user && isDisplayingWatchlistStockNews ? (
+                        stockListNews.map(({ stock_name, news }) => {
+                            return (
+                                <StockNewsCard name={stock_name} news={news} />
+                            );
+                        })
+                    ) : (
+                        <NewsCardList />
+                    )}
+                </VStack>
             </Grid>
         </PageTemplate>
     );
