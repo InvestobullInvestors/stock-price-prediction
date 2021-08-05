@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 const StockInfoContext = createContext({});
 
@@ -11,10 +12,22 @@ const StockInfoProvider = ({ children }) => {
     const [quarterlyStockDetails, setQuarterlyStockDetails] = useState({});
     const [stockName, setStockName] = useState('');
     const [graphData, setGraphData] = useState('');
+    const [isLoading, setIsLoading] = useStateWithCallbackLazy(false);
+    const [isStockInfoTableLoading, setIsStockInfoTableLoading] =
+        useStateWithCallbackLazy(false);
+    const [isRealtimeDataLoading, setIsRealtimeDataLoading] =
+        useStateWithCallbackLazy(false);
+    const [isQuarterlyDataLoading, setIsQuarterlyDataLoading] =
+        useStateWithCallbackLazy(false);
+    const [isStockGraphLoading, setIsStockGraphLoading] =
+        useStateWithCallbackLazy(false);
 
     useEffect(() => {
-        axios.get(`/stock-details/`).then((response) => {
-            setBasicStockInfo(response.data);
+        setIsStockInfoTableLoading(true, () => {
+            axios.get(`/stock-details/`).then((response) => {
+                setBasicStockInfo(response.data);
+                setIsStockInfoTableLoading(false, null);
+            });
         });
     }, []);
 
@@ -22,8 +35,11 @@ const StockInfoProvider = ({ children }) => {
         const tickerString = watchlist.join('-');
         if (!tickerString) return setWatchlistStockInfo([]);
 
-        axios.get(`/stock-details/${tickerString}`).then((response) => {
-            setWatchlistStockInfo(response.data);
+        setIsLoading(true, () => {
+            axios.get(`/stock-details/${tickerString}`).then((response) => {
+                setWatchlistStockInfo(response.data);
+                setIsLoading(false, null);
+            });
         });
     };
 
@@ -34,24 +50,35 @@ const StockInfoProvider = ({ children }) => {
     };
 
     const setRealtimeDetails = (ticker) => {
-        axios.get(`/stock-details/realtime-data/${ticker}`).then((response) => {
-            setRealtimeStockDetails(response.data.stock_details);
-            setStockName(response.data.stock_name);
+        setIsRealtimeDataLoading(true, () => {
+            axios
+                .get(`/stock-details/realtime-data/${ticker}`)
+                .then((response) => {
+                    setRealtimeStockDetails(response.data.stock_details);
+                    setStockName(response.data.stock_name);
+                    setIsRealtimeDataLoading(false, null);
+                });
         });
     };
 
     const setQuarterlyDetails = (ticker) => {
-        axios
-            .get(`/stock-details/quarterly-data/${ticker}`)
-            .then((response) => {
-                setQuarterlyStockDetails(response.data.stock_details);
-                setStockName(response.data.stock_name);
-            });
+        setIsQuarterlyDataLoading(true, () => {
+            axios
+                .get(`/stock-details/quarterly-data/${ticker}`)
+                .then((response) => {
+                    setQuarterlyStockDetails(response.data.stock_details);
+                    setStockName(response.data.stock_name);
+                    setIsQuarterlyDataLoading(false, null);
+                });
+        });
     };
 
     const setRealtimeGraphData = (ticker) => {
-        axios.get(`/realtime-graph/${ticker}`).then((response) => {
-            setGraphData(response.data);
+        setIsStockGraphLoading(true, () => {
+            axios.get(`/realtime-graph/${ticker}`).then((response) => {
+                setGraphData(response.data);
+                setIsStockGraphLoading(false, null);
+            });
         });
     };
 
@@ -97,6 +124,11 @@ const StockInfoProvider = ({ children }) => {
                 watchlistStockInfo,
                 setBasicStockInfo,
                 setWatchlistStockInfo,
+                isLoading,
+                isStockInfoTableLoading,
+                isRealtimeDataLoading,
+                isStockGraphLoading,
+                isQuarterlyDataLoading,
                 getWatchlistStockInfo,
                 setRealtimeDetails,
                 setQuarterlyDetails,

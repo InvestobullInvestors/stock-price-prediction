@@ -14,6 +14,7 @@ import {
     Tr,
     useColorModeValue,
 } from '@chakra-ui/react';
+import LoadingSpinner from '../LoadingSpinner';
 
 const StockDataEnclosure = ({ children }) => (
     <Box mx={4}>
@@ -42,33 +43,43 @@ const QuarterlyStockDataContinued = () => {
         },
     } = useStockSymbol();
 
+    const { isQuarterlyDataLoading } = useStockSymbol();
+
     return (
-        <Tbody>
-            <Tr>
-                <Td>52 Weeks High</Td>
-                <NumberTd>{fifty_two_week_high}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>52 Weeks Low</Td>
-                <NumberTd>{fifty_two_week_low}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>Dividend Payout Ratio</Td>
-                <NumberTd>{dividend_payout_ratio ?? 0}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>Shares Outstanding</Td>
-                <NumberTd>{shares_outstanding}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>Shares Float</Td>
-                <NumberTd>{shares_float}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>Shares Short</Td>
-                <NumberTd>{shares_short}</NumberTd>
-            </Tr>
-        </Tbody>
+        <Box>
+            {isQuarterlyDataLoading ? (
+                <LoadingSpinner />
+            ) : (
+                <StockDataEnclosure>
+                    <Tbody>
+                        <Tr>
+                            <Td>52 Weeks High</Td>
+                            <NumberTd>{fifty_two_week_high}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>52 Weeks Low</Td>
+                            <NumberTd>{fifty_two_week_low}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>Dividend Payout Ratio</Td>
+                            <NumberTd>{dividend_payout_ratio ?? 0}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>Shares Outstanding</Td>
+                            <NumberTd>{shares_outstanding}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>Shares Float</Td>
+                            <NumberTd>{shares_float}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>Shares Short</Td>
+                            <NumberTd>{shares_short}</NumberTd>
+                        </Tr>
+                    </Tbody>
+                </StockDataEnclosure>
+            )}
+        </Box>
     );
 };
 
@@ -84,82 +95,109 @@ const QuarterlyStockData = () => {
         },
     } = useStockSymbol();
 
+    const { isQuarterlyDataLoading } = useStockSymbol();
+
     return (
-        <Tbody>
-            <Tr>
-                <Td>PE Ratio</Td>
-                <NumberTd>{pe_ratio}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>PEG Ratio</Td>
-                <NumberTd>{peg_ratio}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>EPS</Td>
-                <NumberTd>{eps}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>Quarterly Earning Growth</Td>
-                <NumberTd>{quarterly_earning_growth}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>Quarterly Revenue Growth</Td>
-                <NumberTd>{quarterly_revenue_growth}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>Beta</Td>
-                <NumberTd>{beta}</NumberTd>
-            </Tr>
-        </Tbody>
+        <Box>
+            {isQuarterlyDataLoading ? (
+                <LoadingSpinner />
+            ) : (
+                <StockDataEnclosure>
+                    <Tbody>
+                        <Tr>
+                            <Td>PE Ratio</Td>
+                            <NumberTd>{pe_ratio}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>PEG Ratio</Td>
+                            <NumberTd>{peg_ratio}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>EPS</Td>
+                            <NumberTd>{eps}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>Quarterly Earning Growth</Td>
+                            <NumberTd>{quarterly_earning_growth}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>Quarterly Revenue Growth</Td>
+                            <NumberTd>{quarterly_revenue_growth}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>Beta</Td>
+                            <NumberTd>{beta}</NumberTd>
+                        </Tr>
+                    </Tbody>
+                </StockDataEnclosure>
+            )}
+        </Box>
     );
 };
 
 const LivePrice = () => {
-    const { stockName } = useStockSymbol();
     const {
         realtimeStockDetails: { open, high, low, close, volume },
-    } = useStockSymbol();
-    const {
         quarterlyStockDetails: { currency },
+        isRealtimeDataLoading,
+        isQuarterlyDataLoading,
+        stockName,
     } = useStockSymbol();
+
     const redColor = useColorModeValue('red.light', 'red.dark');
     const greenColor = useColorModeValue('green.light', 'green.dark');
 
     return (
-        <Tbody>
-            <Tr>
-                <Td>
-                    <StatGroup>
-                        <Stat>
-                            <StatLabel fontSize="xl">{stockName}</StatLabel>
-                            <StatNumber
-                                mt={2}
-                                color={open >= close ? greenColor : redColor}
-                            >
-                                {formatNumber(open)}
-                            </StatNumber>
-                            <StatHelpText mt={2}>{currency}</StatHelpText>
-                        </Stat>
-                    </StatGroup>
-                </Td>
-            </Tr>
-            <Tr>
-                <Td>Close</Td>
-                <NumberTd>{close}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>High</Td>
-                <NumberTd>{high}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>Low</Td>
-                <NumberTd>{low}</NumberTd>
-            </Tr>
-            <Tr>
-                <Td>Volume</Td>
-                <NumberTd>{volume}</NumberTd>
-            </Tr>
-        </Tbody>
+        <Box>
+            {isRealtimeDataLoading || isQuarterlyDataLoading ? (
+                <LoadingSpinner />
+            ) : (
+                <StockDataEnclosure>
+                    <Tbody>
+                        <Tr>
+                            <Td>
+                                <StatGroup>
+                                    <Stat>
+                                        <StatLabel fontSize="xl">
+                                            {stockName}
+                                        </StatLabel>
+                                        <StatNumber
+                                            mt={2}
+                                            color={
+                                                open >= close
+                                                    ? greenColor
+                                                    : redColor
+                                            }
+                                        >
+                                            {formatNumber(open)}
+                                        </StatNumber>
+                                        <StatHelpText mt={2}>
+                                            {currency}
+                                        </StatHelpText>
+                                    </Stat>
+                                </StatGroup>
+                            </Td>
+                        </Tr>
+                        <Tr>
+                            <Td>Close</Td>
+                            <NumberTd>{close}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>High</Td>
+                            <NumberTd>{high}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>Low</Td>
+                            <NumberTd>{low}</NumberTd>
+                        </Tr>
+                        <Tr>
+                            <Td>Volume</Td>
+                            <NumberTd>{volume}</NumberTd>
+                        </Tr>
+                    </Tbody>
+                </StockDataEnclosure>
+            )}
+        </Box>
     );
 };
 
@@ -172,15 +210,9 @@ const StockInformation = () => (
         p={4}
         borderRadius="lg"
     >
-        <StockDataEnclosure>
-            <LivePrice />
-        </StockDataEnclosure>
-        <StockDataEnclosure>
-            <QuarterlyStockData />
-        </StockDataEnclosure>
-        <StockDataEnclosure>
-            <QuarterlyStockDataContinued />
-        </StockDataEnclosure>
+        <LivePrice />
+        <QuarterlyStockData />
+        <QuarterlyStockDataContinued />
     </SimpleGrid>
 );
 

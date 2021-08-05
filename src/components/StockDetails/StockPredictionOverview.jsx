@@ -2,9 +2,10 @@ import React from 'react';
 import { Box, useColorModeValue } from '@chakra-ui/react';
 import { defaults, Line } from 'react-chartjs-2';
 import { useStockSymbol } from '../../contexts/useStockInfo';
+import LoadingSpinner from '../LoadingSpinner';
 
 const StockDataGraph = () => {
-    const { graphData } = useStockSymbol();
+    const { graphData, isStockGraphLoading } = useStockSymbol();
     defaults.color = useColorModeValue('#000', '#FFF');
     defaults.borderColor = useColorModeValue('#CCC', '#555');
 
@@ -15,7 +16,11 @@ const StockDataGraph = () => {
             bgColor={useColorModeValue('brand.100', 'brand.700')}
             borderRadius="lg"
         >
-            <Line data={graphData} />
+            {isStockGraphLoading ? (
+                <LoadingSpinner />
+            ) : (
+                <Line data={graphData} />
+            )}
         </Box>
     );
 };
