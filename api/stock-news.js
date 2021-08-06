@@ -17,32 +17,17 @@ let newsSelections = [
     },
     {
         id: '2',
-        name: 'Financial Times',
+        name: 'ABC News',
         selected: true,
     },
     {
         id: '3',
-        name: 'The Economist',
+        name: 'Google News',
         selected: true,
     },
     {
         id: '4',
-        name: 'The Global and Mail',
-        selected: true,
-    },
-    {
-        id: '5',
-        name: 'The New York Times',
-        selected: true,
-    },
-    {
-        id: '6',
-        name: 'The Wall Street Journal',
-        selected: true,
-    },
-    {
-        id: '7',
-        name: 'Time',
+        name: 'The Verge',
         selected: true,
     },
 ];
@@ -69,27 +54,27 @@ router.get('/stock-news/news/:ticker', function (req, res) {
         });
 });
 
-/* GET list of all news sources. */
-router.get('/stock-news/newsSourceList', function (req, res) {
-    newsSourceInfo
-        .find({})
-        .then((newsDetails) => {
-            const news = [];
-            for (const sourceNews of newsDetails) {
-                const { _id, source } = sourceNews;
-                news.push({
-                    id: _id,
-                    name: source,
-                    selected: true,
-                });
-            }
-            res.send(news);
-        })
-        .catch(({ message }) => {
-            console.log(message);
-            res.send([]);
-        });
-});
+// /* GET list of all news sources. */
+// router.get('/stock-news/newsSourceList', function (req, res) {
+//     newsSourceInfo
+//         .find({})
+//         .then((newsDetails) => {
+//             const news = [];
+//             for (const sourceNews of newsDetails) {
+//                 const { _id, source } = sourceNews;
+//                 news.push({
+//                     id: _id,
+//                     name: source,
+//                     selected: true,
+//                 });
+//             }
+//             res.send(news);
+//         })
+//         .catch(({ message }) => {
+//             console.log(message);
+//             res.send([]);
+//         });
+// });
 
 /* GET information from each news source. */
 router.get('/stock-news/newsSourceInfo', function (req, res) {
@@ -103,6 +88,7 @@ router.get('/stock-news/newsSourceInfo', function (req, res) {
                     id: _id,
                     name: source,
                     articles: stock_news.slice(0, 5),
+                    selected: true,
                 });
             }
             res.send(news);
@@ -124,7 +110,10 @@ router.post('/stock-news/selectSource', function (req, res) {
     let selectedSource = newsSelections.find(
         (currSource) => currSource.id === source.id
     );
+    console.log(selectedSource);
+    console.log(selectedSource.selected);
     selectedSource.selected = !selectedSource.selected;
+    console.log(selectedSource.selected);
     res.send(newsSelections);
 });
 

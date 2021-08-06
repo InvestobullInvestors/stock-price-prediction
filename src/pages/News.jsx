@@ -8,11 +8,9 @@ import { Grid, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../contexts/useStockNews';
 
 const News = () => {
-    const { setNewsSelectionsFromFirebase, setNewsInfoFromMongo } =
-        useStockNews();
+    const { setNewsInfoFromMongo } = useStockNews();
 
     useEffect(() => {
-        setNewsSelectionsFromFirebase();
         setNewsInfoFromMongo();
     }, []);
 

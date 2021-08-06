@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
@@ -6,10 +6,11 @@ const StockNewsContext = createContext({});
 
 const StockNewsProvider = ({ children }) => {
     const [stockNews, setStockNews] = useState([]);
-    const [newsSelections, setNewsSelections] = useState([]);
     const [newsInfo, setNewsInfo] = useState([]);
-    const [isStockNewsLoading, setIsStockNewsLoading] =
-        useStateWithCallbackLazy(false);
+    const [
+        isStockNewsLoading,
+        setIsStockNewsLoading,
+    ] = useStateWithCallbackLazy(false);
 
     const setNews = (stockSymbol) => {
         setIsStockNewsLoading(true, () => {
@@ -17,12 +18,6 @@ const StockNewsProvider = ({ children }) => {
                 setStockNews(response.data.news);
                 setIsStockNewsLoading(false, null);
             });
-        });
-    };
-
-    const setNewsSelectionsFromFirebase = () => {
-        axios.get('/stock-news/newsSourceList').then((response) => {
-            setNewsSelections(response.data);
         });
     };
 
@@ -34,25 +29,45 @@ const StockNewsProvider = ({ children }) => {
 
     const reorderNews = (sources) => {
         axios.post('/stock-news/reorderNews', { sources }).then((response) => {
-            setNewsSelections(response.data);
+            setNewsInfo(response.data);
         });
     };
 
     const selectSource = (source) => {
-        axios.post('/stock-news/selectSource', { source }).then((response) => {
-            setNewsSelections(response.data);
-        });
+        console.log(source);
+        console.log(source.selected);
+        const newNewsInfo = [...newsInfo];
+        const sourceIndex = newsInfo.findIndex(({ id }) => id === source.id);
+        source.selected = !source.selected;
+        console.log(source.selected);
+        newNewsInfo[sourceIndex] = source;
+        console.log(newNewsInfo);
+        setNewsInfo(newNewsInfo);
+        // console.log(source.selected);
+        // newsInfo[sourceIndex] = source;
+        // const newList = newsInfo;
+        // console.log(newList);
+        // this.setState({ newList });
+        // this.setState({
+        //     data: newsInfo.data.map((currSource) =>
+        //         currSource.id === source.id
+        //             ? { ...currSource, selected: false }
+        //             : currSource
+        //     ),
+        // });
     };
 
     const selectAllSources = () => {
-        axios.post('/stock-news/selectAllSources').then((response) => {
-            setNewsSelections(response.data);
-        });
+        newsInfo.forEach((source) => (source.selected = true));
     };
 
     const unselectAllSources = () => {
-        axios.post('/stock-news/unselectAllSources').then((response) => {
-            setNewsSelections(response.data);
+        newsInfo.forEach((source) => (source.selected = false));
+    };
+
+    const getNewsSourceList = () => {
+        axios.get('/stock-news/newsSourceList').then((response) => {
+            setNewsInfo(response.data);
         });
     };
 
@@ -60,10 +75,8 @@ const StockNewsProvider = ({ children }) => {
         <StockNewsContext.Provider
             value={{
                 stockNews,
-                newsSelections,
                 newsInfo,
                 isStockNewsLoading,
-                setNewsSelectionsFromFirebase,
                 setNewsInfoFromMongo,
                 setNews,
                 reorderNews,

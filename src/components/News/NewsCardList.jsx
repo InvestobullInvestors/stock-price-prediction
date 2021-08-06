@@ -7,11 +7,11 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons';
 
 const NewsCardList = () => {
-    const { newsSelections } = useStockNews();
+    const { newsInfo } = useStockNews();
     const { reorderNews } = useStockNews();
     const { selectSource } = useStockNews();
 
-    let visibleNewsCards = newsSelections.filter(
+    let visibleNewsCards = newsInfo.filter(
         (source) => source.selected === true
     );
 
@@ -35,9 +35,7 @@ const NewsCardList = () => {
                 ) {
                     return;
                 }
-                reorderNews(
-                    reorder(newsSelections, source.index, destination.index)
-                );
+                reorderNews(reorder(newsInfo, source.index, destination.index));
             }}
         >
             <Droppable droppableId="newsGrid">

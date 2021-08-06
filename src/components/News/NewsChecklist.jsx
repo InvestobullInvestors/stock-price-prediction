@@ -3,7 +3,7 @@ import { Button, Checkbox, HStack, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
 
 const NewsChecklist = () => {
-    const { newsSelections } = useStockNews();
+    const { newsInfo } = useStockNews();
     const { selectSource } = useStockNews();
     const { selectAllSources } = useStockNews();
     const { unselectAllSources } = useStockNews();
@@ -19,7 +19,7 @@ const NewsChecklist = () => {
                         Uncheck All
                     </Button>
                 </HStack>
-                {newsSelections.map((source) => (
+                {newsInfo.map((source) => (
                     <Checkbox
                         key={source.id}
                         value={source.name}
