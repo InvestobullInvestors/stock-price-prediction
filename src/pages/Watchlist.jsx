@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
 import CustomHeading from '../components/CustomHeading';
-import { Center, Link, Stack } from '@chakra-ui/react';
+import { Center, Link, Stack, useColorModeValue } from '@chakra-ui/react';
 import { useUser } from '../contexts/useUser';
 import CustomBox from '../components/CustomBox';
 import StockInfoTable from '../components/StockTable/StockInfoTable';
@@ -18,8 +18,8 @@ const Watchlist = () => {
         setWatchlistStockInfo,
         isWatchlistDataLoading,
     } = useStockSymbol();
-
     const { setMode, onOpen } = useLoginSignupPopup();
+    const blueColor = useColorModeValue('blue.light', 'blue.dark');
 
     useEffect(() => {
         const tickers = [];
@@ -51,6 +51,7 @@ const Watchlist = () => {
                                     setMode('login');
                                     onOpen();
                                 }}
+                                color={blueColor}
                                 mx={2}
                             >
                                 Log In
@@ -62,6 +63,7 @@ const Watchlist = () => {
                                     setMode('signup');
                                     onOpen();
                                 }}
+                                color={blueColor}
                                 mx={2}
                             >
                                 Sign Up

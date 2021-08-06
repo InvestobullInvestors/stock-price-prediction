@@ -69,7 +69,7 @@ const LoginSignupPopup = () => {
                 variant="outline"
                 mr={2}
             >
-                Login
+                Log In
             </Button>
 
             <Button
@@ -78,7 +78,7 @@ const LoginSignupPopup = () => {
                     onOpen();
                 }}
             >
-                Signup
+                Sign Up
             </Button>
 
             <Modal
