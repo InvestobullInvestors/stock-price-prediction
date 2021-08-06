@@ -45,7 +45,7 @@ const Logo = () => (
         <Text
             display={{ base: 'none', sm: 'flex' }}
             fontSize={24}
-            fontWeight={200}
+            fontWeight={300}
         >
             InvestoBull
         </Text>
