@@ -17,18 +17,18 @@ const News = () => {
     //TODO: enable watchlist filter
     return (
         <PageTemplate>
-            <VStack>
-                <CustomHeading mb={3}>News</CustomHeading>
-                <Grid display={['flex', 'flex', 'none', 'none']}>
-                    <ChecklistDrawer />
-                </Grid>
-            </VStack>
+            <CustomHeading mb={3}>News</CustomHeading>
             {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
-            <Grid display={['none', 'none', 'flex', 'flex']}>
+            <Grid display={['none', 'none', 'none', 'flex']}>
                 <StaticChecklistContainer />
                 <NewsCardList />
             </Grid>
-            <Grid display={['flex', 'flex', 'none', 'none']}>
+            <VStack>
+                <Grid display={['flex', 'flex', 'flex', 'none']}>
+                    <ChecklistDrawer />
+                </Grid>
+            </VStack>
+            <Grid display={['flex', 'flex', 'flex', 'none']}>
                 <NewsCardList />
             </Grid>
         </PageTemplate>

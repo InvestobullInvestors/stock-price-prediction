@@ -62,7 +62,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
             width="100%"
             minW="100%"
             height="100%"
-            mx={3}
+            mx={1}
             mt={5}
             px={4}
             py={4}
@@ -74,7 +74,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
             {children}
             <Flex display={['none', 'none', 'flex', 'flex']} mt="10px">
                 <Square
-                    w={['20%', '20%', '20%', '15%']}
+                    w={['20%', '20%', '15%', '15%']}
                     h="150px"
                     borderRadius="lg"
                     shadow="md"
@@ -85,7 +85,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                 </Square>
                 <Spacer />
                 <Box
-                    w={['78%', '78%', '78%', '83%']}
+                    w={['78%', '78%', '83%', '83%']}
                     h="150px"
                     borderRadius="lg"
                     shadow="md"
