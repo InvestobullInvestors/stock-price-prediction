@@ -150,7 +150,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                         {articles.map((article) => (
                             <Box key={article.src} w="100%">
                                 <NewsArticle
-                                    date={article.date}
+                                    date={formatDate(article.publishedAt)}
                                     title={article.title}
                                     url={article.src}
                                 />
