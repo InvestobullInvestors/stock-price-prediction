@@ -154,6 +154,7 @@ const UserMenu = ({ bgColor }) => {
     const handleLogout = async () => {
         try {
             await logout();
+            window.location.reload();
         } catch (err) {
             console.error(err.message);
         }
