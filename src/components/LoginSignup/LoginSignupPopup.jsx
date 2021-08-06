@@ -67,6 +67,7 @@ const LoginSignupPopup = () => {
                     onOpen();
                 }}
                 variant="outline"
+                border="2px"
                 mr={2}
             >
                 Log In
