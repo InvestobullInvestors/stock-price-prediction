@@ -22,13 +22,13 @@ const StockNewsProvider = ({ children }) => {
     };
 
     const setNewsInfoFromMongo = () => {
-        axios.get('/stock-news/newsSourceInfo').then((response) => {
+        axios.get('/stock-news/news-source-info').then((response) => {
             setNewsInfo(response.data);
         });
     };
 
     const reorderNews = (sources) => {
-        axios.post('/stock-news/reorderNews', { sources }).then((response) => {
+        axios.post('/stock-news/reorder-news', { sources }).then((response) => {
             setNewsInfo(response.data);
         });
     };
@@ -54,7 +54,7 @@ const StockNewsProvider = ({ children }) => {
     };
 
     const getNewsSourceList = () => {
-        axios.get('/stock-news/newsSourceList').then((response) => {
+        axios.get('/stock-news/news-source-list').then((response) => {
             setNewsInfo(response.data);
         });
     };

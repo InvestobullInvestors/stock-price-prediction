@@ -54,30 +54,8 @@ router.get('/stock-news/news/:ticker', function (req, res) {
         });
 });
 
-// /* GET list of all news sources. */
-// router.get('/stock-news/newsSourceList', function (req, res) {
-//     newsSourceInfo
-//         .find({})
-//         .then((newsDetails) => {
-//             const news = [];
-//             for (const sourceNews of newsDetails) {
-//                 const { _id, source } = sourceNews;
-//                 news.push({
-//                     id: _id,
-//                     name: source,
-//                     selected: true,
-//                 });
-//             }
-//             res.send(news);
-//         })
-//         .catch(({ message }) => {
-//             console.log(message);
-//             res.send([]);
-//         });
-// });
-
 /* GET information from each news source. */
-router.get('/stock-news/newsSourceInfo', function (req, res) {
+router.get('/stock-news/news-source-info', function (req, res) {
     newsSourceInfo
         .find({})
         .then((newsDetails) => {
@@ -99,13 +77,13 @@ router.get('/stock-news/newsSourceInfo', function (req, res) {
         });
 });
 
-router.post('/stock-news/reorderNews', function (req, res) {
+router.post('/stock-news/reorder-news', function (req, res) {
     const { sources } = req.body;
     newsSelections = sources;
     res.send(newsSelections);
 });
 
-router.post('/stock-news/selectSource', function (req, res) {
+router.post('/stock-news/select-source', function (req, res) {
     const { source } = req.body;
     let selectedSource = newsSelections.find(
         (currSource) => currSource.id === source.id
@@ -117,7 +95,7 @@ router.post('/stock-news/selectSource', function (req, res) {
     res.send(newsSelections);
 });
 
-router.post('/stock-news/selectAllSources', function (req, res) {
+router.post('/stock-news/select-all-sources', function (req, res) {
     newsSelections = newsSelections.map(({ selected, ...rest }) => ({
         ...rest,
         selected: true,
@@ -125,7 +103,7 @@ router.post('/stock-news/selectAllSources', function (req, res) {
     res.send(newsSelections);
 });
 
-router.post('/stock-news/unselectAllSources', function (req, res) {
+router.post('/stock-news/unselect-all-sources', function (req, res) {
     newsSelections = newsSelections.map(({ selected, ...rest }) => ({
         ...rest,
         selected: false,
