@@ -34,6 +34,7 @@ import LoginSignupPopup from '../LoginSignup/LoginSignupPopup';
 import { useUser } from '../../contexts/useUser';
 import { useAuth } from '../../contexts/useAuth';
 import UserProfilePopup from './UserProfilePopup';
+import { useStockSymbol } from '../../contexts/useStockInfo';
 
 const PADDING = 1;
 const MARGIN = 1;
@@ -150,11 +151,12 @@ const NotificationMenu = ({ bgColor }) => (
 const UserMenu = ({ bgColor }) => {
     const { user } = useUser();
     const { logout } = useAuth();
+    const { getBasicStockInfo } = useStockSymbol();
 
     const handleLogout = async () => {
         try {
             await logout();
-            window.location.reload();
+            getBasicStockInfo();
         } catch (err) {
             console.error(err.message);
         }
