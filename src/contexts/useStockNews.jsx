@@ -34,35 +34,23 @@ const StockNewsProvider = ({ children }) => {
     };
 
     const selectSource = (source) => {
-        console.log(source);
-        console.log(source.selected);
         const newNewsInfo = [...newsInfo];
         const sourceIndex = newsInfo.findIndex(({ id }) => id === source.id);
         source.selected = !source.selected;
-        console.log(source.selected);
         newNewsInfo[sourceIndex] = source;
-        console.log(newNewsInfo);
         setNewsInfo(newNewsInfo);
-        // console.log(source.selected);
-        // newsInfo[sourceIndex] = source;
-        // const newList = newsInfo;
-        // console.log(newList);
-        // this.setState({ newList });
-        // this.setState({
-        //     data: newsInfo.data.map((currSource) =>
-        //         currSource.id === source.id
-        //             ? { ...currSource, selected: false }
-        //             : currSource
-        //     ),
-        // });
     };
 
     const selectAllSources = () => {
-        newsInfo.forEach((source) => (source.selected = true));
+        const newNewsInfo = [...newsInfo];
+        newNewsInfo.forEach((source) => (source.selected = true));
+        setNewsInfo(newNewsInfo);
     };
 
     const unselectAllSources = () => {
-        newsInfo.forEach((source) => (source.selected = false));
+        const newNewsInfo = [...newsInfo];
+        newNewsInfo.forEach((source) => (source.selected = false));
+        setNewsInfo(newNewsInfo);
     };
 
     const getNewsSourceList = () => {
