@@ -1,9 +1,10 @@
-import { IconButton } from '@chakra-ui/react';
+import { IconButton, useColorModeValue } from '@chakra-ui/react';
 import { BsStar, BsStarFill } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { useUser } from '../contexts/useUser';
 
 const WatchlistButton = ({ ticker }) => {
+    const yellowColor = useColorModeValue('yellow.light', 'yellow.dark');
     const [icon, setIcon] = useState(<BsStar />);
     const [isWatchlisted, setIsWatchlisted] = useState(false);
     const { addToWatchlist, removeFromWatchlist, watchlist, user } = useUser();
@@ -34,7 +35,7 @@ const WatchlistButton = ({ ticker }) => {
         <IconButton
             aria-label="watchlist-button"
             icon={icon}
-            colorScheme="yellow"
+            color={yellowColor}
             variant="ghost"
             onClick={handleClick}
         />

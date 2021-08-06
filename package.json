@@ -75,6 +75,7 @@
         "morgan": "~1.9.1",
         "nodemon": "^2.0.12",
         "request": "^2.88.2",
+        "use-state-with-callback": "^2.0.3",
         "newsapi": "^2.4.1",
         "node-cron": "^3.0.0",
         "stripe": "^8.156.0"

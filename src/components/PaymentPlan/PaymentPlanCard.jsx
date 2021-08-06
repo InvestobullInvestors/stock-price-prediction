@@ -9,7 +9,6 @@ import {
     ModalHeader,
     ModalOverlay,
     Text,
-    useColorModeValue,
     useDisclosure,
     VStack,
 } from '@chakra-ui/react';
@@ -45,10 +44,7 @@ const PaymentPlanCard = ({
     );
 
     return (
-        <CustomBox
-            bg={useColorModeValue('brand.400', 'brand.700')}
-            {...otherProps}
-        >
+        <CustomBox {...otherProps}>
             <VStack spacing={4}>
                 <Heading as="h4" size="md">
                     {type}

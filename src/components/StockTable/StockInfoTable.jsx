@@ -127,8 +127,14 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                 key={ticker_id}
                                 _hover={
                                     lightMode
-                                        ? { cursor: 'pointer', bg: 'brand.200' }
-                                        : { cursor: 'pointer', bg: 'brand.700' }
+                                        ? {
+                                              cursor: 'pointer',
+                                              bg: 'brand.200',
+                                          }
+                                        : {
+                                              cursor: 'pointer',
+                                              bg: 'brand.700',
+                                          }
                                 }
                             >
                                 <Td>
@@ -141,32 +147,47 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     <StockSymbol ticker={ticker_id} />
                                 </ClickableTd>
                                 <ClickableTd
-                                    display={{ base: 'none', md: 'table-cell' }}
+                                    display={{
+                                        base: 'none',
+                                        md: 'table-cell',
+                                    }}
                                     ticker_id={ticker_id}
                                 >
                                     {dividend_payout_ratio ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd
-                                    display={{ base: 'none', md: 'table-cell' }}
+                                    display={{
+                                        base: 'none',
+                                        md: 'table-cell',
+                                    }}
                                     ticker_id={ticker_id}
                                 >
                                     {pe_ratio ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd
-                                    display={{ base: 'none', md: 'table-cell' }}
+                                    display={{
+                                        base: 'none',
+                                        md: 'table-cell',
+                                    }}
                                     ticker_id={ticker_id}
                                 >
                                     {peg_ratio ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd
                                     ticker_id={ticker_id}
-                                    display={{ base: 'none', lg: 'table-cell' }}
+                                    display={{
+                                        base: 'none',
+                                        lg: 'table-cell',
+                                    }}
                                 >
                                     {quarterly_earning_growth ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd
                                     ticker_id={ticker_id}
-                                    display={{ base: 'none', lg: 'table-cell' }}
+                                    display={{
+                                        base: 'none',
+                                        lg: 'table-cell',
+                                    }}
                                 >
                                     {quarterly_revenue_growth ?? '-'}
                                 </ClickableTd>

@@ -11,9 +11,11 @@ import { StarIcon } from '@chakra-ui/icons';
 import CustomBox from '../CustomBox';
 
 const StartRatings = ({ rating }) => {
+    const yellowColor = useColorModeValue('yellow.light', 'yellow.dark');
+
     const ratingStars = [];
     for (let i = 0; i < rating; i++) {
-        ratingStars.push(<StarIcon w={5} h={5} color="#FDCC0D" />);
+        ratingStars.push(<StarIcon key={i} w={5} h={5} color={yellowColor} />);
     }
     return <>{ratingStars}</>;
 };
@@ -27,10 +29,7 @@ const ReviewCard = ({
     ...otherProps
 }) => {
     return (
-        <CustomBox
-            bg={useColorModeValue('brand.400', 'brand.700')}
-            {...otherProps}
-        >
+        <CustomBox {...otherProps}>
             <VStack>
                 <HStack>
                     <Avatar name={name} src={imageUrl} />
