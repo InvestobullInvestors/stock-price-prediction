@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Button,
     Link,
@@ -17,8 +17,7 @@ import ResetPasswordForm from './ResetPasswordForm';
 import { useLoginSignupPopup } from '../../contexts/useLoginSignupPopup';
 
 const LoginSignupPopup = () => {
-    const { isOpen, onOpen, onClose } = useLoginSignupPopup();
-    const [mode, setMode] = useState('login');
+    const { mode, setMode, isOpen, onOpen, onClose } = useLoginSignupPopup();
 
     const modalContent = {
         login: {

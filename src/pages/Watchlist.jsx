@@ -19,7 +19,7 @@ const Watchlist = () => {
         isWatchlistDataLoading,
     } = useStockSymbol();
 
-    const { onOpen } = useLoginSignupPopup();
+    const { setMode, onOpen } = useLoginSignupPopup();
 
     useEffect(() => {
         const tickers = [];
@@ -45,8 +45,26 @@ const Watchlist = () => {
                 ) : (
                     <CustomBox>
                         <Center fontSize="xl" mx={8} my={8}>
-                            <Link as="button" onClick={onOpen} mr={2}>
-                                Log in
+                            <Link
+                                as="button"
+                                onClick={() => {
+                                    setMode('login');
+                                    onOpen();
+                                }}
+                                mx={2}
+                            >
+                                Log In
+                            </Link>
+                            or
+                            <Link
+                                as="button"
+                                onClick={() => {
+                                    setMode('signup');
+                                    onOpen();
+                                }}
+                                mx={2}
+                            >
+                                Sign Up
                             </Link>
                             to use watchlist
                         </Center>
