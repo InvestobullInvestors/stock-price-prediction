@@ -1,8 +1,15 @@
 import { CardElement } from '@stripe/react-stripe-js';
 import { chargeCard } from '../services/paymentService';
 
-const useHandlePayment = (payableAmount, stripe, elements, callback) => {
+const useHandlePayment = (
+    payableAmount,
+    stripe,
+    elements,
+    setIsLoading,
+    callback
+) => {
     return async (event) => {
+        setIsLoading(true);
         event.preventDefault();
         try {
             const {
@@ -18,6 +25,8 @@ const useHandlePayment = (payableAmount, stripe, elements, callback) => {
             }
         } catch ({ message }) {
             console.log(message);
+        } finally {
+            setIsLoading(false);
         }
     };
 };

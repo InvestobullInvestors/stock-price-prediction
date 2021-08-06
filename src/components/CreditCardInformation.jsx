@@ -6,27 +6,37 @@ import {
     useElements,
     useStripe,
 } from '@stripe/react-stripe-js';
-import { AlertDialogHeader, Box, Button, Center } from '@chakra-ui/react';
+import {
+    Alert,
+    AlertDescription,
+    AlertIcon,
+    AlertTitle,
+    Box,
+    Button,
+    Center,
+} from '@chakra-ui/react';
 import useHandlePayment from '../hooks/useHandlePayment';
-import AlertDialogBox from './AlertDialogBox';
 import { useUser } from '../contexts/useUser';
+
+const TIMEOUT = 3500;
 
 const stripePublicKey = loadStripe(
     'pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4'
 );
 
-const CheckoutForm = ({ payableAmount }) => {
+const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
     const stripe = useStripe();
     const elements = useElements();
-    const [isOpen, setIsOpen] = useState(false);
     const [paymentSuccessful, setPaymentSuccessful] = useState(false);
+    const [alertVisible, setAlertVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const { setUserPaymentDetails } = useUser();
-    const onClose = () => setIsOpen(false);
 
     const handlePayment = useHandlePayment(
         payableAmount,
         stripe,
         elements,
+        setIsLoading,
         (status) => {
             if (status) {
                 setPaymentSuccessful(true);
@@ -34,53 +44,86 @@ const CheckoutForm = ({ payableAmount }) => {
                     config: { data },
                 } = status;
                 setUserPaymentDetails(JSON.parse(data));
+                setAlertVisible(true);
+                setTimeout(() => setAlertVisible(false), TIMEOUT);
+                setTimeout(closePaymentModal, TIMEOUT);
             } else {
                 setPaymentSuccessful(false);
+                setAlertVisible(true);
             }
-            setIsOpen(true);
         }
     );
 
     return (
         <>
+            {alertVisible && (
+                <Alert
+                    status={paymentSuccessful ? 'success' : 'error'}
+                    flexDirection="column"
+                    alignItems="center"
+                    py={10}
+                    mb={6}
+                >
+                    <AlertIcon boxSize="40px" mr={0} />
+                    <AlertTitle mt={4} mb={1} fontSize="lg">
+                        {paymentSuccessful
+                            ? 'Payment Successful'
+                            : 'Payment Failed'}
+                    </AlertTitle>
+                    <AlertDescription maxWidth="sm">
+                        {paymentSuccessful
+                            ? 'Thank you for using InvestoBull!'
+                            : 'An error occurred. Please try again.'}
+                    </AlertDescription>
+                </Alert>
+            )}
             <Box
-                px={5}
+                my={2}
+                px={4}
                 py={2}
                 rounded="md"
                 border="solid"
-                borderColor="brand.800"
-                h="10"
-                alignContent="center"
-                bg="brand.100"
+                borderColor="brand.500"
+                bg="brand.300"
             >
-                <CardElement />
+                <CardElement
+                    options={{
+                        style: {
+                            base: {
+                                fontSize: '16px',
+                                color: '#101010',
+                                '::placeholder': {
+                                    color: '#696969',
+                                },
+                            },
+                            invalid: {
+                                color: '#DC1212',
+                            },
+                        },
+                    }}
+                />
             </Box>
             <Center>
                 <Button
-                    size="sm"
-                    my={10}
-                    align="center"
+                    isLoading={isLoading}
+                    my={8}
+                    colorScheme="brand"
                     onClick={handlePayment}
                 >
-                    Subscribe Now
+                    Confirm Payment
                 </Button>
             </Center>
-
-            <AlertDialogBox isOpen={isOpen} onClose={onClose}>
-                <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                    {paymentSuccessful
-                        ? 'Payment Successful'
-                        : 'Payment Failed'}
-                </AlertDialogHeader>
-            </AlertDialogBox>
         </>
     );
 };
 
-const CreditCardInformation = ({ payableAmount }) => {
+const CreditCardInformation = ({ payableAmount, closePaymentModal }) => {
     return (
         <Elements stripe={stripePublicKey}>
-            <CheckoutForm payableAmount={payableAmount} />
+            <CheckoutForm
+                payableAmount={payableAmount}
+                closePaymentModal={closePaymentModal}
+            />
         </Elements>
     );
 };
