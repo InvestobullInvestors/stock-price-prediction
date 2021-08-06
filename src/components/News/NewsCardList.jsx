@@ -44,7 +44,17 @@ const NewsCardList = () => {
                         {...droppableProvided.droppableProps}
                         ref={droppableProvided.innerRef}
                     >
-                        <List spacing={3} mr={5} w="100%">
+                        <List
+                            spacing={3}
+                            ml={['0px', '0px', '0px', '275px']}
+                            mr={5}
+                            width={[
+                                '100%',
+                                '100%',
+                                '100%',
+                                'calc(100% - 275px)',
+                            ]}
+                        >
                             {visibleNewsCards.map((source, index) => (
                                 <Draggable
                                     key={source.id}

@@ -7,7 +7,7 @@ const StaticChecklistContainer = () => {
     const boxColor = useColorModeValue('brand.400', 'brand.700');
 
     return (
-        <CustomBox p="4" mt={5} ml={-1} bgColor={boxColor}>
+        <CustomBox p="4" mt={5} ml={-1} bgColor={boxColor} position="fixed">
             <VStack>
                 <Heading size="md">Sources</Heading>
                 <Divider orientation="horizontal" />

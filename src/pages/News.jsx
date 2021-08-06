@@ -4,7 +4,7 @@ import NewsCardList from '../components/News/NewsCardList';
 import ChecklistDrawer from '../components/News/ChecklistDrawer';
 import CustomHeading from '../components/CustomHeading';
 import StaticChecklistContainer from '../components/News/StaticChecklistContainer';
-import { Grid, VStack } from '@chakra-ui/react';
+import { Flex, Grid, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../contexts/useStockNews';
 
 const News = () => {
@@ -19,10 +19,10 @@ const News = () => {
         <PageTemplate>
             <CustomHeading mb={3}>News</CustomHeading>
             {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
-            <Grid display={['none', 'none', 'none', 'flex']}>
+            <Flex display={['none', 'none', 'none', 'flex']}>
                 <StaticChecklistContainer />
                 <NewsCardList />
-            </Grid>
+            </Flex>
             <VStack>
                 <Grid display={['flex', 'flex', 'flex', 'none']}>
                     <ChecklistDrawer />
