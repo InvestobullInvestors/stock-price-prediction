@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
 import CustomHeading from '../components/CustomHeading';
-import { Center, VStack } from '@chakra-ui/react';
+import { Center, Stack } from '@chakra-ui/react';
 import { useUser } from '../contexts/useUser';
 import CustomBox from '../components/CustomBox';
 import StockInfoTable from '../components/StockTable/StockInfoTable';
@@ -30,7 +30,7 @@ const Watchlist = () => {
 
     return (
         <PageTemplate>
-            <VStack spacing={16}>
+            <Stack spacing={8}>
                 <CustomHeading>Watchlist</CustomHeading>
                 {isWatchlistDataLoading ? (
                     <LoadingSpinner />
@@ -47,7 +47,7 @@ const Watchlist = () => {
                         </Center>
                     </CustomBox>
                 )}
-            </VStack>
+            </Stack>
         </PageTemplate>
     );
 };
