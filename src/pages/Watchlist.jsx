@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
 import CustomHeading from '../components/CustomHeading';
-import { Center, Stack } from '@chakra-ui/react';
+import { Center, Link, Stack } from '@chakra-ui/react';
 import { useUser } from '../contexts/useUser';
 import CustomBox from '../components/CustomBox';
 import StockInfoTable from '../components/StockTable/StockInfoTable';
 import { useStockSymbol } from '../contexts/useStockInfo';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { useLoginSignupPopup } from '../contexts/useLoginSignupPopup';
 
 const Watchlist = () => {
     const { user, watchlist } = useUser();
@@ -17,6 +18,8 @@ const Watchlist = () => {
         setWatchlistStockInfo,
         isWatchlistDataLoading,
     } = useStockSymbol();
+
+    const { onOpen } = useLoginSignupPopup();
 
     useEffect(() => {
         const tickers = [];
@@ -41,9 +44,11 @@ const Watchlist = () => {
                     />
                 ) : (
                     <CustomBox>
-                        {/*TODO: trigger sign in popup from 'Sign in'*/}
-                        <Center fontSize="xl" mx={8} my={4}>
-                            Sign in to use watchlist
+                        <Center fontSize="xl" mx={8} my={8}>
+                            <Link as="button" onClick={onOpen} mr={2}>
+                                Log in
+                            </Link>
+                            to use watchlist
                         </Center>
                     </CustomBox>
                 )}
