@@ -27,10 +27,8 @@ const StockNewsProvider = ({ children }) => {
         });
     };
 
-    const reorderNews = (sources) => {
-        axios.post('/stock-news/reorder-news', { sources }).then((response) => {
-            setNewsInfo(response.data);
-        });
+    const reorderSources = (reorderedList) => {
+        setNewsInfo(reorderedList);
     };
 
     const selectSource = (source) => {
@@ -67,7 +65,7 @@ const StockNewsProvider = ({ children }) => {
                 isStockNewsLoading,
                 setNewsInfoFromMongo,
                 setNews,
-                reorderNews,
+                reorderSources,
                 selectSource,
                 selectAllSources,
                 unselectAllSources,

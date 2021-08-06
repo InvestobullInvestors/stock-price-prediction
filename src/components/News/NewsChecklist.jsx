@@ -7,6 +7,20 @@ const NewsChecklist = () => {
     const { selectSource } = useStockNews();
     const { selectAllSources } = useStockNews();
     const { unselectAllSources } = useStockNews();
+    const sortedNewsInfo = [...newsInfo];
+
+    // keep sources alphabetically sorted in the checklist
+    sortedNewsInfo.sort((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0;
+    });
 
     return (
         <>
@@ -19,7 +33,7 @@ const NewsChecklist = () => {
                         Uncheck All
                     </Button>
                 </HStack>
-                {newsInfo.map((source) => (
+                {sortedNewsInfo.map((source) => (
                     <Checkbox
                         key={source.id}
                         value={source.name}

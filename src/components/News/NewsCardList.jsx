@@ -8,7 +8,7 @@ import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons';
 
 const NewsCardList = () => {
     const { newsInfo } = useStockNews();
-    const { reorderNews } = useStockNews();
+    const { reorderSources } = useStockNews();
     const { selectSource } = useStockNews();
 
     let visibleNewsCards = newsInfo.filter(
@@ -35,7 +35,9 @@ const NewsCardList = () => {
                 ) {
                     return;
                 }
-                reorderNews(reorder(newsInfo, source.index, destination.index));
+                reorderSources(
+                    reorder(newsInfo, source.index, destination.index)
+                );
             }}
         >
             <Droppable droppableId="newsGrid">
