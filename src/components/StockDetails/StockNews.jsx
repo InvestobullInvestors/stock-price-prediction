@@ -48,7 +48,6 @@ const StockNews = ({ ...otherProps }) => {
                                     />
                                 </HStack>
                                 <VStack
-                                    _hover={{ bgColor: hoverColor }}
                                     display={{ base: 'flex', md: 'none' }}
                                     spacing={8}
                                 >
