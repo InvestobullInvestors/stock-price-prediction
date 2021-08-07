@@ -52,6 +52,28 @@ const StockNewsProvider = ({ children }) => {
         setNewsInfo(newNewsInfo);
     };
 
+    const selectStock = (stock) => {
+        const newStockListNews = [...stockListNews];
+        const stockIndex = stockListNews.findIndex(
+            ({ ticker_id }) => ticker_id === stock.ticker_id
+        );
+        stock.selected = !stock.selected;
+        newStockListNews[stockIndex] = stock;
+        setStockListNews(newStockListNews);
+    };
+
+    const selectAllStocks = () => {
+        const newStockListNews = [...stockListNews];
+        newStockListNews.forEach((stock) => (stock.selected = true));
+        setStockListNews(newStockListNews);
+    };
+
+    const unselectAllStocks = () => {
+        const newStockListNews = [...stockListNews];
+        newStockListNews.forEach((stock) => (stock.selected = false));
+        setStockListNews(newStockListNews);
+    };
+
     const reorderSources = (reorderedList) => {
         setNewsInfo(reorderedList);
     };
@@ -95,6 +117,9 @@ const StockNewsProvider = ({ children }) => {
                 selectSource,
                 selectAllSources,
                 unselectAllSources,
+                selectStock,
+                selectAllStocks,
+                unselectAllStocks,
             }}
         >
             {children}

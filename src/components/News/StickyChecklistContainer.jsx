@@ -12,13 +12,15 @@ import StockNewsChecklist from './StockNewsChecklist';
 import { useStockNews } from '../../contexts/useStockNews';
 import { useUser } from '../../contexts/useUser';
 
-const StaticChecklistContainer = () => {
+const StickyChecklistContainer = () => {
     const { user } = useUser();
     const [value, setValue] = React.useState(0);
     const boxColor = useColorModeValue('brand.400', 'brand.700');
 
-    const { isDisplayingWatchlistStockNews, setDisplayWatchlistNews } =
-        useStockNews();
+    const {
+        isDisplayingWatchlistStockNews,
+        setDisplayWatchlistNews,
+    } = useStockNews();
 
     return (
         <CustomBox
@@ -27,6 +29,7 @@ const StaticChecklistContainer = () => {
             ml={-1}
             bgColor={boxColor}
             position="fixed"
+            boxShadow="dark-lg"
             zIndex={100}
         >
             <VStack>
@@ -67,4 +70,4 @@ const StaticChecklistContainer = () => {
     );
 };
 
-export default StaticChecklistContainer;
+export default StickyChecklistContainer;

@@ -5,9 +5,9 @@ import { useStockNews } from '../../contexts/useStockNews';
 const StockNewsChecklist = () => {
     const {
         stockListNews,
-        selectSource,
-        selectAllSources,
-        unselectAllSources,
+        selectStock,
+        selectAllStocks,
+        unselectAllStocks,
     } = useStockNews();
 
     const sortedStockListNews = [...stockListNews];
@@ -31,17 +31,15 @@ const StockNewsChecklist = () => {
     return (
         <VStack align="stretch">
             <HStack>
-                <Button onClick={() => selectAllSources()}>Check All</Button>
-                <Button onClick={() => unselectAllSources()}>
-                    Uncheck All
-                </Button>
+                <Button onClick={() => selectAllStocks()}>Check All</Button>
+                <Button onClick={() => unselectAllStocks()}>Uncheck All</Button>
             </HStack>
             {sortedStockListNews.map((stock) => (
                 <Checkbox
                     key={stock.ticker_id}
                     value={stock.stock_name}
                     isChecked={stock.selected}
-                    onChange={(e) => selectSource(stock)}
+                    onChange={(e) => selectStock(stock)}
                 >
                     {stock.stock_name}
                 </Checkbox>

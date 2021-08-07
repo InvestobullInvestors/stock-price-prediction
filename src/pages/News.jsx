@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
 import ChecklistDrawer from '../components/News/ChecklistDrawer';
 import CustomHeading from '../components/CustomHeading';
-import StaticChecklistContainer from '../components/News/StaticChecklistContainer';
+import StickyChecklistContainer from '../components/News/StickyChecklistContainer';
 import { Flex, Grid, Text, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../contexts/useStockNews';
 import { useUser } from '../contexts/useUser';
@@ -35,7 +35,7 @@ const News = () => {
             <CustomHeading mb={3}>News</CustomHeading>
             {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
             <Flex display={['none', 'none', 'none', 'flex']}>
-                <StaticChecklistContainer />
+                <StickyChecklistContainer />
                 <VStack>
                     {user && isDisplayingWatchlistStockNews ? (
                         <StockNewsCardList />

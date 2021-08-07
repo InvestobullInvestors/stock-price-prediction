@@ -63,6 +63,9 @@ const ChecklistDrawer = () => {
                                 }}
                                 opacity={value === 1 ? '1' : '0.5'}
                                 isDisabled={!user}
+                                title={
+                                    user ? null : 'Log In to view this section.'
+                                }
                             >
                                 Watchlist Stocks
                             </Button>
