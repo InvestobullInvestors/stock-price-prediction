@@ -13,7 +13,7 @@ const StockNewsProvider = ({ children }) => {
         useStateWithCallbackLazy(false);
     const [isDisplayingWatchlistStockNews, setDisplayingWatchlistStockNews] =
         useState(false);
-
+  
     const setNews = (stockSymbol) => {
         setIsStockNewsLoading(true, () => {
             axios.get(`/stock-news/news/${stockSymbol}`).then((response) => {

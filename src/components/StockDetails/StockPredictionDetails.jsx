@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { usePrediction } from '../../contexts/usePredictions';
 import PredictionSlider from './PredictionSlider';
+import CustomBox from '../CustomBox';
 
 const CustomGridItem = ({ children, ...otherProps }) => (
     <GridItem
@@ -132,17 +133,19 @@ const SlidablePredictions = () => {
     );
 };
 
-const StockPredictionDetails = () => (
-    <Grid
-        mt={10}
-        templateColumns={{ base: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }}
-        borderRadius="lg"
-        gap={2}
+const StockPredictionDetails = ({ ...otherProps }) => (
+    <CustomBox
         bgColor={useColorModeValue('brand.100', 'brand.700')}
+        {...otherProps}
     >
-        <PricePrediction />
-        <SlidablePredictions />
-    </Grid>
+        <Grid
+            templateColumns={{ base: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }}
+            gap={2}
+        >
+            <PricePrediction />
+            <SlidablePredictions />
+        </Grid>
+    </CustomBox>
 );
 
 export default StockPredictionDetails;

@@ -4,7 +4,7 @@ import { useColorModeValue } from '@chakra-ui/react';
 import StockInformation from '../components/StockDetails/StockInformation';
 import StockNews from '../components/StockDetails/StockNews';
 import StockPredictionDetails from '../components/StockDetails/StockPredictionDetails';
-import StockDataGraph from '../components/StockDetails/StockPredictionOverview';
+import StockDataGraph from '../components/StockDetails/StockDataGraph';
 import { usePrediction } from '../contexts/usePredictions';
 import { useStockSymbol } from '../contexts/useStockInfo';
 import { useStockNews } from '../contexts/useStockNews';
@@ -26,10 +26,10 @@ const StockDetails = ({ match }) => {
 
     return (
         <PageTemplate bgColor={useColorModeValue('brand.300', 'brand.800')}>
-            <StockInformation />
-            <StockDataGraph />
-            <StockPredictionDetails />
-            <StockNews />
+            <StockInformation my={16} />
+            <StockDataGraph my={16} />
+            <StockPredictionDetails my={16} />
+            <StockNews my={16} />
         </PageTemplate>
     );
 };
