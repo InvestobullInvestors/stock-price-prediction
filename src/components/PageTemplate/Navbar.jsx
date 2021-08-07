@@ -39,7 +39,8 @@ import { useStockSymbol } from '../../contexts/useStockInfo';
 const PADDING = 1;
 const MARGIN = 1;
 const ICON_SIZE = 6;
-const MENU_MAX_WIDTH = 60;
+const MENU_MAX_WIDTH = 100;
+const MENU_MAX_HEIGHT = 300;
 
 const Logo = () => (
     <HStack as={Link} to="/" m={MARGIN}>
@@ -142,7 +143,17 @@ const NotificationMenu = ({ bgColor }) => (
         >
             <BellIcon w={ICON_SIZE} h={ICON_SIZE} />
         </MenuButton>
-        <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
+        <MenuList
+            bg={bgColor}
+            maxW={MENU_MAX_WIDTH}
+            maxH={MENU_MAX_HEIGHT}
+            css={{
+                margin: '0',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                overflow: 'scroll',
+            }}
+        >
             <NotificationList />
         </MenuList>
     </Menu>
