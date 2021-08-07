@@ -1,7 +1,8 @@
 import {
-    Button,
     Divider,
-    HStack,
+    Radio,
+    RadioGroup,
+    Stack,
     useColorModeValue,
     VStack,
 } from '@chakra-ui/react';
@@ -13,7 +14,9 @@ import { useStockNews } from '../../contexts/useStockNews';
 import { useUser } from '../../contexts/useUser';
 
 const StaticChecklistContainer = () => {
+    const [value, setValue] = React.useState('1');
     const boxColor = useColorModeValue('brand.400', 'brand.700');
+
     const {
         isDisplayingWatchlistStockNews,
         setDisplayWatchlistNews,
@@ -31,30 +34,22 @@ const StaticChecklistContainer = () => {
             zIndex={100}
         >
             <VStack>
-                <HStack>
-                    <Button
-                        colorScheme="brand"
-                        opacity="0.5"
-                        onClick={() => setDisplayWatchlistNews(false)}
-                        _focus={{
-                            opacity: '1',
-                        }}
-                        autoFocus={true}
-                    >
-                        Sources
-                    </Button>
-                    <Button
-                        colorScheme="brand"
-                        opacity="0.5"
-                        onClick={() => setDisplayWatchlistNews(true)}
-                        isDisabled={!user}
-                        _focus={{
-                            opacity: '1',
-                        }}
-                    >
-                        Watchlist Stocks
-                    </Button>
-                </HStack>
+                <RadioGroup onChange={setValue} value={value}>
+                    <Stack direction="row">
+                        <Radio
+                            value="1"
+                            onChange={() => setDisplayWatchlistNews(false)}
+                        >
+                            Sources
+                        </Radio>
+                        <Radio
+                            value="2"
+                            onChange={() => setDisplayWatchlistNews(true)}
+                        >
+                            Watchlist Stocks
+                        </Radio>
+                    </Stack>
+                </RadioGroup>
                 <Divider orientation="horizontal" />
                 {isDisplayingWatchlistStockNews ? (
                     <StockNewsChecklist />
