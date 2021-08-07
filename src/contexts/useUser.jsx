@@ -15,20 +15,44 @@ const UserProvider = ({ children }) => {
         .doc(user?.uid)
         .collection('watchlist');
 
+    const NOTIFICATIONS = firestore
+        .collection('users')
+        .doc(user?.uid)
+        .collection('notifications');
+
     const addToWatchlist = (ticker) => {
         if (!user) return;
         WATCHLIST.doc(ticker)
             .set({ ticker: ticker })
-            .then(() => console.log(`Added stock: ${ticker} to watchlist`));
-        // TODO: send notification when watchlist added
+            .then(() =>
+                NOTIFICATIONS.add({
+                    text: `Added ${ticker} to watchlist`,
+                    timestamp: Date.now(),
+                    viewed: false,
+                })
+            );
     };
 
     const removeFromWatchlist = (ticker) => {
         if (!user) return;
         WATCHLIST.doc(ticker)
             .delete()
-            .then(() => console.log(`Removed stock: ${ticker} from watchlist`));
-        // TODO: send notification when watchlist removed
+            .then(() =>
+                NOTIFICATIONS.add({
+                    text: `Removed ${ticker} from watchlist`,
+                    timestamp: Date.now(),
+                    viewed: false,
+                })
+            );
+    };
+
+    const viewNotification = async (timestamp) => {
+        if (!user) return;
+
+        const { docs } = await NOTIFICATIONS.where('timestamp', '==', timestamp)
+            .limit(1)
+            .get();
+        await NOTIFICATIONS.doc(docs[0].id).update({ viewed: true });
     };
 
     // TODO: rename this function and update user based on payment
@@ -50,6 +74,7 @@ const UserProvider = ({ children }) => {
                 setNotifications,
                 addToWatchlist,
                 removeFromWatchlist,
+                viewNotification,
                 setUserPaymentDetails,
             }}
         >

@@ -28,8 +28,8 @@ const AuthProvider = ({ children }) => {
 
         const welcomeMessage = {
             text: 'Welcome to InvestoBull',
-            viewed: false,
             timestamp: Date.now(),
+            viewed: false,
         };
 
         await currentUser.set({
@@ -86,11 +86,14 @@ const AuthProvider = ({ children }) => {
                 setNews(snapshot.docs.map((doc) => doc.data()));
             });
 
-            currentUser.collection(NOTIFICATIONS).onSnapshot((snapshot) => {
-                setNotifications(
-                    snapshot.docs.reverse().map((doc) => doc.data())
-                );
-            });
+            currentUser
+                .collection(NOTIFICATIONS)
+                .orderBy('timestamp')
+                .onSnapshot((snapshot) => {
+                    setNotifications(
+                        snapshot.docs.reverse().map((doc) => doc.data())
+                    );
+                });
 
             currentUser.collection(WATCHLIST).onSnapshot((snapshot) => {
                 setWatchlist(snapshot.docs.map((doc) => doc.data()));

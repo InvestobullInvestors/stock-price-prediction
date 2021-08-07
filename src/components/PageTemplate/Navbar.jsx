@@ -131,7 +131,7 @@ const ThemeSwitchButton = ({ icon }) => {
 };
 
 const NotificationMenu = ({ bgColor }) => (
-    <Menu>
+    <Menu closeOnSelect={false}>
         <MenuButton
             as={Button}
             bg="transparent"

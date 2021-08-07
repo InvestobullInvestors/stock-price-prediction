@@ -4,7 +4,7 @@ import { FaDotCircle } from 'react-icons/fa';
 import { useUser } from '../contexts/useUser';
 
 const NotificationList = () => {
-    const { notifications } = useUser();
+    const { notifications, viewNotification } = useUser();
 
     if (notifications == null || notifications.length < 1)
         return <Text m={3}>You have no notifications!</Text>;
@@ -18,6 +18,7 @@ const NotificationList = () => {
                     size={8}
                 />
             }
+            onClick={() => viewNotification(item.timestamp)}
         >
             <Text color={item.viewed ? 'brand.500' : 'brand'}>{item.text}</Text>
         </MenuItem>
