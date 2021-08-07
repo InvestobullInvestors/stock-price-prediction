@@ -10,7 +10,7 @@ const defaultNews = {
 };
 
 /* GET news details. */
-router.get('/stock-news/news/:ticker', function (req, res) {
+router.get('/stock-news/:ticker', function (req, res) {
     const { ticker } = req.params;
     stockNewsInfo
         .findOne({ ticker_id: ticker })

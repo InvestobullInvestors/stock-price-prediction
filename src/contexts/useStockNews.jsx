@@ -19,7 +19,7 @@ const StockNewsProvider = ({ children }) => {
 
     const setNews = (stockSymbol) => {
         setIsStockNewsLoading(true, () => {
-            axios.get(`/stock-news/news/${stockSymbol}`).then((response) => {
+            axios.get(`/stock-news/${stockSymbol}`).then((response) => {
                 setStockNews(response.data.news);
                 setIsStockNewsLoading(false, null);
             });
