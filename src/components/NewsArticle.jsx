@@ -1,14 +1,10 @@
-import {
-    Box,
-    Heading,
-    Text,
-    useColorModeValue,
-    VStack,
-} from '@chakra-ui/react';
+import {Box, Heading, Text, useColorModeValue, VStack,} from '@chakra-ui/react';
 import React from 'react';
+import useDateFormat from "../hooks/useDateFormat";
 
-const NewsArticle = ({ date, title }) => {
+const NewsArticle = ({date, title}) => {
     const dateColor = useColorModeValue('gray.600', 'gray.400');
+    const formatDate = useDateFormat();
 
     return (
         <VStack spacing="4px" align="flex-start">
@@ -23,7 +19,7 @@ const NewsArticle = ({ date, title }) => {
                 <Heading size="md">{title}</Heading>
             </Box>
             <Text color={dateColor} px={2}>
-                {date}
+                {formatDate(date)}
             </Text>
         </VStack>
     );
