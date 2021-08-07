@@ -1,26 +1,21 @@
 import React from 'react';
 import { MenuItem, Text } from '@chakra-ui/react';
-import { FaDotCircle } from 'react-icons/fa';
+import { SmallCloseIcon, Icon } from '@chakra-ui/icons';
 import { useUser } from '../contexts/useUser';
 
 const NotificationList = () => {
-    const { notifications, viewNotification } = useUser();
+    const { notifications, deleteOneNotification } = useUser();
 
     if (notifications == null || notifications.length < 1)
-        return <Text m={3}>You have no notifications!</Text>;
+        return <Text m={3}>No new notifications!</Text>;
 
     return notifications.map((item, id) => (
         <MenuItem
             key={id}
-            icon={
-                <FaDotCircle
-                    color={item.viewed ? 'transparent' : 'brand'}
-                    size={8}
-                />
-            }
-            onClick={() => viewNotification(item.timestamp)}
+            onClick={() => deleteOneNotification(item.timestamp)}
         >
-            <Text color={item.viewed ? 'brand.500' : 'brand'}>{item.text}</Text>
+            <Text mx={2}>{item.text}</Text>
+            <Icon as={SmallCloseIcon} />
         </MenuItem>
     ));
 };

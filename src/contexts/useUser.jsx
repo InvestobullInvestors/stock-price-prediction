@@ -24,35 +24,32 @@ const UserProvider = ({ children }) => {
         if (!user) return;
         WATCHLIST.doc(ticker)
             .set({ ticker: ticker })
-            .then(() =>
-                NOTIFICATIONS.add({
-                    text: `Added ${ticker} to watchlist`,
-                    timestamp: Date.now(),
-                    viewed: false,
-                })
-            );
+            .then(() => {
+                const timestamp = Date.now();
+                return NOTIFICATIONS.doc(timestamp.toString()).set({
+                    text: `Added ${ticker} to watchlist.`,
+                    timestamp: timestamp,
+                });
+            });
     };
 
     const removeFromWatchlist = (ticker) => {
         if (!user) return;
         WATCHLIST.doc(ticker)
             .delete()
-            .then(() =>
-                NOTIFICATIONS.add({
-                    text: `Removed ${ticker} from watchlist`,
-                    timestamp: Date.now(),
-                    viewed: false,
-                })
-            );
+            .then(() => {
+                const timestamp = Date.now();
+                return NOTIFICATIONS.doc(timestamp.toString()).set({
+                    text: `Removed ${ticker} from watchlist.`,
+                    timestamp: timestamp,
+                });
+            });
     };
 
-    const viewNotification = async (timestamp) => {
+    const deleteOneNotification = async (timestamp) => {
         if (!user) return;
 
-        const { docs } = await NOTIFICATIONS.where('timestamp', '==', timestamp)
-            .limit(1)
-            .get();
-        await NOTIFICATIONS.doc(docs[0].id).update({ viewed: true });
+        await NOTIFICATIONS.doc(timestamp.toString()).delete();
     };
 
     // TODO: rename this function and update user based on payment
@@ -74,7 +71,7 @@ const UserProvider = ({ children }) => {
                 setNotifications,
                 addToWatchlist,
                 removeFromWatchlist,
-                viewNotification,
+                deleteOneNotification,
                 setUserPaymentDetails,
             }}
         >
