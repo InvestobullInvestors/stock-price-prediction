@@ -14,8 +14,10 @@ import { useUser } from '../../contexts/useUser';
 
 const StaticChecklistContainer = () => {
     const boxColor = useColorModeValue('brand.400', 'brand.700');
-    const { isDisplayingWatchlistStockNews, setDisplayWatchlistNews } =
-        useStockNews();
+    const {
+        isDisplayingWatchlistStockNews,
+        setDisplayWatchlistNews,
+    } = useStockNews();
     const { user } = useUser();
 
     return (
@@ -32,14 +34,23 @@ const StaticChecklistContainer = () => {
                 <HStack>
                     <Button
                         colorScheme="brand"
+                        opacity="0.5"
                         onClick={() => setDisplayWatchlistNews(false)}
+                        _focus={{
+                            opacity: '1',
+                        }}
+                        autoFocus={true}
                     >
                         Sources
                     </Button>
                     <Button
                         colorScheme="brand"
+                        opacity="0.5"
                         onClick={() => setDisplayWatchlistNews(true)}
                         isDisabled={!user}
+                        _focus={{
+                            opacity: '1',
+                        }}
                     >
                         Watchlist Stocks
                     </Button>
