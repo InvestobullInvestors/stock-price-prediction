@@ -9,8 +9,8 @@ const useHandlePayment = (
     callback
 ) => {
     return async (event) => {
-        setIsLoading(true);
         event.preventDefault();
+        setIsLoading(true);
         try {
             const {
                 error,

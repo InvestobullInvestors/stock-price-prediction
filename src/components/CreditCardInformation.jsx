@@ -40,13 +40,15 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
         (status) => {
             if (status) {
                 setPaymentSuccessful(true);
+                setAlertVisible(true);
                 const {
                     config: { data },
                 } = status;
                 setUserPaymentDetails(JSON.parse(data));
-                setAlertVisible(true);
-                setTimeout(() => setAlertVisible(false), TIMEOUT);
-                setTimeout(closePaymentModal, TIMEOUT);
+                setTimeout(() => {
+                    setAlertVisible(false);
+                    closePaymentModal();
+                }, TIMEOUT);
             } else {
                 setPaymentSuccessful(false);
                 setAlertVisible(true);
@@ -56,7 +58,7 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
 
     return (
         <>
-            {alertVisible && (
+            {!isLoading && alertVisible && (
                 <Alert
                     status={paymentSuccessful ? 'success' : 'error'}
                     flexDirection="column"
@@ -77,42 +79,46 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
                     </AlertDescription>
                 </Alert>
             )}
-            <Box
-                my={2}
-                px={4}
-                py={2}
-                rounded="md"
-                border="solid"
-                borderColor="brand.500"
-                bg="brand.300"
-            >
-                <CardElement
-                    options={{
-                        style: {
-                            base: {
-                                fontSize: '16px',
-                                color: '#101010',
-                                '::placeholder': {
-                                    color: '#696969',
+            {!paymentSuccessful && (
+                <>
+                    <Box
+                        my={2}
+                        px={4}
+                        py={2}
+                        rounded="md"
+                        border="solid"
+                        borderColor="brand.500"
+                        bg="brand.300"
+                    >
+                        <CardElement
+                            options={{
+                                style: {
+                                    base: {
+                                        fontSize: '16px',
+                                        color: '#101010',
+                                        '::placeholder': {
+                                            color: '#696969',
+                                        },
+                                    },
+                                    invalid: {
+                                        color: '#DC1212',
+                                    },
                                 },
-                            },
-                            invalid: {
-                                color: '#DC1212',
-                            },
-                        },
-                    }}
-                />
-            </Box>
-            <Center>
-                <Button
-                    isLoading={isLoading}
-                    my={8}
-                    colorScheme="brand"
-                    onClick={handlePayment}
-                >
-                    Confirm Payment
-                </Button>
-            </Center>
+                            }}
+                        />
+                    </Box>
+                    <Center>
+                        <Button
+                            isLoading={isLoading}
+                            my={8}
+                            colorScheme="brand"
+                            onClick={handlePayment}
+                        >
+                            Confirm Payment
+                        </Button>
+                    </Center>
+                </>
+            )}
         </>
     );
 };
