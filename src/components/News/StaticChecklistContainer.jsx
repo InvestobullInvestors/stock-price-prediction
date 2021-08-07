@@ -17,10 +17,8 @@ const StaticChecklistContainer = () => {
     const [value, setValue] = React.useState(0);
     const boxColor = useColorModeValue('brand.400', 'brand.700');
 
-    const {
-        isDisplayingWatchlistStockNews,
-        setDisplayWatchlistNews,
-    } = useStockNews();
+    const { isDisplayingWatchlistStockNews, setDisplayWatchlistNews } =
+        useStockNews();
 
     return (
         <CustomBox
@@ -54,6 +52,7 @@ const StaticChecklistContainer = () => {
                         }}
                         opacity={value === 1 ? '1' : '0.5'}
                         isDisabled={!user}
+                        title={user ? null : 'Log In to view this section.'}
                     >
                         Watchlist Stocks
                     </Button>
