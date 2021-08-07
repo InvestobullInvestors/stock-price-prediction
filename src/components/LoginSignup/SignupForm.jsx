@@ -11,10 +11,12 @@ import {
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/useAuth';
+import { auth } from '../../auth/firebase';
+import { StyledFirebaseAuth } from 'react-firebaseui';
 
 const SignupForm = () => {
     const { register, handleSubmit, formState } = useForm();
-    const { signup } = useAuth();
+    const { signup, uiConfig } = useAuth();
 
     const [showPW, setShowPW] = useState(false);
     const [showPWC, setShowPWC] = useState(false);
@@ -99,6 +101,7 @@ const SignupForm = () => {
             <Button isLoading={formState.isSubmitting} type="submit">
                 Sign Up
             </Button>
+            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
         </form>
     );
 };
