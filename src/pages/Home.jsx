@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
 import CustomHeading from '../components/CustomHeading';
 import { VStack } from '@chakra-ui/react';
@@ -10,12 +10,17 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const Home = () => {
     const {
         basicStockInfo,
+        getBasicStockInfo,
         filterStocks,
         isStockInfoTableLoading,
         sortStocks,
         setBasicStockInfo,
     } = useStockSymbol();
     const [filterKeyword, setFilterKeyword] = useState();
+
+    useEffect(() => {
+        getBasicStockInfo();
+    }, []);
 
     const handleSortClick = (key) => {
         sortStocks(basicStockInfo, key, setBasicStockInfo);

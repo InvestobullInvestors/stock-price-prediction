@@ -23,28 +23,24 @@ const NewsChecklist = () => {
     });
 
     return (
-        <>
-            <VStack align="stretch">
-                <HStack>
-                    <Button onClick={() => selectAllSources()}>
-                        Check All
-                    </Button>
-                    <Button onClick={() => unselectAllSources()}>
-                        Uncheck All
-                    </Button>
-                </HStack>
-                {sortedNewsInfo.map((source) => (
-                    <Checkbox
-                        key={source.id}
-                        value={source.name}
-                        isChecked={source.selected}
-                        onChange={(e) => selectSource(source)}
-                    >
-                        {source.name}
-                    </Checkbox>
-                ))}
-            </VStack>
-        </>
+        <VStack align="stretch">
+            <HStack>
+                <Button onClick={() => selectAllSources()}>Check All</Button>
+                <Button onClick={() => unselectAllSources()}>
+                    Uncheck All
+                </Button>
+            </HStack>
+            {sortedNewsInfo.map((source) => (
+                <Checkbox
+                    key={source.id}
+                    value={source.name}
+                    isChecked={source.selected}
+                    onChange={(e) => selectSource(source)}
+                >
+                    {source.name}
+                </Checkbox>
+            ))}
+        </VStack>
     );
 };
 

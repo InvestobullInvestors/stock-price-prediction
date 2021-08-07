@@ -6,19 +6,16 @@ const StockNewsContext = createContext({});
 
 const StockNewsProvider = ({ children }) => {
     const [stockNews, setStockNews] = useState([]);
+    const [stockListNews, setStockListNews] = useState([]);
     const [newsInfo, setNewsInfo] = useState([]);
     const [
         isStockNewsLoading,
         setIsStockNewsLoading,
     ] = useStateWithCallbackLazy(false);
     const [
-        isNewsChecklistLoading,
-        setIsNewsChecklistLoading,
-    ] = useStateWithCallbackLazy(false);
-    const [
-        isNewsCardListLoading,
-        setIsNewsCardListLoading,
-    ] = useStateWithCallbackLazy(false);
+        isDisplayingWatchlistStockNews,
+        setDisplayingWatchlistStockNews,
+    ] = useState(false);
 
     const setNews = (stockSymbol) => {
         setIsStockNewsLoading(true, () => {
@@ -30,16 +27,9 @@ const StockNewsProvider = ({ children }) => {
     };
 
     const setNewsInfoFromMongo = () => {
-        setIsNewsCardListLoading(true, () => {
-            axios.get('/stock-news/news-source-info').then((response) => {
-                setNewsInfo(response.data);
-                setIsNewsCardListLoading(false, null);
-            });
+        axios.get('/stock-news/news-source-info').then((response) => {
+            setNewsInfo(response.data);
         });
-    };
-
-    const reorderSources = (reorderedList) => {
-        setNewsInfo(reorderedList);
     };
 
     const selectSource = (source) => {
@@ -62,20 +52,39 @@ const StockNewsProvider = ({ children }) => {
         setNewsInfo(newNewsInfo);
     };
 
-    const getNewsSourceList = () => {
-        axios.get('/stock-news/news-source-list').then((response) => {
-            setNewsInfo(response.data);
-        });
+    const reorderSources = (reorderedList) => {
+        setNewsInfo(reorderedList);
+    };
+
+    const getStockListNews = (stockSymbols) => {
+        axios
+            .post(
+                `/stock-news/stocks`,
+                JSON.stringify({
+                    stockSymbols,
+                }),
+                { headers: { 'Content-Type': 'application/json' } }
+            )
+            .then((response) => {
+                setStockListNews(response.data);
+            });
+    };
+
+    const setDisplayWatchlistNews = (state) => {
+        setDisplayingWatchlistStockNews(state);
     };
 
     return (
         <StockNewsContext.Provider
             value={{
-                stockNews,
                 newsInfo,
+                stockNews,
+                stockListNews,
                 isStockNewsLoading,
-                isNewsCardListLoading,
+                isDisplayingWatchlistStockNews,
+                setDisplayWatchlistNews,
                 setNewsInfoFromMongo,
+                getStockListNews,
                 setNews,
                 reorderSources,
                 selectSource,

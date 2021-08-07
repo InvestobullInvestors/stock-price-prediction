@@ -4,34 +4,6 @@ const router = express.Router();
 
 const { stockNewsInfo } = require('../dal/stock-markets');
 
-let newsSelections = [
-    {
-        id: '0',
-        name: 'Bloomberg',
-        selected: true,
-    },
-    {
-        id: '1',
-        name: 'Financial Post',
-        selected: true,
-    },
-    {
-        id: '2',
-        name: 'ABC News',
-        selected: true,
-    },
-    {
-        id: '3',
-        name: 'Google News',
-        selected: true,
-    },
-    {
-        id: '4',
-        name: 'The Verge',
-        selected: true,
-    },
-];
-
 const defaultNews = {
     company_name: '',
     news: [],
@@ -51,6 +23,28 @@ router.get('/stock-news/news/:ticker', function (req, res) {
         .catch(({ message }) => {
             console.log(message);
             res.send(defaultNews);
+        });
+});
+
+/* GET news details for multiple stocks. */
+router.post('/stock-news/stocks/', function (req, res) {
+    const { stockSymbols } = req.body;
+
+    stockNewsInfo
+        .find({ ticker_id: stockSymbols })
+        .sort({ ticker_id: 1 })
+        .then((newsInfo) => {
+            res.send(
+                newsInfo.map(({ ticker_id, stock_name, stock_news }) => ({
+                    ticker_id: ticker_id,
+                    stock_name: stock_name,
+                    news: stock_news.slice(0, 5),
+                }))
+            );
+        })
+        .catch(({ message }) => {
+            console.log(message);
+            res.send({});
         });
 });
 
@@ -75,40 +69,6 @@ router.get('/stock-news/news-source-info', function (req, res) {
             console.log(message);
             res.send([]);
         });
-});
-
-router.post('/stock-news/reorder-news', function (req, res) {
-    const { sources } = req.body;
-    newsSelections = sources;
-    res.send(newsSelections);
-});
-
-router.post('/stock-news/select-source', function (req, res) {
-    const { source } = req.body;
-    let selectedSource = newsSelections.find(
-        (currSource) => currSource.id === source.id
-    );
-    console.log(selectedSource);
-    console.log(selectedSource.selected);
-    selectedSource.selected = !selectedSource.selected;
-    console.log(selectedSource.selected);
-    res.send(newsSelections);
-});
-
-router.post('/stock-news/select-all-sources', function (req, res) {
-    newsSelections = newsSelections.map(({ selected, ...rest }) => ({
-        ...rest,
-        selected: true,
-    }));
-    res.send(newsSelections);
-});
-
-router.post('/stock-news/unselect-all-sources', function (req, res) {
-    newsSelections = newsSelections.map(({ selected, ...rest }) => ({
-        ...rest,
-        selected: false,
-    }));
-    res.send(newsSelections);
 });
 
 module.exports = router;

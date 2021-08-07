@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
@@ -23,14 +23,14 @@ const StockInfoProvider = ({ children }) => {
     const [isStockGraphLoading, setIsStockGraphLoading] =
         useStateWithCallbackLazy(false);
 
-    useEffect(() => {
+    const getBasicStockInfo = () => {
         setIsStockInfoTableLoading(true, () => {
             axios.get(`/stock-details/`).then((response) => {
                 setBasicStockInfo(response.data);
                 setIsStockInfoTableLoading(false, null);
             });
         });
-    }, []);
+    };
 
     const getWatchlistStockInfo = (watchlist) => {
         const tickerString = watchlist.join('-');
@@ -131,6 +131,7 @@ const StockInfoProvider = ({ children }) => {
                 isStockGraphLoading,
                 isQuarterlyDataLoading,
                 getWatchlistStockInfo,
+                getBasicStockInfo,
                 setRealtimeDetails,
                 setQuarterlyDetails,
                 setRealtimeGraphData,

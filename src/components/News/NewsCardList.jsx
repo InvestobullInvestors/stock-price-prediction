@@ -11,6 +11,8 @@ const NewsCardList = () => {
     const { reorderSources } = useStockNews();
     const { selectSource } = useStockNews();
 
+    const staticCheckListWidth = '300px';
+
     let visibleNewsCards = newsInfo.filter(
         (source) => source.selected === true
     );
@@ -48,13 +50,13 @@ const NewsCardList = () => {
                     >
                         <List
                             spacing={3}
-                            ml={['0px', '0px', '0px', '275px']}
+                            ml={['0px', '0px', '0px', staticCheckListWidth]}
                             mr={5}
                             width={[
                                 '100%',
                                 '100%',
                                 '100%',
-                                'calc(100% - 275px)',
+                                'calc(100% - ' + staticCheckListWidth + ')',
                             ]}
                         >
                             {visibleNewsCards.map((source, index) => (
