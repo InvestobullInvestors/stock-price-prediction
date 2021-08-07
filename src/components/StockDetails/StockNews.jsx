@@ -1,8 +1,10 @@
 import React from 'react';
 import {
     Box,
-    Divider,
     Heading,
+    HStack,
+    Image,
+    Link,
     useColorModeValue,
     VStack,
 } from '@chakra-ui/react';
@@ -10,6 +12,15 @@ import { useStockNews } from '../../contexts/useStockNews';
 import NewsArticle from '../NewsArticle';
 import LoadingSpinner from '../LoadingSpinner';
 import CustomBox from '../CustomBox';
+
+const NewsLayout = ({ _id, urlToImage, publishedAt, title }) => (
+    <>
+        <Image boxSize="150px" objectFit="cover" src={urlToImage} />
+        <Box key={_id} w={{ base: '100%', md: '80%' }} px={8}>
+            <NewsArticle date={publishedAt} title={title} />
+        </Box>
+    </>
+);
 
 const StockNews = ({ ...otherProps }) => {
     const { stockNews, isStockNewsLoading } = useStockNews();
@@ -24,17 +35,33 @@ const StockNews = ({ ...otherProps }) => {
             {isStockNewsLoading ? (
                 <LoadingSpinner />
             ) : (
-                <VStack>
-                    {stockNews.map(({ _id, url, title }) => (
-                        <Box key={_id} w="80%">
-                            <NewsArticle
-                                date="2021-01-01"
-                                title={title}
-                                url={url}
-                            />
-                            <Divider my={4} orientation="horizontal" />
-                        </Box>
-                    ))}
+                <VStack align="flex-start" spacing={12} mx={16}>
+                    {stockNews.map(
+                        ({ _id, url, title, urlToImage, publishedAt }) => (
+                            <Link href={url} isExternal w="100%" align="center">
+                                <HStack display={{ base: 'none', md: 'flex' }}>
+                                    <NewsLayout
+                                        _id={_id}
+                                        urlToImage={urlToImage}
+                                        publishedAt={publishedAt}
+                                        title={title}
+                                    />
+                                </HStack>
+                                <VStack
+                                    _hover={{ bgColor: hoverColor }}
+                                    display={{ base: 'flex', md: 'none' }}
+                                    spacing={8}
+                                >
+                                    <NewsLayout
+                                        _id={_id}
+                                        urlToImage={urlToImage}
+                                        publishedAt={publishedAt}
+                                        title={title}
+                                    />
+                                </VStack>
+                            </Link>
+                        )
+                    )}
                 </VStack>
             )}
         </CustomBox>
