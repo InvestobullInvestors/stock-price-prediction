@@ -4,7 +4,7 @@ import { Flex, List, Spacer } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons';
-import StockNewsCard2 from './StockNewsCard2';
+import StockNewsCard from './StockNewsCard';
 
 const StockNewsCardList = () => {
     const { stockListNews, reorderStockNews, selectSource } = useStockNews();
@@ -69,7 +69,7 @@ const StockNewsCardList = () => {
                                             {...draggableProvided.draggableProps}
                                             ref={draggableProvided.innerRef}
                                         >
-                                            <StockNewsCard2
+                                            <StockNewsCard
                                                 key={stock.ticker_id}
                                                 stock={stock}
                                             >
@@ -95,7 +95,7 @@ const StockNewsCardList = () => {
                                                         h={5}
                                                     />
                                                 </Flex>
-                                            </StockNewsCard2>
+                                            </StockNewsCard>
                                         </div>
                                     )}
                                 </Draggable>

@@ -23,7 +23,7 @@ function formatDate(date) {
     return new Intl.DateTimeFormat('en-US', options).format(dateObj);
 }
 
-const StockNewsCard2 = ({ stock, children, ...otherProps }) => {
+const StockNewsCard = ({ stock, children, ...otherProps }) => {
     const cardColor = useColorModeValue('brand.400', 'brand.700');
     const textBoxColor = useColorModeValue('brand.100', 'brand.600');
 
@@ -165,4 +165,4 @@ const StockNewsCard2 = ({ stock, children, ...otherProps }) => {
     );
 };
 
-export default StockNewsCard2;
+export default StockNewsCard;
