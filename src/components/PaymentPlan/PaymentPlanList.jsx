@@ -1,40 +1,49 @@
 import React from 'react';
-import { SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid, useColorModeValue } from '@chakra-ui/react';
 import PaymentPlanCard from './PaymentPlanCard';
 
-const PaymentPlanList = () => (
-    <SimpleGrid columns={{ base: 1, md: 3 }} spacing={5}>
-        <PaymentPlanCard
-            type="Basic"
-            price={0}
-            buttonText="Start Exploring"
-            details={[
-                'Access to the latest stock data',
-                'Access to the latest stock news',
-                'Add 5 stocks to the watchlist',
-            ]}
-        />
-        <PaymentPlanCard
-            type="Premium"
-            price={5}
-            buttonText="Subscribe Now"
-            details={[
-                'All perks from the basic plan',
-                'Stock price forecast',
-                'Add 20 stocks to the watchlist',
-            ]}
-        />
-        <PaymentPlanCard
-            type="Unlimited"
-            price={10}
-            buttonText="Subscribe Now"
-            details={[
-                'All perks from the premium plan',
-                'Change forecast predictors',
-                'Add unlimited stocks to the watchlist',
-            ]}
-        />
-    </SimpleGrid>
-);
+const PaymentPlanList = () => {
+    const bronzeColor = useColorModeValue('bronze.light', 'bronze.dark');
+    const silverColor = useColorModeValue('silver.light', 'silver.dark');
+    const goldColor = useColorModeValue('gold.light', 'gold.dark');
+
+    return (
+        <SimpleGrid columns={{ base: 1, md: 3 }}>
+            <PaymentPlanCard
+                plan="Basic"
+                price={0}
+                buttonText="Start Exploring"
+                details={[
+                    'Access the latest stock data.',
+                    'Access the latest stock news.',
+                    'Add 5 stocks to the watchlist.',
+                ]}
+                planColor={bronzeColor}
+            />
+            <PaymentPlanCard
+                plan="Premium"
+                price={5}
+                buttonText="Subscribe Now"
+                details={[
+                    'All Basic perks.',
+                    'Stock price forecast.',
+                    'Add 20 stocks to the watchlist.',
+                ]}
+                planColor={silverColor}
+            />
+            <PaymentPlanCard
+                plan="Unlimited"
+                price={10}
+                buttonText="Subscribe Now"
+                details={[
+                    'All Premium perks.',
+                    'Change forecast predictors.',
+                    'Add unlimited stocks to the watchlist.',
+                ]}
+                planColor={goldColor}
+            />
+        </SimpleGrid>
+    );
+};
 
 export default PaymentPlanList;

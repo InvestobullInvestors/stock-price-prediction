@@ -41,9 +41,11 @@ const ReviewCard = ({
                     </HStack>
                     <Text>Google</Text>
                 </VStack>
-                <Divider py={3} orientation="horizontal" />
+                <Divider py={2} orientation="horizontal" />
                 <HStack>
-                    <Text fontSize="lg">{reviewTitle}</Text>
+                    <Text fontSize="lg" fontWeight={600} my={2}>
+                        {reviewTitle}
+                    </Text>
                 </HStack>
                 <Text>{reviewSummary}</Text>
             </VStack>
