@@ -8,6 +8,9 @@ const NewsArticle = ({date, title}) => {
 
     return (
         <VStack spacing="4px" align="flex-start">
+            <Text color={dateColor} px={2}>
+                {formatDate(date)}
+            </Text>
             <Box
                 as="button"
                 w="100%"
@@ -18,9 +21,6 @@ const NewsArticle = ({date, title}) => {
             >
                 <Heading size="md">{title}</Heading>
             </Box>
-            <Text color={dateColor} px={2}>
-                {formatDate(date)}
-            </Text>
         </VStack>
     );
 };
