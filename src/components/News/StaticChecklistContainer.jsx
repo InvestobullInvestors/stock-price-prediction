@@ -27,7 +27,6 @@ const StaticChecklistContainer = () => {
             ml={-1}
             bgColor={boxColor}
             position="fixed"
-            boxShadow="dark-lg"
             zIndex={100}
         >
             <VStack>
