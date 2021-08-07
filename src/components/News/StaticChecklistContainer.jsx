@@ -14,6 +14,7 @@ import { useStockNews } from '../../contexts/useStockNews';
 import { useUser } from '../../contexts/useUser';
 
 const StaticChecklistContainer = () => {
+    const { user } = useUser();
     const [value, setValue] = React.useState('1');
     const boxColor = useColorModeValue('brand.400', 'brand.700');
 
@@ -21,7 +22,6 @@ const StaticChecklistContainer = () => {
         isDisplayingWatchlistStockNews,
         setDisplayWatchlistNews,
     } = useStockNews();
-    const { user } = useUser();
 
     return (
         <CustomBox
@@ -45,6 +45,7 @@ const StaticChecklistContainer = () => {
                         <Radio
                             value="2"
                             onChange={() => setDisplayWatchlistNews(true)}
+                            isDisabled={!user}
                         >
                             Watchlist Stocks
                         </Radio>
