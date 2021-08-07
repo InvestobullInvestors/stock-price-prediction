@@ -11,6 +11,14 @@ const StockNewsProvider = ({ children }) => {
         isStockNewsLoading,
         setIsStockNewsLoading,
     ] = useStateWithCallbackLazy(false);
+    const [
+        isNewsChecklistLoading,
+        setIsNewsChecklistLoading,
+    ] = useStateWithCallbackLazy(false);
+    const [
+        isNewsCardListLoading,
+        setIsNewsCardListLoading,
+    ] = useStateWithCallbackLazy(false);
 
     const setNews = (stockSymbol) => {
         setIsStockNewsLoading(true, () => {
@@ -22,8 +30,11 @@ const StockNewsProvider = ({ children }) => {
     };
 
     const setNewsInfoFromMongo = () => {
-        axios.get('/stock-news/news-source-info').then((response) => {
-            setNewsInfo(response.data);
+        setIsNewsCardListLoading(true, () => {
+            axios.get('/stock-news/news-source-info').then((response) => {
+                setNewsInfo(response.data);
+                setIsNewsCardListLoading(false, null);
+            });
         });
     };
 
@@ -63,6 +74,7 @@ const StockNewsProvider = ({ children }) => {
                 stockNews,
                 newsInfo,
                 isStockNewsLoading,
+                isNewsCardListLoading,
                 setNewsInfoFromMongo,
                 setNews,
                 reorderSources,
