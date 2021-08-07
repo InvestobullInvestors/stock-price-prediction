@@ -1,8 +1,7 @@
 import {
+    Button,
+    ButtonGroup,
     Divider,
-    Radio,
-    RadioGroup,
-    Stack,
     useColorModeValue,
     VStack,
 } from '@chakra-ui/react';
@@ -15,7 +14,7 @@ import { useUser } from '../../contexts/useUser';
 
 const StaticChecklistContainer = () => {
     const { user } = useUser();
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = React.useState(0);
     const boxColor = useColorModeValue('brand.400', 'brand.700');
 
     const {
@@ -34,23 +33,31 @@ const StaticChecklistContainer = () => {
             zIndex={100}
         >
             <VStack>
-                <RadioGroup onChange={setValue} value={value}>
-                    <Stack direction="row">
-                        <Radio
-                            value="1"
-                            onChange={() => setDisplayWatchlistNews(false)}
-                        >
-                            Sources
-                        </Radio>
-                        <Radio
-                            value="2"
-                            onChange={() => setDisplayWatchlistNews(true)}
-                            isDisabled={!user}
-                        >
-                            Watchlist Stocks
-                        </Radio>
-                    </Stack>
-                </RadioGroup>
+                <ButtonGroup isAttached colorScheme="brand">
+                    <Button
+                        value={0}
+                        mr="-px"
+                        onClick={() => {
+                            setValue(0);
+                            setDisplayWatchlistNews(false);
+                        }}
+                        opacity={value === 0 ? '1' : '0.5'}
+                    >
+                        Sources
+                    </Button>
+                    <Button
+                        value={1}
+                        mr="-px"
+                        onClick={() => {
+                            setValue(1);
+                            setDisplayWatchlistNews(true);
+                        }}
+                        opacity={value === 1 ? '1' : '0.5'}
+                        isDisabled={!user}
+                    >
+                        Watchlist Stocks
+                    </Button>
+                </ButtonGroup>
                 <Divider orientation="horizontal" />
                 {isDisplayingWatchlistStockNews ? (
                     <StockNewsChecklist />
