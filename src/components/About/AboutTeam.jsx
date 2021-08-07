@@ -12,6 +12,15 @@ import {
 import CustomBox from '../CustomBox';
 import { Link } from '@chakra-ui/react';
 
+const ImageAvatar = ({ name, imageUrl }) => (
+    <GridItem colSpan={1}>
+        <VStack>
+            <Avatar size="2xl" name={name} src={imageUrl} />
+            <Text>{name}</Text>
+        </VStack>
+    </GridItem>
+);
+
 const TeamMemberCard = ({
     name,
     imageUrl,
@@ -35,12 +44,7 @@ const TeamMemberCard = ({
         <Grid templateColumns="repeat(6, 1fr)" alignItems="center">
             {alignLeft ? (
                 <>
-                    <GridItem colSpan={1}>
-                        <VStack>
-                            <Avatar size="2xl" name={name} src={imageUrl} />
-                            <Text>{name}</Text>
-                        </VStack>
-                    </GridItem>
+                    <ImageAvatar name={name} imageUrl={imageUrl} />
                     <Spacer />
                 </>
             ) : null}
@@ -59,12 +63,7 @@ const TeamMemberCard = ({
             {alignRight ? (
                 <>
                     <Spacer />
-                    <GridItem colSpan={1}>
-                        <VStack>
-                            <Avatar size="2xl" name={name} src={imageUrl} />
-                            <Text>{name}</Text>
-                        </VStack>
-                    </GridItem>
+                    <ImageAvatar name={name} imageUrl={imageUrl} />
                 </>
             ) : null}
         </Grid>
