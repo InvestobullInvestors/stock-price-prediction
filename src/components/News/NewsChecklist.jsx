@@ -3,14 +3,19 @@ import { Button, Checkbox, HStack, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
 
 const NewsChecklist = () => {
-    const { newsInfo } = useStockNews();
-    const { selectSource } = useStockNews();
-    const { selectAllSources } = useStockNews();
-    const { unselectAllSources } = useStockNews();
+    const {
+        newsInfo,
+        selectSource,
+        selectAllSources,
+        unselectAllSources,
+    } = useStockNews();
     const sortedNewsInfo = [...newsInfo];
 
-    // keep sources alphabetically sorted in the checklist
+    // keep checklist items alphabetically sorted
     sortedNewsInfo.sort((a, b) => {
+        while (a == null || b == null) {
+            setTimeout(null, 1000);
+        }
         const nameA = a.name.toUpperCase();
         const nameB = b.name.toUpperCase();
         if (nameA < nameB) {

@@ -23,36 +23,39 @@ function formatDate(date) {
     return new Intl.DateTimeFormat('en-US', options).format(dateObj);
 }
 
-const NewsCard = ({ source, children, ...otherProps }) => {
+const StockNewsCard2 = ({ stock, children, ...otherProps }) => {
     const cardColor = useColorModeValue('brand.400', 'brand.700');
     const textBoxColor = useColorModeValue('brand.100', 'brand.600');
 
-    const { newsInfo } = useStockNews();
+    const { stockListNews } = useStockNews();
 
+    let ticker_id;
     let name;
     let articles;
     let logoBlack;
     let logoWhite;
     let logo;
 
-    let targetSource = newsInfo.find(
-        (currSource) => currSource.id === source.id
+    let targetStock = stockListNews.find(
+        (currStock) => currStock.ticker_id === stock.ticker_id
     );
 
-    if (targetSource) {
-        name = targetSource.name;
-        articles = targetSource.articles;
-        logoBlack = process.env.PUBLIC_URL + name + '.png';
-        logoWhite = process.env.PUBLIC_URL + name + '_white.png';
+    if (targetStock) {
+        ticker_id = targetStock.ticker_id;
+        name = targetStock.stock_name;
+        articles = targetStock.news;
+        logoBlack = process.env.PUBLIC_URL + ticker_id + '.png';
+        logoWhite = process.env.PUBLIC_URL + ticker_id + '_white.png';
     } else {
+        ticker_id = '';
         name = '';
         articles = [];
         logoBlack = '';
         logoWhite = '';
     }
 
-    logoBlack = logoBlack.replace(/\s+/g, '-').toLowerCase();
-    logoWhite = logoWhite.replace(/\s+/g, '-').toLowerCase();
+    logoBlack = logoBlack.replace(/\s+/g, '-').toUpperCase();
+    logoWhite = logoWhite.replace(/\s+/g, '-').toUpperCase();
     logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
@@ -162,4 +165,4 @@ const NewsCard = ({ source, children, ...otherProps }) => {
     );
 };
 
-export default NewsCard;
+export default StockNewsCard2;

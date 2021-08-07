@@ -6,8 +6,8 @@ import StaticChecklistContainer from '../components/News/StaticChecklistContaine
 import { Flex, Grid, Text, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../contexts/useStockNews';
 import { useUser } from '../contexts/useUser';
-import StockNewsCard from '../components/News/StockNewsCard';
 import NewsCardList from '../components/News/NewsCardList';
+import StockNewsCardList from '../components/News/StockNewsCardList';
 
 const News = () => {
     const {
@@ -16,7 +16,7 @@ const News = () => {
     } = useStockNews();
 
     const { user, watchlist } = useUser();
-    const { stockListNews, getStockListNews } = useStockNews();
+    const { getStockListNews } = useStockNews();
 
     useEffect(() => {
         setNewsInfoFromMongo();
@@ -28,6 +28,8 @@ const News = () => {
         getStockListNews(tickers);
     }, [watchlist]);
 
+    const staticCheckListWidth = '300px';
+
     return (
         <PageTemplate>
             <CustomHeading mb={3}>News</CustomHeading>
@@ -36,11 +38,7 @@ const News = () => {
                 <StaticChecklistContainer />
                 <VStack>
                     {user && isDisplayingWatchlistStockNews ? (
-                        stockListNews.map(({ stock_name, news }) => {
-                            return (
-                                <StockNewsCard name={stock_name} news={news} />
-                            );
-                        })
+                        <StockNewsCardList />
                     ) : (
                         <NewsCardList />
                     )}
@@ -54,11 +52,7 @@ const News = () => {
             <Grid display={['flex', 'flex', 'flex', 'none']}>
                 <VStack>
                     {user && isDisplayingWatchlistStockNews ? (
-                        stockListNews.map(({ stock_name, news }) => {
-                            return (
-                                <StockNewsCard name={stock_name} news={news} />
-                            );
-                        })
+                        <StockNewsCardList />
                     ) : (
                         <NewsCardList />
                     )}

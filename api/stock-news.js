@@ -39,6 +39,7 @@ router.post('/stock-news/stocks/', function (req, res) {
                     ticker_id: ticker_id,
                     stock_name: stock_name,
                     news: stock_news.slice(0, 5),
+                    selected: true,
                 }))
             );
         })

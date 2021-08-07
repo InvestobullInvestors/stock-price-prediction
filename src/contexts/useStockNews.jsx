@@ -56,6 +56,10 @@ const StockNewsProvider = ({ children }) => {
         setNewsInfo(reorderedList);
     };
 
+    const reorderStockNews = (reorderedList) => {
+        setStockListNews(reorderedList);
+    };
+
     const getStockListNews = (stockSymbols) => {
         axios
             .post(
@@ -87,6 +91,7 @@ const StockNewsProvider = ({ children }) => {
                 getStockListNews,
                 setNews,
                 reorderSources,
+                reorderStockNews,
                 selectSource,
                 selectAllSources,
                 unselectAllSources,

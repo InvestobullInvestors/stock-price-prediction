@@ -1,23 +1,25 @@
 import React from 'react';
 import { Flex, List, Spacer } from '@chakra-ui/react';
-import NewsCard from './NewsCard';
 
 import { useStockNews } from '../../contexts/useStockNews';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons';
+import StockNewsCard2 from './StockNewsCard2';
 
-const NewsCardList = () => {
-    const { newsInfo, reorderSources, selectSource } = useStockNews();
+const StockNewsCardList = () => {
+    const { stockListNews, reorderStockNews, selectSource } = useStockNews();
     const staticCheckListWidth = '300px';
 
-    let visibleNewsCards = newsInfo.filter(
-        (source) => source.selected === true
+    let visibleStockNewsCards = stockListNews.filter(
+        (stock) => stock.selected === true
     );
 
     const reorder = (list, startIndex, endIndex) => {
         const result = [...list];
         const [removed] = result.splice(startIndex, 1);
         result.splice(endIndex, 0, removed);
+        console.log('result');
+        console.log(result);
         return result;
     };
 
@@ -34,8 +36,8 @@ const NewsCardList = () => {
                 ) {
                     return;
                 }
-                reorderSources(
-                    reorder(newsInfo, source.index, destination.index)
+                reorderStockNews(
+                    reorder(stockListNews, source.index, destination.index)
                 );
             }}
         >
@@ -56,10 +58,10 @@ const NewsCardList = () => {
                                 'calc(100% - ' + staticCheckListWidth + ')',
                             ]}
                         >
-                            {visibleNewsCards.map((source, index) => (
+                            {visibleStockNewsCards.map((stock, index) => (
                                 <Draggable
-                                    key={source.id}
-                                    draggableId={source.id}
+                                    key={stock.ticker_id}
+                                    draggableId={stock.ticker_id}
                                     index={index}
                                 >
                                     {(draggableProvided) => (
@@ -67,9 +69,9 @@ const NewsCardList = () => {
                                             {...draggableProvided.draggableProps}
                                             ref={draggableProvided.innerRef}
                                         >
-                                            <NewsCard
-                                                key={source.id}
-                                                source={source}
+                                            <StockNewsCard2
+                                                key={stock.ticker_id}
+                                                stock={stock}
                                             >
                                                 <Flex>
                                                     <div
@@ -87,13 +89,13 @@ const NewsCardList = () => {
                                                     <CloseIcon
                                                         cursor={'pointer'}
                                                         onClick={() =>
-                                                            selectSource(source)
+                                                            selectSource(stock)
                                                         }
                                                         w={5}
                                                         h={5}
                                                     />
                                                 </Flex>
-                                            </NewsCard>
+                                            </StockNewsCard2>
                                         </div>
                                     )}
                                 </Draggable>
@@ -107,4 +109,4 @@ const NewsCardList = () => {
     );
 };
 
-export default NewsCardList;
+export default StockNewsCardList;
