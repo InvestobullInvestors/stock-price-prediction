@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
 import CustomHeading from '../components/CustomHeading';
-import { Center, VStack } from '@chakra-ui/react';
+import { Center, Link, useColorModeValue, VStack } from '@chakra-ui/react';
 import { useUser } from '../contexts/useUser';
 import CustomBox from '../components/CustomBox';
 import StockInfoTable from '../components/StockTable/StockInfoTable';
 import { useStockSymbol } from '../contexts/useStockInfo';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { useLoginSignupPopup } from '../contexts/useLoginSignupPopup';
 
 const Watchlist = () => {
     const { user, watchlist } = useUser();
@@ -17,6 +18,8 @@ const Watchlist = () => {
         setWatchlistStockInfo,
         isWatchlistDataLoading,
     } = useStockSymbol();
+    const { setMode, onOpen } = useLoginSignupPopup();
+    const blueColor = useColorModeValue('blue.light', 'blue.dark');
 
     useEffect(() => {
         const tickers = [];
@@ -30,7 +33,7 @@ const Watchlist = () => {
 
     return (
         <PageTemplate>
-            <VStack spacing={16}>
+            <VStack spacing={8}>
                 <CustomHeading>Watchlist</CustomHeading>
                 {isWatchlistDataLoading ? (
                     <LoadingSpinner />
@@ -40,10 +43,32 @@ const Watchlist = () => {
                         handleSortClick={handleSortClick}
                     />
                 ) : (
-                    <CustomBox>
-                        {/*TODO: trigger sign in popup from 'Sign in'*/}
-                        <Center fontSize="xl" mx={8} my={4}>
-                            Sign in to use watchlist
+                    <CustomBox w="100%">
+                        <Center fontSize="xl" mx={8} my={8}>
+                            <Link
+                                as="button"
+                                onClick={() => {
+                                    setMode('login');
+                                    onOpen();
+                                }}
+                                color={blueColor}
+                                mx={2}
+                            >
+                                Log In
+                            </Link>
+                            or
+                            <Link
+                                as="button"
+                                onClick={() => {
+                                    setMode('signup');
+                                    onOpen();
+                                }}
+                                color={blueColor}
+                                mx={2}
+                            >
+                                Sign Up
+                            </Link>
+                            to use watchlist
                         </Center>
                     </CustomBox>
                 )}

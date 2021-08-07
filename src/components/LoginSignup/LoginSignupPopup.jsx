@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Button,
     Link,
@@ -10,16 +10,14 @@ import {
     ModalHeader,
     ModalOverlay,
     Text,
-    useDisclosure,
 } from '@chakra-ui/react';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import ResetPasswordForm from './ResetPasswordForm';
+import { useLoginSignupPopup } from '../../contexts/useLoginSignupPopup';
 
 const LoginSignupPopup = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-
-    const [mode, setMode] = useState('login');
+    const { mode, setMode, isOpen, onOpen, onClose } = useLoginSignupPopup();
 
     const modalContent = {
         login: {
@@ -62,7 +60,27 @@ const LoginSignupPopup = () => {
 
     return (
         <>
-            <Button onClick={onOpen}>Login/Signup</Button>
+            <Button
+                display={{ base: 'none', sm: 'flex' }}
+                onClick={() => {
+                    setMode('login');
+                    onOpen();
+                }}
+                variant="outline"
+                border="2px"
+                mr={2}
+            >
+                Log In
+            </Button>
+
+            <Button
+                onClick={() => {
+                    setMode('signup');
+                    onOpen();
+                }}
+            >
+                Sign Up
+            </Button>
 
             <Modal
                 closeOnOverlayClick={false}
