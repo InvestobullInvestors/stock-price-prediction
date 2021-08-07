@@ -121,11 +121,17 @@ const SlidablePredictions = () => {
     return (
         <CustomGridItem>
             <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={6}>
-                <PredictionSlider value={inflation} tag="Inflation" />
-                <PredictionSlider value={revenueGrowth} tag="Revenue Growth" />
-                <PredictionSlider value={eps} tag="EPS" />
                 <PredictionSlider
-                    value={marketCap}
+                    predictedValue={inflation}
+                    tag="Inflation (%)"
+                />
+                <PredictionSlider
+                    predictedValue={revenueGrowth}
+                    tag="Revenue Growth"
+                />
+                <PredictionSlider predictedValue={eps} tag="EPS" />
+                <PredictionSlider
+                    predictedValue={marketCap}
                     tag="Market Cap (in million)"
                 />
             </SimpleGrid>
