@@ -12,7 +12,7 @@ import '@fontsource/open-sans/400.css';
 
 const theme = extendTheme({
     fonts: {
-        heading: 'Palatino',
+        heading: 'Open Sans',
         body: 'Open Sans',
     },
     config: {
@@ -71,13 +71,11 @@ function App() {
                     <StockInfoProvider>
                         <PredictionProvider>
                             <StockNewsProvider>
-                                <div className="App">
-                                    <ChakraProvider theme={theme}>
-                                        <BrowserRouter>
-                                            <Main />
-                                        </BrowserRouter>
-                                    </ChakraProvider>
-                                </div>
+                                <ChakraProvider theme={theme}>
+                                    <BrowserRouter>
+                                        <Main />
+                                    </BrowserRouter>
+                                </ChakraProvider>
                             </StockNewsProvider>
                         </PredictionProvider>
                     </StockInfoProvider>
