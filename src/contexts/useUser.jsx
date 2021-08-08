@@ -5,10 +5,9 @@ const UserContext = createContext({});
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState({});
-    const [news, setNews] = useState([]);
+    const [payments, setPayments] = useState([]);
     const [notifications, setNotifications] = useState([]);
     const [watchlist, setWatchlist] = useState([]);
-    const [paymentDetails, setPaymentDetails] = useState({});
 
     const WATCHLIST = firestore
         .collection('users')
@@ -53,9 +52,8 @@ const UserProvider = ({ children }) => {
     };
 
     // TODO: rename this function and update user based on payment
-    const setUserPaymentDetails = (details) => {
-        setPaymentDetails(details);
-        console.log(paymentDetails);
+    const upgradeUserPlan = (details) => {
+        console.log(details);
     };
 
     return (
@@ -65,14 +63,14 @@ const UserProvider = ({ children }) => {
                 setUser,
                 watchlist,
                 setWatchlist,
-                news,
-                setNews,
+                payments,
+                setPayments,
                 notifications,
                 setNotifications,
                 addToWatchlist,
                 removeFromWatchlist,
                 deleteOneNotification,
-                setUserPaymentDetails,
+                upgradeUserPlan,
             }}
         >
             {children}

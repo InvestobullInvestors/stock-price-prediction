@@ -30,7 +30,7 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
     const [paymentSuccessful, setPaymentSuccessful] = useState(false);
     const [alertVisible, setAlertVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const { setUserPaymentDetails } = useUser();
+    const { upgradeUserPlan } = useUser();
 
     const handlePayment = useHandlePayment(
         payableAmount,
@@ -44,7 +44,7 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
                 const {
                     config: { data },
                 } = status;
-                setUserPaymentDetails(JSON.parse(data));
+                upgradeUserPlan(JSON.parse(data));
                 setTimeout(() => {
                     setAlertVisible(false);
                     closePaymentModal();
