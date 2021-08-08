@@ -57,7 +57,7 @@ const theme = extendTheme({
             dark: '#B0B0B0',
         },
         gold: {
-            light: '#A37B00',
+            light: '#B89702',
             dark: '#D1AC00',
         },
     },

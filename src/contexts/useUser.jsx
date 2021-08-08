@@ -15,20 +15,41 @@ const UserProvider = ({ children }) => {
         .doc(user?.uid)
         .collection('watchlist');
 
+    const NOTIFICATIONS = firestore
+        .collection('users')
+        .doc(user?.uid)
+        .collection('notifications');
+
     const addToWatchlist = (ticker) => {
         if (!user) return;
         WATCHLIST.doc(ticker)
             .set({ ticker: ticker })
-            .then(() => console.log(`Added stock: ${ticker} to watchlist`));
-        // TODO: send notification when watchlist added
+            .then(() => {
+                const timestamp = Date.now();
+                return NOTIFICATIONS.doc(timestamp.toString()).set({
+                    text: `Added ${ticker} to watchlist`,
+                    timestamp: timestamp,
+                });
+            });
     };
 
     const removeFromWatchlist = (ticker) => {
         if (!user) return;
         WATCHLIST.doc(ticker)
             .delete()
-            .then(() => console.log(`Removed stock: ${ticker} from watchlist`));
-        // TODO: send notification when watchlist removed
+            .then(() => {
+                const timestamp = Date.now();
+                return NOTIFICATIONS.doc(timestamp.toString()).set({
+                    text: `Removed ${ticker} from watchlist`,
+                    timestamp: timestamp,
+                });
+            });
+    };
+
+    const deleteOneNotification = async (timestamp) => {
+        if (!user) return;
+
+        await NOTIFICATIONS.doc(timestamp.toString()).delete();
     };
 
     // TODO: rename this function and update user based on payment
@@ -50,6 +71,7 @@ const UserProvider = ({ children }) => {
                 setNotifications,
                 addToWatchlist,
                 removeFromWatchlist,
+                deleteOneNotification,
                 setUserPaymentDetails,
             }}
         >
