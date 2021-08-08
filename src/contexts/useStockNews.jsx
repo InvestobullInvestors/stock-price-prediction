@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
@@ -8,6 +8,7 @@ const StockNewsProvider = ({ children }) => {
     const [stockNews, setStockNews] = useState([]);
     const [stockListNews, setStockListNews] = useState([]);
     const [newsInfo, setNewsInfo] = useState([]);
+
     const [
         isStockNewsLoading,
         setIsStockNewsLoading,
@@ -16,6 +17,14 @@ const StockNewsProvider = ({ children }) => {
         isDisplayingWatchlistStockNews,
         setDisplayingWatchlistStockNews,
     ] = useState(false);
+    const [
+        isNewsSelectionsFromFirebaseLoading,
+        setIsNewsSelectionsFromFirebaseLoading,
+    ] = useStateWithCallbackLazy(false);
+    const [
+        isNewsSelectionsFromMongoLoading,
+        setIsNewsSelectionsFromMongoLoading,
+    ] = useStateWithCallbackLazy(false);
 
     const setNews = (stockSymbol) => {
         setIsStockNewsLoading(true, () => {
@@ -26,9 +35,34 @@ const StockNewsProvider = ({ children }) => {
         });
     };
 
+    const getStockListNews = (stockSymbols) => {
+        setIsStockNewsLoading(true, () => {
+            axios
+                .post(`/stock-news/stocks`, JSON.stringify({ stockSymbols }), {
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                .then((response) => {
+                    setStockListNews(response.data);
+                    setIsStockNewsLoading(false, null);
+                });
+        });
+    };
+
+    // const setNewsSelectionsFromFirebase = () => {
+    //     setIsNewsSelectionsFromFirebaseLoading(true, () => {
+    //         axios.get('/stock-news/newsSourceList').then((response) => {
+    //             setNewsSelections(response.data);
+    //             setIsNewsSelectionsFromFirebaseLoading(false, null);
+    //         });
+    //     });
+    // };
+
     const setNewsInfoFromMongo = () => {
-        axios.get('/stock-news/news-source-info').then((response) => {
-            setNewsInfo(response.data);
+        setIsNewsSelectionsFromMongoLoading(true, () => {
+            axios.get('/stock-news/news-source-info').then((response) => {
+                setNewsInfo(response.data);
+                setIsNewsSelectionsFromMongoLoading(false, null);
+            });
         });
     };
 
@@ -50,6 +84,10 @@ const StockNewsProvider = ({ children }) => {
         const newNewsInfo = [...newsInfo];
         newNewsInfo.forEach((source) => (source.selected = false));
         setNewsInfo(newNewsInfo);
+    };
+
+    const reorderSources = (reorderedList) => {
+        setNewsInfo(reorderedList);
     };
 
     const selectStock = (stock) => {
@@ -74,26 +112,8 @@ const StockNewsProvider = ({ children }) => {
         setStockListNews(newStockListNews);
     };
 
-    const reorderSources = (reorderedList) => {
-        setNewsInfo(reorderedList);
-    };
-
     const reorderStockNews = (reorderedList) => {
         setStockListNews(reorderedList);
-    };
-
-    const getStockListNews = (stockSymbols) => {
-        axios
-            .post(
-                `/stock-news/stocks`,
-                JSON.stringify({
-                    stockSymbols,
-                }),
-                { headers: { 'Content-Type': 'application/json' } }
-            )
-            .then((response) => {
-                setStockListNews(response.data);
-            });
     };
 
     const setDisplayWatchlistNews = (state) => {
@@ -108,8 +128,11 @@ const StockNewsProvider = ({ children }) => {
                 stockListNews,
                 isStockNewsLoading,
                 isDisplayingWatchlistStockNews,
+                isNewsSelectionsFromFirebaseLoading,
+                isNewsSelectionsFromMongoLoading,
                 setDisplayWatchlistNews,
                 setNewsInfoFromMongo,
+                // setNewsSelectionsFromFirebase,
                 getStockListNews,
                 setNews,
                 reorderSources,

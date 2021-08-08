@@ -2,21 +2,25 @@ import React, { useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
 import ChecklistDrawer from '../components/News/ChecklistDrawer';
 import CustomHeading from '../components/CustomHeading';
-import StickyChecklistContainer from '../components/News/StickyChecklistContainer';
-import { Flex, Grid, Text, VStack } from '@chakra-ui/react';
+import { Flex, Grid, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../contexts/useStockNews';
 import { useUser } from '../contexts/useUser';
 import NewsCardList from '../components/News/NewsCardList';
+import LoadingSpinner from '../components/LoadingSpinner';
+import StickyChecklistContainer from '../components/News/StickyChecklistContainer';
 import StockNewsCardList from '../components/News/StockNewsCardList';
 
 const News = () => {
     const {
         setNewsInfoFromMongo,
         isDisplayingWatchlistStockNews,
+        isNewsSelectionsFromFirebaseLoading,
+        isNewsSelectionsFromMongoLoading,
+        isStockNewsLoading,
+        getStockListNews,
     } = useStockNews();
 
     const { user, watchlist } = useUser();
-    const { getStockListNews } = useStockNews();
 
     useEffect(() => {
         setNewsInfoFromMongo();
@@ -28,36 +32,41 @@ const News = () => {
         getStockListNews(tickers);
     }, [watchlist]);
 
-    const staticCheckListWidth = '300px';
-
     return (
         <PageTemplate>
             <CustomHeading mb={3}>News</CustomHeading>
-            {/*<Button mt={7} bg={color} onClick={handleChangeColor}>watchlist only</Button>*/}
-            <Flex display={['none', 'none', 'none', 'flex']}>
-                <StickyChecklistContainer />
-                <VStack>
-                    {user && isDisplayingWatchlistStockNews ? (
-                        <StockNewsCardList />
-                    ) : (
-                        <NewsCardList />
-                    )}
-                </VStack>
-            </Flex>
-            <VStack>
-                <Grid display={['flex', 'flex', 'flex', 'none']}>
-                    <ChecklistDrawer />
-                </Grid>
-            </VStack>
-            <Grid display={['flex', 'flex', 'flex', 'none']}>
-                <VStack>
-                    {user && isDisplayingWatchlistStockNews ? (
-                        <StockNewsCardList />
-                    ) : (
-                        <NewsCardList />
-                    )}
-                </VStack>
-            </Grid>
+            {isNewsSelectionsFromFirebaseLoading ||
+            isNewsSelectionsFromMongoLoading ||
+            isStockNewsLoading ? (
+                <LoadingSpinner />
+            ) : (
+                <>
+                    <Flex display={['none', 'none', 'none', 'flex']}>
+                        <StickyChecklistContainer />
+                        <VStack>
+                            {user && isDisplayingWatchlistStockNews ? (
+                                <StockNewsCardList />
+                            ) : (
+                                <NewsCardList />
+                            )}
+                        </VStack>
+                    </Flex>
+                    <VStack>
+                        <Grid display={['flex', 'flex', 'flex', 'none']}>
+                            <ChecklistDrawer />
+                        </Grid>
+                    </VStack>
+                    <Grid display={['flex', 'flex', 'flex', 'none']}>
+                        <VStack>
+                            {user && isDisplayingWatchlistStockNews ? (
+                                <StockNewsCardList />
+                            ) : (
+                                <NewsCardList />
+                            )}
+                        </VStack>
+                    </Grid>
+                </>
+            )}
         </PageTemplate>
     );
 };

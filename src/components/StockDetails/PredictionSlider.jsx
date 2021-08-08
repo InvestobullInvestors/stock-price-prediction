@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Box,
-    Heading,
     NumberDecrementStepper,
     NumberIncrementStepper,
     NumberInput,
@@ -11,26 +10,32 @@ import {
     SliderFilledTrack,
     SliderThumb,
     SliderTrack,
+    Text,
+    useColorModeValue,
     VStack,
 } from '@chakra-ui/react';
 import { MdGraphicEq } from 'react-icons/all';
 
-const PredictionSlider = ({ value, tag, ...otherProps }) => {
-    let predictedVal = 0;
-    if (value) {
-        predictedVal = value;
-    }
+const PredictionSlider = ({ predictedValue, tag, ...otherProps }) => {
+    const [sliderValue, setSliderValue] = useState(0);
+
+    const handleChange = (val) => {
+        setSliderValue(val);
+        // TODO: update prediction
+    };
+
+    useEffect(() => {
+        setSliderValue(predictedValue);
+    }, []);
 
     return (
         <VStack my={8} mx={4} spacing={4}>
-            <Heading as="h4" size="md">
-                {tag}
-            </Heading>
+            <Text fontSize="xl">{tag}</Text>
             <NumberInput
-                isDisabled
-                value={predictedVal}
                 min={0}
-                maxW="40%"
+                value={sliderValue}
+                onChange={handleChange}
+                maxW={20}
                 {...otherProps}
             >
                 <NumberInputField />
@@ -39,12 +44,26 @@ const PredictionSlider = ({ value, tag, ...otherProps }) => {
                     <NumberDecrementStepper />
                 </NumberInputStepper>
             </NumberInput>
-            <Slider isDisabled aria-label="slider-ex-4" value={predictedVal}>
-                <SliderTrack bg="red.100">
-                    <SliderFilledTrack bg="tomato" />
+            <Slider
+                aria-label="slider"
+                value={sliderValue}
+                focusThumbOnChange={false}
+                onChange={handleChange}
+                maxW={80}
+            >
+                <SliderTrack bg={useColorModeValue('brand.300', 'brand.800')}>
+                    <SliderFilledTrack
+                        bg={useColorModeValue('brand.600', 'brand.400')}
+                    />
                 </SliderTrack>
-                <SliderThumb boxSize={6}>
-                    <Box color="tomato" as={MdGraphicEq} />
+                <SliderThumb
+                    boxSize={6}
+                    bgColor={useColorModeValue('brand.600', 'brand.200')}
+                >
+                    <Box
+                        color={useColorModeValue('brand.100', 'brand.900')}
+                        as={MdGraphicEq}
+                    />
                 </SliderThumb>
             </Slider>
         </VStack>
