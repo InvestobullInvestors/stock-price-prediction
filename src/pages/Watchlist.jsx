@@ -45,7 +45,7 @@ const Watchlist = () => {
                 {isWatchlistDataLoading ? (
                     <LoadingSpinner />
                 ) : user ? (
-                    watchlist.length > 1 ? (
+                    watchlist.length > 0 ? (
                         <StockInfoTable
                             stocks={watchlistStockInfo}
                             handleSortClick={handleSortClick}

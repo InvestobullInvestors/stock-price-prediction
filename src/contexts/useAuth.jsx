@@ -46,8 +46,6 @@ const AuthProvider = ({ children }) => {
             .collection(NOTIFICATIONS)
             .doc(timestamp.toString())
             .set(welcomeMessage);
-        await currentUser.collection(PAYMENTS).add({});
-        await currentUser.collection(WATCHLIST).add({});
     };
 
     const login = (email, password) => {
