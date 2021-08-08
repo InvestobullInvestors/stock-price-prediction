@@ -1,34 +1,14 @@
 import React from 'react';
-import {
-    Box,
-    Center,
-    Divider,
-    HStack,
-    Image,
-    Square,
-    useColorModeValue,
-    VStack,
-    Flex,
-} from '@chakra-ui/react';
-import { useStockNews } from '../../contexts/useStockNews';
+import {Box, Center, Divider, Flex, HStack, Image, Square, useColorModeValue, VStack,} from '@chakra-ui/react';
+import {useStockNews} from '../../contexts/useStockNews';
 import NewsArticle from '../NewsArticle';
 import CustomBox from '../CustomBox';
 
-function formatDate(date) {
-    let year = parseInt(date.slice(0, 4));
-    let month = parseInt(date.slice(6, 7));
-    let day = parseInt(date.slice(9, 10));
-    let dateObj = new Date(year, month - 1, day);
-
-    let options = { year: 'numeric', month: 'long', day: '2-digit' };
-    return new Intl.DateTimeFormat('en-US', options).format(dateObj);
-}
-
-const NewsCard = ({ source, children, ...otherProps }) => {
+const NewsCard = ({source, children, ...otherProps}) => {
     const cardColor = useColorModeValue('brand.400', 'brand.700');
     const textBoxColor = useColorModeValue('brand.100', 'brand.600');
 
-    const { newsInfo } = useStockNews();
+    const {newsInfo} = useStockNews();
 
     let name;
     let articles;
@@ -73,17 +53,17 @@ const NewsCard = ({ source, children, ...otherProps }) => {
             <Flex display={['none', 'none', 'flex', 'flex']} align="flex-start">
                 <HStack mt="10px" w="full">
                     <Square
-                        w={{ base: '100px', sm: '150px' }}
-                        h={{ base: '100px', sm: '150px' }}
+                        w={{base: '100px', sm: '150px'}}
+                        h={{base: '100px', sm: '150px'}}
                         borderRadius="lg"
                         shadow="md"
                         bg={textBoxColor}
                         p="10px"
                     >
-                        <Image src={logo} />
+                        <Image src={logo}/>
                     </Square>
                     <Center height="150px">
-                        <Divider orientation="vertical" />
+                        <Divider orientation="vertical"/>
                     </Center>
                     <Box
                         w="full"
@@ -103,11 +83,11 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                             {articles.map((article) => (
                                 <Box key={article.src} w="100%">
                                     <NewsArticle
-                                        date={formatDate(article.publishedAt)}
+                                        date={article.publishedAt}
                                         title={article.title}
                                         url={article.url}
                                     />
-                                    <Divider my={2} orientation="horizontal" />
+                                    <Divider my={2} orientation="horizontal"/>
                                 </Box>
                             ))}
                         </VStack>
@@ -125,9 +105,9 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                         mb={0}
                         mt={-9}
                     >
-                        <Image src={logo} />
+                        <Image src={logo}/>
                     </CustomBox>
-                    <Divider orientation="horizontal" />
+                    <Divider orientation="horizontal"/>
                     <Box
                         w="full"
                         h="150px"
@@ -152,7 +132,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                                         title={article.title}
                                         url={article.src}
                                     />
-                                    <Divider my={2} orientation="horizontal" />
+                                    <Divider my={2} orientation="horizontal"/>
                                 </Box>
                             ))}
                         </VStack>

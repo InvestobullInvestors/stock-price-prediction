@@ -71,13 +71,11 @@ function App() {
                     <StockInfoProvider>
                         <PredictionProvider>
                             <StockNewsProvider>
-                                <div className="App">
-                                    <ChakraProvider theme={theme}>
-                                        <BrowserRouter>
-                                            <Main />
-                                        </BrowserRouter>
-                                    </ChakraProvider>
-                                </div>
+                                <ChakraProvider theme={theme}>
+                                    <BrowserRouter>
+                                        <Main />
+                                    </BrowserRouter>
+                                </ChakraProvider>
                             </StockNewsProvider>
                         </PredictionProvider>
                     </StockInfoProvider>
