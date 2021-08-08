@@ -26,10 +26,11 @@ const AuthProvider = ({ children }) => {
     const createUser = async (uid, displayName, email, photoURL) => {
         const currentUser = USERS.doc(uid);
 
+        const timestamp = Date.now();
+
         const welcomeMessage = {
-            text: 'Welcome to InvestoBull',
-            viewed: false,
-            timestamp: Date.now(),
+            text: 'Welcome to InvestoBull!',
+            timestamp: timestamp,
         };
 
         await currentUser.set({
@@ -43,7 +44,10 @@ const AuthProvider = ({ children }) => {
         });
 
         await currentUser.collection(NEWS).add({});
-        await currentUser.collection(NOTIFICATIONS).add(welcomeMessage);
+        await currentUser
+            .collection(NOTIFICATIONS)
+            .doc(timestamp.toString())
+            .set(welcomeMessage);
         await currentUser.collection(WATCHLIST).add({});
     };
 

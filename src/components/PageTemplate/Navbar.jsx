@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Avatar,
@@ -22,13 +22,9 @@ import {
     useColorModeValue,
     useDisclosure,
 } from '@chakra-ui/react';
-import {
-    BellIcon,
-    ChevronDownIcon,
-    HamburgerIcon,
-    Icon,
-} from '@chakra-ui/icons';
+import { ChevronDownIcon, HamburgerIcon, Icon } from '@chakra-ui/icons';
 import { FaMoon, FaSun } from 'react-icons/fa';
+import { VscBell, VscBellDot } from 'react-icons/vsc';
 import NotificationList from '../NotificationList';
 import LoginSignupPopup from '../LoginSignup/LoginSignupPopup';
 import { useUser } from '../../contexts/useUser';
@@ -39,7 +35,8 @@ import { useStockSymbol } from '../../contexts/useStockInfo';
 const PADDING = 1;
 const MARGIN = 1;
 const ICON_SIZE = 6;
-const MENU_MAX_WIDTH = 60;
+const MENU_MAX_WIDTH = 100;
+const MENU_MAX_HEIGHT = 400;
 
 const Logo = () => (
     <HStack as={Link} to="/" m={MARGIN}>
@@ -130,23 +127,48 @@ const ThemeSwitchButton = ({ icon }) => {
     );
 };
 
-const NotificationMenu = ({ bgColor }) => (
-    <Menu>
-        <MenuButton
-            as={Button}
-            bg="transparent"
-            rounded="full"
-            p={PADDING}
-            m={MARGIN}
-            rightIcon={<ChevronDownIcon />}
-        >
-            <BellIcon w={ICON_SIZE} h={ICON_SIZE} />
-        </MenuButton>
-        <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-            <NotificationList />
-        </MenuList>
-    </Menu>
-);
+const NotificationMenu = ({ bgColor }) => {
+    const [newNotification, setNewNotification] = useState(false);
+    const redColor = useColorModeValue('red.light', 'red.dark');
+    const { notifications } = useUser();
+
+    useEffect(() => {
+        setNewNotification(notifications.length > 0);
+    }, [notifications]);
+
+    return (
+        <Menu closeOnSelect={false}>
+            <MenuButton
+                as={Button}
+                bg="transparent"
+                rounded="full"
+                p={PADDING}
+                m={MARGIN}
+                rightIcon={<ChevronDownIcon />}
+            >
+                <Icon
+                    as={newNotification ? VscBellDot : VscBell}
+                    color={newNotification ? redColor : 'brand'}
+                    w={ICON_SIZE}
+                    h={ICON_SIZE}
+                />
+            </MenuButton>
+            <MenuList
+                bg={bgColor}
+                maxW={MENU_MAX_WIDTH}
+                maxH={MENU_MAX_HEIGHT}
+                css={{
+                    margin: '0',
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                    overflow: 'scroll',
+                }}
+            >
+                <NotificationList />
+            </MenuList>
+        </Menu>
+    );
+};
 
 const UserMenu = ({ bgColor }) => {
     const { user } = useUser();

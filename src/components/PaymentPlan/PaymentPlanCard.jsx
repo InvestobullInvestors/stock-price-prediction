@@ -49,12 +49,12 @@ const PaymentPlanCard = ({
             bg={useColorModeValue('brand.200', 'brand.700')}
             {...otherProps}
         >
-            <VStack spacing={8}>
+            <VStack spacing={6}>
                 <Heading
                     as="h4"
                     size="xl"
                     color={planColor}
-                    fontFamily="Palatino"
+                    fontFamily="Georgia"
                 >
                     {plan}
                 </Heading>
@@ -75,10 +75,8 @@ const PaymentPlanCard = ({
                     </>
                 )}
                 <VStack align="flex-start" w="80%" spacing={6}>
-                    {details.map((detail) => (
-                        <Text key={detail} fontSize="lg">
-                            {detail}
-                        </Text>
+                    {details.map((detail, id) => (
+                        <Text key={id}>{detail}</Text>
                     ))}
                 </VStack>
                 <PaymentModal payableAmount={price} />
