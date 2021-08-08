@@ -30,21 +30,21 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
     const [paymentSuccessful, setPaymentSuccessful] = useState(false);
     const [alertVisible, setAlertVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const { upgradeUserPlan } = useUser();
+    const { user, upgradeUserPlan } = useUser();
 
     const handlePayment = useHandlePayment(
         payableAmount,
         stripe,
         elements,
         setIsLoading,
-        (status) => {
+        async (status) => {
             if (status) {
                 setPaymentSuccessful(true);
                 setAlertVisible(true);
                 const {
                     config: { data },
                 } = status;
-                upgradeUserPlan(JSON.parse(data));
+                await upgradeUserPlan(JSON.parse(data));
                 setTimeout(() => {
                     setAlertVisible(false);
                     closePaymentModal();
@@ -113,6 +113,8 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
                             my={8}
                             colorScheme="brand"
                             onClick={handlePayment}
+                            isDisabled={!user}
+                            title={user ? '' : 'Log in to subscribe to plan'}
                         >
                             Confirm Payment
                         </Button>
