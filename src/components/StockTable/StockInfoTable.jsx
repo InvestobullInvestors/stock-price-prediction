@@ -24,6 +24,12 @@ const StockSymbol = ({ ticker }) => (
     </Link>
 );
 
+const CustomTh = ({ children, ...otherProps }) => (
+    <Th w="12%" {...otherProps}>
+        {children}
+    </Th>
+);
+
 const ClickableTd = ({ ticker_id, children, ...otherProps }) => {
     const history = useHistory();
 
@@ -52,10 +58,9 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
             <Table variant="simple">
                 <Thead>
                     <Tr>
-                        <Th w="4%" />
-                        <Th w="12%">Ticker</Th>
-                        <Th
-                            w="12%"
+                        <CustomTh w="4%" />
+                        <CustomTh>Ticker</CustomTh>
+                        <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
                             onClick={() =>
                                 handleSortClick('dividend_payout_ratio')
@@ -63,25 +68,22 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             _hover={{ cursor: 'pointer' }}
                         >
                             Dividend Payout Ratio
-                        </Th>
-                        <Th
-                            w="12%"
+                        </CustomTh>
+                        <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
                             onClick={() => handleSortClick('pe_ratio')}
                             _hover={{ cursor: 'pointer' }}
                         >
                             PE Ratio
-                        </Th>
-                        <Th
-                            w="12%"
+                        </CustomTh>
+                        <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
                             onClick={() => handleSortClick('peg_ratio')}
                             _hover={{ cursor: 'pointer' }}
                         >
                             PEG Ratio
-                        </Th>
-                        <Th
-                            w="12%"
+                        </CustomTh>
+                        <CustomTh
                             display={{ base: 'none', lg: 'table-cell' }}
                             onClick={() =>
                                 handleSortClick('quarterly_earning_growth')
@@ -89,9 +91,8 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             _hover={{ cursor: 'pointer' }}
                         >
                             Quarterly Earning Growth
-                        </Th>
-                        <Th
-                            w="12%"
+                        </CustomTh>
+                        <CustomTh
                             display={{ base: 'none', lg: 'table-cell' }}
                             onClick={() =>
                                 handleSortClick('quarterly_revenue_growth')
@@ -99,25 +100,23 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             _hover={{ cursor: 'pointer' }}
                         >
                             Quarterly Revenue Growth
-                        </Th>
-                        <Th
-                            w="12%"
+                        </CustomTh>
+                        <CustomTh
                             onClick={() =>
                                 handleSortClick('fifty_two_week_low')
                             }
                             _hover={{ cursor: 'pointer' }}
                         >
                             52-week Low
-                        </Th>
-                        <Th
-                            w="12%"
+                        </CustomTh>
+                        <CustomTh
                             onClick={() =>
                                 handleSortClick('fifty_two_week_high')
                             }
                             _hover={{ cursor: 'pointer' }}
                         >
                             52-week High
-                        </Th>
+                        </CustomTh>
                     </Tr>
                 </Thead>
                 <Tbody>
