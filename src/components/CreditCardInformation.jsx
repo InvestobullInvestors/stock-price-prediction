@@ -32,7 +32,6 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
     const [alertVisible, setAlertVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { user, upgradeUserPlan } = useUser();
-    const { plan } = user;
 
     const handlePayment = useHandlePayment(
         payableAmount,
@@ -83,11 +82,11 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
             )}
             {!paymentSuccessful && (
                 <>
-                    {plan !== 'Basic' && (
+                    {user && user.plan !== 'Basic' && (
                         <Alert status="warning" mb={4}>
                             <AlertIcon />
                             <AlertDescription>
-                                <Text>Your current plan is {plan}. </Text>
+                                <Text>Your current plan is {user.plan}. </Text>
                                 <Text>Are you sure you want to pay again?</Text>
                             </AlertDescription>
                         </Alert>
