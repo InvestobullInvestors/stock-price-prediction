@@ -19,7 +19,7 @@ const WatchlistButton = ({ ticker }) => {
     }, [watchlist]);
 
     const handleClick = () => {
-        if (!user) return; // TODO: trigger sign in popup
+        if (!user) return;
 
         if (isWatchlisted) {
             setIcon(<BsStar />);
@@ -37,6 +37,10 @@ const WatchlistButton = ({ ticker }) => {
             icon={icon}
             color={yellowColor}
             variant="ghost"
+            isDisabled={!user}
+            title={
+                user ? 'Add to watchlist' : 'Log in to add stock to watchlist'
+            }
             onClick={handleClick}
         />
     );
