@@ -55,7 +55,14 @@ const Logo = () => (
 );
 
 const CustomButton = ({ children, route, ...otherProps }) => (
-    <Button bg="transparent" m={MARGIN} as={Link} {...otherProps} to={route}>
+    <Button
+        variant="ghost"
+        m={MARGIN}
+        as={Link}
+        _hover={{ color: useColorModeValue('brand.600', 'brand.400') }}
+        {...otherProps}
+        to={route}
+    >
         {children}
     </Button>
 );
@@ -195,41 +202,44 @@ const UserMenu = ({ bgColor }) => {
 const Navbar = () => {
     const { user } = useUser();
 
-    const bgColor = useColorModeValue('brand.400', 'brand.900');
+    const bgColor = useColorModeValue('brand.50', 'brand.900');
     const txtColor = useColorModeValue('brand.900', 'brand.100');
 
     return (
-        <Flex
-            zIndex={5}
-            pos="sticky"
-            top={0}
-            w="100%"
-            justify="center"
-            bg={bgColor}
-            color={txtColor}
-        >
-            <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
-                <NarrowScreenHamburgerMenu bgColor={bgColor} />
-                <Logo />
-                <WideScreenLinks />
+        <>
+            <Flex
+                zIndex={5}
+                pos="sticky"
+                top={0}
+                w="100%"
+                justify="center"
+                bg={bgColor}
+                color={txtColor}
+            >
+                <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
+                    <NarrowScreenHamburgerMenu bgColor={bgColor} />
+                    <Logo />
+                    <WideScreenLinks />
 
-                <Flex flex="1" align="center" justify="flex-end">
-                    {useColorMode().colorMode === 'light' ? (
-                        <ThemeSwitchButton icon={FaMoon} />
-                    ) : (
-                        <ThemeSwitchButton icon={FaSun} />
-                    )}
-                    {user ? (
-                        <>
-                            <NotificationMenu bgColor={bgColor} />
-                            <UserMenu bgColor={bgColor} />
-                        </>
-                    ) : (
-                        <LoginSignupPopup />
-                    )}
+                    <Flex flex="1" align="center" justify="flex-end">
+                        {useColorMode().colorMode === 'light' ? (
+                            <ThemeSwitchButton icon={FaMoon} />
+                        ) : (
+                            <ThemeSwitchButton icon={FaSun} />
+                        )}
+                        {user ? (
+                            <>
+                                <NotificationMenu bgColor={bgColor} />
+                                <UserMenu bgColor={bgColor} />
+                            </>
+                        ) : (
+                            <LoginSignupPopup />
+                        )}
+                    </Flex>
                 </Flex>
             </Flex>
-        </Flex>
+            <Divider zIndex={5} pos="fixed" />
+        </>
     );
 };
 

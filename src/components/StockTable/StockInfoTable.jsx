@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import WatchlistButton from '../WatchlistButton';
+import CustomBox from '../CustomBox';
 
 const StockSymbol = ({ ticker }) => (
     <Link
@@ -31,7 +32,7 @@ const ClickableTd = ({ ticker_id, children, ...otherProps }) => {
     };
 
     return (
-        <Td onClick={handleClick} isNumeric {...otherProps}>
+        <Td w="12%" onClick={handleClick} isNumeric {...otherProps}>
             {children}
         </Td>
     );
@@ -39,20 +40,22 @@ const ClickableTd = ({ ticker_id, children, ...otherProps }) => {
 
 const StockInfoTable = ({ stocks, handleSortClick }) => {
     const lightMode = useColorMode().colorMode === 'light';
+    const greenColor = useColorModeValue('green.light', 'green.dark');
+    const redColor = useColorModeValue('red.light', 'red.dark');
 
     return (
-        <Box
-            borderRadius="xl"
-            border="2px"
+        <CustomBox
             padding={2}
-            borderColor={useColorModeValue('brand.400', 'brand.600')}
+            borderColor={useColorModeValue('brand.200', 'brand.700')}
+            bg={useColorModeValue('brand.50', 'brand.900')}
         >
             <Table variant="simple">
                 <Thead>
                     <Tr>
-                        <Th />
-                        <Th>Ticker</Th>
+                        <Th w="4%" />
+                        <Th w="12%">Ticker</Th>
                         <Th
+                            w="12%"
                             display={{ base: 'none', md: 'table-cell' }}
                             onClick={() =>
                                 handleSortClick('dividend_payout_ratio')
@@ -62,6 +65,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             Dividend Payout Ratio
                         </Th>
                         <Th
+                            w="12%"
                             display={{ base: 'none', md: 'table-cell' }}
                             onClick={() => handleSortClick('pe_ratio')}
                             _hover={{ cursor: 'pointer' }}
@@ -69,6 +73,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             PE Ratio
                         </Th>
                         <Th
+                            w="12%"
                             display={{ base: 'none', md: 'table-cell' }}
                             onClick={() => handleSortClick('peg_ratio')}
                             _hover={{ cursor: 'pointer' }}
@@ -76,6 +81,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             PEG Ratio
                         </Th>
                         <Th
+                            w="12%"
                             display={{ base: 'none', lg: 'table-cell' }}
                             onClick={() =>
                                 handleSortClick('quarterly_earning_growth')
@@ -85,6 +91,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             Quarterly Earning Growth
                         </Th>
                         <Th
+                            w="12%"
                             display={{ base: 'none', lg: 'table-cell' }}
                             onClick={() =>
                                 handleSortClick('quarterly_revenue_growth')
@@ -94,6 +101,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             Quarterly Revenue Growth
                         </Th>
                         <Th
+                            w="12%"
                             onClick={() =>
                                 handleSortClick('fifty_two_week_low')
                             }
@@ -102,6 +110,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             52-week Low
                         </Th>
                         <Th
+                            w="12%"
                             onClick={() =>
                                 handleSortClick('fifty_two_week_high')
                             }
@@ -129,15 +138,15 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     lightMode
                                         ? {
                                               cursor: 'pointer',
-                                              bg: 'brand.200',
+                                              bg: 'brand.100',
                                           }
                                         : {
                                               cursor: 'pointer',
-                                              bg: 'brand.700',
+                                              bg: 'brand.800',
                                           }
                                 }
                             >
-                                <Td>
+                                <Td w="4%">
                                     <WatchlistButton ticker={ticker_id} />
                                 </Td>
                                 <ClickableTd
@@ -179,6 +188,11 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                         base: 'none',
                                         lg: 'table-cell',
                                     }}
+                                    color={
+                                        quarterly_earning_growth >= 0
+                                            ? greenColor
+                                            : redColor
+                                    }
                                 >
                                     {quarterly_earning_growth ?? '-'}
                                 </ClickableTd>
@@ -188,21 +202,26 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                         base: 'none',
                                         lg: 'table-cell',
                                     }}
+                                    color={
+                                        quarterly_revenue_growth >= 0
+                                            ? greenColor
+                                            : redColor
+                                    }
                                 >
                                     {quarterly_revenue_growth ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd ticker_id={ticker_id}>
-                                    {fifty_two_week_low ?? '-'}
+                                    {fifty_two_week_low?.toFixed(2) ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd ticker_id={ticker_id}>
-                                    {fifty_two_week_high ?? '-'}
+                                    {fifty_two_week_high?.toFixed(2) ?? '-'}
                                 </ClickableTd>
                             </Tr>
                         )
                     )}
                 </Tbody>
             </Table>
-        </Box>
+        </CustomBox>
     );
 };
 

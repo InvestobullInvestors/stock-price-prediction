@@ -140,10 +140,7 @@ const SlidablePredictions = () => {
 };
 
 const StockPredictionDetails = ({ ...otherProps }) => (
-    <CustomBox
-        bgColor={useColorModeValue('brand.100', 'brand.700')}
-        {...otherProps}
-    >
+    <CustomBox {...otherProps}>
         <Grid
             templateColumns={{ base: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }}
             gap={2}

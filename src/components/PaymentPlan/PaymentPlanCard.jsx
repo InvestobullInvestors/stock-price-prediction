@@ -45,10 +45,7 @@ const PaymentPlanCard = ({
     );
 
     return (
-        <CustomBox
-            bg={useColorModeValue('brand.200', 'brand.700')}
-            {...otherProps}
-        >
+        <CustomBox {...otherProps}>
             <VStack spacing={8}>
                 <Heading
                     as="h4"
