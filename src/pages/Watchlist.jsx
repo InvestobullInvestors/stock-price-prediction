@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
 import CustomHeading from '../components/CustomHeading';
-import { Center, Link, useColorModeValue, VStack } from '@chakra-ui/react';
+import {
+    Center,
+    Link,
+    Text,
+    useColorModeValue,
+    VStack,
+} from '@chakra-ui/react';
 import { useUser } from '../contexts/useUser';
 import CustomBox from '../components/CustomBox';
 import StockInfoTable from '../components/StockTable/StockInfoTable';
 import { useStockSymbol } from '../contexts/useStockInfo';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useLoginSignupPopup } from '../contexts/useLoginSignupPopup';
+import { Link as ReactRouterLink } from 'react-router-dom';
 
 const Watchlist = () => {
     const { user, watchlist } = useUser();
@@ -38,13 +45,35 @@ const Watchlist = () => {
                 {isWatchlistDataLoading ? (
                     <LoadingSpinner />
                 ) : user ? (
-                    <StockInfoTable
-                        stocks={watchlistStockInfo}
-                        handleSortClick={handleSortClick}
-                    />
+                    watchlist.length > 1 ? (
+                        <StockInfoTable
+                            stocks={watchlistStockInfo}
+                            handleSortClick={handleSortClick}
+                        />
+                    ) : (
+                        <CustomBox w="100%">
+                            <Center mx={8} my={8}>
+                                <VStack>
+                                    <Text>Your watchlist is empty!</Text>
+                                    <Text>
+                                        Add stocks form the
+                                        <Link
+                                            as={ReactRouterLink}
+                                            to="/"
+                                            color={blueColor}
+                                            mx={1}
+                                        >
+                                            Home
+                                        </Link>
+                                        page.
+                                    </Text>
+                                </VStack>
+                            </Center>
+                        </CustomBox>
+                    )
                 ) : (
                     <CustomBox w="100%">
-                        <Center fontSize="xl" mx={8} my={8}>
+                        <Center mx={8} my={8}>
                             <Link
                                 as="button"
                                 onClick={() => {
@@ -52,7 +81,7 @@ const Watchlist = () => {
                                     onOpen();
                                 }}
                                 color={blueColor}
-                                mx={2}
+                                mx={1}
                             >
                                 Log In
                             </Link>
@@ -64,11 +93,11 @@ const Watchlist = () => {
                                     onOpen();
                                 }}
                                 color={blueColor}
-                                mx={2}
+                                mx={1}
                             >
                                 Sign Up
                             </Link>
-                            to use watchlist
+                            to use the watchlist!
                         </Center>
                     </CustomBox>
                 )}

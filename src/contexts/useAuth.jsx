@@ -4,8 +4,8 @@ import { auth, firestore } from '../auth/firebase.jsx';
 import { useUser } from './useUser';
 
 const USERS = firestore.collection('users');
-const PAYMENTS = 'payments';
 const NOTIFICATIONS = 'notifications';
+const PAYMENTS = 'payments';
 const WATCHLIST = 'watchlist';
 
 const AuthContext = createContext({});
@@ -42,11 +42,11 @@ const AuthProvider = ({ children }) => {
             plan_expiry: null,
         });
 
-        await currentUser.collection(PAYMENTS).add({});
         await currentUser
             .collection(NOTIFICATIONS)
             .doc(timestamp.toString())
             .set(welcomeMessage);
+        await currentUser.collection(PAYMENTS).add({});
         await currentUser.collection(WATCHLIST).add({});
     };
 
