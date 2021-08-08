@@ -129,6 +129,7 @@ const ThemeSwitchButton = ({ icon }) => {
 
 const NotificationMenu = ({ bgColor }) => {
     const [newNotification, setNewNotification] = useState(false);
+    const redColor = useColorModeValue('red.light', 'red.dark');
     const { notifications } = useUser();
 
     useEffect(() => {
@@ -147,6 +148,7 @@ const NotificationMenu = ({ bgColor }) => {
             >
                 <Icon
                     as={newNotification ? VscBellDot : VscBell}
+                    color={newNotification ? redColor : 'brand'}
                     w={ICON_SIZE}
                     h={ICON_SIZE}
                 />

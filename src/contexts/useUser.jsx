@@ -27,7 +27,7 @@ const UserProvider = ({ children }) => {
             .then(() => {
                 const timestamp = Date.now();
                 return NOTIFICATIONS.doc(timestamp.toString()).set({
-                    text: `Added ${ticker} to watchlist.`,
+                    text: `Added ${ticker} to watchlist`,
                     timestamp: timestamp,
                 });
             });
@@ -40,7 +40,7 @@ const UserProvider = ({ children }) => {
             .then(() => {
                 const timestamp = Date.now();
                 return NOTIFICATIONS.doc(timestamp.toString()).set({
-                    text: `Removed ${ticker} from watchlist.`,
+                    text: `Removed ${ticker} from watchlist`,
                     timestamp: timestamp,
                 });
             });
