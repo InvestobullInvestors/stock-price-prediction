@@ -7,17 +7,15 @@ import Plans from '../pages/Plans';
 import StockInfo from '../pages/StockInfo';
 import Watchlist from '../pages/Watchlist';
 
-const Main = () => {
-    return (
-        <>
-            <Route path="/watchlist" component={Watchlist} />
-            <Route path="/plans" component={Plans} />
-            <Route path="/about" component={About} />
-            <Route path="/news" component={News} />
-            <Route path="/stock-info/:tickerId" component={StockInfo} />
-            <Route path="/" component={Home} />
-        </>
-    );
-};
+const Main = () => (
+    <>
+        <Route path="/watchlist" component={Watchlist} />
+        <Route path="/plans" component={Plans} />
+        <Route path="/about" component={About} />
+        <Route path="/news" component={News} />
+        <Route path="/stock-info/:tickerId" component={StockInfo} />
+        <Route path="/" component={Home} />
+    </>
+);
 
 export default Main;
