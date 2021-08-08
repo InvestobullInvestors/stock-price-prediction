@@ -9,12 +9,12 @@ import Watchlist from '../pages/Watchlist';
 
 const Main = () => (
     <>
+        <Route path="/" exact component={Home} />
         <Route path="/watchlist" component={Watchlist} />
         <Route path="/plans" component={Plans} />
         <Route path="/about" component={About} />
         <Route path="/news" component={News} />
         <Route path="/stock-info/:tickerId" component={StockInfo} />
-        <Route path="/" component={Home} />
     </>
 );
 
