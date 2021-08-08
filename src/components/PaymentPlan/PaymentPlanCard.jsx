@@ -16,6 +16,7 @@ import {
 import { Link } from 'react-router-dom';
 import CreditCardInformation from '../CreditCardInformation';
 import CustomBox from '../CustomBox';
+import { useUser } from '../../contexts/useUser';
 
 const PaymentPlanCard = ({
     plan,
@@ -26,6 +27,7 @@ const PaymentPlanCard = ({
     ...otherProps
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { user } = useUser();
 
     const PaymentModal = ({ payableAmount }) => (
         <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
@@ -61,8 +63,12 @@ const PaymentPlanCard = ({
                 {price ? (
                     <>
                         <Heading size="md">USD ${price}/month</Heading>
-                        {/*TODO: don't allow paying when no user signed in (but can't use useUser)*/}
-                        <Button onClick={onOpen} colorScheme="brand">
+                        <Button
+                            onClick={onOpen}
+                            isDisabled={!user}
+                            title={user ? '' : 'Log in to subscribe to plan'}
+                            colorScheme="brand"
+                        >
                             {buttonText}
                         </Button>
                     </>
