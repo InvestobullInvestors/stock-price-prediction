@@ -132,14 +132,13 @@ const NotificationMenu = ({ bgColor }) => {
     const { notifications } = useUser();
 
     useEffect(() => {
-        if (notifications.length > 0) setNewNotification(true);
+        setNewNotification(notifications.length > 0);
     }, [notifications]);
 
     return (
-        <Menu closeOnSelect={false} onClose={() => setNewNotification(false)}>
+        <Menu closeOnSelect={false}>
             <MenuButton
                 as={Button}
-                onClick={() => setNewNotification(false)}
                 bg="transparent"
                 rounded="full"
                 p={PADDING}
