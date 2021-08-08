@@ -47,10 +47,7 @@ const PaymentPlanCard = ({
     );
 
     return (
-        <CustomBox
-            bg={useColorModeValue('brand.200', 'brand.700')}
-            {...otherProps}
-        >
+        <CustomBox {...otherProps}>
             <VStack spacing={6}>
                 <Heading
                     as="h4"
@@ -81,8 +78,8 @@ const PaymentPlanCard = ({
                     </>
                 )}
                 <VStack align="flex-start" w="80%" spacing={6}>
-                    {details.map((detail) => (
-                        <Text key={detail}>{detail}</Text>
+                    {details.map((detail, id) => (
+                        <Text key={id}>{detail}</Text>
                     ))}
                 </VStack>
                 <PaymentModal payableAmount={price} />

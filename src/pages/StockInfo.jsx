@@ -25,7 +25,7 @@ const StockDetails = ({ match }) => {
     }, [tickerId]);
 
     return (
-        <PageTemplate bgColor={useColorModeValue('brand.300', 'brand.800')}>
+        <PageTemplate>
             <StockInformation my={16} />
             <StockDataGraph my={16} />
             <StockPredictionDetails my={16} />

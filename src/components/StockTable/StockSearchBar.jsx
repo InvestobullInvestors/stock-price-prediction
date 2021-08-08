@@ -13,10 +13,10 @@ const StockSearchBar = ({
     handleCancel,
     keyword: { filterKeyword },
 }) => {
-    const color = useColorModeValue('brand.400', 'brand.600');
+    const color = useColorModeValue('brand.200', 'brand.700');
 
     return (
-        <InputGroup w="sm" borderRadius="lg" border="1px" borderColor={color}>
+        <InputGroup w="sm" borderColor={color}>
             <InputLeftElement pointerEvents="none">
                 <SearchIcon color={color} />
             </InputLeftElement>

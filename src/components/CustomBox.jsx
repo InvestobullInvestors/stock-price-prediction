@@ -6,8 +6,10 @@ const CustomBox = ({ children, ...otherProps }) => (
         m={4}
         p={8}
         borderRadius="lg"
-        shadow="md"
-        bg={useColorModeValue('brand.300', 'brand.700')}
+        shadow="sm"
+        bg={useColorModeValue('brand.100', 'brand.800')}
+        border="1px"
+        borderColor={useColorModeValue('brand.200', 'brand.700')}
         {...otherProps}
     >
         {children}
