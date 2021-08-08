@@ -10,14 +10,12 @@ import Watchlist from '../pages/Watchlist';
 const Main = () => {
     return (
         <>
-            <Route path="/" exact component={Home} /> {/*Raghav*/}
-            <Route path="/watchlist" component={Watchlist} /> {/*Weiyoung*/}
-            <Route path="/plans" component={Plans} /> {/*Himanshu*/}
-            <Route path="/about" component={About} /> {/*Weiyoung*/}
-            <Route path="/news" component={News} /> {/*Paul*/}
-            {/*<Route path="/help" component={Help}/> /!*Himanshu*!/*/}
+            <Route path="/watchlist" component={Watchlist} />
+            <Route path="/plans" component={Plans} />
+            <Route path="/about" component={About} />
+            <Route path="/news" component={News} />
             <Route path="/stock-info/:tickerId" component={StockInfo} />
-            {/*<Route component={() => <Redirect to="/home"/>}/>*/}
+            <Route path="/" component={Home} />
         </>
     );
 };

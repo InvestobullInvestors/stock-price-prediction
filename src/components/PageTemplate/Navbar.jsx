@@ -205,7 +205,6 @@ const UserMenu = ({ bgColor }) => {
                 <MenuItem as={Link} to="/about">
                     About Us
                 </MenuItem>
-                <MenuItem>Help</MenuItem>
                 <MenuItem as="button" onClick={handleLogout}>
                     Log Out
                 </MenuItem>
