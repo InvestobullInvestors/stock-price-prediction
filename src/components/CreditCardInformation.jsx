@@ -14,6 +14,7 @@ import {
     Box,
     Button,
     Center,
+    Text,
 } from '@chakra-ui/react';
 import useHandlePayment from '../hooks/useHandlePayment';
 import { useUser } from '../contexts/useUser';
@@ -86,8 +87,8 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
                         <Alert status="warning" mb={4}>
                             <AlertIcon />
                             <AlertDescription>
-                                You are currently subscribed to the {plan} plan.
-                                Do you want to pay again?
+                                <Text>Your current plan is {plan}. </Text>
+                                <Text>Are you sure you want to pay again?</Text>
                             </AlertDescription>
                         </Alert>
                     )}
