@@ -11,10 +11,7 @@ const StockDataGraph = ({ ...otherProps }) => {
     defaults.borderColor = useColorModeValue('#CCC', '#555');
 
     return (
-        <CustomBox
-            bgColor={useColorModeValue('brand.100', 'brand.700')}
-            {...otherProps}
-        >
+        <CustomBox {...otherProps}>
             {isStockGraphLoading ? (
                 <LoadingSpinner />
             ) : (

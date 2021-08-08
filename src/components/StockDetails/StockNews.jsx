@@ -25,10 +25,7 @@ const NewsLayout = ({ _id, urlToImage, publishedAt, title }) => (
 const StockNews = ({ ...otherProps }) => {
     const { stockNews, isStockNewsLoading } = useStockNews();
     return (
-        <CustomBox
-            bgColor={useColorModeValue('brand.100', 'brand.700')}
-            {...otherProps}
-        >
+        <CustomBox {...otherProps}>
             <Heading as="h3" size="lg" p={8} textAlign="center">
                 Stock News
             </Heading>

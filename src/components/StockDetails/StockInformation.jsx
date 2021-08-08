@@ -196,10 +196,7 @@ const LivePrice = () => {
 };
 
 const StockInformation = ({ ...otherProps }) => (
-    <CustomBox
-        bgColor={useColorModeValue('brand.100', 'brand.700')}
-        {...otherProps}
-    >
+    <CustomBox {...otherProps}>
         <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={8}>
             <LivePrice />
             <QuarterlyStockData />

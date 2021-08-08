@@ -10,6 +10,7 @@ import {
     ModalHeader,
     ModalOverlay,
     Text,
+    useColorModeValue,
 } from '@chakra-ui/react';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
@@ -18,6 +19,7 @@ import { useLoginSignupPopup } from '../../contexts/useLoginSignupPopup';
 
 const LoginSignupPopup = () => {
     const { mode, setMode, isOpen, onOpen, onClose } = useLoginSignupPopup();
+    const hoverColor = useColorModeValue('brand.600', 'brand.400');
 
     const modalContent = {
         login: {
@@ -66,8 +68,8 @@ const LoginSignupPopup = () => {
                     setMode('login');
                     onOpen();
                 }}
-                variant="outline"
-                border="2px"
+                variant="ghost"
+                _hover={{ color: hoverColor }}
                 mr={2}
             >
                 Log In
@@ -78,6 +80,8 @@ const LoginSignupPopup = () => {
                     setMode('signup');
                     onOpen();
                 }}
+                variant="outline"
+                _hover={{ color: hoverColor }}
             >
                 Sign Up
             </Button>
