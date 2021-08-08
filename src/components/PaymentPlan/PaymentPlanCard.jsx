@@ -50,12 +50,17 @@ const PaymentPlanCard = ({
             {...otherProps}
         >
             <VStack spacing={8}>
-                <Heading as="h4" size="xl" color={planColor}>
+                <Heading
+                    as="h4"
+                    size="xl"
+                    color={planColor}
+                    fontFamily="Palatino"
+                >
                     {plan}
                 </Heading>
                 {price ? (
                     <>
-                        <Heading size="lg">USD ${price}/month</Heading>
+                        <Heading size="md">USD ${price}/month</Heading>
                         {/*TODO: don't allow paying when no user signed in (but can't use useUser)*/}
                         <Button onClick={onOpen} colorScheme="brand">
                             {buttonText}
@@ -63,7 +68,7 @@ const PaymentPlanCard = ({
                     </>
                 ) : (
                     <>
-                        <Heading size="lg">Free</Heading>
+                        <Heading size="md">Free</Heading>
                         <Button as={Link} to="/" colorScheme="brand">
                             {buttonText}
                         </Button>

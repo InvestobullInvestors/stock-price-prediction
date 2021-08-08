@@ -12,7 +12,7 @@ import '@fontsource/open-sans/400.css';
 
 const theme = extendTheme({
     fonts: {
-        heading: 'Palatino',
+        heading: 'Open Sans',
         body: 'Open Sans',
     },
     config: {
