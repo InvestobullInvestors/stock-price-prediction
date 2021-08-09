@@ -56,7 +56,7 @@ const CustomButton = ({ children, route, ...otherProps }) => (
         variant="ghost"
         m={MARGIN}
         as={Link}
-        _hover={{ color: useColorModeValue('brand.600', 'brand.400') }}
+        _hover={{ color: useColorModeValue('brand.500', 'brand.400') }}
         {...otherProps}
         to={route}
     >

@@ -28,7 +28,14 @@ const StockSymbol = ({ ticker }) => (
 );
 
 const CustomTh = ({ children, ...otherProps }) => (
-    <Th w="12%" _hover={{ cursor: 'pointer' }} {...otherProps}>
+    <Th
+        w="12%"
+        _hover={{
+            cursor: 'pointer',
+            color: useColorModeValue('brand.500', 'brand.400'),
+        }}
+        {...otherProps}
+    >
         {children}
     </Th>
 );
