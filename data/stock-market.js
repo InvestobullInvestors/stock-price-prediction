@@ -28,6 +28,10 @@ const MARKET_DATA = [
                 ticker: 'UBER',
                 name: 'Uber',
             },
+            {
+                ticker: 'AAPL',
+                name: 'Apple',
+            },
         ],
     },
 ];

@@ -12,6 +12,10 @@ const tickerToEndpointMap = {
     GOOGL: '',
     AMZN: '',
     COST: '',
+    QCOM: '',
+    AVGO: '',
+    CSCO: '',
+    TSLA: 'http://f6b1b502-ac55-4522-b0ef-f4becf1604a2.canadacentral.azurecontainer.io/score',
 };
 
 const number_of_days = [2, 3, 6];
