@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-    Box,
+    HStack,
     Table,
     Tbody,
     Td,
@@ -14,7 +14,8 @@ import {
 import { useHistory } from 'react-router-dom';
 import WatchlistButton from '../WatchlistButton';
 import CustomBox from '../CustomBox';
-import { Icon, TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
+import { Icon } from '@chakra-ui/icons';
+import { BsChevronDown, BsChevronExpand, BsChevronUp } from 'react-icons/bs';
 
 const StockSymbol = ({ ticker }) => (
     <Text
@@ -49,14 +50,36 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
     const lightMode = useColorMode().colorMode === 'light';
     const greenColor = useColorModeValue('green.light', 'green.dark');
     const redColor = useColorModeValue('red.light', 'red.dark');
-    const arrows = {
-        dividend_payout_ratio: false,
-        pe_ratio: false,
-        peg_ratio: false,
-        quarterly_earning_growth: false,
-        quarterly_revenue_growth: false,
-        fifty_two_week_low: false,
-        fifty_two_week_high: false,
+
+    const [dividendPayoutRatioArrow, setDividendPayoutRatioArrow] = useState(0);
+    const [peRatioArrow, setPeRatioArrow] = useState(0);
+    const [pegRatioArrow, setPegRatioArrow] = useState(0);
+    const [quarterlyEarningGrowthArrow, setQuarterlyEarningGrowthArrow] =
+        useState(0);
+    const [quarterlyRevenueGrowthArrow, setQuarterlyRevenueGrowthArrow] =
+        useState(0);
+    const [fiftyTwoWeekLowArrow, setFiftyTwoWeekLowArrow] = useState(0);
+    const [fiftyTwoWeekHighArrow, setFiftyTwoWeekHighArrow] = useState(0);
+
+    const changeArrowDirection = (state, setter) => {
+        const currentState = state;
+        // reset all arrow states
+        setDividendPayoutRatioArrow(0);
+        setPeRatioArrow(0);
+        setPegRatioArrow(0);
+        setQuarterlyEarningGrowthArrow(0);
+        setQuarterlyRevenueGrowthArrow(0);
+        setFiftyTwoWeekLowArrow(0);
+        setFiftyTwoWeekHighArrow(0);
+        // change arrow direction
+        if (currentState === 1) setter(2);
+        else setter(1);
+    };
+
+    const displayArrow = (state) => {
+        if (state === 0) return <Icon as={BsChevronExpand} boxSize={4} />;
+        if (state === 1) return <Icon as={BsChevronDown} boxSize={3} />;
+        if (state === 2) return <Icon as={BsChevronUp} boxSize={3} />;
     };
 
     return (
@@ -72,67 +95,113 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         <CustomTh>Ticker</CustomTh>
                         <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
-                            onClick={() =>
-                                handleSortClick('dividend_payout_ratio')
-                            }
+                            onClick={() => {
+                                handleSortClick('dividend_payout_ratio');
+                                changeArrowDirection(
+                                    dividendPayoutRatioArrow,
+                                    setDividendPayoutRatioArrow
+                                );
+                            }}
                             _hover={{ cursor: 'pointer' }}
                         >
-                            Dividend Payout Ratio
-                            <Icon
-                                as={
-                                    arrows.dividend_payout_ratio
-                                        ? TriangleUpIcon
-                                        : TriangleDownIcon
-                                }
-                            />
+                            <HStack>
+                                <Text>Dividend Payout Ratio</Text>
+                                {displayArrow(dividendPayoutRatioArrow)}
+                            </HStack>
                         </CustomTh>
                         <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
-                            onClick={() => handleSortClick('pe_ratio')}
+                            onClick={() => {
+                                handleSortClick('pe_ratio');
+                                changeArrowDirection(
+                                    peRatioArrow,
+                                    setPeRatioArrow
+                                );
+                            }}
                             _hover={{ cursor: 'pointer' }}
                         >
-                            PE Ratio
+                            <HStack>
+                                <Text>PE Ratio</Text>
+                                {displayArrow(peRatioArrow)}
+                            </HStack>
                         </CustomTh>
                         <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
-                            onClick={() => handleSortClick('peg_ratio')}
+                            onClick={() => {
+                                handleSortClick('peg_ratio');
+                                changeArrowDirection(
+                                    pegRatioArrow,
+                                    setPegRatioArrow
+                                );
+                            }}
                             _hover={{ cursor: 'pointer' }}
                         >
-                            PEG Ratio
+                            <HStack>
+                                <Text>PEG Ratio</Text>
+                                {displayArrow(pegRatioArrow)}
+                            </HStack>
                         </CustomTh>
                         <CustomTh
                             display={{ base: 'none', lg: 'table-cell' }}
-                            onClick={() =>
-                                handleSortClick('quarterly_earning_growth')
-                            }
+                            onClick={() => {
+                                handleSortClick('quarterly_earning_growth');
+                                changeArrowDirection(
+                                    quarterlyEarningGrowthArrow,
+                                    setQuarterlyEarningGrowthArrow
+                                );
+                            }}
                             _hover={{ cursor: 'pointer' }}
                         >
-                            Quarterly Earning Growth
+                            <HStack>
+                                <Text>Quarterly Earning Growth</Text>
+                                {displayArrow(quarterlyEarningGrowthArrow)}
+                            </HStack>
                         </CustomTh>
                         <CustomTh
                             display={{ base: 'none', lg: 'table-cell' }}
-                            onClick={() =>
-                                handleSortClick('quarterly_revenue_growth')
-                            }
+                            onClick={() => {
+                                handleSortClick('quarterly_revenue_growth');
+                                changeArrowDirection(
+                                    quarterlyRevenueGrowthArrow,
+                                    setQuarterlyRevenueGrowthArrow
+                                );
+                            }}
                             _hover={{ cursor: 'pointer' }}
                         >
-                            Quarterly Revenue Growth
+                            <HStack>
+                                <Text>Quarterly Revenue Growth</Text>
+                                {displayArrow(quarterlyRevenueGrowthArrow)}
+                            </HStack>
                         </CustomTh>
                         <CustomTh
-                            onClick={() =>
-                                handleSortClick('fifty_two_week_low')
-                            }
+                            onClick={() => {
+                                handleSortClick('fifty_two_week_low');
+                                changeArrowDirection(
+                                    fiftyTwoWeekLowArrow,
+                                    setFiftyTwoWeekLowArrow
+                                );
+                            }}
                             _hover={{ cursor: 'pointer' }}
                         >
-                            52-week Low
+                            <HStack>
+                                <Text>52-week Low</Text>
+                                {displayArrow(fiftyTwoWeekLowArrow)}
+                            </HStack>
                         </CustomTh>
                         <CustomTh
-                            onClick={() =>
-                                handleSortClick('fifty_two_week_high')
-                            }
+                            onClick={() => {
+                                handleSortClick('fifty_two_week_high');
+                                changeArrowDirection(
+                                    fiftyTwoWeekHighArrow,
+                                    setFiftyTwoWeekHighArrow
+                                );
+                            }}
                             _hover={{ cursor: 'pointer' }}
                         >
-                            52-week High
+                            <HStack>
+                                <Text>52-week High</Text>
+                                {displayArrow(fiftyTwoWeekHighArrow)}
+                            </HStack>
                         </CustomTh>
                     </Tr>
                 </Thead>
