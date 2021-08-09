@@ -2,6 +2,7 @@ const { realtimeStockInfo } = require('../dal/stock-markets');
 const { predictedStockInfo } = require('../dal/stock-markets');
 const { stockMarketInfo } = require('../dal/stock-markets');
 const axios = require('axios');
+const esprima = require('esprima');
 
 const tickerToEndpointMap = {
     AAPL: 'http://f6b1b502-ac55-4522-b0ef-f4becf1604a2.canadacentral.azurecontainer.io/score',
@@ -13,7 +14,7 @@ const tickerToEndpointMap = {
     COST: '',
 };
 
-const number_of_days = [1, 3, 6];
+const number_of_days = [2, 3, 6];
 
 const predictPrices = async () => {
     const doc = await stockMarketInfo.find({});
@@ -94,23 +95,33 @@ const get_dependent_variables = async (ticker) => {
         });
     }
 
+    const scoreList = getPredictionScoreFromAPI(res, ticker);
+
     return res;
 };
 
-const getPredictionScoreFromAPI = async (dependentVariableList, scoringURI) => {
-    console.log('Scoring URI: ', scoringURI);
-    console.log('Dependent Variables: ', dependentVariableList);
+// Returns a list of prediction scores from Azure AutoML endpoint
+const getPredictionScoreFromAPI = async (dependentVariableList, ticker) => {
+    let scoreURI = '';
+    for (const [key, value] of Object.entries(tickerToEndpointMap)) {
+        if (ticker === key) scoreURI = value;
+    }
 
     const data = {
         data: dependentVariableList,
     };
 
-    const scoreList = await axios.post(scoringURI, JSON.stringify(data), {
-        headers: { 'Content-Type': 'application/json' },
-    });
-
-    console.log('Scoring List: ', scoreList.data);
-
+    let scoreList = [];
+    if (scoreURI !== '') {
+        const scoreRes = await axios.post(scoreURI, JSON.stringify(data), {
+            headers: { 'Content-Type': 'application/json' },
+        });
+        const scoreObj = JSON.parse(scoreRes.data);
+        console.log(scoreObj);
+        scoreList = scoreObj['forecast'];
+    } else {
+        console.log('Score URI is an empty string');
+    }
     return scoreList;
 };
 
