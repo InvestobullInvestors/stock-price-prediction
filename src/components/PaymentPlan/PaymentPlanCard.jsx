@@ -9,7 +9,6 @@ import {
     ModalHeader,
     ModalOverlay,
     Text,
-    useColorModeValue,
     useDisclosure,
     VStack,
 } from '@chakra-ui/react';
