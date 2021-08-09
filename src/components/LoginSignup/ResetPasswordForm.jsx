@@ -8,6 +8,7 @@ import {
     FormLabel,
     Input,
     Link,
+    useColorModeValue,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/useAuth';
@@ -61,6 +62,7 @@ const ResetPasswordPopup = ({ setMode }) => {
                     as="button"
                     onClick={() => setMode('login')}
                     m={3}
+                    color={useColorModeValue('blue.light', 'blue.dark')}
                 >
                     Back to Login
                 </Link>

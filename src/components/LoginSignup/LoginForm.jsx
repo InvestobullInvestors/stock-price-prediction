@@ -9,6 +9,7 @@ import {
     Input,
     InputRightElement,
     Link,
+    useColorModeValue,
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useForm } from 'react-hook-form';
@@ -71,6 +72,7 @@ const LoginForm = ({ setMode }) => {
                     as="button"
                     onClick={() => setMode('resetPassword')}
                     m={3}
+                    color={useColorModeValue('blue.light', 'blue.dark')}
                 >
                     Forgot Password?
                 </Link>

@@ -4,14 +4,14 @@ import { auth, firestore } from '../auth/firebase.jsx';
 import { useUser } from './useUser';
 
 const USERS = firestore.collection('users');
-const NEWS = 'news';
 const NOTIFICATIONS = 'notifications';
+const PAYMENTS = 'payments';
 const WATCHLIST = 'watchlist';
 
 const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-    const { setUser, setNews, setNotifications, setWatchlist } = useUser();
+    const { setUser, setPayments, setNotifications, setWatchlist } = useUser();
 
     const [loading, setLoading] = useState(true);
 
@@ -40,15 +40,12 @@ const AuthProvider = ({ children }) => {
             photoURL: photoURL,
             plan: 'Basic',
             plan_expiry: null,
-            stripe_id: '',
         });
 
-        await currentUser.collection(NEWS).add({});
         await currentUser
             .collection(NOTIFICATIONS)
             .doc(timestamp.toString())
             .set(welcomeMessage);
-        await currentUser.collection(WATCHLIST).add({});
     };
 
     const login = (email, password) => {
@@ -86,8 +83,8 @@ const AuthProvider = ({ children }) => {
 
             currentUser.onSnapshot((snapshot) => setUser(snapshot.data()));
 
-            currentUser.collection(NEWS).onSnapshot((snapshot) => {
-                setNews(snapshot.docs.map((doc) => doc.data()));
+            currentUser.collection(PAYMENTS).onSnapshot((snapshot) => {
+                setPayments(snapshot.docs.map((doc) => doc.data()));
             });
 
             currentUser.collection(NOTIFICATIONS).onSnapshot((snapshot) => {
