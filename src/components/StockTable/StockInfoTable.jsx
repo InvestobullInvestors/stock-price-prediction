@@ -28,7 +28,11 @@ const StockSymbol = ({ ticker }) => (
 );
 
 const CustomTh = ({ children, ...otherProps }) => (
-    <Th w="12%" {...otherProps}>
+    <Th
+        w="12%"
+        _hover={{ cursor: 'pointer', bgColor: 'blackAlpha.50' }}
+        {...otherProps}
+    >
         {children}
     </Th>
 );
@@ -93,8 +97,10 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
             <Table variant="simple">
                 <Thead>
                     <Tr>
-                        <CustomTh w="4%" />
-                        <CustomTh>Ticker</CustomTh>
+                        <CustomTh w="4%" _hover={{ cursor: 'default' }} />
+                        <CustomTh _hover={{ cursor: 'default' }}>
+                            Ticker
+                        </CustomTh>
                         <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
                             onClick={() => {
@@ -104,7 +110,6 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     setDividendPayoutRatioArrow
                                 );
                             }}
-                            _hover={{ cursor: 'pointer' }}
                         >
                             <HStack>
                                 <Text>Dividend Payout Ratio</Text>
@@ -120,7 +125,6 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     setPeRatioArrow
                                 );
                             }}
-                            _hover={{ cursor: 'pointer' }}
                         >
                             <HStack>
                                 <Text>PE Ratio</Text>
@@ -136,7 +140,6 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     setPegRatioArrow
                                 );
                             }}
-                            _hover={{ cursor: 'pointer' }}
                         >
                             <HStack>
                                 <Text>PEG Ratio</Text>
@@ -152,7 +155,6 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     setQuarterlyEarningGrowthArrow
                                 );
                             }}
-                            _hover={{ cursor: 'pointer' }}
                         >
                             <HStack>
                                 <Text>Quarterly Earning Growth</Text>
@@ -168,7 +170,6 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     setQuarterlyRevenueGrowthArrow
                                 );
                             }}
-                            _hover={{ cursor: 'pointer' }}
                         >
                             <HStack>
                                 <Text>Quarterly Revenue Growth</Text>
@@ -183,7 +184,6 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     setFiftyTwoWeekLowArrow
                                 );
                             }}
-                            _hover={{ cursor: 'pointer' }}
                         >
                             <HStack>
                                 <Text>52-week Low</Text>
@@ -198,7 +198,6 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     setFiftyTwoWeekHighArrow
                                 );
                             }}
-                            _hover={{ cursor: 'pointer' }}
                         >
                             <HStack>
                                 <Text>52-week High</Text>
