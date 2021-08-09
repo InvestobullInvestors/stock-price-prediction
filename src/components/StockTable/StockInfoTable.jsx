@@ -16,6 +16,7 @@ import WatchlistButton from '../WatchlistButton';
 import CustomBox from '../CustomBox';
 import { Icon } from '@chakra-ui/icons';
 import { BsChevronDown, BsChevronExpand, BsChevronUp } from 'react-icons/bs';
+import useCurrencyFormat from '../../hooks/useCurrencyFormat';
 
 const StockSymbol = ({ ticker }) => (
     <Text
@@ -47,6 +48,7 @@ const ClickableTd = ({ ticker_id, children, ...otherProps }) => {
 };
 
 const StockInfoTable = ({ stocks, handleSortClick }) => {
+    const formatCurrency = useCurrencyFormat();
     const lightMode = useColorMode().colorMode === 'light';
     const greenColor = useColorModeValue('green.light', 'green.dark');
     const redColor = useColorModeValue('red.light', 'red.dark');
@@ -296,10 +298,14 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     {quarterly_revenue_growth ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd ticker_id={ticker_id}>
-                                    {fifty_two_week_low?.toFixed(2) ?? '-'}
+                                    {fifty_two_week_low
+                                        ? formatCurrency(fifty_two_week_low)
+                                        : '-'}
                                 </ClickableTd>
                                 <ClickableTd ticker_id={ticker_id}>
-                                    {fifty_two_week_high?.toFixed(2) ?? '-'}
+                                    {fifty_two_week_high
+                                        ? formatCurrency(fifty_two_week_high)
+                                        : '-'}
                                 </ClickableTd>
                             </Tr>
                         )
