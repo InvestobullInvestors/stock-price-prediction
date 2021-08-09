@@ -3,7 +3,7 @@ on:
   push:
     branches: [ Himanshu/test-cron ]
   schedule:
-    - cron: '0 0 0 * * *'
+    - cron: '0 0 * * *'
   # Allows running this workflow manually from the Actions tab
   workflow_dispatch:
 
