@@ -56,7 +56,7 @@ const ClickableTd = ({ ticker_id, children, ...otherProps }) => {
 
 const StockInfoTable = ({ stocks, handleSortClick }) => {
     const formatCurrency = useCurrencyFormat();
-    const lightMode = useColorMode().colorMode === 'light';
+    const isLightMode = useColorMode().colorMode === 'light';
     const greenColor = useColorModeValue('green.light', 'green.dark');
     const redColor = useColorModeValue('red.light', 'red.dark');
 
@@ -224,7 +224,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             <Tr
                                 key={ticker_id}
                                 _hover={
-                                    lightMode
+                                    isLightMode
                                         ? {
                                               cursor: 'pointer',
                                               bg: 'brand.100',

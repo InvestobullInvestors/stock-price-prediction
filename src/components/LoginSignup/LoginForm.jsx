@@ -58,7 +58,7 @@ const LoginForm = ({ setMode }) => {
                     {...register('password', { required: true })}
                 />
                 <InputRightElement bottom={-8}>
-                    <Button onClick={() => setShowPW(!showPW)}>
+                    <Button onClick={() => setShowPW(!showPW)} variant="ghost">
                         {showPW ? <ViewOffIcon /> : <ViewIcon />}
                     </Button>
                 </InputRightElement>

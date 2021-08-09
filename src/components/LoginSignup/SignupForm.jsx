@@ -80,7 +80,7 @@ const SignupForm = () => {
                     {...register('password', { required: true })}
                 />
                 <InputRightElement bottom={-8}>
-                    <Button onClick={() => setShowPW(!showPW)}>
+                    <Button onClick={() => setShowPW(!showPW)} variant="ghost">
                         {showPW ? <ViewOffIcon /> : <ViewIcon />}
                     </Button>
                 </InputRightElement>
@@ -93,7 +93,10 @@ const SignupForm = () => {
                     {...register('passwordConfirmation', { required: true })}
                 />
                 <InputRightElement bottom={-8}>
-                    <Button onClick={() => setShowPWC(!showPWC)}>
+                    <Button
+                        onClick={() => setShowPWC(!showPWC)}
+                        variant="ghost"
+                    >
                         {showPWC ? <ViewOffIcon /> : <ViewIcon />}
                     </Button>
                 </InputRightElement>

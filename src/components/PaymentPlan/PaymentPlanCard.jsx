@@ -9,11 +9,12 @@ import {
     ModalHeader,
     ModalOverlay,
     Text,
+    useColorModeValue,
     useDisclosure,
     VStack,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import CreditCardInformation from '../CreditCardInformation';
+import CreditCardInformation from './CreditCardInformation';
 import CustomBox from '../CustomBox';
 
 const PaymentPlanCard = ({
@@ -29,7 +30,9 @@ const PaymentPlanCard = ({
     const PaymentModal = ({ payableAmount }) => (
         <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
             <ModalOverlay>
-                <ModalContent>
+                <ModalContent
+                    bgColor={useColorModeValue('brand.50', 'brand.800')}
+                >
                     <ModalHeader>Confirm Subscription</ModalHeader>
                     <ModalBody>
                         <CreditCardInformation payableAmount={payableAmount} />

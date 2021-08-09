@@ -1,7 +1,7 @@
 import React from 'react';
 import { HStack, Text } from '@chakra-ui/react';
 import { DeleteIcon, Icon } from '@chakra-ui/icons';
-import { useUser } from '../contexts/useUser';
+import { useUser } from '../../contexts/useUser';
 
 const NotificationList = () => {
     const { notifications, deleteOneNotification } = useUser();

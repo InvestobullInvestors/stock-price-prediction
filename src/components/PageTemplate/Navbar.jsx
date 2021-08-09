@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Avatar,
+    Box,
     Button,
     Divider,
     Drawer,
@@ -15,17 +16,19 @@ import {
     Menu,
     MenuButton,
     MenuDivider,
+    MenuGroup,
     MenuItem,
     MenuList,
     Text,
     useColorMode,
     useColorModeValue,
     useDisclosure,
+    VStack,
 } from '@chakra-ui/react';
 import { ChevronDownIcon, HamburgerIcon, Icon } from '@chakra-ui/icons';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { VscBell, VscBellDot } from 'react-icons/vsc';
-import NotificationList from '../NotificationList';
+import NotificationList from './NotificationList';
 import LoginSignupPopup from '../LoginSignup/LoginSignupPopup';
 import { useUser } from '../../contexts/useUser';
 import { useAuth } from '../../contexts/useAuth';
@@ -52,16 +55,16 @@ const Logo = () => (
 );
 
 const CustomButton = ({ children, route, ...otherProps }) => (
-    <Button
-        variant="ghost"
-        m={MARGIN}
+    <Box
         as={Link}
+        to={route}
+        fontSize="lg"
+        mx={4}
         _hover={{ color: useColorModeValue('brand.500', 'brand.400') }}
         {...otherProps}
-        to={route}
     >
         {children}
-    </Button>
+    </Box>
 );
 
 const HamburgerMenu = ({ bgColor }) => {
@@ -87,21 +90,15 @@ const HamburgerMenu = ({ bgColor }) => {
                         MENU
                     </DrawerHeader>
                     <DrawerBody>
-                        <CustomButton w="100%" route="/">
-                            Home
-                        </CustomButton>
-                        <Divider my={1} />
-                        <CustomButton w="100%" route="/watchlist">
+                        <CustomButton route="/">Home</CustomButton>
+                        <Divider my={2} />
+                        <CustomButton route="/watchlist">
                             Watchlist
                         </CustomButton>
-                        <Divider my={1} />
-                        <CustomButton w="100%" route="/news">
-                            News
-                        </CustomButton>
-                        <Divider my={1} />
-                        <CustomButton w="100%" route="/plans">
-                            Plans
-                        </CustomButton>
+                        <Divider my={2} />
+                        <CustomButton route="/news">News</CustomButton>
+                        <Divider my={2} />
+                        <CustomButton route="/plans">Plans</CustomButton>
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>
@@ -203,11 +200,20 @@ const UserMenu = ({ bgColor }) => {
             >
                 <Avatar size="sm" name={user.displayName} src={user.photoURL} />
             </MenuButton>
-            <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-                <UserProfilePopup />
-                <MenuItem as={Link} to="/plans">
-                    Plan: {user.plan}
-                </MenuItem>
+            <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH} isTruncated>
+                <MenuGroup title={user.displayName}>
+                    <UserProfilePopup />
+                    <MenuItem as={Link} to="/plans">
+                        <VStack alignItems="flex-start" spacing={0}>
+                            <Text>Plan: {user.plan}</Text>
+                            {user.plan_expiry ? (
+                                <Text fontSize="xs">
+                                    expires {user.plan_expiry}
+                                </Text>
+                            ) : null}
+                        </VStack>
+                    </MenuItem>
+                </MenuGroup>
                 <MenuDivider />
                 <MenuItem as={Link} to="/about">
                     About Us
