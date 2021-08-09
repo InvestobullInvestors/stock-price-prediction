@@ -67,7 +67,7 @@ const get_dependent_variables = async (ticker) => {
     const {
         stock_details: { timestamp, volume, open, high, low },
     } = await realtimeStockInfo.findOne({ ticker_id: ticker });
-    console.log(timestamp, volume, open, high, low);
+    // console.log(timestamp, volume, open, high, low);
 
     const res = [];
 
@@ -78,13 +78,13 @@ const get_dependent_variables = async (ticker) => {
 
         const randomInt = Math.floor(Math.random() * 5) + 1;
         const randomPercent = 0.05 * randomInt;
-        console.log('RandomInt: ', randomInt);
+        // console.log('RandomInt: ', randomInt);
         const new_volume = volume + volume * randomPercent;
         const new_open = open + open * randomPercent;
         const new_high = high + high * randomPercent;
         const new_low = low + low * randomPercent;
 
-        console.log('OPEN: ', new_open);
+        // console.log('OPEN: ', new_open);
 
         res.push({
             Date: new_time,
@@ -96,11 +96,11 @@ const get_dependent_variables = async (ticker) => {
     }
 
     const scoreList = getPredictionScoreFromAPI(res, ticker);
-
-    return res;
+    // console.log('SCORE LIST: ', scoreList);
+    return scoreList;
 };
 
-// Returns a list of prediction scores from Azure AutoML endpoint
+// Returns a list of updated prediction_details with prediction scores from Azure AutoML endpoint
 const getPredictionScoreFromAPI = async (dependentVariableList, ticker) => {
     let scoreURI = '';
     for (const [key, value] of Object.entries(tickerToEndpointMap)) {
@@ -111,18 +111,24 @@ const getPredictionScoreFromAPI = async (dependentVariableList, ticker) => {
         data: dependentVariableList,
     };
 
-    let scoreList = [];
     if (scoreURI !== '') {
         const scoreRes = await axios.post(scoreURI, JSON.stringify(data), {
             headers: { 'Content-Type': 'application/json' },
         });
         const scoreObj = JSON.parse(scoreRes.data);
-        console.log(scoreObj);
-        scoreList = scoreObj['forecast'];
+        console.log('SCORE: ', scoreObj);
+        const scoreList = scoreObj['forecast'];
+        let count = 0;
+        dependentVariableList.forEach(function (element) {
+            element.Close = roundToTwoDecimals(scoreList[count]);
+            count += 1;
+        });
     } else {
         console.log('Score URI is an empty string');
     }
-    return scoreList;
+    const newList = [...dependentVariableList]; // create new list to return
+    // console.log('NEW LIST: ', newList);
+    return newList;
 };
 
 const roundToTwoDecimals = (num) => {
