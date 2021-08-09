@@ -64,7 +64,7 @@ const CustomButton = ({ children, route, ...otherProps }) => (
     </Button>
 );
 
-const NarrowScreenHamburgerMenu = ({ bgColor }) => {
+const HamburgerMenu = ({ bgColor }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
@@ -99,8 +99,8 @@ const NarrowScreenHamburgerMenu = ({ bgColor }) => {
                             News
                         </CustomButton>
                         <Divider my={1} />
-                        <CustomButton w="100%" route="/about">
-                            About
+                        <CustomButton w="100%" route="/plans">
+                            Plans
                         </CustomButton>
                     </DrawerBody>
                 </DrawerContent>
@@ -109,7 +109,7 @@ const NarrowScreenHamburgerMenu = ({ bgColor }) => {
     );
 };
 
-const WideScreenLinks = () => (
+const NavbarLinks = () => (
     <Flex display={['none', 'none', 'flex', 'flex']}>
         <CustomButton route="/">Home</CustomButton>
         <CustomButton route="/watchlist">Watchlist</CustomButton>
@@ -238,9 +238,9 @@ const Navbar = () => {
                 color={txtColor}
             >
                 <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
-                    <NarrowScreenHamburgerMenu bgColor={bgColor} />
+                    <HamburgerMenu bgColor={bgColor} />
                     <Logo />
-                    <WideScreenLinks />
+                    <NavbarLinks />
 
                     <Flex flex="1" align="center" justify="flex-end">
                         {useColorMode().colorMode === 'light' ? (
