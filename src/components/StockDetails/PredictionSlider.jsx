@@ -51,14 +51,14 @@ const PredictionSlider = ({ predictedValue, tag, ...otherProps }) => {
                 onChange={handleChange}
                 maxW={80}
             >
-                <SliderTrack bg={useColorModeValue('brand.300', 'brand.800')}>
+                <SliderTrack bg={useColorModeValue('brand.200', 'brand.700')}>
                     <SliderFilledTrack
-                        bg={useColorModeValue('brand.600', 'brand.400')}
+                        bg={useColorModeValue('brand.400', 'brand.500')}
                     />
                 </SliderTrack>
                 <SliderThumb
                     boxSize={6}
-                    bgColor={useColorModeValue('brand.600', 'brand.200')}
+                    bgColor={useColorModeValue('brand.400', 'brand.500')}
                 >
                     <Box
                         color={useColorModeValue('brand.100', 'brand.900')}
