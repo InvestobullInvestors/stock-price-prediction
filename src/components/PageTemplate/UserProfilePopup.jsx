@@ -16,7 +16,6 @@ import {
     Text,
     useColorModeValue,
     useDisclosure,
-    VStack,
 } from '@chakra-ui/react';
 import { useUser } from '../../contexts/useUser';
 import { Link } from 'react-router-dom';
