@@ -7,9 +7,14 @@ const PredictionProvider = ({ children }) => {
     const [predictedValue, setPredictedValue] = useState({});
 
     const setPrediction = (stockSymbol) => {
-        axios.get(`/stock-prediction/${stockSymbol}`).then((response) => {
-            setPredictedValue(response.data);
-        });
+        axios
+            .get(`/stock-prediction/${stockSymbol}`)
+            .then((response) => {
+                setPredictedValue(response.data);
+            })
+            .catch(({ message }) => {
+                console.log(message);
+            });
     };
 
     const setInflation = (inflation) => {
