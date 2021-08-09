@@ -1,0 +1,16 @@
+name: cron run
+on:
+  push:
+    branches: [ Himanshu/test-cron ]
+  schedule:
+    - cron: '0 0 0 * * *'
+  # Allows running this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Trigger cron action
+    runs-on: ubuntu-latest
+    steps:
+      - name: cURL request
+        run: curl -X POST https://stock-price-prediction-dgtyjt5e0-hgoyal09.vercel.app/stock-details/TSLA
