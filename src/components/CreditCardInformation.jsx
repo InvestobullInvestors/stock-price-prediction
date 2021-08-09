@@ -59,7 +59,7 @@ const CheckoutForm = ({ payableAmount }) => {
                     flexDirection="column"
                     alignItems="center"
                     py={10}
-                    mb={6}
+                    mb={4}
                 >
                     <AlertIcon boxSize="40px" mr={0} />
                     <AlertTitle mt={4} mb={1} fontSize="lg">
