@@ -33,10 +33,7 @@ const PaymentPlanCard = ({
                 <ModalContent>
                     <ModalHeader>Confirm Subscription</ModalHeader>
                     <ModalBody>
-                        <CreditCardInformation
-                            payableAmount={payableAmount}
-                            closePaymentModal={onClose}
-                        />
+                        <CreditCardInformation payableAmount={payableAmount} />
                     </ModalBody>
                     <ModalCloseButton />
                 </ModalContent>
@@ -47,24 +44,19 @@ const PaymentPlanCard = ({
     return (
         <CustomBox {...otherProps}>
             <VStack spacing={6}>
-                <Heading
-                    as="h4"
-                    size="xl"
-                    color={planColor}
-                    fontFamily="Georgia"
-                >
+                <Heading as="h4" size="xl" color={planColor} fontWeight={400}>
                     {plan}
                 </Heading>
                 {price ? (
                     <>
-                        <Heading size="md">USD ${price}/month</Heading>
+                        <Text fontSize="xl">USD ${price}/month</Text>
                         <Button onClick={onOpen} colorScheme="brand">
                             {buttonText}
                         </Button>
                     </>
                 ) : (
                     <>
-                        <Heading size="md">Free</Heading>
+                        <Text fontSize="xl">Free</Text>
                         <Button as={Link} to="/" colorScheme="brand">
                             {buttonText}
                         </Button>

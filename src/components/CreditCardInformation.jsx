@@ -19,13 +19,11 @@ import {
 import useHandlePayment from '../hooks/useHandlePayment';
 import { useUser } from '../contexts/useUser';
 
-const TIMEOUT = 3500;
-
 const stripePublicKey = loadStripe(
     'pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4'
 );
 
-const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
+const CheckoutForm = ({ payableAmount }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [paymentSuccessful, setPaymentSuccessful] = useState(false);
@@ -46,10 +44,6 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
                     config: { data },
                 } = status;
                 await upgradeUserPlan(JSON.parse(data));
-                setTimeout(() => {
-                    setAlertVisible(false);
-                    closePaymentModal();
-                }, TIMEOUT);
             } else {
                 setPaymentSuccessful(false);
                 setAlertVisible(true);
@@ -74,9 +68,13 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
                             : 'Payment Failed'}
                     </AlertTitle>
                     <AlertDescription maxWidth="sm">
-                        {paymentSuccessful
-                            ? 'Thank you for using InvestoBull!'
-                            : 'An error occurred. Please try again.'}
+                        {paymentSuccessful ? (
+                            <Text>
+                                You are now subscribed to the {user?.plan} plan!
+                            </Text>
+                        ) : (
+                            <Text>An error occurred. Please try again.</Text>
+                        )}
                     </AlertDescription>
                 </Alert>
             )}
@@ -91,6 +89,15 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
                             </AlertDescription>
                         </Alert>
                     )}
+                    <Alert status="info" mb={4}>
+                        <AlertIcon />
+                        <AlertDescription>
+                            <Text>
+                                To test, use 4242424242424242 (good card), or
+                                4000000000009995 (bad card)
+                            </Text>
+                        </AlertDescription>
+                    </Alert>
                     <Box
                         my={2}
                         px={4}
@@ -135,13 +142,10 @@ const CheckoutForm = ({ payableAmount, closePaymentModal }) => {
     );
 };
 
-const CreditCardInformation = ({ payableAmount, closePaymentModal }) => {
+const CreditCardInformation = ({ payableAmount }) => {
     return (
         <Elements stripe={stripePublicKey}>
-            <CheckoutForm
-                payableAmount={payableAmount}
-                closePaymentModal={closePaymentModal}
-            />
+            <CheckoutForm payableAmount={payableAmount} />
         </Elements>
     );
 };

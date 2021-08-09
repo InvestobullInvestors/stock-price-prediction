@@ -21,7 +21,7 @@ const useHandlePayment = (
             });
             if (!error) {
                 const status = await chargeCard(id, payableAmount);
-                await callback(status);
+                callback(status);
             }
         } catch ({ message }) {
             console.log(message);

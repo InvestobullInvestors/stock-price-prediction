@@ -223,7 +223,7 @@ const UserMenu = ({ bgColor }) => {
 const Navbar = () => {
     const { user } = useUser();
 
-    const bgColor = useColorModeValue('brand.50', 'brand.900');
+    const bgColor = useColorModeValue('brand.100', 'brand.800');
     const txtColor = useColorModeValue('brand.900', 'brand.100');
 
     return (
