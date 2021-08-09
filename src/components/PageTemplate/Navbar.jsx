@@ -259,7 +259,7 @@ const Navbar = () => {
                     </Flex>
                 </Flex>
             </Flex>
-            <Divider zIndex={5} pos="fixed" />
+            <Divider pos="fixed" />
         </>
     );
 };
