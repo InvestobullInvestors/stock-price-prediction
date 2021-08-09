@@ -49,14 +49,14 @@ const predictPrices = async () => {
 
 const get_dependent_variables = async (ticker) => {
     const {
-        stock_details: { timestamp, open, close, high, low, volume },
+        stock_details: { timestamp, volume, open, high, low },
     } = await realtimeStockInfo.findOne({ ticker_id: ticker });
-    console.log(timestamp, open, high, low, volume);
+    console.log(timestamp, volume, open, high, low);
+
+    const new_volume = volume + volume * 0.05;
     const new_open = open + open * 0.05;
     const new_high = high + high * 0.05;
     const new_low = low + low * 0.05;
-    const new_volume = volume + volume * 0.05;
-    const new_close = close + close * 0.05;
 
     const res = [];
 
@@ -66,12 +66,11 @@ const get_dependent_variables = async (ticker) => {
         const new_time = new Date(new_date.setUTCHours(0));
 
         res.push({
-            timestamp: new_time,
-            open: new_open,
-            close: new_close,
-            high: new_high,
-            low: new_low,
-            volume: new_volume * 1000,
+            Date: new_time,
+            Volume: new_volume * 1000,
+            Open: new_open,
+            High: new_high,
+            Low: new_low,
         });
     }
 
