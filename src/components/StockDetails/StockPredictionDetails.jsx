@@ -77,7 +77,9 @@ const PricePrediction = () => {
                                                           : redColor
                                                   }
                                               >
-                                                  ${close.toFixed(2)}
+                                                  $
+                                                  {close?.toFixed(2) ??
+                                                      ' --.--'}
                                               </Heading>
                                           </SimpleGrid>
                                       </Box>
