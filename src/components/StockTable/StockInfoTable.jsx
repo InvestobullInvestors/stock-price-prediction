@@ -1,10 +1,10 @@
 import React from 'react';
 import {
     Box,
-    Link,
     Table,
     Tbody,
     Td,
+    Text,
     Th,
     Thead,
     Tr,
@@ -14,14 +14,15 @@ import {
 import { useHistory } from 'react-router-dom';
 import WatchlistButton from '../WatchlistButton';
 import CustomBox from '../CustomBox';
+import { Icon, TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
 
 const StockSymbol = ({ ticker }) => (
-    <Link
+    <Text
         color={useColorModeValue('blue.light', 'blue.dark')}
         fontWeight="bold"
     >
         {ticker}
-    </Link>
+    </Text>
 );
 
 const CustomTh = ({ children, ...otherProps }) => (
@@ -48,6 +49,15 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
     const lightMode = useColorMode().colorMode === 'light';
     const greenColor = useColorModeValue('green.light', 'green.dark');
     const redColor = useColorModeValue('red.light', 'red.dark');
+    const arrows = {
+        dividend_payout_ratio: false,
+        pe_ratio: false,
+        peg_ratio: false,
+        quarterly_earning_growth: false,
+        quarterly_revenue_growth: false,
+        fifty_two_week_low: false,
+        fifty_two_week_high: false,
+    };
 
     return (
         <CustomBox
@@ -68,6 +78,13 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             _hover={{ cursor: 'pointer' }}
                         >
                             Dividend Payout Ratio
+                            <Icon
+                                as={
+                                    arrows.dividend_payout_ratio
+                                        ? TriangleUpIcon
+                                        : TriangleDownIcon
+                                }
+                            />
                         </CustomTh>
                         <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
