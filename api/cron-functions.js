@@ -173,7 +173,7 @@ router.get('/cron-functions/getStockNews', async function (req, res) {
 });
 
 router.get(
-    '/cron-functions/getDailyWeatherGraphData',
+    '/cron-functions/getDailyStockPriceGraphData',
     async function (req, res) {
         const doc = await stockMarketInfo.find({});
         for (let market_data of doc) {
@@ -186,7 +186,7 @@ router.get(
                 });
 
                 const dailyStockDataFromApi =
-                    await getDailyWeatherGraphDataFromApi(stock_data);
+                    await getDailyStockPriceGraphDataFromApi(stock_data);
                 const timeSeriesData =
                     dailyStockDataFromApi['Time Series (Daily)'];
 
@@ -227,7 +227,7 @@ router.get(
                 }
             }
         }
-        res.send('Successfully got daily weather graph data for stocks');
+        res.send('Successfully got daily price data for stocks');
     }
 );
 
@@ -305,7 +305,7 @@ const getStockDataFromApi = async ({ ticker }) => {
     }
 };
 
-const getDailyWeatherGraphDataFromApi = async ({ ticker }) => {
+const getDailyStockPriceGraphDataFromApi = async ({ ticker }) => {
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${stockDataApiKey}`;
     const { data } = await axios.get(url);
     return data;
