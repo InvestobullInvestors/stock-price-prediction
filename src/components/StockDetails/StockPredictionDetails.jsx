@@ -40,7 +40,7 @@ const PricePrediction = () => {
         <CustomGridItem>
             <VStack spacing={4}>
                 <Heading as="h3" size="lg" p={8} textAlign="center">
-                    Prediction
+                    Prediction of Closing Prices
                 </Heading>
                 <CustomBox
                     p={4}
