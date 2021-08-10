@@ -13,7 +13,7 @@ import CustomBox from '../CustomBox';
 const NewsArticle = ({ date, title, url }) => {
     const dateColor = useColorModeValue('gray.600', 'gray.400');
     const formatDate = useDateFormat();
-    const hoverColor = useColorModeValue('brand.300', 'brand.500');
+    const hoverColor = useColorModeValue('brand.200', 'brand.700');
 
     return (
         <VStack spacing="4px" align="flex-start">

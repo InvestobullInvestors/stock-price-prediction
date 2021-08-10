@@ -15,9 +15,6 @@ import NewsArticle from './NewsArticle';
 import CustomBox from '../CustomBox';
 
 const NewsCard = ({ source, children, ...otherProps }) => {
-    const cardColor = useColorModeValue('brand.400', 'brand.700');
-    const textBoxColor = useColorModeValue('brand.100', 'brand.600');
-
     const { newsInfo } = useStockNews();
 
     let name;
@@ -47,7 +44,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
     logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
-        <Box
+        <CustomBox
             width="100%"
             minW="100%"
             height="100%"
@@ -56,33 +53,31 @@ const NewsCard = ({ source, children, ...otherProps }) => {
             px={4}
             py={4}
             borderRadius="lg"
-            bg={cardColor}
             className="my-box"
             {...otherProps}
         >
             {children}
             <Flex display={['none', 'none', 'flex', 'flex']} align="flex-start">
-                <HStack mt="10px" w="full">
+                {/*<HStack mt="10px" w="full">*/}
+                <HStack ml="20px" mr="30px" mt="-15px" w="full">
                     <Square
                         w={['20%', '20%', '15%', '15%']}
                         h="150px"
                         borderRadius="lg"
-                        shadow="md"
-                        bg={textBoxColor}
                         p="10px"
                     >
                         <Image src={logo} />
                     </Square>
                     <Spacer />
-                    <Box
+                    <CustomBox
                         w={['78%', '78%', '83%', '83%']}
                         h="150px"
                         borderRadius="lg"
-                        shadow="md"
-                        bg={textBoxColor}
-                        padding="5px"
+                        border={0}
+                        shadow="none"
+                        m={0}
+                        p={2}
                         css={{
-                            margin: '0',
                             scrollbarWidth: 'none',
                             msOverflowStyle: 'none',
                             overflow: 'scroll',
@@ -90,17 +85,24 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                     >
                         <VStack align="flex-start">
                             {articles.map((article) => (
-                                <Box key={article._id} w="100%">
+                                <CustomBox
+                                    key={article._id}
+                                    w="100%"
+                                    border={0}
+                                    shadow="none"
+                                    m={0}
+                                    p={0}
+                                >
                                     <NewsArticle
                                         date={article.publishedAt}
                                         title={article.title}
                                         url={article.url}
                                     />
                                     <Divider my={2} orientation="horizontal" />
-                                </Box>
+                                </CustomBox>
                             ))}
                         </VStack>
-                    </Box>
+                    </CustomBox>
                 </HStack>
             </Flex>
             <Flex display={['flex', 'flex', 'none', 'none']} align="flex-start">
@@ -108,8 +110,6 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                     <CustomBox
                         w="100px"
                         borderRadius="lg"
-                        shadow="md"
-                        bg={textBoxColor}
                         p="10px"
                         mb={0}
                         mt={-9}
@@ -117,14 +117,12 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                         <Image src={logo} />
                     </CustomBox>
                     <Spacer />
-                    <Box
+                    <CustomBox
                         w="100%"
                         h="150px"
                         border="1px"
-                        borderColor={textBoxColor}
                         borderRadius="lg"
                         shadow="md"
-                        bg={textBoxColor}
                         padding="5px"
                         css={{
                             margin: '0',
@@ -135,20 +133,20 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                     >
                         <VStack align="flex-start">
                             {articles.map((article) => (
-                                <Box key={article._id} w="100%">
+                                <CustomBox key={article._id} w="100%">
                                     <NewsArticle
                                         date={article.publishedAt}
                                         title={article.title}
                                         url={article.url}
                                     />
                                     <Divider my={2} orientation="horizontal" />
-                                </Box>
+                                </CustomBox>
                             ))}
                         </VStack>
-                    </Box>
+                    </CustomBox>
                 </VStack>
             </Flex>
-        </Box>
+        </CustomBox>
     );
 };
 
