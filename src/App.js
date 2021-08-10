@@ -6,31 +6,38 @@ import AuthProvider from './contexts/useAuth';
 import UserProvider from './contexts/useUser';
 import PredictionProvider from './contexts/usePredictions';
 import StockNewsProvider from './contexts/useStockNews';
+import LoginSignupPopupProvider from './contexts/useLoginSignupPopup';
+import '@fontsource/open-sans/300.css';
+import '@fontsource/open-sans/400.css';
 
 const theme = extendTheme({
+    fonts: {
+        heading: 'Open Sans',
+        body: 'Open Sans',
+    },
     config: {
-        initialColorMode: 'light',
+        initialColorMode: 'dark',
         useSystemColorMode: false,
     },
     colors: {
         brand: {
-            50: '#F7FAFC',
-            100: '#EDF2F7',
-            200: '#E2E8F0',
-            300: '#CBD5E0',
-            400: '#A0AEC0',
-            500: '#718096',
-            600: '#4A5568',
+            50: '#FFFFFF',
+            100: '#F7FAFC',
+            200: '#E6EEF8',
+            300: '#BACFE8',
+            400: '#90AFD1',
+            500: '#7689A6',
+            600: '#4A566B',
             700: '#2D3748',
             800: '#1A202C',
             900: '#171923',
         },
         red: {
-            light: '#D6333E',
-            dark: '#E64550',
+            light: '#CC0000',
+            dark: '#FF303E',
         },
         green: {
-            light: '#00823C',
+            light: '#408721',
             dark: '#12C766',
         },
         blue: {
@@ -41,6 +48,18 @@ const theme = extendTheme({
             light: '#F0A800',
             dark: '#FFC01E',
         },
+        bronze: {
+            light: '#8D5400',
+            dark: '#C57800',
+        },
+        silver: {
+            light: '#929292',
+            dark: '#BDBDBD',
+        },
+        gold: {
+            light: '#C49F00',
+            dark: '#D2AC01',
+        },
     },
 });
 
@@ -48,19 +67,19 @@ function App() {
     return (
         <UserProvider>
             <AuthProvider>
-                <StockInfoProvider>
-                    <PredictionProvider>
-                        <StockNewsProvider>
-                            <div className="App">
+                <LoginSignupPopupProvider>
+                    <StockInfoProvider>
+                        <PredictionProvider>
+                            <StockNewsProvider>
                                 <ChakraProvider theme={theme}>
                                     <BrowserRouter>
                                         <Main />
                                     </BrowserRouter>
                                 </ChakraProvider>
-                            </div>
-                        </StockNewsProvider>
-                    </PredictionProvider>
-                </StockInfoProvider>
+                            </StockNewsProvider>
+                        </PredictionProvider>
+                    </StockInfoProvider>
+                </LoginSignupPopupProvider>
             </AuthProvider>
         </UserProvider>
     );

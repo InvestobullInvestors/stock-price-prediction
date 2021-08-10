@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-    Box,
-    Link,
+    HStack,
     Table,
     Tbody,
     Td,
+    Text,
     Th,
     Thead,
     Tr,
@@ -13,14 +13,31 @@ import {
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import WatchlistButton from '../WatchlistButton';
+import CustomBox from '../CustomBox';
+import { Icon } from '@chakra-ui/icons';
+import { BsChevronDown, BsChevronExpand, BsChevronUp } from 'react-icons/bs';
+import useCurrencyFormat from '../../hooks/useCurrencyFormat';
 
 const StockSymbol = ({ ticker }) => (
-    <Link
+    <Text
         color={useColorModeValue('blue.light', 'blue.dark')}
         fontWeight="bold"
     >
         {ticker}
-    </Link>
+    </Text>
+);
+
+const CustomTh = ({ children, ...otherProps }) => (
+    <Th
+        w="12%"
+        _hover={{
+            cursor: 'pointer',
+            color: useColorModeValue('brand.500', 'brand.400'),
+        }}
+        {...otherProps}
+    >
+        {children}
+    </Th>
 );
 
 const ClickableTd = ({ ticker_id, children, ...otherProps }) => {
@@ -31,84 +48,178 @@ const ClickableTd = ({ ticker_id, children, ...otherProps }) => {
     };
 
     return (
-        <Td onClick={handleClick} isNumeric {...otherProps}>
+        <Td w="12%" onClick={handleClick} isNumeric {...otherProps}>
             {children}
         </Td>
     );
 };
 
 const StockInfoTable = ({ stocks, handleSortClick }) => {
-    const lightMode = useColorMode().colorMode === 'light';
+    const formatCurrency = useCurrencyFormat();
+    const isLightMode = useColorMode().colorMode === 'light';
+    const greenColor = useColorModeValue('green.light', 'green.dark');
+    const redColor = useColorModeValue('red.light', 'red.dark');
+
+    const [dividendPayoutRatioArrow, setDividendPayoutRatioArrow] = useState(0);
+    const [peRatioArrow, setPeRatioArrow] = useState(0);
+    const [pegRatioArrow, setPegRatioArrow] = useState(0);
+    const [quarterlyEarningGrowthArrow, setQuarterlyEarningGrowthArrow] =
+        useState(0);
+    const [quarterlyRevenueGrowthArrow, setQuarterlyRevenueGrowthArrow] =
+        useState(0);
+    const [fiftyTwoWeekLowArrow, setFiftyTwoWeekLowArrow] = useState(0);
+    const [fiftyTwoWeekHighArrow, setFiftyTwoWeekHighArrow] = useState(0);
+
+    const changeArrowDirection = (state, setter) => {
+        const currentState = state;
+        setDividendPayoutRatioArrow(0);
+        setPeRatioArrow(0);
+        setPegRatioArrow(0);
+        setQuarterlyEarningGrowthArrow(0);
+        setQuarterlyRevenueGrowthArrow(0);
+        setFiftyTwoWeekLowArrow(0);
+        setFiftyTwoWeekHighArrow(0);
+        if (currentState === -1) setter(1);
+        else setter(-1);
+    };
+
+    const stateToIconMap = {
+        '-1': <Icon as={BsChevronUp} boxSize={3} />,
+        0: <Icon as={BsChevronExpand} boxSize={4} />,
+        1: <Icon as={BsChevronDown} boxSize={3} />,
+    };
 
     return (
-        <Box
-            borderRadius="xl"
-            border="2px"
+        <CustomBox
             padding={2}
-            borderColor={useColorModeValue('brand.400', 'brand.600')}
+            borderColor={useColorModeValue('brand.200', 'brand.700')}
+            bg={useColorModeValue('brand.50', 'brand.900')}
         >
             <Table variant="simple">
                 <Thead>
                     <Tr>
-                        <Th />
-                        <Th>Ticker</Th>
-                        <Th
+                        <CustomTh w="4%" _hover={{ cursor: 'default' }} />
+                        <CustomTh _hover={{ cursor: 'default' }}>
+                            Ticker
+                        </CustomTh>
+                        <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
-                            onClick={() =>
-                                handleSortClick('dividend_payout_ratio')
-                            }
-                            _hover={{ cursor: 'pointer' }}
+                            onClick={() => {
+                                handleSortClick(
+                                    'dividend_payout_ratio',
+                                    dividendPayoutRatioArrow
+                                );
+                                changeArrowDirection(
+                                    dividendPayoutRatioArrow,
+                                    setDividendPayoutRatioArrow
+                                );
+                            }}
                         >
-                            Dividend Payout Ratio
-                        </Th>
-                        <Th
+                            <HStack>
+                                <Text>Dividend Payout Ratio</Text>
+                                {stateToIconMap[dividendPayoutRatioArrow]}
+                            </HStack>
+                        </CustomTh>
+                        <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
-                            onClick={() => handleSortClick('pe_ratio')}
-                            _hover={{ cursor: 'pointer' }}
+                            onClick={() => {
+                                handleSortClick('pe_ratio', peRatioArrow);
+                                changeArrowDirection(
+                                    peRatioArrow,
+                                    setPeRatioArrow
+                                );
+                            }}
                         >
-                            PE Ratio
-                        </Th>
-                        <Th
+                            <HStack>
+                                <Text>PE Ratio</Text>
+                                {stateToIconMap[peRatioArrow]}
+                            </HStack>
+                        </CustomTh>
+                        <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
-                            onClick={() => handleSortClick('peg_ratio')}
-                            _hover={{ cursor: 'pointer' }}
+                            onClick={() => {
+                                handleSortClick('peg_ratio', pegRatioArrow);
+                                changeArrowDirection(
+                                    pegRatioArrow,
+                                    setPegRatioArrow
+                                );
+                            }}
                         >
-                            PEG Ratio
-                        </Th>
-                        <Th
+                            <HStack>
+                                <Text>PEG Ratio</Text>
+                                {stateToIconMap[pegRatioArrow]}
+                            </HStack>
+                        </CustomTh>
+                        <CustomTh
                             display={{ base: 'none', lg: 'table-cell' }}
-                            onClick={() =>
-                                handleSortClick('quarterly_earning_growth')
-                            }
-                            _hover={{ cursor: 'pointer' }}
+                            onClick={() => {
+                                handleSortClick(
+                                    'quarterly_earning_growth',
+                                    quarterlyEarningGrowthArrow
+                                );
+                                changeArrowDirection(
+                                    quarterlyEarningGrowthArrow,
+                                    setQuarterlyEarningGrowthArrow
+                                );
+                            }}
                         >
-                            Quarterly Earning Growth
-                        </Th>
-                        <Th
+                            <HStack>
+                                <Text>Quarterly Earning Growth</Text>
+                                {stateToIconMap[quarterlyEarningGrowthArrow]}
+                            </HStack>
+                        </CustomTh>
+                        <CustomTh
                             display={{ base: 'none', lg: 'table-cell' }}
-                            onClick={() =>
-                                handleSortClick('quarterly_revenue_growth')
-                            }
-                            _hover={{ cursor: 'pointer' }}
+                            onClick={() => {
+                                handleSortClick(
+                                    'quarterly_revenue_growth',
+                                    quarterlyRevenueGrowthArrow
+                                );
+                                changeArrowDirection(
+                                    quarterlyRevenueGrowthArrow,
+                                    setQuarterlyRevenueGrowthArrow
+                                );
+                            }}
                         >
-                            Quarterly Revenue Growth
-                        </Th>
-                        <Th
-                            onClick={() =>
-                                handleSortClick('fifty_two_week_low')
-                            }
-                            _hover={{ cursor: 'pointer' }}
+                            <HStack>
+                                <Text>Quarterly Revenue Growth</Text>
+                                {stateToIconMap[quarterlyRevenueGrowthArrow]}
+                            </HStack>
+                        </CustomTh>
+                        <CustomTh
+                            onClick={() => {
+                                handleSortClick(
+                                    'fifty_two_week_low',
+                                    fiftyTwoWeekLowArrow
+                                );
+                                changeArrowDirection(
+                                    fiftyTwoWeekLowArrow,
+                                    setFiftyTwoWeekLowArrow
+                                );
+                            }}
                         >
-                            52-week Low
-                        </Th>
-                        <Th
-                            onClick={() =>
-                                handleSortClick('fifty_two_week_high')
-                            }
-                            _hover={{ cursor: 'pointer' }}
+                            <HStack>
+                                <Text>52-week Low</Text>
+                                {stateToIconMap[fiftyTwoWeekLowArrow]}
+                            </HStack>
+                        </CustomTh>
+                        <CustomTh
+                            onClick={() => {
+                                handleSortClick(
+                                    'fifty_two_week_high',
+                                    fiftyTwoWeekHighArrow
+                                );
+                                changeArrowDirection(
+                                    fiftyTwoWeekHighArrow,
+                                    setFiftyTwoWeekHighArrow
+                                );
+                            }}
                         >
-                            52-week High
-                        </Th>
+                            <HStack>
+                                <Text>52-week High</Text>
+                                {stateToIconMap[fiftyTwoWeekHighArrow]}
+                            </HStack>
+                        </CustomTh>
                     </Tr>
                 </Thead>
                 <Tbody>
@@ -126,12 +237,18 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                             <Tr
                                 key={ticker_id}
                                 _hover={
-                                    lightMode
-                                        ? { cursor: 'pointer', bg: 'brand.200' }
-                                        : { cursor: 'pointer', bg: 'brand.700' }
+                                    isLightMode
+                                        ? {
+                                              cursor: 'pointer',
+                                              bg: 'brand.100',
+                                          }
+                                        : {
+                                              cursor: 'pointer',
+                                              bg: 'brand.800',
+                                          }
                                 }
                             >
-                                <Td>
+                                <Td w="4%">
                                     <WatchlistButton ticker={ticker_id} />
                                 </Td>
                                 <ClickableTd
@@ -141,47 +258,76 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     <StockSymbol ticker={ticker_id} />
                                 </ClickableTd>
                                 <ClickableTd
-                                    display={{ base: 'none', md: 'table-cell' }}
+                                    display={{
+                                        base: 'none',
+                                        md: 'table-cell',
+                                    }}
                                     ticker_id={ticker_id}
                                 >
                                     {dividend_payout_ratio ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd
-                                    display={{ base: 'none', md: 'table-cell' }}
+                                    display={{
+                                        base: 'none',
+                                        md: 'table-cell',
+                                    }}
                                     ticker_id={ticker_id}
                                 >
                                     {pe_ratio ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd
-                                    display={{ base: 'none', md: 'table-cell' }}
+                                    display={{
+                                        base: 'none',
+                                        md: 'table-cell',
+                                    }}
                                     ticker_id={ticker_id}
                                 >
                                     {peg_ratio ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd
                                     ticker_id={ticker_id}
-                                    display={{ base: 'none', lg: 'table-cell' }}
+                                    display={{
+                                        base: 'none',
+                                        lg: 'table-cell',
+                                    }}
+                                    color={
+                                        quarterly_earning_growth >= 0
+                                            ? greenColor
+                                            : redColor
+                                    }
                                 >
                                     {quarterly_earning_growth ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd
                                     ticker_id={ticker_id}
-                                    display={{ base: 'none', lg: 'table-cell' }}
+                                    display={{
+                                        base: 'none',
+                                        lg: 'table-cell',
+                                    }}
+                                    color={
+                                        quarterly_revenue_growth >= 0
+                                            ? greenColor
+                                            : redColor
+                                    }
                                 >
                                     {quarterly_revenue_growth ?? '-'}
                                 </ClickableTd>
                                 <ClickableTd ticker_id={ticker_id}>
-                                    {fifty_two_week_low ?? '-'}
+                                    {fifty_two_week_low
+                                        ? formatCurrency(fifty_two_week_low)
+                                        : '-'}
                                 </ClickableTd>
                                 <ClickableTd ticker_id={ticker_id}>
-                                    {fifty_two_week_high ?? '-'}
+                                    {fifty_two_week_high
+                                        ? formatCurrency(fifty_two_week_high)
+                                        : '-'}
                                 </ClickableTd>
                             </Tr>
                         )
                     )}
                 </Tbody>
             </Table>
-        </Box>
+        </CustomBox>
     );
 };
 

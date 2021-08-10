@@ -13,56 +13,67 @@ import {
     useDisclosure,
     VStack,
 } from '@chakra-ui/react';
-import CreditCardInformation from '../CreditCardInformation';
+import { Link } from 'react-router-dom';
+import CreditCardInformation from './CreditCardInformation';
 import CustomBox from '../CustomBox';
 
 const PaymentPlanCard = ({
-    type,
+    plan,
     price,
     buttonText,
     details,
+    planColor,
     ...otherProps
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+
     const PaymentModal = ({ payableAmount }) => (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
             <ModalOverlay>
-                <ModalContent>
-                    <ModalHeader>Thank you for using Investobull</ModalHeader>
-                    <ModalCloseButton />
+                <ModalContent
+                    bgColor={useColorModeValue('brand.50', 'brand.800')}
+                >
+                    <ModalHeader>Confirm Subscription</ModalHeader>
                     <ModalBody>
-                        {payableAmount ? (
-                            <CreditCardInformation
-                                payableAmount={payableAmount}
-                            />
-                        ) : (
-                            'Redirecting'
-                        )}
+                        <CreditCardInformation payableAmount={payableAmount} />
                     </ModalBody>
+                    <ModalCloseButton />
                 </ModalContent>
             </ModalOverlay>
         </Modal>
     );
 
     return (
-        <CustomBox
-            bg={useColorModeValue('brand.400', 'brand.700')}
-            {...otherProps}
-        >
-            <VStack spacing={4}>
-                <Heading as="h4" size="md">
-                    {type}
+        <CustomBox {...otherProps}>
+            <VStack spacing={6}>
+                <Heading as="h4" size="xl" color={planColor} fontWeight={400}>
+                    {plan}
                 </Heading>
-                <Text>USD ${price}/month</Text>
-                <Button colorScheme="brand" onClick={onOpen}>
-                    {buttonText}
-                </Button>
-                <PaymentModal payableAmount={price} />
-                <VStack align="flex-start" spacing={6}>
-                    {details.map((detail) => (
-                        <Text key={detail}>{detail}</Text>
+                {price ? (
+                    <>
+                        <Text fontSize="xl">USD ${price}/month</Text>
+                        <Button
+                            onClick={onOpen}
+                            colorScheme="brand"
+                            isDisabled={buttonText === 'Coming Soon'}
+                        >
+                            {buttonText}
+                        </Button>
+                    </>
+                ) : (
+                    <>
+                        <Text fontSize="xl">Free</Text>
+                        <Button as={Link} to="/" colorScheme="brand">
+                            {buttonText}
+                        </Button>
+                    </>
+                )}
+                <VStack align="flex-start" w="80%" spacing={6}>
+                    {details.map((detail, id) => (
+                        <Text key={id}>{detail}</Text>
                     ))}
                 </VStack>
+                <PaymentModal payableAmount={price} />
             </VStack>
         </CustomBox>
     );
