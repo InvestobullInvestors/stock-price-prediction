@@ -8,6 +8,7 @@ const NewsAPI = require('newsapi');
 const stockDataApiKey = new NewsAPI(process.env.STOCK_DATA_API_KEY);
 
 const axios = require('axios');
+const { dailyGraphInfo } = require('../dal/stock-markets');
 const { stockNewsInfo } = require('../dal/stock-markets');
 const { quarterlyStockInfo } = require('../dal/stock-markets');
 
@@ -171,6 +172,65 @@ router.get('/cron-functions/getStockNews', async function (req, res) {
     res.send('Successfully processed news data for all stocks');
 });
 
+router.get(
+    '/cron-functions/getDailyWeatherGraphData',
+    async function (req, res) {
+        const doc = await stockMarketInfo.find({});
+        for (let market_data of doc) {
+            const stocks_considered = market_data.stocks.slice(0, 5);
+            console.log(stocks_considered);
+            for (let stock_data of stocks_considered) {
+                console.log(`Processing data for ${stock_data.ticker}`);
+                const dailyGraphData = await dailyGraphInfo.findOne({
+                    ticker_id: stock_data.ticker,
+                });
+
+                const dailyStockDataFromApi =
+                    await getDailyWeatherGraphDataFromApi(stock_data);
+                const timeSeriesData =
+                    dailyStockDataFromApi['Time Series (Daily)'];
+
+                const timestamps = Object.keys(timeSeriesData);
+                const stock_details = [];
+                timestamps.forEach((timestamp) => {
+                    const timeStampData = timeSeriesData[timestamp];
+                    stock_details.push({
+                        timestamp: timestamp,
+                        open: timeStampData['1. open'],
+                        high: timeStampData['2. high'],
+                        low: timeStampData['3. low'],
+                        close: timeStampData['4. close'],
+                        volume: timeStampData['5. volume'],
+                    });
+                });
+
+                if (dailyGraphData) {
+                    await dailyGraphInfo.updateOne(
+                        { ticker_id: stock_data.ticker },
+                        {
+                            stock_id: stock_data._id,
+                            stock_details: stock_details,
+                        }
+                    );
+                    console.log('Update successful');
+                } else {
+                    const dailyStockData = new dailyGraphInfo({
+                        market_name: market_data.market_name,
+                        market_id: market_data._id,
+                        stock_name: stock_data.name,
+                        ticker_id: stock_data.ticker,
+                        stock_id: stock_data._id,
+                        stock_details: stock_details,
+                    });
+                    await dailyStockData.save();
+                    console.log('Save successful');
+                }
+            }
+        }
+        res.send('Successfully got daily weather graph data for stocks');
+    }
+);
+
 router.get('/cron-functions/getMarketNews', async function (req, res) {
     const stockNewsInfo = await stockNewsList.find({});
     for (const { news_sources } of stockNewsInfo) {
@@ -243,6 +303,12 @@ const getStockDataFromApi = async ({ ticker }) => {
             await new Promise((resolve) => setTimeout(resolve, 40000));
         }
     }
+};
+
+const getDailyWeatherGraphDataFromApi = async ({ ticker }) => {
+    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${stockDataApiKey}`;
+    const { data } = await axios.get(url);
+    return data;
 };
 
 module.exports = router;
