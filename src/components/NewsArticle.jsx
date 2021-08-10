@@ -1,8 +1,14 @@
-import {Box, Heading, Text, useColorModeValue, VStack,} from '@chakra-ui/react';
+import {
+    Box,
+    Heading,
+    Text,
+    useColorModeValue,
+    VStack,
+} from '@chakra-ui/react';
 import React from 'react';
-import useDateFormat from "../hooks/useDateFormat";
+import useDateFormat from '../hooks/useDateFormat';
 
-const NewsArticle = ({date, title}) => {
+const NewsArticle = ({ date, title }) => {
     const dateColor = useColorModeValue('gray.600', 'gray.400');
     const formatDate = useDateFormat();
 

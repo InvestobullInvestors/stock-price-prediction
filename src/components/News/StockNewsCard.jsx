@@ -1,11 +1,22 @@
-import React from "react";
-import {Box, Center, Divider, Flex, HStack, Image, Square, Text, useColorModeValue, VStack} from "@chakra-ui/react";
-import NewsArticle from "../NewsArticle";
-import CustomBox from "../CustomBox";
+import React from 'react';
+import {
+    Box,
+    Center,
+    Divider,
+    Flex,
+    HStack,
+    Image,
+    Square,
+    Text,
+    useColorModeValue,
+    VStack,
+} from '@chakra-ui/react';
+import NewsArticle from '../NewsArticle';
+import CustomBox from '../CustomBox';
 
-const StockNewsCard = ({name, news}) => {
-    const textBoxColor = useColorModeValue("brand.100", "brand.600");
-    const cardColor = useColorModeValue("brand.400", "brand.700");
+const StockNewsCard = ({ name, news }) => {
+    const textBoxColor = useColorModeValue('brand.100', 'brand.600');
+    const cardColor = useColorModeValue('brand.400', 'brand.700');
     return (
         <Box
             width="100%"
@@ -17,11 +28,11 @@ const StockNewsCard = ({name, news}) => {
             borderRadius="lg"
             bg={cardColor}
         >
-            <Flex display={["none", "none", "flex", "flex"]} align="flex-start">
+            <Flex display={['none', 'none', 'flex', 'flex']} align="flex-start">
                 <HStack mt="10px" w="full">
                     <Square
-                        w={{base: "100px", sm: "150px"}}
-                        h={{base: "100px", sm: "150px"}}
+                        w={{ base: '100px', sm: '150px' }}
+                        h={{ base: '100px', sm: '150px' }}
                         borderRadius="lg"
                         shadow="md"
                         bg={textBoxColor}
@@ -30,7 +41,7 @@ const StockNewsCard = ({name, news}) => {
                         <Text>{name}</Text>
                     </Square>
                     <Center height="150px">
-                        <Divider orientation="vertical"/>
+                        <Divider orientation="vertical" />
                     </Center>
                     <Box
                         w="full"
@@ -40,29 +51,28 @@ const StockNewsCard = ({name, news}) => {
                         bg={textBoxColor}
                         padding="5px"
                         css={{
-                            margin: "0",
-                            scrollbarWidth: "none",
-                            msOverflowStyle: "none",
-                            overflow: "scroll",
+                            margin: '0',
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                            overflow: 'scroll',
                         }}
                     >
                         <VStack align="flex-start">
-                            {
-                                news.map(({url, title, publishedAt, _id}) => (
-                                    <Box key={_id} w="100%">
-                                        <NewsArticle
-                                            date={publishedAt}
-                                            title={title}
-                                            url={url}/>
-                                        <Divider my={2} orientation="horizontal"/>
-                                    </Box>
-                                ))
-                            }
+                            {news.map(({ url, title, publishedAt, _id }) => (
+                                <Box key={_id} w="100%">
+                                    <NewsArticle
+                                        date={publishedAt}
+                                        title={title}
+                                        url={url}
+                                    />
+                                    <Divider my={2} orientation="horizontal" />
+                                </Box>
+                            ))}
                         </VStack>
                     </Box>
                 </HStack>
             </Flex>
-            <Flex display={["flex", "flex", "none", "none"]} align="flex-start">
+            <Flex display={['flex', 'flex', 'none', 'none']} align="flex-start">
                 <VStack mt="10px" align="center" w="full">
                     <CustomBox
                         w="100px"
@@ -75,7 +85,7 @@ const StockNewsCard = ({name, news}) => {
                     >
                         <Text>{name}</Text>
                     </CustomBox>
-                    <Divider orientation="horizontal"/>
+                    <Divider orientation="horizontal" />
                     <Box
                         w="full"
                         h="150px"
@@ -86,24 +96,23 @@ const StockNewsCard = ({name, news}) => {
                         bg={textBoxColor}
                         padding="5px"
                         css={{
-                            margin: "0",
-                            scrollbarWidth: "none",
-                            msOverflowStyle: "none",
-                            overflow: "scroll",
+                            margin: '0',
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                            overflow: 'scroll',
                         }}
                     >
                         <VStack align="flex-start">
-                            {
-                                news.map(({url, title, publishedAt, _id}) => (
-                                    <Box key={_id} w="100%">
-                                        <NewsArticle
-                                            date={publishedAt}
-                                            title={title}
-                                            url={url}/>
-                                        <Divider my={2} orientation="horizontal"/>
-                                    </Box>
-                                ))
-                            }
+                            {news.map(({ url, title, publishedAt, _id }) => (
+                                <Box key={_id} w="100%">
+                                    <NewsArticle
+                                        date={publishedAt}
+                                        title={title}
+                                        url={url}
+                                    />
+                                    <Divider my={2} orientation="horizontal" />
+                                </Box>
+                            ))}
                         </VStack>
                     </Box>
                 </VStack>

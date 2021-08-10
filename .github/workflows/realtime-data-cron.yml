@@ -1,12 +1,12 @@
 name: realtime data cron run
 on:
-  schedule:
-    - cron: '33 4 * * *'
+    schedule:
+        - cron: '33 4 * * *'
 
 jobs:
-  build:
-    name: Trigger cron action
-    runs-on: ubuntu-latest
-    steps:
-      - name: cURL request
-        run: curl -X GET https://stock-price-prediction-m3ze93pd8-hgoyal09.vercel.app/cron-functions/getRealtimeStockData
+    build:
+        name: Trigger cron action
+        runs-on: ubuntu-latest
+        steps:
+            - name: cURL request
+              run: curl -X GET https://stock-price-prediction-m3ze93pd8-hgoyal09.vercel.app/cron-functions/getRealtimeStockData
