@@ -1,7 +1,7 @@
 name: cron run
 on:
   schedule:
-    - cron: '27 7 * * *'
+    - cron: '20 20 * * *'
 
 jobs:
   build:
