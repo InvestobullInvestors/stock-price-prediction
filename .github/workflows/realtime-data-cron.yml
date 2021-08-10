@@ -1,4 +1,4 @@
-name: cron run
+name: realtime data cron run
 on:
   schedule:
     - cron: '44 3 * * *'
