@@ -1,9 +1,12 @@
 import React from 'react';
-import { Center, Spinner } from '@chakra-ui/react';
+import { Center, Spinner, useColorModeValue } from '@chakra-ui/react';
 
 const LoadingSpinner = () => (
     <Center p={20}>
-        <Spinner size="xl" />
+        <Spinner
+            size="xl"
+            color={useColorModeValue('brand.500', 'brand.400')}
+        />
     </Center>
 );
 

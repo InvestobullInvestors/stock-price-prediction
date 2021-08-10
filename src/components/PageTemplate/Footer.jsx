@@ -29,7 +29,7 @@ const Footer = () => (
         </Flex>
         <Flex align="center">
             <Text m={1}>Connect with us:</Text>
-            <CustomLink url="https://github.com/InvestoBull/stock-price-prediction">
+            <CustomLink url="https://github.com/InvestobullInvestors/stock-price-prediction">
                 <CustomIcon icon={FaGithub} />
             </CustomLink>
             <CustomLink url="https://www.facebook.com/people/Investobull-Investors/100068350916511/">
