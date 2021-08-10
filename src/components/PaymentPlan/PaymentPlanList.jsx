@@ -16,7 +16,7 @@ const PaymentPlanList = () => {
                 details={[
                     'Access the latest stock data.',
                     'Access the latest stock news.',
-                    'Add up to 10 stocks to the watchlist.',
+                    'Add up to 5 stocks to the watchlist.',
                 ]}
                 planColor={bronzeColor}
             />
