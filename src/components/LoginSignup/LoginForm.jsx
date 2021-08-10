@@ -29,7 +29,6 @@ const LoginForm = ({ setMode }) => {
             setError('');
             await login(email, password);
         } catch {
-            // for security reasons, we don't expose why the login failed
             return setError('Failed to log in');
         }
     };

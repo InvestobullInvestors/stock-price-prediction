@@ -72,7 +72,6 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
 
     const changeArrowDirection = (state, setter) => {
         const currentState = state;
-        // reset all arrow states
         setDividendPayoutRatioArrow(0);
         setPeRatioArrow(0);
         setPegRatioArrow(0);
@@ -80,7 +79,6 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
         setQuarterlyRevenueGrowthArrow(0);
         setFiftyTwoWeekLowArrow(0);
         setFiftyTwoWeekHighArrow(0);
-        // change arrow direction
         if (currentState === -1) setter(1);
         else setter(-1);
     };
