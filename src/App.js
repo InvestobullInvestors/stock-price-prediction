@@ -49,16 +49,16 @@ const theme = extendTheme({
             dark: '#FFC01E',
         },
         bronze: {
-            light: '#995D02',
-            dark: '#AD6B05',
+            light: '#8D5400',
+            dark: '#C57800',
         },
         silver: {
-            light: '#757575',
-            dark: '#B0B0B0',
+            light: '#929292',
+            dark: '#BDBDBD',
         },
         gold: {
-            light: '#B89702',
-            dark: '#D1AC00',
+            light: '#C49F00',
+            dark: '#D2AC01',
         },
     },
 });
