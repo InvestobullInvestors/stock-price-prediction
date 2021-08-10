@@ -83,10 +83,10 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
         else setter(-1);
     };
 
-    const displayArrow = (state) => {
-        if (state === -1) return <Icon as={BsChevronUp} boxSize={3} />;
-        if (state === 0) return <Icon as={BsChevronExpand} boxSize={4} />;
-        if (state === 1) return <Icon as={BsChevronDown} boxSize={3} />;
+    const stateToIconMap = {
+        '-1': <Icon as={BsChevronUp} boxSize={3} />,
+        0: <Icon as={BsChevronExpand} boxSize={4} />,
+        1: <Icon as={BsChevronDown} boxSize={3} />,
     };
 
     return (
@@ -117,7 +117,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         >
                             <HStack>
                                 <Text>Dividend Payout Ratio</Text>
-                                {displayArrow(dividendPayoutRatioArrow)}
+                                {stateToIconMap[dividendPayoutRatioArrow]}
                             </HStack>
                         </CustomTh>
                         <CustomTh
@@ -132,7 +132,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         >
                             <HStack>
                                 <Text>PE Ratio</Text>
-                                {displayArrow(peRatioArrow)}
+                                {stateToIconMap[peRatioArrow]}
                             </HStack>
                         </CustomTh>
                         <CustomTh
@@ -147,7 +147,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         >
                             <HStack>
                                 <Text>PEG Ratio</Text>
-                                {displayArrow(pegRatioArrow)}
+                                {stateToIconMap[pegRatioArrow]}
                             </HStack>
                         </CustomTh>
                         <CustomTh
@@ -165,7 +165,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         >
                             <HStack>
                                 <Text>Quarterly Earning Growth</Text>
-                                {displayArrow(quarterlyEarningGrowthArrow)}
+                                {stateToIconMap[quarterlyEarningGrowthArrow]}
                             </HStack>
                         </CustomTh>
                         <CustomTh
@@ -183,7 +183,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         >
                             <HStack>
                                 <Text>Quarterly Revenue Growth</Text>
-                                {displayArrow(quarterlyRevenueGrowthArrow)}
+                                {stateToIconMap[quarterlyRevenueGrowthArrow]}
                             </HStack>
                         </CustomTh>
                         <CustomTh
@@ -200,7 +200,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         >
                             <HStack>
                                 <Text>52-week Low</Text>
-                                {displayArrow(fiftyTwoWeekLowArrow)}
+                                {stateToIconMap[fiftyTwoWeekLowArrow]}
                             </HStack>
                         </CustomTh>
                         <CustomTh
@@ -217,7 +217,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         >
                             <HStack>
                                 <Text>52-week High</Text>
-                                {displayArrow(fiftyTwoWeekHighArrow)}
+                                {stateToIconMap[fiftyTwoWeekHighArrow]}
                             </HStack>
                         </CustomTh>
                     </Tr>
