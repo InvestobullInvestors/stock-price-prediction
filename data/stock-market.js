@@ -25,10 +25,6 @@ const MARKET_DATA = [
                 name: 'PepsiCo',
             },
             {
-                ticker: 'UBER',
-                name: 'Uber',
-            },
-            {
                 ticker: 'NFLX',
                 name: 'Netflix',
             },
