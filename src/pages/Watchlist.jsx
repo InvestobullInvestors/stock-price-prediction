@@ -34,8 +34,8 @@ const Watchlist = () => {
         getWatchlistStockInfo(tickers);
     }, [watchlist]);
 
-    const handleSortClick = (key) => {
-        sortStocks(watchlistStockInfo, key, setWatchlistStockInfo);
+    const handleSortClick = (key, direction) => {
+        sortStocks(watchlistStockInfo, key, direction, setWatchlistStockInfo);
     };
 
     return (

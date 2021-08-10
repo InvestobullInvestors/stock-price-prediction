@@ -81,14 +81,14 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
         setFiftyTwoWeekLowArrow(0);
         setFiftyTwoWeekHighArrow(0);
         // change arrow direction
-        if (currentState === 1) setter(2);
-        else setter(1);
+        if (currentState === -1) setter(1);
+        else setter(-1);
     };
 
     const displayArrow = (state) => {
+        if (state === -1) return <Icon as={BsChevronUp} boxSize={3} />;
         if (state === 0) return <Icon as={BsChevronExpand} boxSize={4} />;
         if (state === 1) return <Icon as={BsChevronDown} boxSize={3} />;
-        if (state === 2) return <Icon as={BsChevronUp} boxSize={3} />;
     };
 
     return (
@@ -107,7 +107,10 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
                             onClick={() => {
-                                handleSortClick('dividend_payout_ratio');
+                                handleSortClick(
+                                    'dividend_payout_ratio',
+                                    dividendPayoutRatioArrow
+                                );
                                 changeArrowDirection(
                                     dividendPayoutRatioArrow,
                                     setDividendPayoutRatioArrow
@@ -122,7 +125,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
                             onClick={() => {
-                                handleSortClick('pe_ratio');
+                                handleSortClick('pe_ratio', peRatioArrow);
                                 changeArrowDirection(
                                     peRatioArrow,
                                     setPeRatioArrow
@@ -137,7 +140,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         <CustomTh
                             display={{ base: 'none', md: 'table-cell' }}
                             onClick={() => {
-                                handleSortClick('peg_ratio');
+                                handleSortClick('peg_ratio', pegRatioArrow);
                                 changeArrowDirection(
                                     pegRatioArrow,
                                     setPegRatioArrow
@@ -152,7 +155,10 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         <CustomTh
                             display={{ base: 'none', lg: 'table-cell' }}
                             onClick={() => {
-                                handleSortClick('quarterly_earning_growth');
+                                handleSortClick(
+                                    'quarterly_earning_growth',
+                                    quarterlyEarningGrowthArrow
+                                );
                                 changeArrowDirection(
                                     quarterlyEarningGrowthArrow,
                                     setQuarterlyEarningGrowthArrow
@@ -167,7 +173,10 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         <CustomTh
                             display={{ base: 'none', lg: 'table-cell' }}
                             onClick={() => {
-                                handleSortClick('quarterly_revenue_growth');
+                                handleSortClick(
+                                    'quarterly_revenue_growth',
+                                    quarterlyRevenueGrowthArrow
+                                );
                                 changeArrowDirection(
                                     quarterlyRevenueGrowthArrow,
                                     setQuarterlyRevenueGrowthArrow
@@ -181,7 +190,10 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         </CustomTh>
                         <CustomTh
                             onClick={() => {
-                                handleSortClick('fifty_two_week_low');
+                                handleSortClick(
+                                    'fifty_two_week_low',
+                                    fiftyTwoWeekLowArrow
+                                );
                                 changeArrowDirection(
                                     fiftyTwoWeekLowArrow,
                                     setFiftyTwoWeekLowArrow
@@ -195,7 +207,10 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                         </CustomTh>
                         <CustomTh
                             onClick={() => {
-                                handleSortClick('fifty_two_week_high');
+                                handleSortClick(
+                                    'fifty_two_week_high',
+                                    fiftyTwoWeekHighArrow
+                                );
                                 changeArrowDirection(
                                     fiftyTwoWeekHighArrow,
                                     setFiftyTwoWeekHighArrow

@@ -97,7 +97,7 @@ const StockInfoProvider = ({ children }) => {
             });
     };
 
-    const sortStocks = (stock_list, table_header_key, setInfo) => {
+    const sortStocks = (stock_list, table_header_key, direction, setInfo) => {
         const ticker_list = stock_list.map(({ ticker_id }) => ticker_id);
         axios
             .post(
@@ -105,6 +105,7 @@ const StockInfoProvider = ({ children }) => {
                 JSON.stringify({
                     ticker_list,
                     table_header_key,
+                    direction,
                 }),
                 { headers: { 'Content-Type': 'application/json' } }
             )
