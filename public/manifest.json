@@ -8,12 +8,12 @@
             "type": "image/x-icon"
         },
         {
-            "src": "bull_logo_128.png",
+            "src": "bull-red-128.png",
             "type": "image/png",
             "sizes": "128x128"
         },
         {
-            "src": "bull_logo_512.png",
+            "src": "bull-red-512.png",
             "type": "image/png",
             "sizes": "512x512"
         }

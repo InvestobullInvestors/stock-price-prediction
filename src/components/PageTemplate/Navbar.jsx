@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Avatar,
+    Box,
     Button,
     Divider,
     Drawer,
@@ -15,51 +16,58 @@ import {
     Menu,
     MenuButton,
     MenuDivider,
+    MenuGroup,
     MenuItem,
     MenuList,
     Text,
     useColorMode,
     useColorModeValue,
     useDisclosure,
+    VStack,
 } from '@chakra-ui/react';
-import {
-    BellIcon,
-    ChevronDownIcon,
-    HamburgerIcon,
-    Icon,
-} from '@chakra-ui/icons';
+import { ChevronDownIcon, HamburgerIcon, Icon } from '@chakra-ui/icons';
 import { FaMoon, FaSun } from 'react-icons/fa';
-import NotificationList from '../NotificationList';
+import { VscBell, VscBellDot } from 'react-icons/vsc';
+import NotificationList from './NotificationList';
 import LoginSignupPopup from '../LoginSignup/LoginSignupPopup';
 import { useUser } from '../../contexts/useUser';
 import { useAuth } from '../../contexts/useAuth';
 import UserProfilePopup from './UserProfilePopup';
+import { useStockSymbol } from '../../contexts/useStockInfo';
 
 const PADDING = 1;
 const MARGIN = 1;
 const ICON_SIZE = 6;
-const MENU_MAX_WIDTH = 60;
+const MENU_MAX_WIDTH = 100;
+const MENU_MAX_HEIGHT = 400;
 
 const Logo = () => (
     <HStack as={Link} to="/" m={MARGIN}>
         <Text
             display={{ base: 'none', sm: 'flex' }}
             fontSize={24}
-            fontWeight={200}
+            fontWeight={300}
         >
             InvestoBull
         </Text>
-        <Image src="/bull_logo_512.png" boxSize={8} />
+        <Image src="/bull-red-512.png" boxSize={8} />
     </HStack>
 );
 
 const CustomButton = ({ children, route, ...otherProps }) => (
-    <Button bg="transparent" m={MARGIN} as={Link} {...otherProps} to={route}>
+    <Box
+        as={Link}
+        to={route}
+        fontSize="lg"
+        mx={4}
+        _hover={{ color: useColorModeValue('brand.500', 'brand.400') }}
+        {...otherProps}
+    >
         {children}
-    </Button>
+    </Box>
 );
 
-const NarrowScreenHamburgerMenu = ({ bgColor }) => {
+const HamburgerMenu = ({ bgColor }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
@@ -82,21 +90,15 @@ const NarrowScreenHamburgerMenu = ({ bgColor }) => {
                         MENU
                     </DrawerHeader>
                     <DrawerBody>
-                        <CustomButton w="100%" route="/">
-                            Home
-                        </CustomButton>
-                        <Divider my={1} />
-                        <CustomButton w="100%" route="/watchlist">
+                        <CustomButton route="/">Home</CustomButton>
+                        <Divider my={2} />
+                        <CustomButton route="/watchlist">
                             Watchlist
                         </CustomButton>
-                        <Divider my={1} />
-                        <CustomButton w="100%" route="/news">
-                            News
-                        </CustomButton>
-                        <Divider my={1} />
-                        <CustomButton w="100%" route="/about">
-                            About
-                        </CustomButton>
+                        <Divider my={2} />
+                        <CustomButton route="/news">News</CustomButton>
+                        <Divider my={2} />
+                        <CustomButton route="/plans">Plans</CustomButton>
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>
@@ -104,7 +106,7 @@ const NarrowScreenHamburgerMenu = ({ bgColor }) => {
     );
 };
 
-const WideScreenLinks = () => (
+const NavbarLinks = () => (
     <Flex display={['none', 'none', 'flex', 'flex']}>
         <CustomButton route="/">Home</CustomButton>
         <CustomButton route="/watchlist">Watchlist</CustomButton>
@@ -129,31 +131,58 @@ const ThemeSwitchButton = ({ icon }) => {
     );
 };
 
-const NotificationMenu = ({ bgColor }) => (
-    <Menu>
-        <MenuButton
-            as={Button}
-            bg="transparent"
-            rounded="full"
-            p={PADDING}
-            m={MARGIN}
-            rightIcon={<ChevronDownIcon />}
-        >
-            <BellIcon w={ICON_SIZE} h={ICON_SIZE} />
-        </MenuButton>
-        <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-            <NotificationList />
-        </MenuList>
-    </Menu>
-);
+const NotificationMenu = ({ bgColor }) => {
+    const [newNotification, setNewNotification] = useState(false);
+    const redColor = useColorModeValue('red.light', 'red.dark');
+    const { notifications } = useUser();
+
+    useEffect(() => {
+        setNewNotification(notifications.length > 0);
+    }, [notifications]);
+
+    return (
+        <Menu closeOnSelect={false}>
+            <MenuButton
+                as={Button}
+                bg="transparent"
+                rounded="full"
+                p={PADDING}
+                m={MARGIN}
+                rightIcon={<ChevronDownIcon />}
+            >
+                <Icon
+                    as={newNotification ? VscBellDot : VscBell}
+                    color={newNotification ? redColor : 'brand'}
+                    w={ICON_SIZE}
+                    h={ICON_SIZE}
+                />
+            </MenuButton>
+            <MenuList
+                bg={bgColor}
+                maxW={MENU_MAX_WIDTH}
+                maxH={MENU_MAX_HEIGHT}
+                css={{
+                    margin: '0',
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                    overflow: 'scroll',
+                }}
+            >
+                <NotificationList />
+            </MenuList>
+        </Menu>
+    );
+};
 
 const UserMenu = ({ bgColor }) => {
     const { user } = useUser();
     const { logout } = useAuth();
+    const { getBasicStockInfo } = useStockSymbol();
 
     const handleLogout = async () => {
         try {
             await logout();
+            getBasicStockInfo();
         } catch (err) {
             console.error(err.message);
         }
@@ -171,16 +200,24 @@ const UserMenu = ({ bgColor }) => {
             >
                 <Avatar size="sm" name={user.displayName} src={user.photoURL} />
             </MenuButton>
-            <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH}>
-                <UserProfilePopup />
-                <MenuItem as={Link} to="/plans">
-                    Plan: {user.plan}
-                </MenuItem>
+            <MenuList bg={bgColor} maxW={MENU_MAX_WIDTH} isTruncated>
+                <MenuGroup title={user.displayName}>
+                    <UserProfilePopup />
+                    <MenuItem as={Link} to="/plans">
+                        <VStack alignItems="flex-start" spacing={0}>
+                            <Text>Plan: {user.plan}</Text>
+                            {user.plan_expiry ? (
+                                <Text fontSize="xs">
+                                    expires {user.plan_expiry}
+                                </Text>
+                            ) : null}
+                        </VStack>
+                    </MenuItem>
+                </MenuGroup>
                 <MenuDivider />
                 <MenuItem as={Link} to="/about">
                     About Us
                 </MenuItem>
-                <MenuItem>Help</MenuItem>
                 <MenuItem as="button" onClick={handleLogout}>
                     Log Out
                 </MenuItem>
@@ -192,41 +229,44 @@ const UserMenu = ({ bgColor }) => {
 const Navbar = () => {
     const { user } = useUser();
 
-    const bgColor = useColorModeValue('brand.400', 'brand.900');
+    const bgColor = useColorModeValue('brand.100', 'brand.800');
     const txtColor = useColorModeValue('brand.900', 'brand.100');
 
     return (
-        <Flex
-            zIndex={5}
-            pos="sticky"
-            top={0}
-            w="100%"
-            justify="center"
-            bg={bgColor}
-            color={txtColor}
-        >
-            <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
-                <NarrowScreenHamburgerMenu bgColor={bgColor} />
-                <Logo />
-                <WideScreenLinks />
+        <>
+            <Flex
+                zIndex={5}
+                pos="sticky"
+                top={0}
+                w="100%"
+                justify="center"
+                bg={bgColor}
+                color={txtColor}
+            >
+                <Flex flex={1} h={16} p={4} align="center" maxW="container.xl">
+                    <HamburgerMenu bgColor={bgColor} />
+                    <Logo />
+                    <NavbarLinks />
 
-                <Flex flex="1" align="center" justify="flex-end">
-                    {useColorMode().colorMode === 'light' ? (
-                        <ThemeSwitchButton icon={FaMoon} />
-                    ) : (
-                        <ThemeSwitchButton icon={FaSun} />
-                    )}
-                    {user ? (
-                        <>
-                            <NotificationMenu bgColor={bgColor} />
-                            <UserMenu bgColor={bgColor} />
-                        </>
-                    ) : (
-                        <LoginSignupPopup />
-                    )}
+                    <Flex flex="1" align="center" justify="flex-end">
+                        {useColorMode().colorMode === 'light' ? (
+                            <ThemeSwitchButton icon={FaMoon} />
+                        ) : (
+                            <ThemeSwitchButton icon={FaSun} />
+                        )}
+                        {user ? (
+                            <>
+                                <NotificationMenu bgColor={bgColor} />
+                                <UserMenu bgColor={bgColor} />
+                            </>
+                        ) : (
+                            <LoginSignupPopup />
+                        )}
+                    </Flex>
                 </Flex>
             </Flex>
-        </Flex>
+            <Divider pos="fixed" />
+        </>
     );
 };
 

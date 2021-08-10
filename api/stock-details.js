@@ -135,10 +135,10 @@ router.post('/stock-details/filter-stocks', function (req, res) {
 
 /* GET sorted stock details. */
 router.post('/stock-details/sort-stocks', function (req, res) {
-    const { ticker_list, table_header_key } = req.body;
+    const { ticker_list, table_header_key, direction } = req.body;
     quarterlyStockInfo
         .find({ ticker_id: ticker_list })
-        .sort({ [`stock_details.${table_header_key}`]: -1 })
+        .sort({ [`stock_details.${table_header_key}`]: direction })
         .then((stock_details) => {
             const result = [];
             for (let stocks of stock_details) {
