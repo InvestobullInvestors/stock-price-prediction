@@ -33,11 +33,11 @@ const theme = extendTheme({
             900: '#171923',
         },
         red: {
-            light: '#F81C29',
+            light: '#CC0000',
             dark: '#FF303E',
         },
         green: {
-            light: '#01AB4B',
+            light: '#408721',
             dark: '#12C766',
         },
         blue: {
