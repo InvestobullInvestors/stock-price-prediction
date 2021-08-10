@@ -1,0 +1,12 @@
+name: stock news data cron run
+on:
+  schedule:
+    - cron: '5 5 * * *'
+
+jobs:
+  build:
+    name: Trigger cron action
+    runs-on: ubuntu-latest
+    steps:
+      - name: cURL request
+        run: curl -X GET https://stock-price-prediction-bnq0clo6l-hgoyal09.vercel.app/cron-functions/getStockNews

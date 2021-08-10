@@ -14,7 +14,7 @@ import {
     VStack,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import CreditCardInformation from '../CreditCardInformation';
+import CreditCardInformation from './CreditCardInformation';
 import CustomBox from '../CustomBox';
 
 const PaymentPlanCard = ({
@@ -30,13 +30,12 @@ const PaymentPlanCard = ({
     const PaymentModal = ({ payableAmount }) => (
         <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
             <ModalOverlay>
-                <ModalContent>
+                <ModalContent
+                    bgColor={useColorModeValue('brand.50', 'brand.800')}
+                >
                     <ModalHeader>Confirm Subscription</ModalHeader>
                     <ModalBody>
-                        <CreditCardInformation
-                            payableAmount={payableAmount}
-                            closePaymentModal={onClose}
-                        />
+                        <CreditCardInformation payableAmount={payableAmount} />
                     </ModalBody>
                     <ModalCloseButton />
                 </ModalContent>
@@ -45,35 +44,33 @@ const PaymentPlanCard = ({
     );
 
     return (
-        <CustomBox
-            bg={useColorModeValue('brand.200', 'brand.700')}
-            {...otherProps}
-        >
-            <VStack spacing={8}>
-                <Heading as="h4" size="xl" color={planColor}>
+        <CustomBox {...otherProps}>
+            <VStack spacing={6}>
+                <Heading as="h4" size="xl" color={planColor} fontWeight={400}>
                     {plan}
                 </Heading>
                 {price ? (
                     <>
-                        <Heading size="lg">USD ${price}/month</Heading>
-                        {/*TODO: don't allow paying when no user signed in (but can't use useUser)*/}
-                        <Button onClick={onOpen} colorScheme="brand">
+                        <Text fontSize="xl">USD ${price}/month</Text>
+                        <Button
+                            onClick={onOpen}
+                            colorScheme="brand"
+                            isDisabled={buttonText === 'Coming Soon'}
+                        >
                             {buttonText}
                         </Button>
                     </>
                 ) : (
                     <>
-                        <Heading size="lg">Free</Heading>
+                        <Text fontSize="xl">Free</Text>
                         <Button as={Link} to="/" colorScheme="brand">
                             {buttonText}
                         </Button>
                     </>
                 )}
                 <VStack align="flex-start" w="80%" spacing={6}>
-                    {details.map((detail) => (
-                        <Text key={detail} fontSize="lg">
-                            {detail}
-                        </Text>
+                    {details.map((detail, id) => (
+                        <Text key={id}>{detail}</Text>
                     ))}
                 </VStack>
                 <PaymentModal payableAmount={price} />

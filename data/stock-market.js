@@ -5,8 +5,56 @@ const MARKET_DATA = [
         market_name: 'Nasdaq',
         stocks: [
             {
+                ticker: 'NVDA',
+                name: 'Nvidia',
+            },
+            {
+                ticker: 'PYPL',
+                name: 'PayPal',
+            },
+            {
+                ticker: 'MSFT',
+                name: 'Microsoft',
+            },
+            {
+                ticker: 'ADBE',
+                name: 'Adobe',
+            },
+            {
+                ticker: 'PEP',
+                name: 'PepsiCo',
+            },
+            {
+                ticker: 'NFLX',
+                name: 'Netflix',
+            },
+            {
+                ticker: 'CMCSA',
+                name: 'Comcast',
+            },
+            {
+                ticker: 'INTC',
+                name: 'Intel',
+            },
+            {
                 ticker: 'TSLA',
                 name: 'Tesla',
+            },
+            {
+                ticker: 'CSCO',
+                name: 'Cisco',
+            },
+            {
+                ticker: 'AVGO',
+                name: 'Broadcom',
+            },
+            {
+                ticker: 'QCOM',
+                name: 'Qualcomm',
+            },
+            {
+                ticker: 'COST',
+                name: 'Costco Wholesale Corporation',
             },
             {
                 ticker: 'AMZN',
@@ -21,12 +69,16 @@ const MARKET_DATA = [
                 name: 'Facebook',
             },
             {
+                ticker: 'TXN',
+                name: 'Texas Instruments',
+            },
+            {
                 ticker: 'TWTR',
                 name: 'Twitter',
             },
             {
-                ticker: 'UBER',
-                name: 'Uber',
+                ticker: 'AAPL',
+                name: 'Apple',
             },
         ],
     },

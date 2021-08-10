@@ -26,7 +26,6 @@ const Footer = () => (
             <Link as={ReactRouterLink} to="/about" m={MARGIN}>
                 About Us
             </Link>
-            <Link m={MARGIN}>Help</Link>
         </Flex>
         <Flex align="center">
             <Text m={1}>Connect with us:</Text>

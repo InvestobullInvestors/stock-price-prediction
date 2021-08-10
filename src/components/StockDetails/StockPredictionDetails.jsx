@@ -1,6 +1,10 @@
 import React from 'react';
 import {
+    Alert,
+    AlertDescription,
+    AlertIcon,
     Box,
+    Center,
     Grid,
     GridItem,
     Heading,
@@ -11,6 +15,7 @@ import {
 import { usePrediction } from '../../contexts/usePredictions';
 import PredictionSlider from './PredictionSlider';
 import CustomBox from '../CustomBox';
+import useDateFormat from '../../hooks/useDateFormat';
 
 const CustomGridItem = ({ children, ...otherProps }) => (
     <GridItem
@@ -25,101 +30,81 @@ const CustomGridItem = ({ children, ...otherProps }) => (
     </GridItem>
 );
 
-const CustomContainer = ({ children, ...otherProps }) => (
-    <Box
-        p={4}
-        w="80%"
-        textAlign="center"
-        bgColor={useColorModeValue('brand.300', 'brand.600')}
-        borderRadius="lg"
-        {...otherProps}
-    >
-        {children}
-    </Box>
-);
+const PricePrediction = () => {
+    const {
+        predictedValue: { prediction_details },
+    } = usePrediction();
 
-const PricePrediction = () => (
-    <CustomGridItem>
-        <VStack spacing={4}>
-            <CustomContainer>Prediction</CustomContainer>
-            <CustomContainer
-                p={4}
-                w="80%"
-                bgColor={useColorModeValue('brand.300', 'brand.600')}
-                borderRadius="lg"
-            >
-                <VStack spacing={4}>
-                    <Box
-                        p={4}
-                        w="100%"
-                        bgColor={useColorModeValue('brand.100', 'brand.500')}
-                        borderRadius="lg"
-                    >
-                        <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={1}>
-                            <Heading as="h3" size="lg">
-                                1 Day
-                            </Heading>
-                            <Heading as="h3" size="lg" color="lightgreen">
-                                612.25
-                            </Heading>
-                        </SimpleGrid>
-                    </Box>
-                    <Box
-                        p={4}
-                        w="100%"
-                        bgColor={useColorModeValue('brand.100', 'brand.500')}
-                        borderRadius="lg"
-                    >
-                        <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={1}>
-                            <Heading as="h3" size="lg">
-                                1 Week
-                            </Heading>
-                            <Heading as="h3" size="lg" color="lightgreen">
-                                676.25
-                            </Heading>
-                        </SimpleGrid>
-                    </Box>
-                    <Box
-                        p={4}
-                        w="100%"
-                        bgColor={useColorModeValue('brand.100', 'brand.500')}
-                        borderRadius="lg"
-                    >
-                        <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={1}>
-                            <Heading as="h3" size="lg">
-                                1 Month
-                            </Heading>
-                            <Heading as="h3" size="lg" color="lightgreen">
-                                690.25
-                            </Heading>
-                        </SimpleGrid>
-                    </Box>
-                    <Box
-                        p={4}
-                        w="100%"
-                        bgColor={useColorModeValue('brand.100', 'brand.500')}
-                        borderRadius="lg"
-                    >
-                        <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={1}>
-                            <Heading as="h3" size="lg">
-                                1 Year
-                            </Heading>
-                            <Heading as="h3" size="lg" color="lightgreen">
-                                700.25
-                            </Heading>
-                        </SimpleGrid>
-                    </Box>
-                </VStack>
-            </CustomContainer>
-        </VStack>
-    </CustomGridItem>
-);
+    const formatDate = useDateFormat();
+    const redColor = useColorModeValue('red.light', 'red.dark');
+    const greenColor = useColorModeValue('green.light', 'green.dark');
+
+    return (
+        <CustomGridItem>
+            <VStack spacing={4}>
+                <Heading as="h3" size="lg" p={8} textAlign="center">
+                    Prediction
+                </Heading>
+                <CustomBox
+                    p={4}
+                    w="80%"
+                    border="none"
+                    borderRadius="lg"
+                    shadow="none"
+                >
+                    <VStack spacing={4}>
+                        {prediction_details
+                            ? prediction_details.map(
+                                  ({ close, timestamp, _id }) => (
+                                      <Box
+                                          key={_id}
+                                          p={4}
+                                          w="100%"
+                                          borderRadius="lg"
+                                      >
+                                          <SimpleGrid
+                                              columns={{ base: 1, lg: 2 }}
+                                              spacing={1}
+                                          >
+                                              <Center>
+                                                  <Heading as="h4" size="md">
+                                                      {formatDate(timestamp)}
+                                                  </Heading>
+                                              </Center>
+                                              <Heading
+                                                  as="h3"
+                                                  size="lg"
+                                                  color={
+                                                      close >= 0
+                                                          ? greenColor
+                                                          : redColor
+                                                  }
+                                              >
+                                                  $
+                                                  {close?.toFixed(2) ??
+                                                      ' --.--'}
+                                              </Heading>
+                                          </SimpleGrid>
+                                      </Box>
+                                  )
+                              )
+                            : null}
+                    </VStack>
+                </CustomBox>
+            </VStack>
+        </CustomGridItem>
+    );
+};
 
 const SlidablePredictions = () => {
     const { predictedValue } = usePrediction();
     const { inflation, revenueGrowth, eps, marketCap } = predictedValue;
     return (
         <CustomGridItem>
+            <Alert status="info">
+                <AlertIcon />
+                <AlertDescription>Coming Soon</AlertDescription>
+            </Alert>
             <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={6}>
                 <PredictionSlider
                     predictedValue={inflation}
@@ -140,10 +125,7 @@ const SlidablePredictions = () => {
 };
 
 const StockPredictionDetails = ({ ...otherProps }) => (
-    <CustomBox
-        bgColor={useColorModeValue('brand.100', 'brand.700')}
-        {...otherProps}
-    >
+    <CustomBox {...otherProps}>
         <Grid
             templateColumns={{ base: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }}
             gap={2}

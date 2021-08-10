@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
 import CustomHeading from '../components/CustomHeading';
-import { Center, Link, useColorModeValue, VStack } from '@chakra-ui/react';
+import {
+    Center,
+    Link,
+    Text,
+    useColorModeValue,
+    VStack,
+} from '@chakra-ui/react';
 import { useUser } from '../contexts/useUser';
 import CustomBox from '../components/CustomBox';
 import StockInfoTable from '../components/StockTable/StockInfoTable';
 import { useStockSymbol } from '../contexts/useStockInfo';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useLoginSignupPopup } from '../contexts/useLoginSignupPopup';
+import { Link as ReactRouterLink } from 'react-router-dom';
 
 const Watchlist = () => {
     const { user, watchlist } = useUser();
@@ -27,9 +34,55 @@ const Watchlist = () => {
         getWatchlistStockInfo(tickers);
     }, [watchlist]);
 
-    const handleSortClick = (key) => {
-        sortStocks(watchlistStockInfo, key, setWatchlistStockInfo);
+    const handleSortClick = (key, direction) => {
+        sortStocks(watchlistStockInfo, key, direction, setWatchlistStockInfo);
     };
+
+    const EmptyWatchlistPrompt = () => (
+        <CustomBox w="100%">
+            <VStack m={8}>
+                <Text>Your watchlist is empty!</Text>
+                <Text>
+                    Add stocks form the
+                    <Link as={ReactRouterLink} to="/" color={blueColor} mx={1}>
+                        Home
+                    </Link>
+                    page.
+                </Text>
+            </VStack>
+        </CustomBox>
+    );
+
+    const SignInPrompt = () => (
+        <CustomBox w="100%">
+            <Center m={8}>
+                <Link
+                    as="button"
+                    onClick={() => {
+                        setMode('login');
+                        onOpen();
+                    }}
+                    color={blueColor}
+                    mx={1}
+                >
+                    Log In
+                </Link>
+                or
+                <Link
+                    as="button"
+                    onClick={() => {
+                        setMode('signup');
+                        onOpen();
+                    }}
+                    color={blueColor}
+                    mx={1}
+                >
+                    Sign Up
+                </Link>
+                to use the watchlist!
+            </Center>
+        </CustomBox>
+    );
 
     return (
         <PageTemplate>
@@ -38,39 +91,16 @@ const Watchlist = () => {
                 {isWatchlistDataLoading ? (
                     <LoadingSpinner />
                 ) : user ? (
-                    <StockInfoTable
-                        stocks={watchlistStockInfo}
-                        handleSortClick={handleSortClick}
-                    />
+                    watchlist.length > 0 ? (
+                        <StockInfoTable
+                            stocks={watchlistStockInfo}
+                            handleSortClick={handleSortClick}
+                        />
+                    ) : (
+                        <EmptyWatchlistPrompt />
+                    )
                 ) : (
-                    <CustomBox w="100%">
-                        <Center fontSize="xl" mx={8} my={8}>
-                            <Link
-                                as="button"
-                                onClick={() => {
-                                    setMode('login');
-                                    onOpen();
-                                }}
-                                color={blueColor}
-                                mx={2}
-                            >
-                                Log In
-                            </Link>
-                            or
-                            <Link
-                                as="button"
-                                onClick={() => {
-                                    setMode('signup');
-                                    onOpen();
-                                }}
-                                color={blueColor}
-                                mx={2}
-                            >
-                                Sign Up
-                            </Link>
-                            to use watchlist
-                        </Center>
-                    </CustomBox>
+                    <SignInPrompt />
                 )}
             </VStack>
         </PageTemplate>

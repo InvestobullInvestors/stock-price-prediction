@@ -11,13 +11,16 @@ import {
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/useAuth';
+import { auth } from '../../auth/firebase';
+import { StyledFirebaseAuth } from 'react-firebaseui';
 
 const SignupForm = () => {
     const { register, handleSubmit, formState } = useForm();
-    const { signup } = useAuth();
+    const { signup, uiConfig } = useAuth();
 
-    const [showPW, setShowPW] = useState(false);
-    const [showPWC, setShowPWC] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordConfirmation, setShowPasswordConfirmation] =
+        useState(false);
     const [error, setError] = useState('');
 
     const onSubmit = async ({
@@ -73,32 +76,47 @@ const SignupForm = () => {
             <FormControl id="password" isRequired mb={4}>
                 <FormLabel>Password</FormLabel>
                 <Input
-                    type={showPW ? 'text' : 'password'}
+                    type={showPassword ? 'text' : 'password'}
                     placeholder="password"
                     {...register('password', { required: true })}
                 />
                 <InputRightElement bottom={-8}>
-                    <Button onClick={() => setShowPW(!showPW)}>
-                        {showPW ? <ViewOffIcon /> : <ViewIcon />}
+                    <Button
+                        onClick={() => setShowPassword(!showPassword)}
+                        variant="ghost"
+                    >
+                        {showPassword ? <ViewOffIcon /> : <ViewIcon />}
                     </Button>
                 </InputRightElement>
             </FormControl>
             <FormControl id="password-confirmation" isRequired mb={4}>
                 <FormLabel>Password Confirmation</FormLabel>
                 <Input
-                    type={showPWC ? 'text' : 'password'}
+                    type={showPasswordConfirmation ? 'text' : 'password'}
                     placeholder="password"
                     {...register('passwordConfirmation', { required: true })}
                 />
                 <InputRightElement bottom={-8}>
-                    <Button onClick={() => setShowPWC(!showPWC)}>
-                        {showPWC ? <ViewOffIcon /> : <ViewIcon />}
+                    <Button
+                        onClick={() =>
+                            setShowPasswordConfirmation(
+                                !showPasswordConfirmation
+                            )
+                        }
+                        variant="ghost"
+                    >
+                        {showPasswordConfirmation ? (
+                            <ViewOffIcon />
+                        ) : (
+                            <ViewIcon />
+                        )}
                     </Button>
                 </InputRightElement>
             </FormControl>
             <Button isLoading={formState.isSubmitting} type="submit">
                 Sign Up
             </Button>
+            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
         </form>
     );
 };

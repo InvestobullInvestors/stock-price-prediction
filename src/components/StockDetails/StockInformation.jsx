@@ -16,15 +16,22 @@ import {
 } from '@chakra-ui/react';
 import LoadingSpinner from '../LoadingSpinner';
 import CustomBox from '../CustomBox';
+import useCurrencyFormat from '../../hooks/useCurrencyFormat';
 
 const NumberTd = ({ children }) => (
     <Td isNumeric fontWeight="bold">
-        {formatNumber(children)}
+        {children?.toLocaleString('en-US', { maximumFractionDigits: 2 })}
     </Td>
 );
 
-const formatNumber = (num) =>
-    num?.toLocaleString('en-US', { maximumFractionDigits: 2 });
+const CurrencyTd = ({ children }) => {
+    const formatCurrency = useCurrencyFormat();
+    return (
+        <Td isNumeric fontWeight="bold">
+            {formatCurrency(children)}
+        </Td>
+    );
+};
 
 const QuarterlyStockDataContinued = () => {
     const {
@@ -48,11 +55,11 @@ const QuarterlyStockDataContinued = () => {
                     <Tbody>
                         <Tr>
                             <Td>52 Weeks High</Td>
-                            <NumberTd>{fifty_two_week_high}</NumberTd>
+                            <CurrencyTd>{fifty_two_week_high}</CurrencyTd>
                         </Tr>
                         <Tr>
                             <Td>52 Weeks Low</Td>
-                            <NumberTd>{fifty_two_week_low}</NumberTd>
+                            <CurrencyTd>{fifty_two_week_low}</CurrencyTd>
                         </Tr>
                         <Tr>
                             <Td>Dividend Payout Ratio</Td>
@@ -163,7 +170,7 @@ const LivePrice = () => {
                                                     : redColor
                                             }
                                         >
-                                            {formatNumber(open)}
+                                            {open?.toFixed(2)}
                                         </StatNumber>
                                         <StatHelpText mt={2}>
                                             {currency}
@@ -174,15 +181,15 @@ const LivePrice = () => {
                         </Tr>
                         <Tr>
                             <Td>Close</Td>
-                            <NumberTd>{close}</NumberTd>
+                            <CurrencyTd>{close}</CurrencyTd>
                         </Tr>
                         <Tr>
                             <Td>High</Td>
-                            <NumberTd>{high}</NumberTd>
+                            <CurrencyTd>{high}</CurrencyTd>
                         </Tr>
                         <Tr>
                             <Td>Low</Td>
-                            <NumberTd>{low}</NumberTd>
+                            <CurrencyTd>{low}</CurrencyTd>
                         </Tr>
                         <Tr>
                             <Td>Volume</Td>
@@ -196,10 +203,7 @@ const LivePrice = () => {
 };
 
 const StockInformation = ({ ...otherProps }) => (
-    <CustomBox
-        bgColor={useColorModeValue('brand.100', 'brand.700')}
-        {...otherProps}
-    >
+    <CustomBox {...otherProps}>
         <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={8}>
             <LivePrice />
             <QuarterlyStockData />
