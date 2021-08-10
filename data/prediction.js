@@ -14,6 +14,15 @@ const tickerToEndpointMap = {
     AVGO: '',
     CSCO: '',
     TSLA: '',
+    INTC: '',
+    CMCSA: '',
+    NFLX: '',
+    UBER: '',
+    PEP: '',
+    ADBE: '',
+    MSFT: 'http://08478e4a-bbc7-4e7b-bb07-38f4792fea4b.eastus2.azurecontainer.io/score',
+    PYPL: '',
+    NVDA: '',
 };
 
 const number_of_days = [1, 3, 6];
