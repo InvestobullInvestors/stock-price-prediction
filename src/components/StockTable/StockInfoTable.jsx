@@ -93,7 +93,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
 
     return (
         <CustomBox
-            padding={0}
+            padding={2}
             borderColor={useColorModeValue('brand.200', 'brand.700')}
             bg={useColorModeValue('brand.50', 'brand.900')}
         >
