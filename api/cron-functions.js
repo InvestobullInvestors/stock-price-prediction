@@ -2,11 +2,19 @@ const express = require('express');
 const { stockMarketInfo, realtimeStockInfo } = require('../dal/stock-markets');
 const router = express.Router();
 
-router.post('/cron-functions/getRealtimeStockData', async function (req, res) {
+const dotenv = require('dotenv');
+dotenv.config();
+const NewsAPI = require('newsapi');
+const stockDataApiKey = new NewsAPI(process.env.STOCK_DATA_API_KEY);
+
+const axios = require('axios');
+
+router.get('/cron-functions/getRealtimeStockData', async function (req, res) {
     const doc = await stockMarketInfo.find({});
     for (let market_data of doc) {
-        console.log(market_data.stocks);
-        for (let stock_data of market_data.stocks) {
+        const stocks_considered = market_data.stocks.slice(0, 5);
+        console.log(stocks_considered);
+        for (let stock_data of stocks_considered) {
             console.log(`Processing data for ${stock_data.ticker}`);
             const realTimeStockInfo = await realtimeStockInfo.findOne({
                 ticker_id: stock_data.ticker,
