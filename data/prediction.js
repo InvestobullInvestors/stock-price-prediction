@@ -2,7 +2,6 @@ const { realtimeStockInfo } = require('../dal/stock-markets');
 const { predictedStockInfo } = require('../dal/stock-markets');
 const { stockMarketInfo } = require('../dal/stock-markets');
 const axios = require('axios');
-const esprima = require('esprima');
 
 const tickerToEndpointMap = {
     AAPL: 'http://f6b1b502-ac55-4522-b0ef-f4becf1604a2.canadacentral.azurecontainer.io/score',
@@ -15,7 +14,7 @@ const tickerToEndpointMap = {
     QCOM: '',
     AVGO: '',
     CSCO: '',
-    TSLA: 'http://f6b1b502-ac55-4522-b0ef-f4becf1604a2.canadacentral.azurecontainer.io/score',
+    TSLA: '',
 };
 
 const number_of_days = [2, 3, 6];
@@ -29,7 +28,7 @@ const predictPrices = async () => {
                 ticker_id: stock_data.ticker,
             });
 
-            get_dependent_variables(stock_data.ticker)
+            getDependentVariables(stock_data.ticker)
                 .then(async (dependent_variable_list) => {
                     console.log(
                         'dependent_variable_list: ',
@@ -67,11 +66,20 @@ const predictPrices = async () => {
     }
 };
 
-const get_dependent_variables = async (ticker) => {
+// get Date, Volume, Open, High, Low, values from database and fluctuate their values
+const getDependentVariables = async (ticker) => {
     const {
         stock_details: { timestamp, volume, open, high, low },
     } = await realtimeStockInfo.findOne({ ticker_id: ticker });
-    // console.log(timestamp, volume, open, high, low);
+    console.log(
+        'Original values for ticker',
+        ticker,
+        timestamp,
+        volume,
+        open,
+        high,
+        low
+    );
 
     const res = [];
 
@@ -80,28 +88,24 @@ const get_dependent_variables = async (ticker) => {
         const new_date = new Date(date.setDate(date.getDate() + days));
         const new_time = new Date(new_date.setUTCHours(0));
 
-        const randomInt = Math.floor(Math.random() * 5) + 1;
-        const randomPercent = 0.05 * randomInt;
-        // console.log('RandomInt: ', randomInt);
+        // randomize dependent variables
+        const randomPercent = (Math.random() * 5 + 1) * 0.01;
+        console.log('RandomInt: ', randomPercent);
         const new_volume = volume + volume * randomPercent;
         const new_open = open + open * randomPercent;
         const new_high = high + high * randomPercent;
         const new_low = low + low * randomPercent;
 
-        // console.log('OPEN: ', new_open);
-
         res.push({
             Date: new_time,
-            Volume: new_volume * 1000,
+            Volume: Math.round(new_volume),
             Open: roundToTwoDecimals(new_open),
             High: roundToTwoDecimals(new_high),
             Low: roundToTwoDecimals(new_low),
         });
     }
 
-    const scoreList = getPredictionScoreFromAPI(res, ticker);
-    // console.log('SCORE LIST: ', scoreList);
-    return scoreList;
+    return getPredictionScoreFromAPI(res, ticker);
 };
 
 // Returns a list of updated prediction_details with prediction scores from Azure AutoML endpoint
@@ -120,21 +124,24 @@ const getPredictionScoreFromAPI = async (dependentVariableList, ticker) => {
             headers: { 'Content-Type': 'application/json' },
         });
         const scoreObj = JSON.parse(scoreRes.data);
-        console.log('SCORE: ', scoreObj);
         const scoreList = scoreObj['forecast'];
         let count = 0;
         dependentVariableList.forEach(function (element) {
-            element.Close = roundToTwoDecimals(scoreList[count]);
+            if (isNaN(scoreList[count])) {
+                element.Close = 0.0;
+            } else {
+                element.Close = roundToTwoDecimals(scoreList[count]);
+            }
             count += 1;
         });
     } else {
         console.log('Score URI is an empty string');
     }
-    const newList = [...dependentVariableList]; // create new list to return
-    // console.log('NEW LIST: ', newList);
+    const newList = [...dependentVariableList]; // create new list of prediction_details to return
     return newList;
 };
 
+// Rounds input to two decimal places
 const roundToTwoDecimals = (num) => {
     return +(Math.round(num + 'e+2') + 'e-2');
 };
