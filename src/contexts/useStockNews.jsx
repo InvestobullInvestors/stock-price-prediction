@@ -18,10 +18,6 @@ const StockNewsProvider = ({ children }) => {
         setDisplayingWatchlistStockNews,
     ] = useState(false);
     const [
-        isNewsSelectionsFromFirebaseLoading,
-        setIsNewsSelectionsFromFirebaseLoading,
-    ] = useStateWithCallbackLazy(false);
-    const [
         isNewsSelectionsFromMongoLoading,
         setIsNewsSelectionsFromMongoLoading,
     ] = useStateWithCallbackLazy(false);
@@ -47,15 +43,6 @@ const StockNewsProvider = ({ children }) => {
                 });
         });
     };
-
-    // const setNewsSelectionsFromFirebase = () => {
-    //     setIsNewsSelectionsFromFirebaseLoading(true, () => {
-    //         axios.get('/stock-news/newsSourceList').then((response) => {
-    //             setNewsSelections(response.data);
-    //             setIsNewsSelectionsFromFirebaseLoading(false, null);
-    //         });
-    //     });
-    // };
 
     const setNewsInfoFromMongo = () => {
         setIsNewsSelectionsFromMongoLoading(true, () => {
@@ -128,11 +115,9 @@ const StockNewsProvider = ({ children }) => {
                 stockListNews,
                 isStockNewsLoading,
                 isDisplayingWatchlistStockNews,
-                isNewsSelectionsFromFirebaseLoading,
                 isNewsSelectionsFromMongoLoading,
                 setDisplayWatchlistNews,
                 setNewsInfoFromMongo,
-                // setNewsSelectionsFromFirebase,
                 getStockListNews,
                 setNews,
                 reorderSources,

@@ -1,7 +1,7 @@
 const express = require('express');
-const { newsSourceInfo } = require('../dal/stock-markets');
 const router = express.Router();
 
+const { newsSourceInfo } = require('../dal/stock-markets');
 const { stockNewsInfo } = require('../dal/stock-markets');
 
 const defaultNews = {

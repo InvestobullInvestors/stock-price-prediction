@@ -13,16 +13,6 @@ import { useStockNews } from '../../contexts/useStockNews';
 import NewsArticle from '../NewsArticle';
 import CustomBox from '../CustomBox';
 
-function formatDate(date) {
-    let year = parseInt(date.slice(0, 4));
-    let month = parseInt(date.slice(6, 7));
-    let day = parseInt(date.slice(9, 10));
-    let dateObj = new Date(year, month - 1, day);
-
-    let options = { year: 'numeric', month: 'long', day: '2-digit' };
-    return new Intl.DateTimeFormat('en-US', options).format(dateObj);
-}
-
 const StockNewsCard = ({ stock, children, ...otherProps }) => {
     const cardColor = useColorModeValue('brand.400', 'brand.700');
     const textBoxColor = useColorModeValue('brand.100', 'brand.600');
@@ -103,7 +93,7 @@ const StockNewsCard = ({ stock, children, ...otherProps }) => {
                         {articles.map((article) => (
                             <Box key={article._id} w="100%">
                                 <NewsArticle
-                                    date={formatDate(article.publishedAt)}
+                                    date={article.publishedAt}
                                     title={article.title}
                                     url={article.url}
                                 />
@@ -151,7 +141,7 @@ const StockNewsCard = ({ stock, children, ...otherProps }) => {
                         {articles.map((article) => (
                             <Box key={article._id} w="100%">
                                 <NewsArticle
-                                    date={formatDate(article.publishedAt)}
+                                    date={article.publishedAt}
                                     title={article.title}
                                     url={article.url}
                                 />

@@ -14,7 +14,6 @@ const News = () => {
     const {
         setNewsInfoFromMongo,
         isDisplayingWatchlistStockNews,
-        isNewsSelectionsFromFirebaseLoading,
         isNewsSelectionsFromMongoLoading,
         isStockNewsLoading,
         getStockListNews,
@@ -35,9 +34,7 @@ const News = () => {
     return (
         <PageTemplate>
             <CustomHeading mb={3}>News</CustomHeading>
-            {isNewsSelectionsFromFirebaseLoading ||
-            isNewsSelectionsFromMongoLoading ||
-            isStockNewsLoading ? (
+            {isNewsSelectionsFromMongoLoading || isStockNewsLoading ? (
                 <LoadingSpinner />
             ) : (
                 <>
