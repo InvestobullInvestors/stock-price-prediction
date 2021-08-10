@@ -16,7 +16,7 @@ const PaymentPlanList = () => {
                 details={[
                     'Access the latest stock data.',
                     'Access the latest stock news.',
-                    'Add 5 stocks to the watchlist.',
+                    'Add up to 10 stocks to the watchlist.',
                 ]}
                 planColor={bronzeColor}
             />
@@ -27,18 +27,18 @@ const PaymentPlanList = () => {
                 details={[
                     'All Basic perks.',
                     'Stock price forecast.',
-                    'Add 20 stocks to the watchlist.',
+                    'Add unlimited stocks to the watchlist.',
                 ]}
                 planColor={silverColor}
             />
             <PaymentPlanCard
                 plan="Unlimited"
                 price={10}
-                buttonText="Subscribe Now"
+                buttonText="Coming Soon"
                 details={[
                     'All Premium perks.',
                     'Change forecast predictors.',
-                    'Add unlimited stocks to the watchlist.',
+                    'More exciting features to come.',
                 ]}
                 planColor={goldColor}
             />

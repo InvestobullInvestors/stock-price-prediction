@@ -52,7 +52,11 @@ const PaymentPlanCard = ({
                 {price ? (
                     <>
                         <Text fontSize="xl">USD ${price}/month</Text>
-                        <Button onClick={onOpen} colorScheme="brand">
+                        <Button
+                            onClick={onOpen}
+                            colorScheme="brand"
+                            isDisabled={buttonText === 'Coming Soon'}
+                        >
                             {buttonText}
                         </Button>
                     </>
