@@ -13,6 +13,10 @@
         {
             "source": "/stock-prediction/(.*)",
             "destination": "/api/stock-prediction"
+        },
+        {
+            "source": "/cron-functions/(.*)",
+            "destination": "/api/cron-functions"
         }
     ]
 }
