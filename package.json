@@ -20,7 +20,6 @@
         "axios-hooks": "^2.6.3",
         "babel-loader": "8.1.0",
         "chart.js": "^3.4.1",
-        "esprima": "^4.0.1",
         "firebase": "^8.7.0",
         "framer-motion": "^4",
         "prop-types": "^15.7.2",

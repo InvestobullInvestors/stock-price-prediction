@@ -2,7 +2,6 @@ const { realtimeStockInfo } = require('../dal/stock-markets');
 const { predictedStockInfo } = require('../dal/stock-markets');
 const { stockMarketInfo } = require('../dal/stock-markets');
 const axios = require('axios');
-
 const tickerToEndpointMap = {
     AAPL: 'http://f6b1b502-ac55-4522-b0ef-f4becf1604a2.canadacentral.azurecontainer.io/score',
     TWTR: '',
@@ -17,7 +16,7 @@ const tickerToEndpointMap = {
     TSLA: '',
 };
 
-const number_of_days = [2, 3, 6];
+const number_of_days = [1, 3, 6];
 
 const predictPrices = async () => {
     const doc = await stockMarketInfo.find({});
@@ -90,7 +89,6 @@ const getDependentVariables = async (ticker) => {
 
         // randomize dependent variables
         const randomPercent = (Math.random() * 5 + 1) * 0.01;
-        console.log('RandomInt: ', randomPercent);
         const new_volume = volume + volume * randomPercent;
         const new_open = open + open * randomPercent;
         const new_high = high + high * randomPercent;
@@ -120,10 +118,11 @@ const getPredictionScoreFromAPI = async (dependentVariableList, ticker) => {
     };
 
     if (scoreURI !== '') {
-        const scoreRes = await axios.post(scoreURI, JSON.stringify(data), {
+        let scoreRes = await axios.post(scoreURI, JSON.stringify(data), {
             headers: { 'Content-Type': 'application/json' },
         });
-        const scoreObj = JSON.parse(scoreRes.data);
+        let score = scoreRes.data.replace('NaN', 0.0); // having NaN in JSON throws error
+        const scoreObj = JSON.parse(score);
         const scoreList = scoreObj['forecast'];
         let count = 0;
         dependentVariableList.forEach(function (element) {
