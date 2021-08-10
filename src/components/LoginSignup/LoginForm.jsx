@@ -21,7 +21,7 @@ const LoginForm = ({ setMode }) => {
     const { register, handleSubmit, formState } = useForm();
     const { login, uiConfig } = useAuth();
 
-    const [showPW, setShowPW] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
 
     const onSubmit = async ({ email, password }) => {
@@ -29,7 +29,6 @@ const LoginForm = ({ setMode }) => {
             setError('');
             await login(email, password);
         } catch {
-            // for security reasons, we don't expose why the login failed
             return setError('Failed to log in');
         }
     };
@@ -53,13 +52,16 @@ const LoginForm = ({ setMode }) => {
             <FormControl id="password" isRequired mb={4}>
                 <FormLabel>Password</FormLabel>
                 <Input
-                    type={showPW ? 'text' : 'password'}
+                    type={showPassword ? 'text' : 'password'}
                     placeholder="password"
                     {...register('password', { required: true })}
                 />
                 <InputRightElement bottom={-8}>
-                    <Button onClick={() => setShowPW(!showPW)}>
-                        {showPW ? <ViewOffIcon /> : <ViewIcon />}
+                    <Button
+                        onClick={() => setShowPassword(!showPassword)}
+                        variant="ghost"
+                    >
+                        {showPassword ? <ViewOffIcon /> : <ViewIcon />}
                     </Button>
                 </InputRightElement>
             </FormControl>

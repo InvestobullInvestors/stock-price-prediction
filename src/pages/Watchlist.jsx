@@ -34,9 +34,55 @@ const Watchlist = () => {
         getWatchlistStockInfo(tickers);
     }, [watchlist]);
 
-    const handleSortClick = (key) => {
-        sortStocks(watchlistStockInfo, key, setWatchlistStockInfo);
+    const handleSortClick = (key, direction) => {
+        sortStocks(watchlistStockInfo, key, direction, setWatchlistStockInfo);
     };
+
+    const EmptyWatchlistPrompt = () => (
+        <CustomBox w="100%">
+            <VStack m={8}>
+                <Text>Your watchlist is empty!</Text>
+                <Text>
+                    Add stocks form the
+                    <Link as={ReactRouterLink} to="/" color={blueColor} mx={1}>
+                        Home
+                    </Link>
+                    page.
+                </Text>
+            </VStack>
+        </CustomBox>
+    );
+
+    const SignInPrompt = () => (
+        <CustomBox w="100%">
+            <Center m={8}>
+                <Link
+                    as="button"
+                    onClick={() => {
+                        setMode('login');
+                        onOpen();
+                    }}
+                    color={blueColor}
+                    mx={1}
+                >
+                    Log In
+                </Link>
+                or
+                <Link
+                    as="button"
+                    onClick={() => {
+                        setMode('signup');
+                        onOpen();
+                    }}
+                    color={blueColor}
+                    mx={1}
+                >
+                    Sign Up
+                </Link>
+                to use the watchlist!
+            </Center>
+        </CustomBox>
+    );
 
     return (
         <PageTemplate>
@@ -51,55 +97,10 @@ const Watchlist = () => {
                             handleSortClick={handleSortClick}
                         />
                     ) : (
-                        <CustomBox w="100%">
-                            <Center mx={8} my={8}>
-                                <VStack>
-                                    <Text>Your watchlist is empty!</Text>
-                                    <Text>
-                                        Add stocks form the
-                                        <Link
-                                            as={ReactRouterLink}
-                                            to="/"
-                                            color={blueColor}
-                                            mx={1}
-                                        >
-                                            Home
-                                        </Link>
-                                        page.
-                                    </Text>
-                                </VStack>
-                            </Center>
-                        </CustomBox>
+                        <EmptyWatchlistPrompt />
                     )
                 ) : (
-                    <CustomBox w="100%">
-                        <Center mx={8} my={8}>
-                            <Link
-                                as="button"
-                                onClick={() => {
-                                    setMode('login');
-                                    onOpen();
-                                }}
-                                color={blueColor}
-                                mx={1}
-                            >
-                                Log In
-                            </Link>
-                            or
-                            <Link
-                                as="button"
-                                onClick={() => {
-                                    setMode('signup');
-                                    onOpen();
-                                }}
-                                color={blueColor}
-                                mx={1}
-                            >
-                                Sign Up
-                            </Link>
-                            to use the watchlist!
-                        </Center>
-                    </CustomBox>
+                    <SignInPrompt />
                 )}
             </VStack>
         </PageTemplate>

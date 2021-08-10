@@ -15,9 +15,11 @@ import {
     Button,
     Center,
     Text,
+    useColorMode,
+    useColorModeValue,
 } from '@chakra-ui/react';
-import useHandlePayment from '../hooks/useHandlePayment';
-import { useUser } from '../contexts/useUser';
+import useHandlePayment from '../../hooks/useHandlePayment';
+import { useUser } from '../../contexts/useUser';
 
 const stripePublicKey = loadStripe(
     'pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4'
@@ -30,6 +32,9 @@ const CheckoutForm = ({ payableAmount }) => {
     const [alertVisible, setAlertVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { user, upgradeUserPlan } = useUser();
+
+    const boxBgColor = useColorModeValue('brand.200', 'brand.700');
+    const isLightMode = useColorMode().colorMode === 'light';
 
     const handlePayment = useHandlePayment(
         payableAmount,
@@ -59,7 +64,7 @@ const CheckoutForm = ({ payableAmount }) => {
                     flexDirection="column"
                     alignItems="center"
                     py={10}
-                    mb={6}
+                    mb={4}
                 >
                     <AlertIcon boxSize="40px" mr={0} />
                     <AlertTitle mt={4} mb={1} fontSize="lg">
@@ -92,42 +97,44 @@ const CheckoutForm = ({ payableAmount }) => {
                     <Alert status="info" mb={4}>
                         <AlertIcon />
                         <AlertDescription>
-                            <Text>
-                                To test, use 4242424242424242 (good card), or
-                                4000000000009995 (bad card)
-                            </Text>
+                            <Text>Good test card: 4242 4242 4242 4242</Text>
+                            <Text>Bad test card: 4000 0000 0000 9995</Text>
                         </AlertDescription>
                     </Alert>
-                    <Box
-                        my={2}
-                        px={4}
-                        py={2}
-                        rounded="md"
-                        border="solid"
-                        borderColor="brand.500"
-                        bg="brand.300"
-                    >
-                        <CardElement
-                            options={{
-                                style: {
-                                    base: {
-                                        fontSize: '16px',
-                                        color: '#101010',
-                                        '::placeholder': {
-                                            color: '#696969',
+                    <Box my={2} px={4} py={3} rounded="md" bg={boxBgColor}>
+                        {isLightMode ? (
+                            <CardElement
+                                options={{
+                                    style: {
+                                        base: {
+                                            fontSize: '16px',
                                         },
                                     },
-                                    invalid: {
-                                        color: '#DC1212',
+                                }}
+                            />
+                        ) : (
+                            <CardElement
+                                options={{
+                                    style: {
+                                        base: {
+                                            fontSize: '16px',
+                                            color: '#F0F0F0',
+                                            '::placeholder': {
+                                                color: '#888888',
+                                            },
+                                        },
+                                        invalid: {
+                                            color: '#FF4854',
+                                        },
                                     },
-                                },
-                            }}
-                        />
+                                }}
+                            />
+                        )}
                     </Box>
                     <Center>
                         <Button
                             isLoading={isLoading}
-                            my={8}
+                            my={4}
                             colorScheme="brand"
                             onClick={handlePayment}
                             isDisabled={!user}

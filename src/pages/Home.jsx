@@ -22,8 +22,8 @@ const Home = () => {
         getBasicStockInfo();
     }, []);
 
-    const handleSortClick = (key) => {
-        sortStocks(basicStockInfo, key, setBasicStockInfo);
+    const handleSortClick = (key, direction) => {
+        sortStocks(basicStockInfo, key, direction, setBasicStockInfo);
     };
 
     const handleChange = (event) => {

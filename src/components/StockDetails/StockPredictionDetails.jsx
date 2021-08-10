@@ -1,5 +1,8 @@
 import React from 'react';
 import {
+    Alert,
+    AlertDescription,
+    AlertIcon,
     Box,
     Center,
     Grid,
@@ -77,7 +80,9 @@ const PricePrediction = () => {
                                                           : redColor
                                                   }
                                               >
-                                                  ${close.toFixed(2)}
+                                                  $
+                                                  {close?.toFixed(2) ??
+                                                      ' --.--'}
                                               </Heading>
                                           </SimpleGrid>
                                       </Box>
@@ -96,6 +101,10 @@ const SlidablePredictions = () => {
     const { inflation, revenueGrowth, eps, marketCap } = predictedValue;
     return (
         <CustomGridItem>
+            <Alert status="info">
+                <AlertIcon />
+                <AlertDescription>Coming Soon</AlertDescription>
+            </Alert>
             <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={6}>
                 <PredictionSlider
                     predictedValue={inflation}

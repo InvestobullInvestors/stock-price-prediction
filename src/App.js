@@ -23,21 +23,21 @@ const theme = extendTheme({
         brand: {
             50: '#FFFFFF',
             100: '#F7FAFC',
-            200: '#d5e1f2',
-            300: '#bacfe8',
-            400: '#90afd1',
-            500: '#7689a6',
-            600: '#4a566b',
+            200: '#E6EEF8',
+            300: '#BACFE8',
+            400: '#90AFD1',
+            500: '#7689A6',
+            600: '#4A566B',
             700: '#2D3748',
             800: '#1A202C',
             900: '#171923',
         },
         red: {
-            light: '#D6333E',
-            dark: '#E64550',
+            light: '#CC0000',
+            dark: '#FF303E',
         },
         green: {
-            light: '#00823C',
+            light: '#408721',
             dark: '#12C766',
         },
         blue: {
@@ -49,16 +49,16 @@ const theme = extendTheme({
             dark: '#FFC01E',
         },
         bronze: {
-            light: '#995D02',
-            dark: '#AD6B05',
+            light: '#8D5400',
+            dark: '#C57800',
         },
         silver: {
-            light: '#757575',
-            dark: '#B0B0B0',
+            light: '#929292',
+            dark: '#BDBDBD',
         },
         gold: {
-            light: '#B89702',
-            dark: '#D1AC00',
+            light: '#C49F00',
+            dark: '#D2AC01',
         },
     },
 });
