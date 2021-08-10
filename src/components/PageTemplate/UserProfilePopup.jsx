@@ -20,26 +20,28 @@ import {
 import { useUser } from '../../contexts/useUser';
 import { Link } from 'react-router-dom';
 
-const UserProfileBody = ({ user }) => (
+const UserProfileBody = ({
+    user: { displayName, email, photoURL, plan, plan_expiry },
+}) => (
     <HStack>
-        <Avatar size="lg" name={user.displayName} src={user.photoURL} m={3} />
+        <Avatar size="lg" name={displayName} src={photoURL} m={3} />
         <Grid templateColumns="repeat(4, 1fr)" minH={36} gap={2}>
             <GridItem colSpan={1}>
                 <Text fontWeight="bold">Name:</Text>
             </GridItem>
-            <GridItem colSpan={3}>{user.displayName}</GridItem>
+            <GridItem colSpan={3}>{displayName}</GridItem>
             <GridItem colSpan={1}>
                 <Text fontWeight="bold">Email:</Text>
             </GridItem>
-            <GridItem colSpan={3}>{user.email}</GridItem>
+            <GridItem colSpan={3}>{email}</GridItem>
             <GridItem colSpan={1}>
                 <Text fontWeight="bold">Plan:</Text>
             </GridItem>
-            <GridItem colSpan={3}>{user.plan}</GridItem>
+            <GridItem colSpan={3}>{plan}</GridItem>
             <GridItem colSpan={1}>
                 <Text fontWeight="bold">Expiry:</Text>
             </GridItem>
-            <GridItem colSpan={3}>{user.plan_expiry ?? '-'}</GridItem>
+            <GridItem colSpan={3}>{plan_expiry ?? '-'}</GridItem>
         </Grid>
     </HStack>
 );
