@@ -10,7 +10,7 @@ import {
     Spacer,
 } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
-import NewsArticle from '../NewsArticle';
+import NewsArticle from './NewsArticle';
 import CustomBox from '../CustomBox';
 
 const StockNewsCard = ({ stock, children, ...otherProps }) => {

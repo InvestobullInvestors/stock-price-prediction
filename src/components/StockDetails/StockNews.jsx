@@ -9,7 +9,7 @@ import {
     VStack,
 } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
-import NewsArticle from '../NewsArticle';
+import NewsArticle from '../News/NewsArticle';
 import LoadingSpinner from '../LoadingSpinner';
 import CustomBox from '../CustomBox';
 
