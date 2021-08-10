@@ -11,8 +11,11 @@ import { useStockNews } from '../contexts/useStockNews';
 import { useUser } from '../contexts/useUser';
 import CustomBox from '../components/CustomBox';
 import { Link as ReactRouterLink } from 'react-router-dom';
+import SignInPromptBox from '../components/SignInPromptBox';
 
-const UpgradePrompt = () => (
+const TO_SEE_PREDICTIONS_TEXT = 'to see predictions for this stock!';
+
+const UpgradePromptBox = () => (
     <CustomBox>
         <VStack my={16}>
             <Text fontSize="lg">
@@ -24,7 +27,7 @@ const UpgradePrompt = () => (
                 >
                     Upgrade your plan
                 </Link>
-                to see predictions for this stock.
+                {TO_SEE_PREDICTIONS_TEXT}
             </Text>
         </VStack>
     </CustomBox>
@@ -50,10 +53,14 @@ const StockDetails = ({ match }) => {
         <PageTemplate>
             <StockInformation my={16} />
             <StockDataGraph my={16} />
-            {user?.plan === 'Premium' || user?.plan === 'Unlimited' ? (
-                <StockPredictionDetails my={16} />
+            {user ? (
+                user.plan === 'Premium' || user.plan === 'Unlimited' ? (
+                    <StockPredictionDetails my={16} />
+                ) : (
+                    <UpgradePromptBox />
+                )
             ) : (
-                <UpgradePrompt />
+                <SignInPromptBox text={TO_SEE_PREDICTIONS_TEXT} />
             )}
             <StockNews my={16} />
         </PageTemplate>
