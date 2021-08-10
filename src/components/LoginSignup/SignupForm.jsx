@@ -18,8 +18,9 @@ const SignupForm = () => {
     const { register, handleSubmit, formState } = useForm();
     const { signup, uiConfig } = useAuth();
 
-    const [showPW, setShowPW] = useState(false);
-    const [showPWC, setShowPWC] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordConfirmation, setShowPasswordConfirmation] =
+        useState(false);
     const [error, setError] = useState('');
 
     const onSubmit = async ({
@@ -75,29 +76,40 @@ const SignupForm = () => {
             <FormControl id="password" isRequired mb={4}>
                 <FormLabel>Password</FormLabel>
                 <Input
-                    type={showPW ? 'text' : 'password'}
+                    type={showPassword ? 'text' : 'password'}
                     placeholder="password"
                     {...register('password', { required: true })}
                 />
                 <InputRightElement bottom={-8}>
-                    <Button onClick={() => setShowPW(!showPW)} variant="ghost">
-                        {showPW ? <ViewOffIcon /> : <ViewIcon />}
+                    <Button
+                        onClick={() => setShowPassword(!showPassword)}
+                        variant="ghost"
+                    >
+                        {showPassword ? <ViewOffIcon /> : <ViewIcon />}
                     </Button>
                 </InputRightElement>
             </FormControl>
             <FormControl id="password-confirmation" isRequired mb={4}>
                 <FormLabel>Password Confirmation</FormLabel>
                 <Input
-                    type={showPWC ? 'text' : 'password'}
+                    type={showPasswordConfirmation ? 'text' : 'password'}
                     placeholder="password"
                     {...register('passwordConfirmation', { required: true })}
                 />
                 <InputRightElement bottom={-8}>
                     <Button
-                        onClick={() => setShowPWC(!showPWC)}
+                        onClick={() =>
+                            setShowPasswordConfirmation(
+                                !showPasswordConfirmation
+                            )
+                        }
                         variant="ghost"
                     >
-                        {showPWC ? <ViewOffIcon /> : <ViewIcon />}
+                        {showPasswordConfirmation ? (
+                            <ViewOffIcon />
+                        ) : (
+                            <ViewIcon />
+                        )}
                     </Button>
                 </InputRightElement>
             </FormControl>
