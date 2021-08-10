@@ -8,7 +8,11 @@ const NewsAPI = require('newsapi');
 const stockDataApiKey = new NewsAPI(process.env.STOCK_DATA_API_KEY);
 
 const axios = require('axios');
+const { stockNewsInfo } = require('../dal/stock-markets');
 const { quarterlyStockInfo } = require('../dal/stock-markets');
+
+const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
+const { newsSourceInfo, stockNewsList } = require('../dal/stock-markets');
 
 router.get('/cron-functions/getRealtimeStockData', async function (req, res) {
     const doc = await stockMarketInfo.find({});
@@ -124,6 +128,98 @@ router.get('/cron-functions/getQuarterlyStockData', async function (req, res) {
     }
     res.send('Successfully processed quarterly data for all stocks');
 });
+
+router.get('/cron-functions/getStockNews', async function (req, res) {
+    const doc = await stockMarketInfo.find({});
+    for (let market_data of doc) {
+        for (let stock_data of market_data.stocks) {
+            const result = await stockNewsInfo.findOne({
+                ticker_id: stock_data.ticker,
+            });
+            const { articles } = await getStockNewsFromApi(stock_data);
+            if (result) {
+                const { stock_news } = result;
+                const filteredArticles = articles.filter((article) => {
+                    return !newsArticleExists(stock_news, article);
+                });
+                await stockNewsInfo.updateOne(
+                    { ticker_id: stock_data.ticker },
+                    {
+                        stock_id: stock_data._id,
+                        stock_news: [...filteredArticles, ...stock_news],
+                    }
+                );
+                console.log(
+                    `Successfully updated news for stock: ${stock_data.name}`
+                );
+            } else {
+                const stockNewsData = new stockNewsInfo({
+                    market_name: market_data.market_name,
+                    market_id: market_data._id,
+                    stock_name: stock_data.name,
+                    ticker_id: stock_data.ticker,
+                    stock_id: stock_data._id,
+                    stock_news: articles,
+                });
+                await stockNewsData.save();
+                console.log(
+                    `Successfully added news for stock: ${stock_data.name}`
+                );
+            }
+        }
+    }
+    res.send('Successfully processed news data for all stocks');
+});
+
+router.get('/cron-functions/getMarketNews', async function (req, res) {
+    const stockNewsInfo = await stockNewsList.find({});
+    for (const { news_sources } of stockNewsInfo) {
+        for (const { id, name } of news_sources) {
+            console.log(`Getting data from news source: ${name}`);
+            const { articles } = await getMarketNewsFromApi(id);
+
+            newsSourceInfo.find({ source: name }).then((doc) => {
+                if (doc.length === 0) {
+                    const newsInfo = new newsSourceInfo({
+                        source: name,
+                        stock_news: articles,
+                    });
+                    newsInfo.save().then(() => {
+                        console.log('Save successful');
+                    });
+                } else {
+                    newsSourceInfo
+                        .updateOne(
+                            { source: name },
+                            {
+                                stock_news: articles,
+                            }
+                        )
+                        .then(() => {
+                            console.log('Update successful');
+                        });
+                }
+            });
+            console.log(`Successfully got data from news source: ${name}`);
+        }
+    }
+    res.send('Successfully processed market news for all news sources');
+});
+
+const newsArticleExists = (stock_news, article) =>
+    stock_news.find((news) => news['publishedAt'] === article.publishedAt);
+
+const getStockNewsFromApi = async ({ name }) =>
+    await newsapi.v2.topHeadlines({
+        q: `${name}`,
+        language: 'en',
+    });
+
+const getMarketNewsFromApi = async (id) =>
+    await newsapi.v2.topHeadlines({
+        sources: `${id}`,
+        language: 'en',
+    });
 
 const getQuarterlyStockDataFromApi = async ({ ticker }) => {
     const url = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${stockDataApiKey}`;

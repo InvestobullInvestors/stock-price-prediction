@@ -1,4 +1,4 @@
-name: realtime data cron run
+name: quarterly data cron run
 on:
   schedule:
     - cron: '51 4 * * *'
