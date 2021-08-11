@@ -1,4 +1,4 @@
-# InvestoBull – A Stock Price Prediction WebApp
+# [InvestoBull][investobull] – A Stock Price Prediction WebApp
 
 ## Project Description
 
@@ -8,11 +8,14 @@ Quick links: [Swagger API Documentation][swagger] | [Quick Start Guide][guide]
 
 ### Tech Stack
 
-[React](https://reactjs.org/) | [ChakraUI](https://chakra-ui.com/) | [Node](https://nodejs.org/) | [Express](https://expressjs.com/) | [MongoDB](https://www.mongodb.com/) | [Firebase](https://firebase.google.com/) | [Stripe](https://stripe.com/) | [Azure ML](https://azure.microsoft.com/en-ca/services/machine-learning/) | [Swagger](https://swagger.io/)
+[React](https://reactjs.org/) | [ChakraUI](https://chakra-ui.com/) | [Node](https://nodejs.org/) | [Axios](https://axios-http.com/) | [Express](https://expressjs.com/) | [MongoDB](https://www.mongodb.com/) | [Firebase](https://firebase.google.com/) | [Stripe](https://stripe.com/) | [Azure ML](https://azure.microsoft.com/en-ca/services/machine-learning/) | [Swagger](https://swagger.io/)
+
+## Contents
+-   [Goals and Requirements](#goals_and_requirements)
 
 <br/>
 
-## Goals and Requirements
+## Goals and Requirements <a name="goals_and_requirements" />
 
 ### Minimal Requirements
 -   ✅ Fully functional webapp using all technologies learned throughout the course - CSS, React, Node, Express, MongoDB, hosting & CI/CD
@@ -30,7 +33,7 @@ Quick links: [Swagger API Documentation][swagger] | [Quick Start Guide][guide]
     -   ✅ Secure credit card payment through Stripe
     -   ✅ Notifications system
 -   Stock Details
-    -   ✅ Retrieve stock details through an API and store stock data on MongoDB Atlas
+    -   ✅ Retrieve stock details through an [API][newsapi] and store stock data on MongoDB Atlas
     -   ✅ Display fundamentals for each stock - market cap, earning etc.
     -   ✅ Render an interactive graph with historical price fluctuation
     -   ✅ Display relevant news for each stock
@@ -76,5 +79,7 @@ Quick links: [Swagger API Documentation][swagger] | [Quick Start Guide][guide]
 -   Build the payments UI using Stripe Elements
 -   Save Credit Cards on Stripe
 
+[investobull]: https://investobull.vercel.app/
 [guide]: https://docs.google.com/document/d/1lpJtf07Uv22bCiGY2IghgsdkWpxphbpEnlNmjR_iexU/edit?usp=sharing
 [swagger]: https://app.swaggerhub.com/apis-docs/InvestobullInvestors/InvestobullInvestors/1.0.0
+[newsapi]: https://newsapi.org/
