@@ -36,7 +36,7 @@ const WatchlistButton = ({ ticker }) => {
     const ExceededLimitMessage = () => (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
-            <ModalContent>
+            <ModalContent bgColor={useColorModeValue('brand.50', 'brand.800')}>
                 <ModalBody>
                     <Alert
                         status="info"
