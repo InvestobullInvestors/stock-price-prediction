@@ -25,43 +25,42 @@ const stripePublicKey = loadStripe(
     'pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4'
 );
 
-const CreditCardInputBox = () => {
-    const boxBgColor = useColorModeValue('brand.200', 'brand.700');
-    const isLightMode = useColorMode().colorMode === 'light';
-
-    return (
-        <Box my={2} px={4} py={3} rounded="md" bg={boxBgColor}>
-            {
-                <CardElement
-                    options={
-                        isLightMode
-                            ? {
-                                  style: {
-                                      base: {
-                                          fontSize: '16px',
-                                      },
+const CreditCardInputBox = () => (
+    <Box
+        my={2}
+        px={4}
+        py={3}
+        rounded="md"
+        bg={useColorModeValue('brand.200', 'brand.700')}
+    >
+        <CardElement
+            options={
+                useColorMode().colorMode === 'light'
+                    ? {
+                          style: {
+                              base: {
+                                  fontSize: '16px',
+                              },
+                          },
+                      }
+                    : {
+                          style: {
+                              base: {
+                                  fontSize: '16px',
+                                  color: '#F0F0F0',
+                                  '::placeholder': {
+                                      color: '#888888',
                                   },
-                              }
-                            : {
-                                  style: {
-                                      base: {
-                                          fontSize: '16px',
-                                          color: '#F0F0F0',
-                                          '::placeholder': {
-                                              color: '#888888',
-                                          },
-                                      },
-                                      invalid: {
-                                          color: '#FF4854',
-                                      },
-                                  },
-                              }
-                    }
-                />
+                              },
+                              invalid: {
+                                  color: '#FF4854',
+                              },
+                          },
+                      }
             }
-        </Box>
-    );
-};
+        />
+    </Box>
+);
 
 const CheckoutForm = ({ payableAmount }) => {
     const stripe = useStripe();
@@ -120,35 +119,51 @@ const CheckoutForm = ({ payableAmount }) => {
             )}
             {!paymentSuccessful && (
                 <>
-                    {user && user.plan !== 'Basic' && (
+                    {user && user.plan !== 'Basic' ? (
                         <Alert status="warning" mb={4}>
                             <AlertIcon />
                             <AlertDescription>
-                                <Text>Your current plan is {user.plan}. </Text>
-                                <Text>Are you sure you want to pay again?</Text>
+                                <Text>
+                                    You are already subscribed to the{' '}
+                                    {user.plan} plan!
+                                </Text>
                             </AlertDescription>
                         </Alert>
+                    ) : (
+                        <>
+                            <Alert status="info" mb={4}>
+                                <AlertIcon />
+                                <AlertDescription fontSize="sm">
+                                    <Text>
+                                        Good test card: 4242 4242 4242 4242
+                                    </Text>
+                                    <Text>
+                                        Bad test card: 4000 0000 0000 9995
+                                    </Text>
+                                    <Text>
+                                        Input any number for date, CVC, and ZIP
+                                    </Text>
+                                </AlertDescription>
+                            </Alert>
+                            <CreditCardInputBox />
+                            <Center>
+                                <Button
+                                    isLoading={isLoading}
+                                    my={4}
+                                    colorScheme="brand"
+                                    onClick={handlePayment}
+                                    isDisabled={!user}
+                                    title={
+                                        user
+                                            ? ''
+                                            : 'Log in to subscribe to plan'
+                                    }
+                                >
+                                    Confirm Payment
+                                </Button>
+                            </Center>
+                        </>
                     )}
-                    <Alert status="info" mb={4}>
-                        <AlertIcon />
-                        <AlertDescription>
-                            <Text>Good test card: 4242 4242 4242 4242</Text>
-                            <Text>Bad test card: 4000 0000 0000 9995</Text>
-                        </AlertDescription>
-                    </Alert>
-                    <CreditCardInputBox />
-                    <Center>
-                        <Button
-                            isLoading={isLoading}
-                            my={4}
-                            colorScheme="brand"
-                            onClick={handlePayment}
-                            isDisabled={!user}
-                            title={user ? '' : 'Log in to subscribe to plan'}
-                        >
-                            Confirm Payment
-                        </Button>
-                    </Center>
                 </>
             )}
         </>
