@@ -1,20 +1,26 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
+import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 const PredictionContext = createContext({});
 
 const PredictionProvider = ({ children }) => {
     const [predictedValue, setPredictedValue] = useState({});
+    const [isPredictionLoading, setIsPredictionLoading] = useStateWithCallbackLazy(false);
 
     const setPrediction = (stockSymbol) => {
-        axios
-            .get(`/stock-prediction/${stockSymbol}`)
-            .then((response) => {
-                setPredictedValue(response.data);
-            })
-            .catch(({ message }) => {
-                console.log(message);
+        setIsPredictionLoading(true, () => {
+            axios
+                .get(`/stock-prediction/${stockSymbol}`)
+                .then((response) => {
+                    setPredictedValue(response.data);
+                })
+                .catch(({ message }) => {
+                    console.log(message);
+                }).finally(_ => {
+                setIsPredictionLoading(false, null);
             });
+        });
     };
 
     const setInflation = (inflation) => {
@@ -37,6 +43,7 @@ const PredictionProvider = ({ children }) => {
         <PredictionContext.Provider
             value={{
                 predictedValue,
+                isPredictionLoading,
                 setInflation,
                 setRevenueGrowth,
                 setPrediction,
