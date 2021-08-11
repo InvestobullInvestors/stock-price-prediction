@@ -54,16 +54,13 @@ const PricePrediction = () => {
                 >
                     <VStack spacing={4}>
                         {prediction_details
-                            ? prediction_details.map(({ Close, Date, _id }) => (
-                                  <Box
-                                      key={_id}
-                                      p={4}
-                                      w="100%"
-                                      borderRadius="lg"
-                                  >
-                                      <SimpleGrid
-                                          columns={{ base: 1, lg: 2 }}
-                                          spacing={1}
+                            ? prediction_details.map(
+                                  ({ close: Close, timestamp: Date, _id }) => (
+                                      <Box
+                                          key={_id}
+                                          p={4}
+                                          w="100%"
+                                          borderRadius="lg"
                                       >
                                           <SimpleGrid
                                               columns={{ base: 1, lg: 2 }}
@@ -86,10 +83,11 @@ const PricePrediction = () => {
                                                   $
                                                   {Close?.toFixed(2) ??
                                                       ' --.--'}
-                                          </Heading>
-                                      </SimpleGrid>
-                                  </Box>
-                              ))
+                                              </Heading>
+                                          </SimpleGrid>
+                                      </Box>
+                                  )
+                              )
                             : null}
                     </VStack>
                 </CustomBox>
