@@ -19,7 +19,7 @@ const tickerToEndpointMap = {
     NFLX: '',
     UBER: '',
     PEP: '',
-    ADBE: '',
+    ADBE: 'http://15d1cdd8-a814-4b62-90ee-de15fc6d6225.eastus2.azurecontainer.io/score',
     MSFT: 'http://08478e4a-bbc7-4e7b-bb07-38f4792fea4b.eastus2.azurecontainer.io/score',
     PYPL: '',
     NVDA: '',
