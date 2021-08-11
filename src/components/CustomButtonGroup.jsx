@@ -14,7 +14,6 @@ const CustomButtonGroup = () => {
         <ButtonGroup isAttached colorScheme="brand">
             <Button
                 mr="-px"
-                opacity={0.5}
                 onClick={() => {
                     setDisplayWatchlistNews(false);
                 }}
