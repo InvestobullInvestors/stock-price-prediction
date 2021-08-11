@@ -51,7 +51,7 @@ const StockDetails = ({ match }) => {
 
     return (
         <PageTemplate>
-            <StockInformation my={16} />
+            <StockInformation my={16} tickerId={tickerId} />
             <StockDataGraph my={16} />
             {user ? (
                 user.plan === 'Premium' || user.plan === 'Unlimited' ? (

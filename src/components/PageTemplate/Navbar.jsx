@@ -120,7 +120,7 @@ const ThemeSwitchButton = ({ icon }) => {
 
     return (
         <Button
-            bg="transparent"
+            variant="ghost"
             rounded="full"
             p={PADDING}
             m={MARGIN}
