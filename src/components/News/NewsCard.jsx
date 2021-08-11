@@ -3,7 +3,6 @@ import {
     Divider,
     Image,
     Square,
-    useColorModeValue,
     VStack,
     Flex,
     Spacer,
@@ -22,8 +21,6 @@ const NewsCard = ({ source, children, ...otherProps }) => {
 
     let name;
     let articles;
-    let logoBlack;
-    let logoWhite;
     let logo;
 
     let targetSource = newsInfo.find(
@@ -33,18 +30,12 @@ const NewsCard = ({ source, children, ...otherProps }) => {
     if (targetSource) {
         name = targetSource.name;
         articles = targetSource.articles;
-        logoBlack = process.env.PUBLIC_URL + name + '.png';
-        logoWhite = process.env.PUBLIC_URL + name + '_white.png';
+        logo = process.env.PUBLIC_URL + 'logos/sources/' + name + '.png';
     } else {
         name = '';
         articles = [];
-        logoBlack = '';
-        logoWhite = '';
+        logo = '';
     }
-
-    logoBlack = logoBlack.replace(/\s+/g, '-').toLowerCase();
-    logoWhite = logoWhite.replace(/\s+/g, '-').toLowerCase();
-    logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
         <CustomBox
@@ -134,16 +125,16 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                 <Popover trigger="hover">
                     <PopoverTrigger>
                         <VStack mt="10px" align="center" w="full">
-                            <CustomBox
+                            <Square
                                 w="100px"
-                                border={0}
-                                shadow="none"
+                                minH="100px"
+                                borderRadius="lg"
                                 p="10px"
                                 mt={-9}
-                                mb={-6}
+                                mb={-3}
                             >
                                 <Image src={logo} />
-                            </CustomBox>
+                            </Square>
                             <Spacer />
                             <CustomBox
                                 w="100%"

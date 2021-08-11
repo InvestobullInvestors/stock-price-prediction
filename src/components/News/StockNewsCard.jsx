@@ -7,7 +7,6 @@ import {
     Flex,
     Spacer,
     HStack,
-    useColorModeValue,
     PopoverTrigger,
     Popover,
     PopoverContent,
@@ -23,8 +22,6 @@ const StockNewsCard = ({ stock, children, ...otherProps }) => {
     let ticker_id;
     let name;
     let articles;
-    let logoBlack;
-    let logoWhite;
     let logo;
 
     let targetStock = stockListNews.find(
@@ -35,19 +32,13 @@ const StockNewsCard = ({ stock, children, ...otherProps }) => {
         ticker_id = targetStock.ticker_id;
         name = targetStock.stock_name;
         articles = targetStock.news;
-        logoBlack = process.env.PUBLIC_URL + ticker_id + '.png';
-        logoWhite = process.env.PUBLIC_URL + ticker_id + '_white.png';
+        logo = process.env.PUBLIC_URL + 'logos/stocks/' + ticker_id + '.png';
     } else {
         ticker_id = '';
         name = '';
         articles = [];
-        logoBlack = '';
-        logoWhite = '';
+        logo = '';
     }
-
-    logoBlack = logoBlack.replace(/\s+/g, '-').toUpperCase();
-    logoWhite = logoWhite.replace(/\s+/g, '-').toUpperCase();
-    logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
         <CustomBox
@@ -71,6 +62,7 @@ const StockNewsCard = ({ stock, children, ...otherProps }) => {
                                 h="150px"
                                 borderRadius="lg"
                                 p="10px"
+                                bg="brand.100"
                             >
                                 <Image src={logo} />
                             </Square>
@@ -137,16 +129,17 @@ const StockNewsCard = ({ stock, children, ...otherProps }) => {
                 <Popover trigger="hover">
                     <PopoverTrigger>
                         <VStack mt="10px" align="center" w="full">
-                            <CustomBox
+                            <Square
                                 w="100px"
-                                border={0}
-                                shadow="none"
+                                minH="100px"
+                                borderRadius="lg"
                                 p="10px"
                                 mt={-9}
-                                mb={-6}
+                                mb={-3}
+                                bg="brand.100"
                             >
                                 <Image src={logo} />
-                            </CustomBox>
+                            </Square>
                             <Spacer />
                             <CustomBox
                                 w="100%"
