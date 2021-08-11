@@ -99,6 +99,7 @@ const HamburgerMenu = ({ bgColor }) => {
                         <CustomButton route="/news">News</CustomButton>
                         <Divider my={2} />
                         <CustomButton route="/plans">Plans</CustomButton>
+                        <Divider my={2} />
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>
@@ -120,7 +121,7 @@ const ThemeSwitchButton = ({ icon }) => {
 
     return (
         <Button
-            bg="transparent"
+            variant="ghost"
             rounded="full"
             p={PADDING}
             m={MARGIN}
@@ -144,7 +145,7 @@ const NotificationMenu = ({ bgColor }) => {
         <Menu closeOnSelect={false}>
             <MenuButton
                 as={Button}
-                bg="transparent"
+                variant="ghost"
                 rounded="full"
                 p={PADDING}
                 m={MARGIN}
@@ -194,7 +195,7 @@ const UserMenu = ({ bgColor }) => {
         <Menu>
             <MenuButton
                 as={Button}
-                bg="transparent"
+                variant="ghost"
                 rounded="full"
                 p={PADDING}
                 m={MARGIN}

@@ -1,12 +1,12 @@
 name: daily stock price graph data cron run
 on:
-  schedule:
-    - cron: '25 5 * * *'
+    schedule:
+        - cron: '25 5 * * *'
 
 jobs:
-  build:
-    name: Trigger cron action
-    runs-on: ubuntu-latest
-    steps:
-      - name: cURL request
-        run: curl -X GET https://stock-price-prediction-9ec0ib18f-hgoyal09.vercel.app/cron-functions/getDailyStockPriceGraphData
+    build:
+        name: Trigger cron action
+        runs-on: ubuntu-latest
+        steps:
+            - name: cURL request
+              run: curl -X GET https://stock-price-prediction-9ec0ib18f-hgoyal09.vercel.app/cron-functions/getDailyStockPriceGraphData

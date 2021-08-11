@@ -17,6 +17,7 @@ import {
 import LoadingSpinner from '../LoadingSpinner';
 import CustomBox from '../CustomBox';
 import useCurrencyFormat from '../../hooks/useCurrencyFormat';
+import WatchlistButton from '../WatchlistButton';
 
 const NumberTd = ({ children }) => (
     <Td isNumeric fontWeight="bold">
@@ -136,7 +137,7 @@ const QuarterlyStockData = () => {
     );
 };
 
-const LivePrice = () => {
+const LivePrice = ({ tickerId }) => {
     const {
         realtimeStockDetails: { open, high, low, close, volume },
         quarterlyStockDetails: { currency },
@@ -178,6 +179,9 @@ const LivePrice = () => {
                                     </Stat>
                                 </StatGroup>
                             </Td>
+                            <Td isNumeric>
+                                <WatchlistButton ticker={tickerId} />
+                            </Td>
                         </Tr>
                         <Tr>
                             <Td>Close</Td>
@@ -202,10 +206,10 @@ const LivePrice = () => {
     );
 };
 
-const StockInformation = ({ ...otherProps }) => (
+const StockInformation = ({ tickerId, ...otherProps }) => (
     <CustomBox {...otherProps}>
         <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={8}>
-            <LivePrice />
+            <LivePrice tickerId={tickerId} />
             <QuarterlyStockData />
             <QuarterlyStockDataContinued />
         </SimpleGrid>

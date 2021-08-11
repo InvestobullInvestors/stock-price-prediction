@@ -1,12 +1,12 @@
 name: quarterly data cron run
 on:
-  schedule:
-    - cron: '51 4 * * *'
+    schedule:
+        - cron: '51 4 * * *'
 
 jobs:
-  build:
-    name: Trigger cron action
-    runs-on: ubuntu-latest
-    steps:
-      - name: cURL request
-        run: curl -X GET https://stock-price-prediction-dvkfkq1sj-hgoyal09.vercel.app/cron-functions/getQuarterlyStockData
+    build:
+        name: Trigger cron action
+        runs-on: ubuntu-latest
+        steps:
+            - name: cURL request
+              run: curl -X GET https://stock-price-prediction-dvkfkq1sj-hgoyal09.vercel.app/cron-functions/getQuarterlyStockData
