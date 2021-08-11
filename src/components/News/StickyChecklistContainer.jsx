@@ -1,4 +1,4 @@
-import { Divider, VStack } from '@chakra-ui/react';
+import { Divider, VStack, Box } from '@chakra-ui/react';
 import NewsChecklist from './NewsChecklist';
 import React from 'react';
 import CustomBox from '../CustomBox';
@@ -10,15 +10,24 @@ const StickyChecklistContainer = () => {
     const { isDisplayingWatchlistStockNews } = useStockNews();
 
     return (
-        <CustomBox p="4" mt={5} ml={-1} position="fixed" zIndex={100}>
+        <CustomBox
+            p="4"
+            mt={5}
+            ml={-1}
+            position="fixed"
+            zIndex={100}
+            maxH="315px"
+        >
             <VStack>
                 <CustomButtonGroup />
-                <Divider orientation="horizontal" />
-                {isDisplayingWatchlistStockNews ? (
-                    <StockNewsChecklist />
-                ) : (
-                    <NewsChecklist />
-                )}
+                <Box>
+                    <Divider orientation="horizontal" mb={2} />
+                    {isDisplayingWatchlistStockNews ? (
+                        <StockNewsChecklist />
+                    ) : (
+                        <NewsChecklist />
+                    )}
+                </Box>
             </VStack>
         </CustomBox>
     );
