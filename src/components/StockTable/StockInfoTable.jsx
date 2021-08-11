@@ -103,6 +103,8 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
         1: <Icon as={BsChevronDown} boxSize={3} />,
     };
 
+    const color = useColorModeValue('brand.500', 'brand.400');
+
     return (
         <CustomBox
             padding={2}
