@@ -15,8 +15,8 @@ const tickerToEndpointMap = {
     CSCO: '',
     TSLA: '',
     INTC: '',
-    CMCSA: '',
-    NFLX: '',
+    CMCSA: 'http://22bf09cc-c6c5-4140-961f-ceb313f36d95.canadacentral.azurecontainer.io/score',
+    NFLX: 'http://ca1e5525-9831-4300-9b8f-09a4728d81fe.canadacentral.azurecontainer.io/score',
     PEP: 'http://bd11a1d3-ecea-40c4-8f8c-efda1333a980.canadacentral.azurecontainer.io/score',
     ADBE: 'http://15d1cdd8-a814-4b62-90ee-de15fc6d6225.eastus2.azurecontainer.io/score',
     MSFT: 'http://08478e4a-bbc7-4e7b-bb07-38f4792fea4b.eastus2.azurecontainer.io/score',
@@ -116,7 +116,7 @@ const getDependentVariables = async (ticker) => {
 
 // Returns a list of updated prediction_details with prediction scores from Azure AutoML endpoint
 const getPredictionScoreFromAPI = async (dependentVariableList, ticker) => {
-    let scoreURI = tickerToEndpointMap[ticker]
+    let scoreURI = tickerToEndpointMap[ticker];
 
     const data = {
         data: dependentVariableList,
@@ -147,7 +147,7 @@ const getPredictionScoreFromAPI = async (dependentVariableList, ticker) => {
 
 // Rounds input to two decimal places
 const roundToTwoDecimals = (num) => {
-    return Math.round(num + 'e+2') + 'e-2';
+    return +(Math.round(num + 'e+2') + 'e-2');
 };
 
 predictPrices().then((_) => {
