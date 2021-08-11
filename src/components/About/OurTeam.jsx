@@ -22,7 +22,7 @@ const OurTeam = () => (
         />
         <TeamMemberCard
             name="Raghav Thakur"
-            imageUrl="/team-members/raghav-thakur.jpg"
+            imageUrl="https://media-exp1.licdn.com/dms/image/C4D03AQGLWXRkOWTRXA/profile-displayphoto-shrink_800_800/0/1628714429453?e=1634169600&v=beta&t=P-zHnxEwfrIOR4iA4JFn0lJoigC-wJcJALl84JN36S4"
             linkedIn="https://www.linkedin.com/in/raghavthakur/"
             github="https://github.com/raghavthakur"
             summary="Raghav worked on ..."
