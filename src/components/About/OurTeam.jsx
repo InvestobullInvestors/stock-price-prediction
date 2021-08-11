@@ -25,7 +25,7 @@ const OurTeam = () => (
             imageUrl="https://media-exp1.licdn.com/dms/image/C4D03AQGLWXRkOWTRXA/profile-displayphoto-shrink_800_800/0/1628714429453?e=1634169600&v=beta&t=P-zHnxEwfrIOR4iA4JFn0lJoigC-wJcJALl84JN36S4"
             linkedIn="https://www.linkedin.com/in/raghavthakur/"
             github="https://github.com/raghavthakur"
-            summary="Raghav worked on ..."
+            summary="Raghav mostly worked on stock predictions, Microsoft Azure AutoML integration, trained and deployed machine learning models using historical data of Nasdaq stocks, initial development of frontend components such Home and Stock Table, and Quick Start Guide."
             alignLeft
         />
         <TeamMemberCard
