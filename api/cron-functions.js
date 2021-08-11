@@ -14,8 +14,8 @@ const router = express.Router();
 const dotenv = require('dotenv');
 dotenv.config();
 const NewsAPI = require('newsapi');
-const stockDataApiKey = new NewsAPI(process.env.STOCK_DATA_API_KEY);
-const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
+const STOCK_DATA_API_KEY = new NewsAPI(process.env.STOCK_DATA_API_KEY);
+const NEWS_API = new NewsAPI(process.env.NEWS_API_KEY);
 
 const axios = require('axios');
 
@@ -419,19 +419,19 @@ const newsArticleExists = (stock_news, article) =>
     stock_news.find((news) => news['publishedAt'] === article.publishedAt);
 
 const getStockNewsFromApi = async ({ name }) =>
-    await newsapi.v2.topHeadlines({
+    await NEWS_API.v2.topHeadlines({
         q: `${name}`,
         language: 'en',
     });
 
 const getMarketNewsFromApi = async (id) =>
-    await newsapi.v2.topHeadlines({
+    await NEWS_API.v2.topHeadlines({
         sources: `${id}`,
         language: 'en',
     });
 
 const getQuarterlyStockDataFromApi = async ({ ticker }) => {
-    const url = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${stockDataApiKey}`;
+    const url = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${STOCK_DATA_API_KEY}`;
     const { data } = await axios.get(url);
     return data;
 };
@@ -440,7 +440,7 @@ const getStockDataFromApi = async ({ ticker }) => {
     const maxTries = 3;
     for (let i = 1; i <= maxTries; i++) {
         console.log(`Trying to get data for ${ticker} for the ${i}th time`);
-        const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${stockDataApiKey}`;
+        const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${STOCK_DATA_API_KEY}`;
         const { data } = await axios.get(url);
         if (data['Time Series (Daily)']) {
             return data;
@@ -455,7 +455,7 @@ const getStockDataFromApi = async ({ ticker }) => {
 };
 
 const getDailyStockPriceGraphDataFromApi = async ({ ticker }) => {
-    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${stockDataApiKey}`;
+    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${STOCK_DATA_API_KEY}`;
     const { data } = await axios.get(url);
     return data;
 };
