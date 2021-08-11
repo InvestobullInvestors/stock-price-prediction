@@ -24,7 +24,6 @@ const NewsArticle = ({ date, title, url }) => {
                 p={2}
                 m={0}
                 textAlign="left"
-                borderRadius="lg"
                 border={0}
                 shadow="none"
                 _hover={{ bgColor: hoverColor }}

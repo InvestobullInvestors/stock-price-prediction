@@ -51,7 +51,6 @@ const NewsCard = ({ source, children, ...otherProps }) => {
             mt={5}
             px={4}
             py={4}
-            borderRadius="lg"
             className="my-box"
             {...otherProps}
         >
@@ -70,7 +69,6 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                     <CustomBox
                         w={['78%', '78%', '83%', '83%']}
                         h="150px"
-                        borderRadius="lg"
                         border={0}
                         shadow="none"
                         m={0}
@@ -107,7 +105,6 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                 <VStack mt="10px" align="center" w="full">
                     <CustomBox
                         w="100px"
-                        borderRadius="lg"
                         border={0}
                         shadow="none"
                         p="10px"
@@ -120,8 +117,6 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                     <CustomBox
                         w="100%"
                         h="150px"
-                        border="1px"
-                        borderRadius="lg"
                         border={0}
                         shadow="none"
                         m={0}
