@@ -12353,6 +12353,11 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
+simplejson@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/simplejson/-/simplejson-0.0.2.tgz#9e3d9875aecec49565028cd9278b2a1ac6bcaaef"
+  integrity sha1-nj2Yda7OxJVlAozZJ4sqGsa8qu8=
+
 sisteransi@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
