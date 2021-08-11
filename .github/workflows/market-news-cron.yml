@@ -1,7 +1,7 @@
 name: market news data cron run
 on:
     schedule:
-        - cron: '53 22 * * *'
+        - cron: '38 23 * * *'
     workflow_dispatch:
 
 jobs:
