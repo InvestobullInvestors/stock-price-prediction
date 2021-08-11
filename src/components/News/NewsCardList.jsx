@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, List, Spacer } from '@chakra-ui/react';
+import { Flex, List, Spacer, Box } from '@chakra-ui/react';
 import NewsCard from './NewsCard';
 
 import { useStockNews } from '../../contexts/useStockNews';
@@ -32,7 +32,7 @@ const NewsCardList = () => {
         >
             <Droppable droppableId="newsGrid">
                 {(droppableProvided) => (
-                    <div
+                    <Box
                         {...droppableProvided.droppableProps}
                         ref={droppableProvided.innerRef}
                     >
@@ -54,7 +54,7 @@ const NewsCardList = () => {
                                     index={index}
                                 >
                                     {(draggableProvided) => (
-                                        <div
+                                        <Box
                                             {...draggableProvided.draggableProps}
                                             ref={draggableProvided.innerRef}
                                         >
@@ -63,7 +63,7 @@ const NewsCardList = () => {
                                                 source={source}
                                             >
                                                 <Flex>
-                                                    <div
+                                                    <Box
                                                         {...draggableProvided.dragHandleProps}
                                                         style={{
                                                             marginTop: '-6px',
@@ -73,7 +73,7 @@ const NewsCardList = () => {
                                                             w={5}
                                                             h={5}
                                                         />
-                                                    </div>
+                                                    </Box>
                                                     <Spacer />
                                                     <CloseIcon
                                                         cursor={'pointer'}
@@ -85,13 +85,13 @@ const NewsCardList = () => {
                                                     />
                                                 </Flex>
                                             </NewsCard>
-                                        </div>
+                                        </Box>
                                     )}
                                 </Draggable>
                             ))}
                         </List>
                         {droppableProvided.placeholder}
-                    </div>
+                    </Box>
                 )}
             </Droppable>
         </DragDropContext>
