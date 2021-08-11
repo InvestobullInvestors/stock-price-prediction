@@ -7,21 +7,12 @@ import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons';
 import StockNewsCard from './StockNewsCard';
 
 const StockNewsCardList = () => {
-    const { stockListNews, reorderStockNews, selectSource } = useStockNews();
+    const { stockListNews, reorderStocks, selectSource } = useStockNews();
     const staticCheckListWidth = '300px';
 
     let visibleStockNewsCards = stockListNews.filter(
         (stock) => stock.selected === true
     );
-
-    const reorder = (list, startIndex, endIndex) => {
-        const result = [...list];
-        const [removed] = result.splice(startIndex, 1);
-        result.splice(endIndex, 0, removed);
-        console.log('result');
-        console.log(result);
-        return result;
-    };
 
     return (
         <DragDropContext
@@ -36,9 +27,7 @@ const StockNewsCardList = () => {
                 ) {
                     return;
                 }
-                reorderStockNews(
-                    reorder(stockListNews, source.index, destination.index)
-                );
+                reorderStocks(source.index, destination.index);
             }}
         >
             <Droppable droppableId="newsGrid">

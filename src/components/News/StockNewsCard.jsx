@@ -1,22 +1,18 @@
 import React from 'react';
 import {
-    Box,
     Divider,
     Image,
     Square,
-    useColorModeValue,
     VStack,
     Flex,
     Spacer,
+    HStack,
 } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
 import NewsArticle from './NewsArticle';
 import CustomBox from '../CustomBox';
 
 const StockNewsCard = ({ stock, children, ...otherProps }) => {
-    const cardColor = useColorModeValue('brand.400', 'brand.700');
-    const textBoxColor = useColorModeValue('brand.100', 'brand.600');
-
     const { stockListNews } = useStockNews();
 
     let ticker_id;
@@ -46,10 +42,9 @@ const StockNewsCard = ({ stock, children, ...otherProps }) => {
 
     logoBlack = logoBlack.replace(/\s+/g, '-').toUpperCase();
     logoWhite = logoWhite.replace(/\s+/g, '-').toUpperCase();
-    logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
-        <Box
+        <CustomBox
             width="100%"
             minW="100%"
             height="100%"
@@ -57,101 +52,111 @@ const StockNewsCard = ({ stock, children, ...otherProps }) => {
             mt={5}
             px={4}
             py={4}
-            borderRadius="lg"
-            bg={cardColor}
             className="my-box"
             {...otherProps}
         >
             {children}
-            <Flex display={['none', 'none', 'flex', 'flex']} mt="10px">
-                <Square
-                    w={['20%', '20%', '15%', '15%']}
-                    h="150px"
-                    borderRadius="lg"
-                    shadow="md"
-                    bg={textBoxColor}
-                    p="10px"
-                >
-                    <Image src={logo} />
-                </Square>
-                <Spacer />
-                <Box
-                    w={['78%', '78%', '83%', '83%']}
-                    h="150px"
-                    borderRadius="lg"
-                    shadow="md"
-                    bg={textBoxColor}
-                    padding="5px"
-                    css={{
-                        margin: '0',
-                        scrollbarWidth: 'none',
-                        msOverflowStyle: 'none',
-                        overflow: 'scroll',
-                    }}
-                >
-                    <VStack align="flex-start">
-                        {articles.map((article) => (
-                            <Box key={article._id} w="100%">
-                                <NewsArticle
-                                    date={article.publishedAt}
-                                    title={article.title}
-                                    url={article.url}
-                                />
-                                <Divider my={2} orientation="horizontal" />
-                            </Box>
-                        ))}
-                    </VStack>
-                </Box>
+            <Flex display={['none', 'none', 'flex', 'flex']} align="flex-start">
+                <HStack ml="20px" mr="30px" mt="-15px" w="full">
+                    <Square
+                        w={['20%', '20%', '15%', '15%']}
+                        h="150px"
+                        borderRadius="lg"
+                        p="10px"
+                    >
+                        <Image src={logo} />
+                    </Square>
+                    <Spacer />
+                    <CustomBox
+                        w={['78%', '78%', '83%', '83%']}
+                        h="215px"
+                        border={0}
+                        shadow="none"
+                        m={0}
+                        p={2}
+                        overflow="auto"
+                        css={{
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                            '&::-webkit-scrollbar': {
+                                width: '0px',
+                            },
+                        }}
+                    >
+                        <VStack align="flex-start">
+                            {articles.map((article) => (
+                                <CustomBox
+                                    key={article._id}
+                                    w="100%"
+                                    border={0}
+                                    shadow="none"
+                                    m={0}
+                                    p={0}
+                                >
+                                    <NewsArticle
+                                        date={article.publishedAt}
+                                        title={article.title}
+                                        url={article.url}
+                                    />
+                                    <Divider my={2} orientation="horizontal" />
+                                </CustomBox>
+                            ))}
+                        </VStack>
+                    </CustomBox>
+                </HStack>
             </Flex>
-            <Flex
-                display={['flex', 'flex', 'none', 'none']}
-                direction="column"
-                align="center"
-                h="100%"
-            >
-                <CustomBox
-                    w="100px"
-                    borderRadius="lg"
-                    shadow="md"
-                    bg={textBoxColor}
-                    p="10px"
-                    // mb={0}
-                    mt="-7"
-                >
-                    <Image src={logo} />
-                </CustomBox>
-                <Spacer />
-                <Box
-                    w="100%"
-                    h="150px"
-                    border="1px"
-                    borderColor={textBoxColor}
-                    borderRadius="lg"
-                    shadow="md"
-                    bg={textBoxColor}
-                    padding="5px"
-                    css={{
-                        margin: '0',
-                        scrollbarWidth: 'none',
-                        msOverflowStyle: 'none',
-                        overflow: 'scroll',
-                    }}
-                >
-                    <VStack align="flex-start">
-                        {articles.map((article) => (
-                            <Box key={article._id} w="100%">
-                                <NewsArticle
-                                    date={article.publishedAt}
-                                    title={article.title}
-                                    url={article.url}
-                                />
-                                <Divider my={2} orientation="horizontal" />
-                            </Box>
-                        ))}
-                    </VStack>
-                </Box>
+            <Flex display={['flex', 'flex', 'none', 'none']} align="flex-start">
+                <VStack mt="10px" align="center" w="full">
+                    <CustomBox
+                        w="100px"
+                        border={0}
+                        shadow="none"
+                        p="10px"
+                        mt={-9}
+                        mb={-6}
+                    >
+                        <Image src={logo} />
+                    </CustomBox>
+                    <Spacer />
+                    <CustomBox
+                        w="100%"
+                        h="150px"
+                        border={0}
+                        shadow="none"
+                        m={0}
+                        padding="5px"
+                        overflow="auto"
+                        css={{
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                            '&::-webkit-scrollbar': {
+                                width: '0px',
+                            },
+                        }}
+                    >
+                        <VStack align="flex-start">
+                            {articles.map((article) => (
+                                <CustomBox
+                                    key={article._id}
+                                    w="100%"
+                                    border={0}
+                                    shadow="none"
+                                    m={0}
+                                    p={0}
+                                >
+                                    <NewsArticle
+                                        date={article.publishedAt}
+                                        title={article.title}
+                                        url={article.url}
+                                    />
+                                    <Divider my={2} orientation="horizontal" />
+                                </CustomBox>
+                            ))}
+                        </VStack>
+                    </CustomBox>
+                </VStack>
             </Flex>
-        </Box>
+        </CustomBox>
     );
 };
 

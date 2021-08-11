@@ -73,8 +73,11 @@ const StockNewsProvider = ({ children }) => {
         setNewsInfo(newNewsInfo);
     };
 
-    const reorderSources = (reorderedList) => {
-        setNewsInfo(reorderedList);
+    const reorderSources = (startIndex, endIndex) => {
+        const newList = [...newsInfo];
+        const [removed] = newList.splice(startIndex, 1);
+        newList.splice(endIndex, 0, removed);
+        setNewsInfo(newList);
     };
 
     const selectStock = (stock) => {
@@ -99,8 +102,11 @@ const StockNewsProvider = ({ children }) => {
         setStockListNews(newStockListNews);
     };
 
-    const reorderStockNews = (reorderedList) => {
-        setStockListNews(reorderedList);
+    const reorderStocks = (startIndex, endIndex) => {
+        const newList = [...stockListNews];
+        const [removed] = newList.splice(startIndex, 1);
+        newList.splice(endIndex, 0, removed);
+        setStockListNews(newList);
     };
 
     const setDisplayWatchlistNews = (state) => {
@@ -121,10 +127,10 @@ const StockNewsProvider = ({ children }) => {
                 getStockListNews,
                 setNews,
                 reorderSources,
-                reorderStockNews,
                 selectSource,
                 selectAllSources,
                 unselectAllSources,
+                reorderStocks,
                 selectStock,
                 selectAllStocks,
                 unselectAllStocks,

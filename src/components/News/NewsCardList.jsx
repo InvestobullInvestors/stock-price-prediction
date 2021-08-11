@@ -14,13 +14,6 @@ const NewsCardList = () => {
         (source) => source.selected === true
     );
 
-    const reorder = (list, startIndex, endIndex) => {
-        const result = [...list];
-        const [removed] = result.splice(startIndex, 1);
-        result.splice(endIndex, 0, removed);
-        return result;
-    };
-
     return (
         <DragDropContext
             onDragEnd={(result) => {
@@ -34,9 +27,7 @@ const NewsCardList = () => {
                 ) {
                     return;
                 }
-                reorderSources(
-                    reorder(newsInfo, source.index, destination.index)
-                );
+                reorderSources(source.index, destination.index);
             }}
         >
             <Droppable droppableId="newsGrid">
