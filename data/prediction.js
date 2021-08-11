@@ -117,10 +117,7 @@ const getDependentVariables = async (ticker) => {
 
 // Returns a list of updated prediction_details with prediction scores from Azure AutoML endpoint
 const getPredictionScoreFromAPI = async (dependentVariableList, ticker) => {
-    let scoreURI = '';
-    for (const [key, value] of Object.entries(tickerToEndpointMap)) {
-        if (ticker === key) scoreURI = value;
-    }
+    let scoreURI = tickerToEndpointMap[ticker]
 
     const data = {
         data: dependentVariableList,
@@ -145,13 +142,13 @@ const getPredictionScoreFromAPI = async (dependentVariableList, ticker) => {
     } else {
         console.log('Score URI is an empty string');
     }
-    const newList = [...dependentVariableList]; // create new list of prediction_details to return
-    return newList;
+
+    return [...dependentVariableList];
 };
 
 // Rounds input to two decimal places
 const roundToTwoDecimals = (num) => {
-    return +(Math.round(num + 'e+2') + 'e-2');
+    return Math.round(num + 'e+2') + 'e-2';
 };
 
 predictPrices().then((_) => {
