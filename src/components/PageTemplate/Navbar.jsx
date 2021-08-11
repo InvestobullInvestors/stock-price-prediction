@@ -161,6 +161,7 @@ const NotificationMenu = ({ bgColor }) => {
                 bg={bgColor}
                 maxW={MENU_MAX_WIDTH}
                 maxH={MENU_MAX_HEIGHT}
+                overflow="auto"
                 css={{
                     scrollbarWidth: 'none',
                     msOverflowStyle: 'none',

@@ -124,6 +124,7 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                         shadow="none"
                         m={0}
                         padding="5px"
+                        overflow="auto"
                         css={{
                             scrollbarWidth: 'none',
                             msOverflowStyle: 'none',
