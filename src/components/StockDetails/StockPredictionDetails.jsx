@@ -38,7 +38,6 @@ const PricePrediction = () => {
     const formatDate = useDateFormat();
     const redColor = useColorModeValue('red.light', 'red.dark');
     const greenColor = useColorModeValue('green.light', 'green.dark');
-
     return (
         <CustomGridItem>
             <VStack spacing={4}>
@@ -54,40 +53,36 @@ const PricePrediction = () => {
                 >
                     <VStack spacing={4}>
                         {prediction_details
-                            ? prediction_details.map(
-                                  ({ close: Close, timestamp: Date, _id }) => (
-                                      <Box
-                                          key={_id}
-                                          p={4}
-                                          w="100%"
-                                          borderRadius="lg"
+                            ? prediction_details.map(({ Close, Date, _id }) => (
+                                  <Box
+                                      key={_id}
+                                      p={4}
+                                      w="100%"
+                                      borderRadius="lg"
+                                  >
+                                      <SimpleGrid
+                                          columns={{ base: 1, lg: 2 }}
+                                          spacing={1}
                                       >
-                                          <SimpleGrid
-                                              columns={{ base: 1, lg: 2 }}
-                                              spacing={1}
-                                          >
-                                              <Center>
-                                                  <Heading as="h4" size="md">
-                                                      {formatDate(Date)}
-                                                  </Heading>
-                                              </Center>
-                                              <Heading
-                                                  as="h3"
-                                                  size="lg"
-                                                  color={
-                                                      Close >= 0
-                                                          ? greenColor
-                                                          : redColor
-                                                  }
-                                              >
-                                                  $
-                                                  {Close?.toFixed(2) ??
-                                                      ' --.--'}
+                                          <Center>
+                                              <Heading as="h4" size="md">
+                                                  {formatDate(Date)}
                                               </Heading>
-                                          </SimpleGrid>
-                                      </Box>
-                                  )
-                              )
+                                          </Center>
+                                          <Heading
+                                              as="h3"
+                                              size="lg"
+                                              color={
+                                                  Close >= 0
+                                                      ? greenColor
+                                                      : redColor
+                                              }
+                                          >
+                                              ${Close?.toFixed(2) ?? ' --.--'}
+                                          </Heading>
+                                      </SimpleGrid>
+                                  </Box>
+                              ))
                             : null}
                     </VStack>
                 </CustomBox>
