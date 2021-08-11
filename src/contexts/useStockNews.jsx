@@ -38,7 +38,24 @@ const StockNewsProvider = ({ children }) => {
                     headers: { 'Content-Type': 'application/json' },
                 })
                 .then((response) => {
-                    setStockListNews(response.data);
+                    const sortedStockListNews = [...response.data];
+
+                    sortedStockListNews.sort((a, b) => {
+                        while (a == null || b == null) {
+                            setTimeout(null, 1000);
+                        }
+                        const nameA = a.stock_name.toUpperCase();
+                        const nameB = b.stock_name.toUpperCase();
+                        if (nameA < nameB) {
+                            return -1;
+                        }
+                        if (nameA > nameB) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+
+                    setStockListNews(sortedStockListNews);
                     setIsStockNewsLoading(false, null);
                 });
         });
@@ -47,7 +64,24 @@ const StockNewsProvider = ({ children }) => {
     const setNewsInfoFromMongo = () => {
         setIsNewsSelectionsFromMongoLoading(true, () => {
             axios.get('/stock-news/news-source-info').then((response) => {
-                setNewsInfo(response.data);
+                const sortedNewsInfo = [...newsInfo];
+
+                sortedNewsInfo.sort((a, b) => {
+                    while (a == null || b == null) {
+                        setTimeout(null, 1000);
+                    }
+                    const nameA = a.name.toUpperCase();
+                    const nameB = b.name.toUpperCase();
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+
+                setNewsInfo(sortedNewsInfo);
                 setIsNewsSelectionsFromMongoLoading(false, null);
             });
         });

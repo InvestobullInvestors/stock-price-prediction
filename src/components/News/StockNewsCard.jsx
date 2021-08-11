@@ -7,6 +7,7 @@ import {
     Flex,
     Spacer,
     HStack,
+    useColorModeValue,
 } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
 import NewsArticle from './NewsArticle';
@@ -42,6 +43,7 @@ const StockNewsCard = ({ stock, children, ...otherProps }) => {
 
     logoBlack = logoBlack.replace(/\s+/g, '-').toUpperCase();
     logoWhite = logoWhite.replace(/\s+/g, '-').toUpperCase();
+    logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
         <CustomBox
