@@ -2,6 +2,7 @@ name: stock news data cron run
 on:
     schedule:
         - cron: '1 23 * * *'
+    workflow_dispatch:
 
 jobs:
     build:

@@ -2,6 +2,7 @@ name: quarterly data cron run
 on:
     schedule:
         - cron: '56 22 * * *'
+    workflow_dispatch:
 
 jobs:
     build:

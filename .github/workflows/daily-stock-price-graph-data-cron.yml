@@ -2,6 +2,7 @@ name: daily stock price graph data cron run
 on:
     schedule:
         - cron: '4 23 * * *'
+    workflow_dispatch:
 
 jobs:
     build:
