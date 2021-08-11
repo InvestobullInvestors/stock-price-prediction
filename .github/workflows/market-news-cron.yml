@@ -1,7 +1,7 @@
 name: market news data cron run
 on:
     schedule:
-        - cron: '10 5 * * *'
+        - cron: '53 22 * * *'
 
 jobs:
     build:
@@ -9,4 +9,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: cURL request
-              run: curl -X GET https://stock-price-prediction-bnq0clo6l-hgoyal09.vercel.app/cron-functions/getMarketNews
+              run: curl -X GET ${{secrets.VERCEL_DOMAIN_FOR_CRON}}/getMarketNews
