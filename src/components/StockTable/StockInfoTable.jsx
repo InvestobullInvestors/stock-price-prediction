@@ -28,19 +28,6 @@ const StockSymbol = ({ ticker }) => (
     </Text>
 );
 
-const CustomTh = ({ children, ...otherProps }) => (
-    <Th
-        w="12%"
-        _hover={{
-            cursor: 'pointer',
-            color: useColorModeValue('brand.500', 'brand.400'),
-        }}
-        {...otherProps}
-    >
-        {children}
-    </Th>
-);
-
 const ClickableTd = ({ ticker_id, children, ...otherProps }) => {
     const history = useHistory();
 
@@ -116,6 +103,8 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
         1: <Icon as={BsChevronDown} boxSize={3} />,
     };
 
+    const color = useColorModeValue('brand.500', 'brand.400')
+
     return (
         <CustomBox
             padding={2}
@@ -126,10 +115,14 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                 <Thead>
                     <Tr>
                         {tableHeading.map((table_details) => (
-                            <CustomTh
-                                w={table_details?.width}
+                            <Th
+                                w={table_details?.width ?? "12%"}
                                 display={table_details?.display}
-                                _hover={{ cursor: 'default' }}
+                                _hover={
+                                    table_details?.hover ?? {
+                                    cursor: 'pointer',
+                                    color: color,
+                                }}
                                 onClick={() => {
                                     handleSortClick(
                                         table_details.column_name,
@@ -152,7 +145,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                             ]
                                         : null}
                                 </HStack>
-                            </CustomTh>
+                            </Th>
                         ))}
                     </Tr>
                 </Thead>
