@@ -73,10 +73,13 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                         shadow="none"
                         m={0}
                         p={2}
+                        overflow="auto"
                         css={{
                             scrollbarWidth: 'none',
                             msOverflowStyle: 'none',
-                            overflow: 'scroll',
+                            '&::-webkit-scrollbar': {
+                                width: '0px',
+                            },
                         }}
                     >
                         <VStack align="flex-start">
@@ -124,7 +127,9 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                         css={{
                             scrollbarWidth: 'none',
                             msOverflowStyle: 'none',
-                            overflow: 'scroll',
+                            '&::-webkit-scrollbar': {
+                                width: '0px',
+                            },
                         }}
                     >
                         <VStack align="flex-start">

@@ -162,10 +162,11 @@ const NotificationMenu = ({ bgColor }) => {
                 maxW={MENU_MAX_WIDTH}
                 maxH={MENU_MAX_HEIGHT}
                 css={{
-                    margin: '0',
                     scrollbarWidth: 'none',
                     msOverflowStyle: 'none',
-                    overflow: 'scroll',
+                    '&::-webkit-scrollbar': {
+                        width: '0px',
+                    },
                 }}
             >
                 <NotificationList />
