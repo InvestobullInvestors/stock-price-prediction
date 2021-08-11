@@ -69,8 +69,8 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                     <CustomBox
                         w={['78%', '78%', '83%', '83%']}
                         h="215px"
-                        // border={0}
-                        // shadow="none"
+                        border={0}
+                        shadow="none"
                         m={0}
                         p={2}
                         overflow="auto"
