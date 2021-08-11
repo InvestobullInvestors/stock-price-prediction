@@ -9,7 +9,7 @@ const SignInPromptBox = ({ text, ...otherProps }) => {
 
     return (
         <CustomBox {...otherProps}>
-            <Center my={16}>
+            <Center my={16} fontSize="lg">
                 <Text>
                     <Link
                         as="button"

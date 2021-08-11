@@ -99,6 +99,7 @@ const HamburgerMenu = ({ bgColor }) => {
                         <CustomButton route="/news">News</CustomButton>
                         <Divider my={2} />
                         <CustomButton route="/plans">Plans</CustomButton>
+                        <Divider my={2} />
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>
