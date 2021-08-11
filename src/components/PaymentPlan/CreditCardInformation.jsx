@@ -31,34 +31,34 @@ const CreditCardInputBox = () => {
 
     return (
         <Box my={2} px={4} py={3} rounded="md" bg={boxBgColor}>
-            {isLightMode ? (
+            {
                 <CardElement
-                    options={{
-                        style: {
-                            base: {
-                                fontSize: '16px',
-                            },
-                        },
-                    }}
+                    options={
+                        isLightMode
+                            ? {
+                                  style: {
+                                      base: {
+                                          fontSize: '16px',
+                                      },
+                                  },
+                              }
+                            : {
+                                  style: {
+                                      base: {
+                                          fontSize: '16px',
+                                          color: '#F0F0F0',
+                                          '::placeholder': {
+                                              color: '#888888',
+                                          },
+                                      },
+                                      invalid: {
+                                          color: '#FF4854',
+                                      },
+                                  },
+                              }
+                    }
                 />
-            ) : (
-                <CardElement
-                    options={{
-                        style: {
-                            base: {
-                                fontSize: '16px',
-                                color: '#F0F0F0',
-                                '::placeholder': {
-                                    color: '#888888',
-                                },
-                            },
-                            invalid: {
-                                color: '#FF4854',
-                            },
-                        },
-                    }}
-                />
-            )}
+            }
         </Box>
     );
 };
