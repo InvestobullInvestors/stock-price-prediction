@@ -38,10 +38,6 @@ const predictPrices = async () => {
 
             getDependentVariables(stock_data.ticker)
                 .then(async (dependent_variable_list) => {
-                    console.log(
-                        'dependent_variable_list: ',
-                        dependent_variable_list
-                    );
                     if (stockPredictionInfo) {
                         await predictedStockInfo.updateOne(
                             { ticker_id: stock_data.ticker },
@@ -79,15 +75,6 @@ const getDependentVariables = async (ticker) => {
     const {
         stock_details: { timestamp, volume, open, high, low },
     } = await realtimeStockInfo.findOne({ ticker_id: ticker });
-    console.log(
-        'Original values for ticker',
-        ticker,
-        timestamp,
-        volume,
-        open,
-        high,
-        low
-    );
 
     const res = [];
 
