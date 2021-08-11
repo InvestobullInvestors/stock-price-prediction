@@ -28,7 +28,7 @@ const CustomButtonGroup = () => {
                 }}
                 opacity={isDisplayingWatchlistStockNews ? '1' : '0.5'}
                 isDisabled={!user}
-                title={user ? null : 'Log In to view this section.'}
+                title={user ? null : 'Log in to view this section.'}
             >
                 Watchlist Stocks
             </Button>
