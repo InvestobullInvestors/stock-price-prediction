@@ -3,12 +3,8 @@ import { Button, Checkbox, HStack, Text, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
 
 const StockNewsChecklist = () => {
-    const {
-        stockListNews,
-        selectStock,
-        selectAllStocks,
-        unselectAllStocks,
-    } = useStockNews();
+    const { stockListNews, selectStock, selectAllStocks, unselectAllStocks } =
+        useStockNews();
 
     const sortedStockListNews = [...stockListNews];
 

@@ -9,14 +9,10 @@ const StockNewsProvider = ({ children }) => {
     const [stockListNews, setStockListNews] = useState([]);
     const [newsInfo, setNewsInfo] = useState([]);
 
-    const [
-        isStockNewsLoading,
-        setIsStockNewsLoading,
-    ] = useStateWithCallbackLazy(false);
-    const [
-        isDisplayingWatchlistStockNews,
-        setDisplayingWatchlistStockNews,
-    ] = useState(false);
+    const [isStockNewsLoading, setIsStockNewsLoading] =
+        useStateWithCallbackLazy(false);
+    const [isDisplayingWatchlistStockNews, setDisplayingWatchlistStockNews] =
+        useState(false);
     const [
         isNewsSelectionsFromMongoLoading,
         setIsNewsSelectionsFromMongoLoading,

@@ -9,21 +9,21 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 const Home = () => {
     const {
-        basicStockInfo,
-        getBasicStockInfo,
+        stockInfoForTable,
+        getStockInfoForTable,
         filterStocks,
         isStockInfoTableLoading,
         sortStocks,
-        setBasicStockInfo,
+        setStockInfoForTable,
     } = useStockSymbol();
     const [filterKeyword, setFilterKeyword] = useState();
 
     useEffect(() => {
-        getBasicStockInfo();
+        getStockInfoForTable();
     }, []);
 
     const handleSortClick = (key, direction) => {
-        sortStocks(basicStockInfo, key, direction, setBasicStockInfo);
+        sortStocks(stockInfoForTable, key, direction, setStockInfoForTable);
     };
 
     const handleChange = (event) => {
@@ -51,7 +51,7 @@ const Home = () => {
                     <LoadingSpinner />
                 ) : (
                     <StockInfoTable
-                        stocks={basicStockInfo}
+                        stocks={stockInfoForTable}
                         handleSortClick={handleSortClick}
                     />
                 )}

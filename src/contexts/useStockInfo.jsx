@@ -5,7 +5,7 @@ import { useStateWithCallbackLazy } from 'use-state-with-callback';
 const StockInfoContext = createContext({});
 
 const StockInfoProvider = ({ children }) => {
-    const [basicStockInfo, setBasicStockInfo] = useState([]);
+    const [stockInfoForTable, setStockInfoForTable] = useState([]);
     const [watchlistStockInfo, setWatchlistStockInfo] = useState([]);
     const [stockDetails, setStockDetails] = useState({});
     const [realtimeStockDetails, setRealtimeStockDetails] = useState({});
@@ -23,10 +23,10 @@ const StockInfoProvider = ({ children }) => {
     const [isStockGraphLoading, setIsStockGraphLoading] =
         useStateWithCallbackLazy(false);
 
-    const getBasicStockInfo = () => {
+    const getStockInfoForTable = () => {
         setIsStockInfoTableLoading(true, () => {
             axios.get(`/stock-details/`).then((response) => {
-                setBasicStockInfo(response.data);
+                setStockInfoForTable(response.data);
                 setIsStockInfoTableLoading(false, null);
             });
         });
@@ -93,7 +93,7 @@ const StockInfoProvider = ({ children }) => {
                 { headers: { 'Content-Type': 'application/json' } }
             )
             .then((response) => {
-                setBasicStockInfo(response.data);
+                setStockInfoForTable(response.data);
             });
     };
 
@@ -122,9 +122,9 @@ const StockInfoProvider = ({ children }) => {
                 realtimeStockDetails,
                 quarterlyStockDetails,
                 graphData,
-                basicStockInfo,
+                stockInfoForTable,
                 watchlistStockInfo,
-                setBasicStockInfo,
+                setStockInfoForTable,
                 setWatchlistStockInfo,
                 isWatchlistDataLoading,
                 isStockInfoTableLoading,
@@ -132,7 +132,7 @@ const StockInfoProvider = ({ children }) => {
                 isStockGraphLoading,
                 isQuarterlyDataLoading,
                 getWatchlistStockInfo,
-                getBasicStockInfo,
+                getStockInfoForTable,
                 setRealtimeDetails,
                 setQuarterlyDetails,
                 setRealtimeGraphData,

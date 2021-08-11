@@ -179,12 +179,12 @@ const NotificationMenu = ({ bgColor }) => {
 const UserMenu = ({ bgColor }) => {
     const { user } = useUser();
     const { logout } = useAuth();
-    const { getBasicStockInfo } = useStockSymbol();
+    const { getStockInfoForTable } = useStockSymbol();
 
     const handleLogout = async () => {
         try {
             await logout();
-            getBasicStockInfo();
+            getStockInfoForTable();
         } catch (err) {
             console.error(err.message);
         }
