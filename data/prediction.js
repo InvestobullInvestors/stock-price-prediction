@@ -3,7 +3,7 @@ const { predictedStockInfo } = require('../dal/stock-markets');
 const { stockMarketInfo } = require('../dal/stock-markets');
 const axios = require('axios');
 const tickerToEndpointMap = {
-    AAPL: 'http://f6b1b502-ac55-4522-b0ef-f4becf1604a2.canadacentral.azurecontainer.io/score',
+    AAPL: '',
     TWTR: '',
     TXN: '',
     FB: '',
@@ -17,12 +17,11 @@ const tickerToEndpointMap = {
     INTC: '',
     CMCSA: '',
     NFLX: '',
-    UBER: '',
-    PEP: '',
+    PEP: 'http://bd11a1d3-ecea-40c4-8f8c-efda1333a980.canadacentral.azurecontainer.io/score',
     ADBE: 'http://15d1cdd8-a814-4b62-90ee-de15fc6d6225.eastus2.azurecontainer.io/score',
     MSFT: 'http://08478e4a-bbc7-4e7b-bb07-38f4792fea4b.eastus2.azurecontainer.io/score',
-    PYPL: '',
-    NVDA: '',
+    PYPL: 'http://52461b64-760e-4e2a-8012-3c1f6cce213e.canadacentral.azurecontainer.io/score',
+    NVDA: 'http://f3459155-fdfd-4328-a00c-5a58dcfef578.canadacentral.azurecontainer.io/score',
 };
 
 const numOfDays = [1, 3, 6];
