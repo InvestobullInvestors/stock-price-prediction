@@ -38,6 +38,7 @@ const PricePrediction = () => {
     const formatDate = useDateFormat();
     const redColor = useColorModeValue('red.light', 'red.dark');
     const greenColor = useColorModeValue('green.light', 'green.dark');
+
     return (
         <CustomGridItem>
             <VStack spacing={4}>
