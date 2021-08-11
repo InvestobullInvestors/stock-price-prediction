@@ -8,7 +8,6 @@ import {
     Grid,
     GridItem,
     Heading,
-    HStack,
     SimpleGrid,
     useColorModeValue,
     VStack,
