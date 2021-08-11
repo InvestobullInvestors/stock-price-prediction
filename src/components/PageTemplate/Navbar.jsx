@@ -144,7 +144,7 @@ const NotificationMenu = ({ bgColor }) => {
         <Menu closeOnSelect={false}>
             <MenuButton
                 as={Button}
-                bg="transparent"
+                variant="ghost"
                 rounded="full"
                 p={PADDING}
                 m={MARGIN}
@@ -192,7 +192,7 @@ const UserMenu = ({ bgColor }) => {
         <Menu>
             <MenuButton
                 as={Button}
-                bg="transparent"
+                variant="ghost"
                 rounded="full"
                 p={PADDING}
                 m={MARGIN}
