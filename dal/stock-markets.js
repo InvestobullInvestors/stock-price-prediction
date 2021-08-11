@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(
-    mongoose.connect(process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    }
-);
+mongoose.connect(process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
 const Schema = mongoose.Schema;
 
