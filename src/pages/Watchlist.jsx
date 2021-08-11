@@ -32,7 +32,7 @@ const Watchlist = () => {
 
     const EmptyWatchlistPromptBox = () => (
         <CustomBox w="100%">
-            <VStack m={8}>
+            <VStack m={8} fontSize="lg">
                 <Text>Your watchlist is empty!</Text>
                 <Text>
                     Add stocks form the

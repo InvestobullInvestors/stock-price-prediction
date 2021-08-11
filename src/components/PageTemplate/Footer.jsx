@@ -1,45 +1,32 @@
 import React from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import { Flex, Link, Text } from '@chakra-ui/react';
-import { Icon } from '@chakra-ui/icons';
 import { FaGithub, FaFacebookSquare, FaEnvelope } from 'react-icons/fa';
-
-const MARGIN = 2;
-
-const CustomLink = ({ children, url }) => (
-    <Link
-        href={url}
-        isExternal
-        p={0}
-        bg="transparent"
-        _hover={{ color: 'brand.500' }}
-    >
-        {children}
-    </Link>
-);
-
-const CustomIcon = ({ icon }) => <Icon as={icon} w={6} h={6} m={MARGIN} />;
+import SocialMediaButton from '../SocialMediaButton';
 
 const Footer = () => (
     <Flex direction="column" p={16} align="center">
         <Flex align="center">
-            <Link as={ReactRouterLink} to="/about" m={MARGIN}>
+            <Link as={ReactRouterLink} to="/about" m={2} fontSize="lg">
                 About Us
             </Link>
         </Flex>
         <Flex align="center">
             <Text m={1}>Connect with us:</Text>
-            <CustomLink url="https://github.com/InvestobullInvestors/stock-price-prediction">
-                <CustomIcon icon={FaGithub} />
-            </CustomLink>
-            <CustomLink url="https://www.facebook.com/people/Investobull-Investors/100068350916511/">
-                <CustomIcon icon={FaFacebookSquare} />
-            </CustomLink>
-            <CustomLink url="mailto:team.investobull@gmail.com">
-                <CustomIcon icon={FaEnvelope} />
-            </CustomLink>
+            <SocialMediaButton
+                url="https://github.com/InvestobullInvestors/stock-price-prediction"
+                icon={FaGithub}
+            />
+            <SocialMediaButton
+                url="https://www.facebook.com/people/Investobull-Investors/100068350916511/"
+                icon={FaFacebookSquare}
+            />
+            <SocialMediaButton
+                url="mailto:team.investobull@gmail.com"
+                icon={FaEnvelope}
+            />
         </Flex>
-        <Text color="brand.500" fontSize="sm" m={MARGIN}>
+        <Text color="brand.500" fontSize="sm" m={2}>
             Copyright © InvestoBull 2021
         </Text>
     </Flex>
