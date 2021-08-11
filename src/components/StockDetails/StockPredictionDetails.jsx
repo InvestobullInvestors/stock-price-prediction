@@ -16,6 +16,7 @@ import { usePrediction } from '../../contexts/usePredictions';
 import PredictionSlider from './PredictionSlider';
 import CustomBox from '../CustomBox';
 import useDateFormat from '../../hooks/useDateFormat';
+import LoadingSpinner from '../LoadingSpinner';
 
 const CustomGridItem = ({ children, ...otherProps }) => (
     <GridItem
@@ -33,6 +34,7 @@ const CustomGridItem = ({ children, ...otherProps }) => (
 const PricePrediction = () => {
     const {
         predictedValue: { prediction_details },
+        isPredictionLoading,
     } = usePrediction();
 
     const formatDate = useDateFormat();
@@ -41,57 +43,55 @@ const PricePrediction = () => {
 
     return (
         <CustomGridItem>
-            <VStack spacing={4}>
-                <Heading as="h3" size="lg" p={8} textAlign="center">
-                    Prediction
-                </Heading>
-                <CustomBox
-                    p={4}
-                    w="80%"
-                    border="none"
-                    borderRadius="lg"
-                    shadow="none"
-                >
-                    <VStack spacing={4}>
-                        {prediction_details
-                            ? prediction_details.map(
-                                  ({ close, timestamp, _id }) => (
-                                      <Box
-                                          key={_id}
-                                          p={4}
-                                          w="100%"
-                                          borderRadius="lg"
-                                      >
-                                          <SimpleGrid
-                                              columns={{ base: 1, lg: 2 }}
-                                              spacing={1}
-                                          >
-                                              <Center>
-                                                  <Heading as="h4" size="md">
-                                                      {formatDate(timestamp)}
-                                                  </Heading>
-                                              </Center>
-                                              <Heading
-                                                  as="h3"
-                                                  size="lg"
-                                                  color={
-                                                      close >= 0
-                                                          ? greenColor
-                                                          : redColor
-                                                  }
+            {isPredictionLoading ? (
+                <LoadingSpinner />
+            ) : (
+                <VStack spacing={4}>
+                    <Heading as="h3" size="lg" p={8} textAlign="center">
+                        Prediction
+                    </Heading>
+                    <Box p={4} w="80%">
+                        <VStack spacing={4}>
+                            {prediction_details
+                                ? prediction_details.map(
+                                      ({ close, timestamp, _id }) => (
+                                          <Box key={_id} p={4} w="100%">
+                                              <SimpleGrid
+                                                  columns={{ base: 1, lg: 2 }}
+                                                  spacing={1}
                                               >
-                                                  $
-                                                  {close?.toFixed(2) ??
-                                                      ' --.--'}
-                                              </Heading>
-                                          </SimpleGrid>
-                                      </Box>
+                                                  <Center>
+                                                      <Heading
+                                                          as="h4"
+                                                          size="md"
+                                                      >
+                                                          {formatDate(
+                                                              timestamp
+                                                          )}
+                                                      </Heading>
+                                                  </Center>
+                                                  <Heading
+                                                      as="h3"
+                                                      size="lg"
+                                                      color={
+                                                          close >= 0
+                                                              ? greenColor
+                                                              : redColor
+                                                      }
+                                                  >
+                                                      $
+                                                      {close?.toFixed(2) ??
+                                                          ' --.--'}
+                                                  </Heading>
+                                              </SimpleGrid>
+                                          </Box>
+                                      )
                                   )
-                              )
-                            : null}
-                    </VStack>
-                </CustomBox>
-            </VStack>
+                                : null}
+                        </VStack>
+                    </Box>
+                </VStack>
+            )}
         </CustomGridItem>
     );
 };
