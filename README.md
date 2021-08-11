@@ -65,7 +65,8 @@ Investobull is a web app designed for everyday investors who struggle with the i
 -   ❌ Analyze technical factors like moving averages, etc. for prediction and validation metrics
 -   ❌ Display public reports from analyzers
 #### Documentation
--   ✅ Document API endpoints on Swagger
+-   ✅ [Document API endpoints on Swagger](https://app.swaggerhub.com/apis-docs/InvestobullInvestors/InvestobullInvestors/1.0.0)
+-   ✅ [Quick Start Guide](https://docs.google.com/document/d/1lpJtf07Uv22bCiGY2IghgsdkWpxphbpEnlNmjR_iexU/edit?usp=sharing)
 
 ---
 
