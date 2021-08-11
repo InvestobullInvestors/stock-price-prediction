@@ -1,6 +1,6 @@
 # [InvestoBull][investobull] – A Stock Price Prediction WebApp
 
-## Project Description
+## 1. Project Description
 
 Investobull is a web app designed for everyday investors who struggle with the intricacies of the stock market. This app not only provides insights into the fundamentals of blue chip stocks in the Nasdaq alongside relevant news articles, but also provides stock price predictions powered by an ensemble of delicately tuned machine learning algorithms to help investors make informed decisions. We do the heavy lifting so that our investors can enjoy their new-found financial freedom.
 
@@ -8,14 +8,19 @@ Quick links: [Swagger API Documentation][swagger] | [Quick Start Guide][guide]
 
 ### Tech Stack
 
-[React](https://reactjs.org/) | [ChakraUI](https://chakra-ui.com/) | [Node](https://nodejs.org/) | [Axios](https://axios-http.com/) | [Express](https://expressjs.com/) | [MongoDB](https://www.mongodb.com/) | [Firebase](https://firebase.google.com/) | [Stripe](https://stripe.com/) | [Azure ML](https://azure.microsoft.com/en-ca/services/machine-learning/) | [Swagger](https://swagger.io/)
+[React](https://reactjs.org/) | [ChakraUI](https://chakra-ui.com/) | [Axios](https://axios-http.com/) | [Node](https://nodejs.org/) | [Express](https://expressjs.com/) | [MongoDB](https://www.mongodb.com/) | [Firebase](https://firebase.google.com/) | [Stripe](https://stripe.com/) | [Azure ML](https://azure.microsoft.com/en-ca/services/machine-learning/) | [Swagger](https://swagger.io/)
 
 ## Contents
--   [Goals and Requirements](#goals_and_requirements)
+-   [1. Project Description](#1-project-description)
+-   [2. Requirements and Goals](#2-requirements-and-goals)
+-   [3. Integration of Tech](#3-integration-of-tech)
+-   [4. Above and Beyond](#4-above-and-beyond)
+-   [5. Next Steps](#5-next-steps)
+-   [6. Contributions](#6-contributions)
 
 <br/>
 
-## Goals and Requirements <a name="goals_and_requirements" />
+## 2. Requirements and Goals
 
 ### Minimal Requirements
 -   ✅ Fully functional webapp using all technologies learned throughout the course - CSS, React, Node, Express, MongoDB, hosting & CI/CD
@@ -61,23 +66,42 @@ Quick links: [Swagger API Documentation][swagger] | [Quick Start Guide][guide]
 -   Documentation
     -   ✅ [Quick Start Guide][guide]
     -   ✅ [Document API endpoints on Swagger][swagger]
+    
+<br/>
 
+## 3. Integration of Tech
+
+### Unit 1 - HTML, CSS, JS
+
+### Unit 2 - React
+
+### Unit 3 - Node & Express
+
+### Unit 4 - NoSQL with MongoDB
+
+### Unit 5 - Release Engineering
 
 <br/>
 
-## Task breakdown
+## 4. Above and Beyond
 
--   Show opening and closing of stock prices
--   Get data for the required ticker symbol from an API (probably Yahoo finance)
--   Store this data onto a database
--   Create an API to deliver that data to the frontend
--   Display the data to the end user
--   Plans page to subscribe to plans
--   Create a list of plans that one can subscribe to
--   Set up a customer on Stripe
--   Save the Stripe customer id corresponding to a customer in the database
--   Build the payments UI using Stripe Elements
--   Save Credit Cards on Stripe
+<br/>
+
+## 5. Next Steps
+
+<br/>
+
+## 6. Contributions
+
+#### Himanshu Goyal
+
+#### Paul Freiwirth
+
+#### Raghav Thakur
+
+#### Weiyoung Tan
+
+<br/>
 
 [investobull]: https://investobull.vercel.app/
 [guide]: https://docs.google.com/document/d/1lpJtf07Uv22bCiGY2IghgsdkWpxphbpEnlNmjR_iexU/edit?usp=sharing
