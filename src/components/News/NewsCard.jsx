@@ -68,9 +68,9 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                     <Spacer />
                     <CustomBox
                         w={['78%', '78%', '83%', '83%']}
-                        h="150px"
-                        border={0}
-                        shadow="none"
+                        h="215px"
+                        // border={0}
+                        // shadow="none"
                         m={0}
                         p={2}
                         overflow="auto"
