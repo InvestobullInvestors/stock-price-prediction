@@ -10,7 +10,6 @@ import {
     Alert,
     AlertDescription,
     AlertIcon,
-    AlertTitle,
     Box,
     Button,
     Center,
@@ -20,6 +19,8 @@ import {
 } from '@chakra-ui/react';
 import useHandlePayment from '../../hooks/useHandlePayment';
 import { useUser } from '../../contexts/useUser';
+import SignInPromptBox from '../SignInPromptBox';
+import CustomLargeAlert from '../CustomLargeAlert';
 
 const stripePublicKey = loadStripe(
     'pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4'
@@ -81,42 +82,15 @@ const CheckoutForm = ({ payableAmount }) => {
     const { user, upgradeUserPlan } = useUser();
 
     const PaymentStatusAlert = () => (
-        <Alert
+        <CustomLargeAlert
             status={paymentSuccessful ? 'success' : 'error'}
-            flexDirection="column"
-            alignItems="center"
-            py={10}
-            mb={4}
-        >
-            <AlertIcon boxSize="40px" mr={0} />
-            <AlertTitle mt={4} mb={1} fontSize="lg">
-                {paymentSuccessful ? 'Payment Successful' : 'Payment Failed'}
-            </AlertTitle>
-            <AlertDescription maxWidth="sm">
-                {paymentSuccessful
+            title={paymentSuccessful ? 'Payment Successful' : 'Payment Failed'}
+            description={
+                paymentSuccessful
                     ? `You are now subscribed to the ${user?.plan} plan!`
-                    : `An error occurred. Please try again.`}
-            </AlertDescription>
-        </Alert>
-    );
-
-    const PaymentSection = () => (
-        <>
-            <HelpText />
-            <CreditCardInputBox />
-            <Center>
-                <Button
-                    isLoading={isLoading}
-                    mb={4}
-                    colorScheme="brand"
-                    onClick={handlePayment}
-                    isDisabled={!user}
-                    title={user ? '' : 'Log in to subscribe to plan'}
-                >
-                    Confirm Payment
-                </Button>
-            </Center>
-        </>
+                    : `An error occurred. Please try again.`
+            }
+        />
     );
 
     const handlePayment = useHandlePayment(
@@ -126,6 +100,7 @@ const CheckoutForm = ({ payableAmount }) => {
         setIsLoading,
         async (status) => {
             if (status) {
+                console.log('HELP!');
                 setPaymentSuccessful(true);
                 setAlertVisible(true);
                 const {
@@ -140,12 +115,13 @@ const CheckoutForm = ({ payableAmount }) => {
     );
 
     const AlreadySubscribedWarning = () => (
-        <Alert status="warning" mb={4}>
-            <AlertIcon />
-            <AlertDescription>
+        <CustomLargeAlert
+            status="warning"
+            title="Already Subscribed"
+            description={
                 <Text>You are already subscribed to the {user.plan} plan!</Text>
-            </AlertDescription>
-        </Alert>
+            }
+        />
     );
 
     return (
@@ -153,10 +129,32 @@ const CheckoutForm = ({ payableAmount }) => {
             {!isLoading && alertVisible && <PaymentStatusAlert />}
             {!paymentSuccessful && (
                 <>
-                    {user && user.plan !== 'Basic' ? (
-                        <AlreadySubscribedWarning />
+                    {user ? (
+                        user.plan !== 'Basic' ? (
+                            <AlreadySubscribedWarning />
+                        ) : (
+                            <>
+                                <HelpText />
+                                <CreditCardInputBox />
+                                <Center>
+                                    <Button
+                                        isLoading={isLoading}
+                                        mb={4}
+                                        colorScheme="brand"
+                                        onClick={handlePayment}
+                                        isDisabled={!user}
+                                    >
+                                        Confirm Payment
+                                    </Button>
+                                </Center>
+                            </>
+                        )
                     ) : (
-                        <PaymentSection />
+                        <SignInPromptBox
+                            text="to subscribe"
+                            border={0}
+                            shadow="none"
+                        />
                     )}
                 </>
             )}
