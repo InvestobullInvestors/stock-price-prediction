@@ -6,7 +6,8 @@ const PredictionContext = createContext({});
 
 const PredictionProvider = ({ children }) => {
     const [predictedValue, setPredictedValue] = useState({});
-    const [isPredictionLoading, setIsPredictionLoading] = useStateWithCallbackLazy(false);
+    const [isPredictionLoading, setIsPredictionLoading] =
+        useStateWithCallbackLazy(false);
 
     const setPrediction = (stockSymbol) => {
         setIsPredictionLoading(true, () => {
@@ -17,9 +18,10 @@ const PredictionProvider = ({ children }) => {
                 })
                 .catch(({ message }) => {
                     console.log(message);
-                }).finally(_ => {
-                setIsPredictionLoading(false, null);
-            });
+                })
+                .finally((_) => {
+                    setIsPredictionLoading(false, null);
+                });
         });
     };
 
