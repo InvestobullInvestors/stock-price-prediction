@@ -19,14 +19,7 @@ import useDateFormat from '../../hooks/useDateFormat';
 import LoadingSpinner from '../LoadingSpinner';
 
 const CustomGridItem = ({ children, ...otherProps }) => (
-    <GridItem
-        mx={4}
-        my={4}
-        borderRadius="lg"
-        shadow="none"
-        colSpan={3}
-        {...otherProps}
-    >
+    <GridItem m={4} colSpan={3} {...otherProps}>
         {children}
     </GridItem>
 );
@@ -50,55 +43,32 @@ const PricePrediction = () => {
                     <Heading as="h3" size="lg" p={8} textAlign="center">
                         Prediction of Closing Prices
                     </Heading>
-                    <CustomBox
-                        p={4}
-                        w="80%"
-                        border="none"
-                        borderRadius="lg"
-                        shadow="none"
-                    >
-                        <VStack spacing={4}>
-                            {prediction_details
-                                ? prediction_details.map(
-                                      ({ Close, Date, _id }) => (
-                                          <Box
-                                              key={_id}
-                                              p={4}
-                                              w="100%"
-                                              borderRadius="lg"
-                                          >
-                                              <SimpleGrid
-                                                  columns={{ base: 1, lg: 2 }}
-                                                  spacing={1}
-                                              >
-                                                  <Center>
-                                                      <Heading
-                                                          as="h4"
-                                                          size="md"
-                                                      >
-                                                          {formatDate(Date)}
-                                                      </Heading>
-                                                  </Center>
-                                                  <Heading
-                                                      as="h3"
-                                                      size="lg"
-                                                      color={
-                                                          Close >= 0
-                                                              ? greenColor
-                                                              : redColor
-                                                      }
-                                                  >
-                                                      $
-                                                      {Close?.toFixed(2) ??
-                                                          ' --.--'}
-                                                  </Heading>
-                                              </SimpleGrid>
-                                          </Box>
-                                      )
-                                  )
-                                : null}
-                        </VStack>
-                    </CustomBox>
+                    <VStack spacing={6}>
+                        {prediction_details
+                            ? prediction_details.map(({ Close, Date, _id }) => (
+                                  <SimpleGrid
+                                      key={_id}
+                                      columns={2}
+                                      spacing={4}
+                                      justifyItems="center"
+                                      alignItems="center"
+                                  >
+                                      <Heading as="h4" size="md">
+                                          {formatDate(Date)}
+                                      </Heading>
+                                      <Heading
+                                          as="h3"
+                                          size="lg"
+                                          color={
+                                              Close >= 0 ? greenColor : redColor
+                                          }
+                                      >
+                                          ${Close?.toFixed(2) ?? ' --.--'}
+                                      </Heading>
+                                  </SimpleGrid>
+                              ))
+                            : null}
+                    </VStack>
                 </VStack>
             )}
         </CustomGridItem>
