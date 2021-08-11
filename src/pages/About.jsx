@@ -1,34 +1,15 @@
 import React from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
-import AboutTeam from '../components/About/AboutTeam';
 import CustomHeading from '../components/CustomHeading';
-import { Text } from '@chakra-ui/react';
-import CustomBox from '../components/CustomBox';
-
-const AboutInvestobull = () => {
-    return (
-        <CustomBox>
-            <Text fontSize="lg" lineHeight={10}>
-                This web app will be used by everyday investors who have a
-                limited understanding of the technical and fundamental factors
-                affecting blue chip stock prices. Our system will provide
-                detailed insights into commonly used analysis models—such as
-                discounted cash flow (DCF)in order to predict a stock's future
-                price. We will differentiate our service from competitors’
-                offerings by providing users with transparent metrics that
-                explain how we derive our projections. Our goal is to help users
-                make better-informed decisions with their investments.
-            </Text>
-        </CustomBox>
-    );
-};
+import OurGoal from '../components/About/OurGoal';
+import OurTeam from '../components/About/OurTeam';
 
 const About = () => (
     <PageTemplate>
         <CustomHeading>Our Goal</CustomHeading>
-        <AboutInvestobull />
+        <OurGoal />
         <CustomHeading>Our Team</CustomHeading>
-        <AboutTeam />
+        <OurTeam />
     </PageTemplate>
 );
 

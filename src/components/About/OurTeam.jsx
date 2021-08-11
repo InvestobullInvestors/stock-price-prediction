@@ -2,7 +2,7 @@ import React from 'react';
 import { VStack } from '@chakra-ui/react';
 import TeamMemberCard from './TeamMemberCard';
 
-const AboutTeam = () => (
+const OurTeam = () => (
     <VStack spacing={12} m={4}>
         <TeamMemberCard
             name="Himanshu Goyal"
@@ -39,4 +39,4 @@ const AboutTeam = () => (
     </VStack>
 );
 
-export default AboutTeam;
+export default OurTeam;
