@@ -58,7 +58,6 @@ const NewsCard = ({ source, children, ...otherProps }) => {
         >
             {children}
             <Flex display={['none', 'none', 'flex', 'flex']} align="flex-start">
-                {/*<HStack mt="10px" w="full">*/}
                 <HStack ml="20px" mr="30px" mt="-15px" w="full">
                     <Square
                         w={['20%', '20%', '15%', '15%']}
@@ -110,9 +109,11 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                     <CustomBox
                         w="100px"
                         borderRadius="lg"
+                        border={0}
+                        shadow="none"
                         p="10px"
-                        mb={0}
                         mt={-9}
+                        mb={-6}
                     >
                         <Image src={logo} />
                     </CustomBox>
@@ -122,10 +123,11 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                         h="150px"
                         border="1px"
                         borderRadius="lg"
-                        shadow="md"
+                        border={0}
+                        shadow="none"
+                        m={0}
                         padding="5px"
                         css={{
-                            margin: '0',
                             scrollbarWidth: 'none',
                             msOverflowStyle: 'none',
                             overflow: 'scroll',
@@ -133,7 +135,14 @@ const NewsCard = ({ source, children, ...otherProps }) => {
                     >
                         <VStack align="flex-start">
                             {articles.map((article) => (
-                                <CustomBox key={article._id} w="100%">
+                                <CustomBox
+                                    key={article._id}
+                                    w="100%"
+                                    border={0}
+                                    shadow="none"
+                                    m={0}
+                                    p={0}
+                                >
                                     <NewsArticle
                                         date={article.publishedAt}
                                         title={article.title}
