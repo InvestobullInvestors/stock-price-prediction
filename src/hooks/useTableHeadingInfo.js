@@ -1,5 +1,5 @@
-const useTableHeadingInfo = () => {
-    return [
+const useTableHeadingInfo = () => (
+    [
         {
             name: '',
             width: '4%',
@@ -56,7 +56,7 @@ const useTableHeadingInfo = () => {
             id: 'fiftyTwoWeekHigh',
             hover: { cursor: 'default' },
         },
-    ];
-};
+    ]
+);
 
 export default useTableHeadingInfo;
