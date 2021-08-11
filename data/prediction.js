@@ -25,7 +25,7 @@ const tickerToEndpointMap = {
     NVDA: '',
 };
 
-const number_of_days = [1, 3, 6];
+const numOfDays = [1, 3, 6];
 
 const predictPrices = async () => {
     const doc = await stockMarketInfo.find({});
@@ -91,10 +91,23 @@ const getDependentVariables = async (ticker) => {
 
     const res = [];
 
-    for (let days of number_of_days) {
+    for (let days of numOfDays) {
         const date = new Date(timestamp);
-        const new_date = new Date(date.setDate(date.getDate() + days));
-        const new_time = new Date(new_date.setUTCHours(0));
+        let newDate = new Date(date.setDate(date.getDate() + days));
+        let currentDay = newDate.getDay();
+        let addDays = 0;
+
+        // if date is weekend, set date to Monday since no predictions available for weekends
+        if (currentDay == 5) {
+            // saturday
+            addDays = 2;
+        } else if (currentDay == 6) {
+            // sunday
+            addDays = 1;
+        }
+
+        newDate.setDate(newDate.getDate() + addDays);
+        const newDateWithTime = new Date(newDate.setUTCHours(0));
 
         // randomize dependent variables
         const randomPercent = (Math.random() * 5 + 1) * 0.01;
@@ -104,7 +117,7 @@ const getDependentVariables = async (ticker) => {
         const new_low = low + low * randomPercent;
 
         res.push({
-            Date: new_time,
+            Date: newDateWithTime,
             Volume: Math.round(new_volume),
             Open: roundToTwoDecimals(new_open),
             High: roundToTwoDecimals(new_high),
