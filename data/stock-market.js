@@ -79,11 +79,7 @@ const MARKET_DATA = [
             {
                 ticker: 'AAPL',
                 name: 'Apple',
-            },
-            {
-                ticker: 'AAPL',
-                name: 'Apple',
-            },
+            }
         ],
     },
 ];
