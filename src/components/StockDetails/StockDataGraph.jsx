@@ -7,8 +7,8 @@ import CustomBox from '../CustomBox';
 
 const StockDataGraph = ({ ...otherProps }) => {
     const { graphData, isStockGraphLoading } = useStockSymbol();
-    defaults.color = useColorModeValue('#000', '#FFF');
-    defaults.borderColor = useColorModeValue('#CCC', '#555');
+    defaults.color = useColorModeValue('#000', '#DDD');
+    defaults.borderColor = useColorModeValue('#DDD', '#333');
 
     return (
         <CustomBox {...otherProps}>

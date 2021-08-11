@@ -108,7 +108,9 @@ const LoginSignupPopup = () => {
                 onClose={onClose}
             >
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent
+                    bgColor={useColorModeValue('brand.50', 'brand.800')}
+                >
                     <ModalHeader>{modalContent[mode].header}</ModalHeader>
                     <ModalBody>{modalContent[mode].body}</ModalBody>
                     <ModalFooter>{modalContent[mode].footer}</ModalFooter>

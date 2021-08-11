@@ -1,5 +1,8 @@
 import React from 'react';
 import {
+    Alert,
+    AlertDescription,
+    AlertIcon,
     Box,
     Center,
     Grid,
@@ -62,21 +65,27 @@ const PricePrediction = () => {
                                           columns={{ base: 1, lg: 2 }}
                                           spacing={1}
                                       >
-                                          <Center>
-                                              <Heading as="h4" size="md">
-                                                  {formatDate(Date)}
-                                              </Heading>
-                                          </Center>
-                                          <Heading
-                                              as="h3"
-                                              size="lg"
-                                              color={
-                                                  Close >= 0
-                                                      ? greenColor
-                                                      : redColor
-                                              }
+                                          <SimpleGrid
+                                              columns={{ base: 1, lg: 2 }}
+                                              spacing={1}
                                           >
-                                              ${Close.toFixed(2)}
+                                              <Center>
+                                                  <Heading as="h4" size="md">
+                                                      {formatDate(Date)}
+                                                  </Heading>
+                                              </Center>
+                                              <Heading
+                                                  as="h3"
+                                                  size="lg"
+                                                  color={
+                                                      Close >= 0
+                                                          ? greenColor
+                                                          : redColor
+                                                  }
+                                              >
+                                                  $
+                                                  {Close?.toFixed(2) ??
+                                                      ' --.--'}
                                           </Heading>
                                       </SimpleGrid>
                                   </Box>
@@ -94,6 +103,10 @@ const SlidablePredictions = () => {
     const { inflation, revenueGrowth, eps, marketCap } = predictedValue;
     return (
         <CustomGridItem>
+            <Alert status="info">
+                <AlertIcon />
+                <AlertDescription>Coming Soon</AlertDescription>
+            </Alert>
             <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={6}>
                 <PredictionSlider
                     predictedValue={inflation}
