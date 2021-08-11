@@ -3,8 +3,6 @@ import {
     Alert,
     AlertDescription,
     AlertIcon,
-    Box,
-    Center,
     Grid,
     GridItem,
     Heading,
@@ -17,6 +15,7 @@ import PredictionSlider from './PredictionSlider';
 import CustomBox from '../CustomBox';
 import useDateFormat from '../../hooks/useDateFormat';
 import LoadingSpinner from '../LoadingSpinner';
+import { useStockSymbol } from '../../contexts/useStockInfo';
 
 const CustomGridItem = ({ children, ...otherProps }) => (
     <GridItem m={4} colSpan={3} {...otherProps}>
@@ -30,13 +29,18 @@ const PricePrediction = () => {
         isPredictionLoading,
     } = usePrediction();
 
+    const {
+        realtimeStockDetails: { close },
+        isRealtimeDataLoading,
+    } = useStockSymbol();
+
     const formatDate = useDateFormat();
     const redColor = useColorModeValue('red.light', 'red.dark');
     const greenColor = useColorModeValue('green.light', 'green.dark');
 
     return (
         <CustomGridItem>
-            {isPredictionLoading ? (
+            {isPredictionLoading || isRealtimeDataLoading ? (
                 <LoadingSpinner />
             ) : (
                 <VStack spacing={4}>
@@ -60,7 +64,9 @@ const PricePrediction = () => {
                                           as="h3"
                                           size="lg"
                                           color={
-                                              Close >= 0 ? greenColor : redColor
+                                              Close >= close
+                                                  ? greenColor
+                                                  : redColor
                                           }
                                       >
                                           ${Close?.toFixed(2) ?? ' --.--'}
