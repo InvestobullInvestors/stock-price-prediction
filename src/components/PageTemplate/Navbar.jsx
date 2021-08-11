@@ -50,7 +50,7 @@ const Logo = () => (
         >
             InvestoBull
         </Text>
-        <Image src="/bull-red-512.png" boxSize={8} />
+        <Image src="/bull_512px.png" boxSize={8} />
     </HStack>
 );
 
