@@ -27,9 +27,8 @@ const stripePublicKey = loadStripe(
 
 const CreditCardInputBox = () => (
     <Box
-        my={2}
-        px={4}
-        py={3}
+        my={4}
+        p={4}
         rounded="md"
         bg={useColorModeValue('brand.200', 'brand.700')}
     >
@@ -62,6 +61,17 @@ const CreditCardInputBox = () => (
     </Box>
 );
 
+const HelpText = () => (
+    <Alert status="info" mb={4}>
+        <AlertIcon />
+        <AlertDescription fontSize="sm">
+            <Text>Good test card: 4242 4242 4242 4242</Text>
+            <Text>Bad test card: 4000 0000 0000 9995</Text>
+            <Text>Input any number for date, CVC, and ZIP</Text>
+        </AlertDescription>
+    </Alert>
+);
+
 const CheckoutForm = ({ payableAmount }) => {
     const stripe = useStripe();
     const elements = useElements();
@@ -69,6 +79,45 @@ const CheckoutForm = ({ payableAmount }) => {
     const [alertVisible, setAlertVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { user, upgradeUserPlan } = useUser();
+
+    const PaymentStatusAlert = () => (
+        <Alert
+            status={paymentSuccessful ? 'success' : 'error'}
+            flexDirection="column"
+            alignItems="center"
+            py={10}
+            mb={4}
+        >
+            <AlertIcon boxSize="40px" mr={0} />
+            <AlertTitle mt={4} mb={1} fontSize="lg">
+                {paymentSuccessful ? 'Payment Successful' : 'Payment Failed'}
+            </AlertTitle>
+            <AlertDescription maxWidth="sm">
+                {paymentSuccessful
+                    ? `You are now subscribed to the ${user?.plan} plan!`
+                    : `An error occurred. Please try again.`}
+            </AlertDescription>
+        </Alert>
+    );
+
+    const PaymentSection = () => (
+        <>
+            <HelpText />
+            <CreditCardInputBox />
+            <Center>
+                <Button
+                    isLoading={isLoading}
+                    mb={4}
+                    colorScheme="brand"
+                    onClick={handlePayment}
+                    isDisabled={!user}
+                    title={user ? '' : 'Log in to subscribe to plan'}
+                >
+                    Confirm Payment
+                </Button>
+            </Center>
+        </>
+    );
 
     const handlePayment = useHandlePayment(
         payableAmount,
@@ -90,83 +139,28 @@ const CheckoutForm = ({ payableAmount }) => {
         }
     );
 
+    const AlreadySubscribedWarning = () => (
+        <Alert status="warning" mb={4}>
+            <AlertIcon />
+            <AlertDescription>
+                <Text>You are already subscribed to the {user.plan} plan!</Text>
+            </AlertDescription>
+        </Alert>
+    );
+
     return (
-        <>
-            {!isLoading && alertVisible && (
-                <Alert
-                    status={paymentSuccessful ? 'success' : 'error'}
-                    flexDirection="column"
-                    alignItems="center"
-                    py={10}
-                    mb={4}
-                >
-                    <AlertIcon boxSize="40px" mr={0} />
-                    <AlertTitle mt={4} mb={1} fontSize="lg">
-                        {paymentSuccessful
-                            ? 'Payment Successful'
-                            : 'Payment Failed'}
-                    </AlertTitle>
-                    <AlertDescription maxWidth="sm">
-                        {paymentSuccessful ? (
-                            <Text>
-                                You are now subscribed to the {user?.plan} plan!
-                            </Text>
-                        ) : (
-                            <Text>An error occurred. Please try again.</Text>
-                        )}
-                    </AlertDescription>
-                </Alert>
-            )}
+        <Box>
+            {!isLoading && alertVisible && <PaymentStatusAlert />}
             {!paymentSuccessful && (
                 <>
                     {user && user.plan !== 'Basic' ? (
-                        <Alert status="warning" mb={4}>
-                            <AlertIcon />
-                            <AlertDescription>
-                                <Text>
-                                    You are already subscribed to the{' '}
-                                    {user.plan} plan!
-                                </Text>
-                            </AlertDescription>
-                        </Alert>
+                        <AlreadySubscribedWarning />
                     ) : (
-                        <>
-                            <Alert status="info" mb={4}>
-                                <AlertIcon />
-                                <AlertDescription fontSize="sm">
-                                    <Text>
-                                        Good test card: 4242 4242 4242 4242
-                                    </Text>
-                                    <Text>
-                                        Bad test card: 4000 0000 0000 9995
-                                    </Text>
-                                    <Text>
-                                        Input any number for date, CVC, and ZIP
-                                    </Text>
-                                </AlertDescription>
-                            </Alert>
-                            <CreditCardInputBox />
-                            <Center>
-                                <Button
-                                    isLoading={isLoading}
-                                    my={4}
-                                    colorScheme="brand"
-                                    onClick={handlePayment}
-                                    isDisabled={!user}
-                                    title={
-                                        user
-                                            ? ''
-                                            : 'Log in to subscribe to plan'
-                                    }
-                                >
-                                    Confirm Payment
-                                </Button>
-                            </Center>
-                        </>
+                        <PaymentSection />
                     )}
                 </>
             )}
-        </>
+        </Box>
     );
 };
 
