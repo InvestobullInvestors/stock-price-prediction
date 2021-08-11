@@ -83,7 +83,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
         },
     };
 
-    const tableHeading = useTableHeadingInfo()
+    const tableHeading = useTableHeadingInfo();
 
     const changeArrowDirection = (currentState, setter) => {
         setDividendPayoutRatioArrow(0);
@@ -103,7 +103,7 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
         1: <Icon as={BsChevronDown} boxSize={3} />,
     };
 
-    const color = useColorModeValue('brand.500', 'brand.400')
+    const color = useColorModeValue('brand.500', 'brand.400');
 
     return (
         <CustomBox
@@ -116,13 +116,14 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                     <Tr>
                         {tableHeading.map((table_details) => (
                             <Th
-                                w={table_details?.width ?? "12%"}
+                                w={table_details?.width ?? '12%'}
                                 display={table_details?.display}
                                 _hover={
                                     table_details?.hover ?? {
-                                    cursor: 'pointer',
-                                    color: color,
-                                }}
+                                        cursor: 'pointer',
+                                        color: color,
+                                    }
+                                }
                                 onClick={() => {
                                     handleSortClick(
                                         table_details.column_name,
@@ -140,9 +141,9 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                                     <Text>{table_details.name}</Text>
                                     {table_details.id
                                         ? stateToIconMap[
-                                            mapStringToArrow[table_details.id]
-                                                .state
-                                            ]
+                                              mapStringToArrow[table_details.id]
+                                                  .state
+                                          ]
                                         : null}
                                 </HStack>
                             </Th>
@@ -152,27 +153,27 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                 <Tbody>
                     {stocks.map(
                         ({
-                             ticker_id,
-                             dividend_payout_ratio,
-                             pe_ratio,
-                             peg_ratio,
-                             quarterly_earning_growth,
-                             quarterly_revenue_growth,
-                             fifty_two_week_low,
-                             fifty_two_week_high,
-                         }) => (
+                            ticker_id,
+                            dividend_payout_ratio,
+                            pe_ratio,
+                            peg_ratio,
+                            quarterly_earning_growth,
+                            quarterly_revenue_growth,
+                            fifty_two_week_low,
+                            fifty_two_week_high,
+                        }) => (
                             <Tr
                                 key={ticker_id}
                                 _hover={
                                     isLightMode
                                         ? {
-                                            cursor: 'pointer',
-                                            bg: 'brand.100',
-                                        }
+                                              cursor: 'pointer',
+                                              bg: 'brand.100',
+                                          }
                                         : {
-                                            cursor: 'pointer',
-                                            bg: 'brand.800',
-                                        }
+                                              cursor: 'pointer',
+                                              bg: 'brand.800',
+                                          }
                                 }
                             >
                                 <Td w="4%">

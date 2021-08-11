@@ -49,12 +49,15 @@ const predictedStockInfoSchema = new Schema(
         market_name: String,
         market_id: String,
         stock_name: String,
+        ticker_id: String,
         stock_id: String,
         prediction_details: {
-            timestamp: Date,
+            date: Date,
+            volume: Number,
             open: Number,
+            high: Number,
+            low: Number,
             close: Number,
-            volume_traded: Number,
         },
     },
     { collection: 'PredictedStockInfo' }
