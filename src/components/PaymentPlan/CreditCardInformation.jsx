@@ -25,6 +25,44 @@ const stripePublicKey = loadStripe(
     'pk_test_51IweHkKvAxvZ5kVeTShMjLwl1ZyDd6u5GtDEMtnWCKcZq3FNj0L0z7ZLmE5Qk6EVaTds84lMbRTfUPj8Aq0Nodt500I8OLMSs4'
 );
 
+const CreditCardInputBox = () => {
+    const boxBgColor = useColorModeValue('brand.200', 'brand.700');
+    const isLightMode = useColorMode().colorMode === 'light';
+
+    return (
+        <Box my={2} px={4} py={3} rounded="md" bg={boxBgColor}>
+            {isLightMode ? (
+                <CardElement
+                    options={{
+                        style: {
+                            base: {
+                                fontSize: '16px',
+                            },
+                        },
+                    }}
+                />
+            ) : (
+                <CardElement
+                    options={{
+                        style: {
+                            base: {
+                                fontSize: '16px',
+                                color: '#F0F0F0',
+                                '::placeholder': {
+                                    color: '#888888',
+                                },
+                            },
+                            invalid: {
+                                color: '#FF4854',
+                            },
+                        },
+                    }}
+                />
+            )}
+        </Box>
+    );
+};
+
 const CheckoutForm = ({ payableAmount }) => {
     const stripe = useStripe();
     const elements = useElements();
@@ -32,9 +70,6 @@ const CheckoutForm = ({ payableAmount }) => {
     const [alertVisible, setAlertVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { user, upgradeUserPlan } = useUser();
-
-    const boxBgColor = useColorModeValue('brand.200', 'brand.700');
-    const isLightMode = useColorMode().colorMode === 'light';
 
     const handlePayment = useHandlePayment(
         payableAmount,
@@ -101,36 +136,7 @@ const CheckoutForm = ({ payableAmount }) => {
                             <Text>Bad test card: 4000 0000 0000 9995</Text>
                         </AlertDescription>
                     </Alert>
-                    <Box my={2} px={4} py={3} rounded="md" bg={boxBgColor}>
-                        {isLightMode ? (
-                            <CardElement
-                                options={{
-                                    style: {
-                                        base: {
-                                            fontSize: '16px',
-                                        },
-                                    },
-                                }}
-                            />
-                        ) : (
-                            <CardElement
-                                options={{
-                                    style: {
-                                        base: {
-                                            fontSize: '16px',
-                                            color: '#F0F0F0',
-                                            '::placeholder': {
-                                                color: '#888888',
-                                            },
-                                        },
-                                        invalid: {
-                                            color: '#FF4854',
-                                        },
-                                    },
-                                }}
-                            />
-                        )}
-                    </Box>
+                    <CreditCardInputBox />
                     <Center>
                         <Button
                             isLoading={isLoading}
