@@ -9,7 +9,7 @@ const OurTeam = () => (
             imageUrl="https://media-exp1.licdn.com/dms/image/C5603AQGSQ0CWJrsGbg/profile-displayphoto-shrink_800_800/0/1553838277450?e=1633564800&v=beta&t=Ai27ezxA-caXbBRnxPLPH7KWuSoJn3I3kBmNvcHu3oU"
             linkedIn="https://www.linkedin.com/in/himanshu-g/"
             github="https://github.com/HGoyal09"
-            summary="I worked on setting up the database schemas on Mongoose and connecting them to the backend APIs. I also developed the home page, plans page, the stock details page while setting up the Stripe payment workflow. I also worked on deploying the project to Vercel and setting up the cron jobs to pull real-time data."
+            summary="I worked on setting up the database schemas on Mongoose and connecting them to the backend APIs. I also developed the home page, plans page, and the stock details page, while setting up the Stripe payment workflow. I also worked on deploying the project to Vercel and setting up the cron jobs to pull real-time data."
             alignLeft
         />
         <TeamMemberCard
@@ -33,7 +33,7 @@ const OurTeam = () => (
             imageUrl="/team-members/paul-freiwirth.jpg"
             linkedIn="https://www.linkedin.com/in/f-paul/"
             github="https://github.com/paulsgh"
-            summary="I worked on the designing the News page, news checklist components, and implementing the filtering features and responsive drag-and-drop functionalities."
+            summary="I worked on designing the News page and news checklist components, as well as implementing the filtering features and responsive drag-and-drop functionalities."
             alignRight
         />
     </VStack>

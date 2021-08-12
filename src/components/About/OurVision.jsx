@@ -4,7 +4,7 @@ import React from 'react';
 const OurVision = () => (
     <Box m={4} mb={24}>
         <Text fontSize="lg" lineHeight={10}>
-            Investobull is a web app designed for everyday investors who
+            InvestoBull is a web app designed for everyday investors who
             struggle with the intricacies of the stock market. This app not only
             provides insights into the fundamentals of blue chip stocks in the
             Nasdaq alongside relevant news articles, but also provides stock
