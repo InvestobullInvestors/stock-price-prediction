@@ -4,15 +4,14 @@ import React from 'react';
 const OurGoal = () => (
     <Box m={4} mb={24}>
         <Text fontSize="lg" lineHeight={10}>
-            This web app will be used by everyday investors who have a limited
-            understanding of the technical and fundamental factors affecting
-            blue chip stock prices. Our system will provide detailed insights
-            into commonly used analysis models—such as discounted cash flow
-            (DCF)in order to predict a stock's future price. We will
-            differentiate our service from competitors’ offerings by providing
-            users with transparent metrics that explain how we derive our
-            projections. Our goal is to help users make better-informed
-            decisions with their investments.
+            Investobull is a web app designed for everyday investors who
+            struggle with the intricacies of the stock market. This app not only
+            provides insights into the fundamentals of blue chip stocks in the
+            Nasdaq alongside relevant news articles, but also provides stock
+            price predictions powered by an ensemble of delicately tuned machine
+            learning algorithms, to help investors make informed decisions. We
+            do the heavy lifting so that our investors can enjoy their new-found
+            financial freedom.
         </Text>
     </Box>
 );
