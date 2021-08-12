@@ -50,6 +50,7 @@ InvestoBull is a web app designed for everyday investors who struggle with the i
     -   ⚠️ Breakdown of all variables used for future price predictions
 -   User Interface
     -   ✅ Clean and consistent UI with high readability
+    -   ✅ Loading spinners and responsive buttons to indicate interactive components
     -   ✅ Responsive UI that is mobile ready
 
 ### Stretch Goals
@@ -59,7 +60,6 @@ InvestoBull is a web app designed for everyday investors who struggle with the i
     -   ✅ Utilize cron jobs to fetch the latest news articles from [News API][newsapi]
 -   User Experience
     -   ✅ Light and Dark mode to improve accessibility
-    -   ✅ Loading spinners and responsive buttons to indicate interactive components
     -   ✅ Drag-and-drop functionality to maximize user customization
     -   ✅ Perform User Acceptance Testing with potential users/customers, and improve user flow based on feedback
 -   Stock Price Predictions
@@ -128,7 +128,7 @@ InvestoBull is a web app designed for everyday investors who struggle with the i
     -   User data – name, email, photo, plan, etc.
     -   Collections of user-specific Watchlist stocks, Notifications, and successful Payments
 
-Storing data on Firestore allowed us to store all user related data on Firebase, enhancing integration with the authentication system
+Storing data on Cloud Firestore allowed us to keep all user-related data on Firebase, enhancing integration with the authentication system
 
 #### Why is NoSQL more suitable than SQL for our project?
 
@@ -209,7 +209,7 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 ### User Acceptance Testing (UAT)
 
 -   Performed UAT with 20+ potential users, where we make observations on each user's workflow
--   Addressed UI / UX concerns - color scheme, setting up light/dark mode, loading spinner, etc.
+-   Addressed UI / UX concerns - color scheme, setting up light/dark mode, loading spinner, responsive buttons, etc.
 
 ### Future-proofing
 
@@ -240,7 +240,7 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 -   Send email alerts with important updates similar to newsletters
 -   Analyze technical factors like moving averages for fine-tuning our algorithms
 -   Display reports from reputed stock analysts
--   Automatically train machine learning models by creating a workflow to download and clean data
+-   Create a workflow that automatically downloads and cleans data to train machine learning models
 
 <br/>
 
@@ -251,15 +251,14 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 #### Himanshu Goyal
 
 -   Developed a responsive front-end for Home, Stock Details, Plans and parts of About Us, including interactive graphs and credit card payment section
--   Took leadership on setting up a scalable and future proof MongoDB schema along with backend integration and Swagger API documentation for stock details and news
--   Deployed the project on Vercel and set up the cron jobs to update real time data
+-   Took leadership on setting up a scalable and future proof MongoDB schema along with backend integration and Swagger API documentation for stock details, stock news, and stock predictions
+-   Deployed the project on Vercel and set up the cron jobs to update data in real-time
 -   Coordinated and scheduled meetings alongside text updates for smooth flow of the project
 
 #### Paul Freiwirth
 
 -   Developed the front-end for the news page, including a news filtering system
--   Set up the drag-and-drop functionality to enhance user experience
--   Worked on making the news page responsive
+-   Set up the drag-and-drop functionality and made the news page responsive
 
 #### Raghav Thakur
 
@@ -269,9 +268,14 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 
 #### Weiyoung Tan
 
--   Set up the login, signup, and password reset system using Firebase Authentication and stored user data on Cloud Firestore
+-   Set up the login/signup system using Firebase Authentication and stored user data on Cloud Firestore
 -   Built the Navbar, Watchlist, Notifications, Payment Popups, and About Us components, and integrated user accounts with Payments, Notifications, and Watchlist
--   Took charge of the overall UI/UX, performed UAT with potential customers, structured README doc, helped out with Vercel deployment and cron jobs
+-   Led the overall UI/UX development, performed UAT with potential customers, and enhanced UX by adjusting to user feedback
+-   Took charge of the repo structure and code cleanliness, designed README documentation, aided with Vercel deployment, crons and Github Actions
+
+<br/>
+
+Thanks for reading our documentation ❤️ Have a bullish day!
 
 <br/>
 
