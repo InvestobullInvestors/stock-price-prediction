@@ -1,7 +1,7 @@
 name: predictions cron run
 on:
     schedule:
-        - cron: '40 6 * * *'
+        - cron: '35 17 * * *'
     workflow_dispatch:
 jobs:
     build:
