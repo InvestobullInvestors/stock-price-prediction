@@ -135,9 +135,11 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 ### Unit 5 - Release Engineering
 
--   Deployed the website on Vercel - High performance with low latency compared to Heroku for free plans - Bigger free tier for projects compared to bigger hosting platforms like AWS, Azure, GCP etc
-    Deploying cron jobs on GitHub actions
-    Trigger serverless functions set up on Vercel to pull in the latest stock and news data and pre determined timestamps
+-   Deployed the website on Vercel
+    -   Higher performance with lower latency compared to Heroku (for free plans)
+    -   Bigger free-tier plan for projects compared to other bigger hosting platforms like AWS, Azure, GCP etc.
+    -   Deploying cron jobs on GitHub actions
+    -   Trigger serverless functions set up on Vercel to pull in the latest stocks, news, and prediction data
 
 <br/>
 
@@ -191,7 +193,7 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 -   Used Chart.js to render a reactive open/close chart with real-time data stored on our database
 
-#### [React DnD]
+#### [React DnD][react-dnd]
 
 -   Used React DnD to enable the drag-and-drop function for news cards
 
