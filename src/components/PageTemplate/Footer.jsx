@@ -10,6 +10,14 @@ const Footer = () => (
             <Link as={ReactRouterLink} to="/about" m={2} fontSize="lg">
                 About Us
             </Link>
+            <Link
+                href="https://drive.google.com/file/d/1XGfFeO6v_aEfeBdAqSZux_9Bni-dOc9I/view?usp=sharing"
+                isExternal
+                m={2}
+                fontSize="lg"
+            >
+                Quick Start Guide
+            </Link>
         </Flex>
         <Flex align="center">
             <Text m={1}>Connect with us:</Text>

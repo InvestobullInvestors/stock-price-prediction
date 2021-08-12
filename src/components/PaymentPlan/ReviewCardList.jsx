@@ -27,7 +27,7 @@ const ReviewCardList = () => (
         />
         <ReviewCard
             name="Paul Freiwirth"
-            imageUrl=""
+            imageUrl="/team-members/paul-freiwirth.jpg"
             rating={4}
             reviewTitle="Love the news feature"
             reviewSummary="I really like being able to see the latest news from different sources all in one place. I found myself coming back to this app time and time again for this feature!"
