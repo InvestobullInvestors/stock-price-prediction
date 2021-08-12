@@ -3,12 +3,8 @@ import { Button, Checkbox, HStack, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
 
 const NewsChecklist = () => {
-    const {
-        newsInfo,
-        selectSource,
-        selectAllSources,
-        unselectAllSources,
-    } = useStockNews();
+    const { newsInfo, selectSource, selectAllSources, unselectAllSources } =
+        useStockNews();
     const sortedNewsInfo = [...newsInfo];
 
     sortedNewsInfo.sort((a, b) => {

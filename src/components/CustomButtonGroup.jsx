@@ -5,10 +5,8 @@ import { useUser } from '../contexts/useUser';
 
 const CustomButtonGroup = () => {
     const { user } = useUser();
-    const {
-        isDisplayingWatchlistStockNews,
-        setDisplayWatchlistNews,
-    } = useStockNews();
+    const { isDisplayingWatchlistStockNews, setDisplayWatchlistNews } =
+        useStockNews();
 
     return (
         <ButtonGroup isAttached colorScheme="brand">

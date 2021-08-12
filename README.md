@@ -8,7 +8,7 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 ### Tech Stack
 
-[React](https://reactjs.org/) | [ChakraUI](https://chakra-ui.com/) | [Axios](https://axios-http.com/) | [Node](https://nodejs.org/) | [Express](https://expressjs.com/) | [MongoDB](https://www.mongodb.com/) | [Firebase][firebase] | [Stripe][stripe] | [Azure ML](https://azure.microsoft.com/en-ca/services/machine-learning/) | [Swagger](https://swagger.io/)
+[React](https://reactjs.org/) | [ChakraUI](https://chakra-ui.com/) | [Axios](https://axios-http.com/) | [Node](https://nodejs.org/) | [Express](https://expressjs.com/) | [MongoDB](https://www.mongodb.com/) | [Firebase][firebase] | [Stripe][stripe] | [Azure ML][azure-ml] | [Swagger](https://swagger.io/)
 
 ### Contents
 
@@ -87,11 +87,12 @@ Investobull is a web app designed for everyday investors who struggle with the i
 ### Unit 2 - React
 
 -   Used React to build reusable components to set up the website
-    -   These components helped minimize repetition and maximize reusability
-    -   The virtual dom structure significantly reduces page load times
+    -   These components helped minimize code repetition and maximize re-usability
+    -   The stateful components and virtual dom structure significantly reduces page load times and eliminates unnecessary updates
+    -   React prevents DOM injection attacks
 -   Used Context API to track state
     -   Eliminates the need for passing state as props
-    -   Reduces boiler plate code compared to Redux
+    -   Less boiler plate code compared to Redux
 -   Used custom hooks for abstract site functionality
     -   Create reusable functions and avoid code duplication
 -   Use Stripe Elements integration to handle credit card payments
@@ -103,9 +104,42 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 ### Unit 3 - Node & Express
 
+-   Set up APIs using Express for
+    -   Getting stock data
+    -   Getting price prediction for stocks
+    -   Handling credit card payment
+    -   Getting stock news
+-   Used Axios to make calls to the backend
+    -   Supported in more browsers compared to fetch – even older ones
+    -   Great documentation and better code readability
+
 ### Unit 4 - NoSQL with MongoDB
 
+-   Used MongoDB Atlas to store the following:
+    -   Real-time stock data
+    -   Quarterly stock data
+    -   Price fluctuation graphs data for a stock
+    -   Predicted future price for stocks
+    -   Stock-specific news
+    -   News information from different news sources
+-   Went above and beyond by integrating Cloud Firestore, a MongoDB fork hosted on Firebase, to store:
+    -   User data – name, email, photo, plan, etc.
+    -   Collections of user-specific Watchlist stocks, Notifications, and successful Payments
+
+#### Why is NoSQL more suitable than SQL for our project?
+
+-   It eliminates the need for determining relations between tables
+-   Lower latency when reading / writing to large databases
+-   Minimal data holes since data is stored as a JSON
+-   Better horizontal scaling capacity for future-proofing
+
 ### Unit 5 - Release Engineering
+
+-   Deployed the website on Vercel
+    -   Higher performance with lower latency compared to Heroku (for free plans)
+    -   Bigger free-tier plan for projects compared to other bigger hosting platforms like AWS, Azure, GCP etc.
+    -   Deploying cron jobs on GitHub actions
+    -   Trigger serverless functions set up on Vercel to pull in the latest stocks, news, and prediction data
 
 <br/>
 
@@ -113,15 +147,29 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 ## 4. Above and Beyond
 
-### Microsoft Azure AutoML
+### [Microsoft Azure AutoML](https://azure.microsoft.com/en-ca/services/machine-learning/automatedml/#features)
 
-### 3rd Party Services
+<img src='https://content.altexsoft.com/media/2017/03/word-image.jpeg'  alt='ml-services-comparison'/>
+
+-   Azure ML and AWS SageMaker both provide anomaly detection, but we decided to use Azure as Microsoft offers free credits ($250) for students
+-   Choice to use the web app (Studio), CLI or Python Notebooks to train and deploy models
+-   Offers easy to use and intuitive functionality for time series forecasting, can get very technical when you need it
+-   Automatic feature engineering
+-   Supports classification, regression, and time series forecasting
+-   Microsoft Azure tutorials and documentation are awesome!
+-   Easily manage and scale your resources all in one platform
+-   Predictions use real-time stock data and queries Azure daily for updated predictions
+
+### Cron Jobs
+
+### Third-party Services
 
 #### [Firebase][firebase]
 
 -   [Firebase Authentication](https://firebase.google.com/products/auth)
-    -   A simple yet secure way of setting up OAuth
-    -   Seamless integration for email + Google Account login/signup
+    -   A simple yet secure way of setting up OAuth – no need to reinvent the wheel
+    -   Seamless integration for email + Google Account login or signup
+    -
 -   [Cloud Firestore](https://firebase.google.com/products/firestore)
     -   Storing user data – name, subscription plan, watchlist, notifications, etc.
     -   Removes the need to move user data out of Firebase
@@ -141,16 +189,24 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 -   Used the Alpha Vantage API to fetch real-time data for different stocks
 
+#### [Chart.js][chartjs]
+
+-   Used Chart.js to render a reactive open/close chart with real-time data stored on our database
+
+#### [React DnD][react-dnd]
+
+-   Used React DnD to enable the drag-and-drop function for news cards
+
 ### User Acceptance Testing (UAT)
 
--   Performed UAT with 20+ potential users
--   Addressed UI / UX concerns - color scheme, setting up light/dark mode etc.
+-   Performed UAT with 20+ potential users, where we make observations on each user's workflow
+-   Addressed UI / UX concerns - color scheme, setting up light/dark mode, loading spinner, etc.
 
 ### Future-proofing
 
 #### MongoDB structure
 
--   The database has been designed to handle new markets like TSX and NYSE if we decide to scale up in the future
+-   The MongoDB structure has been designed to handle new markets like TSX and NYSE if we decide to scale up in the future
 
 ### Documentation
 
@@ -178,18 +234,33 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 #### Himanshu Goyal
 
+-   Developed the front-end for Home, Stock Details, Plans and parts of About Us, including interactive graphs and credit card payment section
+-   Set up a scalable and future proof MongoDB schema along with backend integration for stock details and news
+-   Deployed the project on Vercel and set up the cron jobs to update real time data
+
 #### Paul Freiwirth
 
 #### Raghav Thakur
 
+-   Worked on stock predictions, Microsoft Azure AutoML integration with backend
+-   Trained and deployed machine learning models using historical data of Nasdaq stocks
+-   Initial development of frontend components such as Home and Stock Table, and created Quick Start Guide
+
 #### Weiyoung Tan
+
+-   Set up the login / signup / password reset system using Firebase Authentication and stored user data on Cloud Firestore
+-   Built the Navbar, Watchlist, Notifications, Payment Popups, and About Us components, and integrated user accounts with Payments, Notifications, and Watchlist
+-   Took charge of the overall UI/UX, performed UAT with potential customers, structured README doc, helped out with Vercel deployment and cron jobs.
 
 <br/>
 
 [investobull]: https://investobull.vercel.app/
-[guide]: https://docs.google.com/document/d/1lpJtf07Uv22bCiGY2IghgsdkWpxphbpEnlNmjR_iexU/edit?usp=sharing
+[guide]: https://drive.google.com/file/d/1XGfFeO6v_aEfeBdAqSZux_9Bni-dOc9I/view?usp=sharing
 [swagger]: https://app.swaggerhub.com/apis-docs/InvestobullInvestors/InvestobullInvestors/1.0.0
+[azure-ml]: https://azure.microsoft.com/en-ca/services/machine-learning/
 [firebase]: https://firebase.google.com/
 [stripe]: https://stripe.com/
 [newsapi]: https://newsapi.org/
 [alpha-vantage]: https://www.alphavantage.co/
+[chartjs]: https://www.chartjs.org/
+[react-dnd]: https://react-dnd.github.io/react-dnd/about

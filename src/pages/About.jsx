@@ -1,13 +1,13 @@
 import React from 'react';
 import PageTemplate from '../components/PageTemplate/PageTemplate';
 import CustomHeading from '../components/CustomHeading';
-import OurGoal from '../components/About/OurGoal';
+import OurVision from '../components/About/OurVision';
 import OurTeam from '../components/About/OurTeam';
 
 const About = () => (
     <PageTemplate>
-        <CustomHeading>Our Goal</CustomHeading>
-        <OurGoal />
+        <CustomHeading>Our Vision</CustomHeading>
+        <OurVision />
         <CustomHeading>Our Team</CustomHeading>
         <OurTeam />
     </PageTemplate>

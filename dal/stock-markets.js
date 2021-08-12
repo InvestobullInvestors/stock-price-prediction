@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING', {
+mongoose.connect(process.env.STOCK_MARKET_MONGO_DB_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
