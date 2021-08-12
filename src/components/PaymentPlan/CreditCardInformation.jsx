@@ -99,7 +99,6 @@ const CheckoutForm = ({ payableAmount }) => {
         setIsLoading,
         async (status) => {
             if (status) {
-                console.log('HELP!');
                 setPaymentSuccessful(true);
                 setAlertVisible(true);
                 const {

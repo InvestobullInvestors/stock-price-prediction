@@ -30,18 +30,14 @@ const NewsCard = ({ source, children, ...otherProps }) => {
         (currSource) => currSource.id === source.id
     );
 
-    if (targetSource) {
-        name = targetSource.name;
-        articles = targetSource.articles;
-        logoBlack = process.env.PUBLIC_URL + 'logos/sources/' + name + '.png';
-        logoWhite =
-            process.env.PUBLIC_URL + 'logos/sources/' + name + '_white.png';
-    } else {
-        name = '';
-        articles = [];
-        logoBlack = '';
-        logoWhite = '';
-    }
+    name = targetSource?.name;
+    articles = targetSource?.articles;
+    logoBlack = targetSource
+        ? process.env.PUBLIC_URL + 'logos/sources/' + name + '.png'
+        : '';
+    logoWhite = targetSource
+        ? process.env.PUBLIC_URL + 'logos/sources/' + name + '_white.png'
+        : '';
 
     logoBlack = logoBlack.replace(/\s+/g, '-').toUpperCase();
     logoWhite = logoWhite.replace(/\s+/g, '-').toUpperCase();

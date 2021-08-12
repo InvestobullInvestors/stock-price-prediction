@@ -28,17 +28,12 @@ const StockNewsCard = ({ stock, children, ...otherProps }) => {
         (currStock) => currStock.ticker_id === stock.ticker_id
     );
 
-    if (targetStock) {
-        ticker_id = targetStock.ticker_id;
-        name = targetStock.stock_name;
-        articles = targetStock.news;
-        logo = process.env.PUBLIC_URL + 'logos/stocks/' + ticker_id + '.png';
-    } else {
-        ticker_id = '';
-        name = '';
-        articles = [];
-        logo = '';
-    }
+    ticker_id = targetStock?.ticker_id;
+    name = targetStock?.stock_name;
+    articles = targetStock?.news;
+    logo = targetStock
+        ? process.env.PUBLIC_URL + 'logos/stocks/' + ticker_id + '.png'
+        : '';
 
     return (
         <CustomBox

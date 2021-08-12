@@ -59,6 +59,7 @@ const StockNews = ({ ...otherProps }) => {
                     {stockNews.map(
                         ({ _id, url, title, urlToImage, publishedAt }) => (
                             <Link
+                                key={_id}
                                 href={url}
                                 isExternal
                                 w="100%"
