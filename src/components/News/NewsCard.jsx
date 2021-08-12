@@ -10,6 +10,7 @@ import {
     PopoverTrigger,
     Popover,
     PopoverContent,
+    useColorModeValue,
 } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
 import NewsArticle from './NewsArticle';
@@ -21,6 +22,8 @@ const NewsCard = ({ source, children, ...otherProps }) => {
 
     let name;
     let articles;
+    let logoBlack;
+    let logoWhite;
     let logo;
 
     let targetSource = newsInfo.find(
@@ -30,12 +33,19 @@ const NewsCard = ({ source, children, ...otherProps }) => {
     if (targetSource) {
         name = targetSource.name;
         articles = targetSource.articles;
-        logo = process.env.PUBLIC_URL + 'logos/sources/' + name + '.png';
+        logoBlack = process.env.PUBLIC_URL + 'logos/sources/' + name + '.png';
+        logoWhite =
+            process.env.PUBLIC_URL + 'logos/sources/' + name + '_white.png';
     } else {
         name = '';
         articles = [];
-        logo = '';
+        logoBlack = '';
+        logoWhite = '';
     }
+
+    logoBlack = logoBlack.replace(/\s+/g, '-').toUpperCase();
+    logoWhite = logoWhite.replace(/\s+/g, '-').toUpperCase();
+    logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
         <CustomBox
