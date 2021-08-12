@@ -1,7 +1,7 @@
 import { Box, Text } from '@chakra-ui/react';
 import React from 'react';
 
-const OurGoal = () => (
+const OurVision = () => (
     <Box m={4} mb={24}>
         <Text fontSize="lg" lineHeight={10}>
             Investobull is a web app designed for everyday investors who
@@ -16,4 +16,4 @@ const OurGoal = () => (
     </Box>
 );
 
-export default OurGoal;
+export default OurVision;
