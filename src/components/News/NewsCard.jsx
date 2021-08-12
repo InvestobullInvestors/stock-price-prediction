@@ -33,8 +33,12 @@ const NewsCard = ({ source, children, ...otherProps }) => {
         ? process.env.PUBLIC_URL + 'logos/sources/' + name + '_white.png'
         : '';
 
-    logoBlack = logoBlack.replace(/\s+/g, '-').toUpperCase();
-    logoWhite = logoWhite.replace(/\s+/g, '-').toUpperCase();
+    logoBlack = logoBlack.replace(/\s+/g, '-').toLowerCase();
+    logoWhite = logoWhite.replace(/\s+/g, '-').toLowerCase();
+
+    console.log(logoBlack);
+    console.log(logoWhite);
+
     const logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
