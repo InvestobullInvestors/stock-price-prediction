@@ -7,7 +7,7 @@ const tickerToEndpointMap = {
     TWTR: 'http://030da4c9-88d8-4549-9689-727fbcbdb424.canadacentral.azurecontainer.io/score',
     TXN: '',
     FB: 'http://73ac4a9e-bcc3-4632-a7b6-c224dab0d02f.canadacentral.azurecontainer.io/score',
-    GOOGL: '',
+    GOOGL: 'http://bad8e482-005d-4788-9cb6-b96735b8e987.canadacentral.azurecontainer.io/score',
     AMZN: '',
     COST: '',
     QCOM: '',
