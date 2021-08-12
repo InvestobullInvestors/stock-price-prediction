@@ -1,7 +1,7 @@
 name: realtime data cron run
 on:
     schedule:
-        - cron: '0 6 * * *'
+        - cron: '25 17 * * *'
     workflow_dispatch:
 
 jobs:
