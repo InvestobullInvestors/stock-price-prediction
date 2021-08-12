@@ -33,7 +33,7 @@ const OurTeam = () => (
             imageUrl="/team-members/paul-freiwirth.jpg"
             linkedIn="https://www.linkedin.com/in/f-paul/"
             github="https://github.com/paulsgh"
-            summary="I worked on the news page, implementing the drag and drop system..."
+            summary="I worked on the designing the News page, news checklist components, and implementing the filtering features and responsive drag-and-drop functionalities."
             alignRight
         />
     </VStack>

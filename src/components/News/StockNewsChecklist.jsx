@@ -13,12 +13,8 @@ import { useStockNews } from '../../contexts/useStockNews';
 import { BiChevronsDown } from 'react-icons/bi';
 
 const StockNewsChecklist = () => {
-    const {
-        stockListNews,
-        selectStock,
-        selectAllStocks,
-        unselectAllStocks,
-    } = useStockNews();
+    const { stockListNews, selectStock, selectAllStocks, unselectAllStocks } =
+        useStockNews();
 
     const sortedStockListNews = [...stockListNews];
 
