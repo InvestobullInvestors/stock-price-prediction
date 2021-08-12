@@ -1,0 +1,13 @@
+name: predictions cron run
+on:
+  schedule:
+    - cron: '40 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Trigger cron action
+    runs-on: ubuntu-latest
+    steps:
+      - name: cURL request
+        run: curl -X GET ${{secrets.VERCEL_DOMAIN_FOR_CRON}}/getPredictions

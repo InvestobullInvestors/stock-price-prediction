@@ -1,7 +1,8 @@
 name: realtime data cron run
 on:
     schedule:
-        - cron: '33 4 * * *'
+        - cron: '0 6 * * *'
+    workflow_dispatch:
 
 jobs:
     build:
@@ -9,4 +10,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: cURL request
-              run: curl -X GET https://stock-price-prediction-m3ze93pd8-hgoyal09.vercel.app/cron-functions/getRealtimeStockData
+              run: curl -X GET ${{secrets.VERCEL_DOMAIN_FOR_CRON}}/getRealtimeStockData

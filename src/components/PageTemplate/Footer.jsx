@@ -18,7 +18,7 @@ const Footer = () => (
                 icon={FaGithub}
             />
             <SocialMediaButton
-                url="https://www.facebook.com/people/Investobull-Investors/100068350916511/"
+                url="https://www.facebook.com/InvestoBull-106251995094607"
                 icon={FaFacebookSquare}
             />
             <SocialMediaButton
