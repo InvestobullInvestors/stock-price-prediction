@@ -60,6 +60,7 @@ InvestoBull is a web app designed for everyday investors who struggle with the i
 -   User Experience
     -   ✅ Light and Dark mode to improve accessibility
     -   ✅ Loading spinners and responsive buttons to indicate interactive components
+    -   ✅ Drag-and-drop functionality to maximize user customization
     -   ✅ Perform User Acceptance Testing with potential users/customers, and improve user flow based on feedback
 -   Stock Price Predictions
     -   ✅ Integrate AutoML to deploy models as endpoints
@@ -201,9 +202,9 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 
 -   Used Chart.js to render a reactive open/close chart with real-time data stored on our database
 
-#### [React DnD][react-dnd]
+#### [react-beautiful-dnd][react-beautiful-dnd]
 
--   Used React DnD to enable the drag-and-drop function for news cards
+-   Used react-beautiful-dnd to enable the drag-and-drop functionality for the news cards
 
 ### User Acceptance Testing (UAT)
 
@@ -256,8 +257,8 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 
 #### Paul Freiwirth
 
--   Developed the front-end for the news page, including a news filter system
--   Set up the drag and drop functionality to enhance user experience
+-   Developed the front-end for the news page, including a news filtering system
+-   Set up the drag-and-drop functionality to enhance user experience
 -   Worked on making the news page responsive
 
 #### Raghav Thakur
@@ -284,5 +285,5 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 [alpha-vantage]: https://www.alphavantage.co/
 [newsapi-comparison]: http://rapidapi.ca/blog/rapidapi-featured-news-apis/
 [chartjs]: https://www.chartjs.org/
-[react-dnd]: https://react-dnd.github.io/react-dnd/about
+[react-beautiful-dnd]: https://github.com/atlassian/react-beautiful-dnd
 [cron-workflow]: https://drive.google.com/file/d/1aKen6Y5VnhOW3yXCGJ1H2mRckcYLeYsg/view?usp=sharing
