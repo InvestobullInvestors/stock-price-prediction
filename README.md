@@ -64,10 +64,10 @@ Investobull is a web app designed for everyday investors who struggle with the i
 -   Stock Price Predictions
     -   ✅ Integrate AutoML to deploy models as endpoints
     -   ✅ Have predictions set up for more than 10 stocks
-    -   ⚠️ Graph detailed metrics related to each stock - moving averages, RS, RSI values etc. 
+    -   ⚠️ Graph detailed metrics related to each stock - moving averages, RS, RSI values etc.
     -   ⚠️ Set up in-app notifications to alert users on price fluctuations
     -   ❌ Send emails to alert users on important updates
-    -   ❌ Analyze technical factors like moving averages, etc. for tuning and validating machine learning algorithms 
+    -   ❌ Analyze technical factors like moving averages, etc. for tuning and validating machine learning algorithms
     -   ❌ Display public reports from analyzers
 -   Documentation
     -   ✅ [Quick Start Guide][guide]
@@ -83,7 +83,7 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 -   Used Chakra UI: a CSS framework, and styled using inline CSS
 -   Built a Responsive UI for mobile view
--   Went above and beyond by designing cron jobs using Javascript to fetch realtime stock data 
+-   Went above and beyond by designing cron jobs using Javascript to fetch realtime stock data
 
 ### Unit 2 - React
 
@@ -126,8 +126,8 @@ Investobull is a web app designed for everyday investors who struggle with the i
 -   Went above and beyond by integrating Cloud Firestore, a MongoDB fork hosted on Firebase, to store:
     -   User data – name, email, photo, plan, etc.
     -   Collections of user-specific Watchlist stocks, Notifications, and successful Payments
-    
-Storing data on Firestore allowed us to store all user related data on Firebase, enhancing integration with the authentication system  
+
+Storing data on Firestore allowed us to store all user related data on Firebase, enhancing integration with the authentication system
 
 #### Why is NoSQL more suitable than SQL for our project?
 
@@ -162,11 +162,11 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 -   Predictions use real-time stock data and queries Azure daily for updated predictions
 
 ### Cron Jobs
+
 ![img.png](cron-workflow.png)
 
 -   Leveraged Javascript to update stock, news and prediction information present in our system
 -   Triggered by scheduler attached to Github actions which triggers serverless functions in Vercel to parse latest data
-
 
 ### Third-party Services
 
@@ -195,7 +195,7 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 #### [Alpha Vantage API][alpha-vantage]
 
 -   Used the Alpha Vantage API to fetch real-time data for different stocks
--   Most stock data APIs provide similar data but Alpha Vantage had really clean documentation 
+-   Most stock data APIs provide similar data but Alpha Vantage had really clean documentation
 
 #### [Chart.js][chartjs]
 
@@ -237,10 +237,9 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 -   Find alternative to the free API plan which currently only allows updating data for only 5 stocks a minute
 -   Set up in app notifications for price fluctuations alerts that can be pre-set by the user
 -   Send email alerts with important updates similar to newsletters
--   Analyze technical factors like moving averages for fine-tuning our algorithms 
--   Display reports from reputed stock analysts 
+-   Analyze technical factors like moving averages for fine-tuning our algorithms
+-   Display reports from reputed stock analysts
 -   Automatically train machine learning models by creating a workflow to download and clean data
-
 
 <br/>
 
@@ -253,12 +252,13 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 -   Developed a responsive front-end for Home, Stock Details, Plans and parts of About Us, including interactive graphs and credit card payment section
 -   Took leadership on setting up a scalable and future proof MongoDB schema along with backend integration and Swagger API documentation for stock details and news
 -   Deployed the project on Vercel and set up the cron jobs to update real time data
--   Coordinated and scheduled meetings alongside text updates for smooth flow of the project 
+-   Coordinated and scheduled meetings alongside text updates for smooth flow of the project
 
 #### Paul Freiwirth
--   Developed the front-end for the news page, including a news filter system 
--   Set up the drag and drop functionality to enhance user experience 
--   Worked on making the news page responsive 
+
+-   Developed the front-end for the news page, including a news filter system
+-   Set up the drag and drop functionality to enhance user experience
+-   Worked on making the news page responsive
 
 #### Raghav Thakur
 
