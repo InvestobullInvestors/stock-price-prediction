@@ -65,10 +65,9 @@ const CreditCardInputBox = () => (
 const HelpText = () => (
     <Alert status="info" mb={4}>
         <AlertIcon />
-        <AlertDescription fontSize="sm">
-            <Text>Good test card: 4242 4242 4242 4242</Text>
-            <Text>Bad test card: 4000 0000 0000 9995</Text>
-            <Text>Input any number for date, CVC, and ZIP</Text>
+        <AlertDescription>
+            <Text>Test card: 4242 4242 4242 4242</Text>
+            <Text>Date, CVC, ZIP: 02/22, 222, 22222</Text>
         </AlertDescription>
     </Alert>
 );
