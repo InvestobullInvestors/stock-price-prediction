@@ -1,123 +1,205 @@
 import React from 'react';
 import {
-    Box,
-    Center,
     Divider,
-    Flex,
-    HStack,
     Image,
     Square,
-    Text,
-    useColorModeValue,
     VStack,
+    Flex,
+    Spacer,
+    HStack,
+    PopoverTrigger,
+    Popover,
+    PopoverContent,
 } from '@chakra-ui/react';
-import NewsArticle from '../NewsArticle';
+import { useStockNews } from '../../contexts/useStockNews';
+import NewsArticle from './NewsArticle';
 import CustomBox from '../CustomBox';
+import { BiChevronsDown } from 'react-icons/bi';
 
-const StockNewsCard = ({ name, news }) => {
-    const textBoxColor = useColorModeValue('brand.100', 'brand.600');
-    const cardColor = useColorModeValue('brand.400', 'brand.700');
+const StockNewsCard = ({ stock, children, ...otherProps }) => {
+    const { stockListNews } = useStockNews();
+
+    let ticker_id;
+    let name;
+    let articles;
+    let logo;
+
+    let targetStock = stockListNews.find(
+        (currStock) => currStock.ticker_id === stock.ticker_id
+    );
+
+    if (targetStock) {
+        ticker_id = targetStock.ticker_id;
+        name = targetStock.stock_name;
+        articles = targetStock.news;
+        logo = process.env.PUBLIC_URL + 'logos/stocks/' + ticker_id + '.png';
+    } else {
+        ticker_id = '';
+        name = '';
+        articles = [];
+        logo = '';
+    }
+
     return (
-        <Box
+        <CustomBox
             width="100%"
+            minW="100%"
             height="100%"
-            mx={3}
+            mx={1}
             mt={5}
             px={4}
             py={4}
-            borderRadius="lg"
-            bg={cardColor}
+            className="my-box"
+            {...otherProps}
         >
+            {children}
             <Flex display={['none', 'none', 'flex', 'flex']} align="flex-start">
-                <HStack mt="10px" w="full">
-                    <Square
-                        w={{ base: '100px', sm: '150px' }}
-                        h={{ base: '100px', sm: '150px' }}
-                        borderRadius="lg"
-                        shadow="md"
-                        bg={textBoxColor}
-                        p="10px"
+                <Popover trigger="hover">
+                    <PopoverTrigger>
+                        <HStack ml="20px" mr="30px" mt="-15px" w="full">
+                            <Square
+                                w={['20%', '20%', '15%', '15%']}
+                                h="150px"
+                                borderRadius="lg"
+                                p="10px"
+                                bg="brand.100"
+                            >
+                                <Image src={logo} />
+                            </Square>
+                            <Spacer />
+                            <CustomBox
+                                w={['78%', '78%', '83%', '83%']}
+                                h="215px"
+                                border={0}
+                                shadow="none"
+                                m={0}
+                                p={2}
+                                overflow="auto"
+                                css={{
+                                    scrollbarWidth: 'none',
+                                    msOverflowStyle: 'none',
+                                    '&::-webkit-scrollbar': {
+                                        width: '0px',
+                                    },
+                                }}
+                            >
+                                <VStack align="flex-start">
+                                    {articles.map((article) => (
+                                        <CustomBox
+                                            key={article._id}
+                                            w="100%"
+                                            border={0}
+                                            shadow="none"
+                                            m={0}
+                                            p={0}
+                                        >
+                                            <NewsArticle
+                                                date={article.publishedAt}
+                                                title={article.title}
+                                                url={article.url}
+                                            />
+                                            <Divider
+                                                my={2}
+                                                orientation="horizontal"
+                                            />
+                                        </CustomBox>
+                                    ))}
+                                </VStack>
+                            </CustomBox>
+                        </HStack>
+                    </PopoverTrigger>
+                    <PopoverContent
+                        background="transparent"
+                        border={0}
+                        shadow={0}
+                        mt="-25px"
                     >
-                        <Text>{name}</Text>
-                    </Square>
-                    <Center height="150px">
-                        <Divider orientation="vertical" />
-                    </Center>
-                    <Box
-                        w="full"
-                        h="150px"
-                        borderRadius="lg"
-                        shadow="md"
-                        bg={textBoxColor}
-                        padding="5px"
-                        css={{
-                            margin: '0',
-                            scrollbarWidth: 'none',
-                            msOverflowStyle: 'none',
-                            overflow: 'scroll',
-                        }}
-                    >
-                        <VStack align="flex-start">
-                            {news.map(({ url, title, publishedAt, _id }) => (
-                                <Box key={_id} w="100%">
-                                    <NewsArticle
-                                        date={publishedAt}
-                                        title={title}
-                                        url={url}
-                                    />
-                                    <Divider my={2} orientation="horizontal" />
-                                </Box>
-                            ))}
-                        </VStack>
-                    </Box>
-                </HStack>
+                        <Flex justify="center">
+                            <BiChevronsDown
+                                size={40}
+                                opacity={0.7}
+                                display="inline-block"
+                                w="100%"
+                            />
+                        </Flex>
+                    </PopoverContent>
+                </Popover>
             </Flex>
             <Flex display={['flex', 'flex', 'none', 'none']} align="flex-start">
-                <VStack mt="10px" align="center" w="full">
-                    <CustomBox
-                        w="100px"
-                        borderRadius="lg"
-                        shadow="md"
-                        bg={textBoxColor}
-                        p="10px"
-                        mb={0}
-                        mt={-9}
-                    >
-                        <Text>{name}</Text>
-                    </CustomBox>
-                    <Divider orientation="horizontal" />
-                    <Box
-                        w="full"
-                        h="150px"
-                        border="1px"
-                        borderColor={textBoxColor}
-                        borderRadius="lg"
-                        shadow="md"
-                        bg={textBoxColor}
-                        padding="5px"
-                        css={{
-                            margin: '0',
-                            scrollbarWidth: 'none',
-                            msOverflowStyle: 'none',
-                            overflow: 'scroll',
-                        }}
-                    >
-                        <VStack align="flex-start">
-                            {news.map(({ url, title, publishedAt, _id }) => (
-                                <Box key={_id} w="100%">
-                                    <NewsArticle
-                                        date={publishedAt}
-                                        title={title}
-                                        url={url}
-                                    />
-                                    <Divider my={2} orientation="horizontal" />
-                                </Box>
-                            ))}
+                <Popover trigger="hover">
+                    <PopoverTrigger>
+                        <VStack mt="10px" align="center" w="full">
+                            <Square
+                                w="100px"
+                                minH="100px"
+                                borderRadius="lg"
+                                p="10px"
+                                mt={-9}
+                                mb={-3}
+                                bg="brand.100"
+                            >
+                                <Image src={logo} />
+                            </Square>
+                            <Spacer />
+                            <CustomBox
+                                w="100%"
+                                h="150px"
+                                border={0}
+                                shadow="none"
+                                m={0}
+                                padding="5px"
+                                overflow="auto"
+                                css={{
+                                    scrollbarWidth: 'none',
+                                    msOverflowStyle: 'none',
+                                    '&::-webkit-scrollbar': {
+                                        width: '0px',
+                                    },
+                                }}
+                            >
+                                <VStack align="flex-start">
+                                    {articles.map((article) => (
+                                        <CustomBox
+                                            key={article._id}
+                                            w="100%"
+                                            border={0}
+                                            shadow="none"
+                                            m={0}
+                                            p={0}
+                                        >
+                                            <NewsArticle
+                                                date={article.publishedAt}
+                                                title={article.title}
+                                                url={article.url}
+                                            />
+                                            <Divider
+                                                my={2}
+                                                orientation="horizontal"
+                                            />
+                                        </CustomBox>
+                                    ))}
+                                </VStack>
+                            </CustomBox>
                         </VStack>
-                    </Box>
-                </VStack>
+                    </PopoverTrigger>
+                    <PopoverContent
+                        background="transparent"
+                        border={0}
+                        shadow={0}
+                        mt="-25px"
+                    >
+                        <Flex justify="center">
+                            <BiChevronsDown
+                                size={40}
+                                opacity={0.7}
+                                display="inline-block"
+                                w="100%"
+                            />
+                        </Flex>
+                    </PopoverContent>
+                </Popover>
             </Flex>
-        </Box>
+        </CustomBox>
     );
 };
 

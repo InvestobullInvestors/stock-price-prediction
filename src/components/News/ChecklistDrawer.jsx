@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     Button,
+    Divider,
     Drawer,
     DrawerBody,
     DrawerContent,
@@ -10,9 +11,13 @@ import {
 } from '@chakra-ui/react';
 import { BiFilterAlt } from 'react-icons/bi';
 import NewsChecklist from './NewsChecklist';
+import { useStockNews } from '../../contexts/useStockNews';
+import StockNewsChecklist from './StockNewsChecklist';
+import CustomButtonGroup from '../CustomButtonGroup';
 
 const ChecklistDrawer = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isDisplayingWatchlistStockNews } = useStockNews();
 
     return (
         <>
@@ -30,9 +35,16 @@ const ChecklistDrawer = () => {
             <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
                 <DrawerOverlay />
                 <DrawerContent>
-                    <DrawerHeader borderBottomWidth="1px">Sources</DrawerHeader>
+                    <DrawerHeader>
+                        <CustomButtonGroup />
+                    </DrawerHeader>
+                    <Divider orientation="horizontal" mb={3} />
                     <DrawerBody>
-                        <NewsChecklist />
+                        {isDisplayingWatchlistStockNews ? (
+                            <StockNewsChecklist />
+                        ) : (
+                            <NewsChecklist />
+                        )}
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>

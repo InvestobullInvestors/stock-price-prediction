@@ -3,10 +3,28 @@ import { Button, Checkbox, HStack, VStack } from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
 
 const NewsChecklist = () => {
-    const { newsSelections } = useStockNews();
-    const { selectSource } = useStockNews();
-    const { selectAllSources } = useStockNews();
-    const { unselectAllSources } = useStockNews();
+    const {
+        newsInfo,
+        selectSource,
+        selectAllSources,
+        unselectAllSources,
+    } = useStockNews();
+    const sortedNewsInfo = [...newsInfo];
+
+    sortedNewsInfo.sort((a, b) => {
+        while (a == null || b == null) {
+            setTimeout(null, 1000);
+        }
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0;
+    });
 
     return (
         <VStack align="stretch">
@@ -16,7 +34,7 @@ const NewsChecklist = () => {
                     Uncheck All
                 </Button>
             </HStack>
-            {newsSelections.map((source) => (
+            {sortedNewsInfo.map((source) => (
                 <Checkbox
                     key={source.id}
                     value={source.name}
