@@ -1,7 +1,7 @@
 name: daily stock price graph data cron run
 on:
     schedule:
-        - cron: '35 23 * * *'
+        - cron: '10 6 * * *'
     workflow_dispatch:
 
 jobs:
