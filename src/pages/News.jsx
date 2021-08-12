@@ -40,13 +40,11 @@ const News = () => {
                 <>
                     <Flex display={['none', 'none', 'none', 'flex']}>
                         <StickyChecklistContainer />
-                        <VStack>
-                            {user && isDisplayingWatchlistStockNews ? (
-                                <StockNewsCardList />
-                            ) : (
-                                <NewsCardList />
-                            )}
-                        </VStack>
+                        {user && isDisplayingWatchlistStockNews ? (
+                            <StockNewsCardList />
+                        ) : (
+                            <NewsCardList />
+                        )}
                     </Flex>
                     <VStack>
                         <Grid display={['flex', 'flex', 'flex', 'none']}>
@@ -54,13 +52,11 @@ const News = () => {
                         </Grid>
                     </VStack>
                     <Grid display={['flex', 'flex', 'flex', 'none']}>
-                        <VStack>
-                            {user && isDisplayingWatchlistStockNews ? (
-                                <StockNewsCardList />
-                            ) : (
-                                <NewsCardList />
-                            )}
-                        </VStack>
+                        {user && isDisplayingWatchlistStockNews ? (
+                            <StockNewsCardList />
+                        ) : (
+                            <NewsCardList />
+                        )}
                     </Grid>
                 </>
             )}

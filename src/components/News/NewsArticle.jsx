@@ -35,10 +35,10 @@ const NewsArticle = ({ date, title, url }) => {
                     align="center"
                     style={{ textDecoration: 'none' }}
                 >
-                    <Text color={dateColor} px={2}>
+                    <Text color={dateColor} textAlign="left">
                         {formatDate(date)}
                     </Text>
-                    <Heading size="md">{title}</Heading>
+                    <Heading size="sm" textAlign="left">{title}</Heading>
                 </Link>
             </CustomBox>
         </VStack>
