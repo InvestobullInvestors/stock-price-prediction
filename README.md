@@ -8,7 +8,7 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 ### Tech Stack
 
-[React](https://reactjs.org/) | [ChakraUI](https://chakra-ui.com/) | [Axios](https://axios-http.com/) | [Node](https://nodejs.org/) | [Express](https://expressjs.com/) | [MongoDB](https://www.mongodb.com/) | [Firebase][firebase] | [Stripe][stripe] | [Azure ML](https://azure.microsoft.com/en-ca/services/machine-learning/) | [Swagger](https://swagger.io/)
+[React](https://reactjs.org/) | [ChakraUI](https://chakra-ui.com/) | [Axios](https://axios-http.com/) | [Node](https://nodejs.org/) | [Express](https://expressjs.com/) | [MongoDB](https://www.mongodb.com/) | [Firebase][firebase] | [Stripe][stripe] | [Azure ML][azure-ml] | [Swagger](https://swagger.io/)
 
 ### Contents
 
@@ -113,15 +113,26 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 ## 4. Above and Beyond
 
-### Microsoft Azure AutoML
+### [Microsoft Azure AutoML](https://azure.microsoft.com/en-ca/services/machine-learning/automatedml/#features)
+
+<img src='https://content.altexsoft.com/media/2017/03/word-image.jpeg'  alt='ml-services-comparison'/>
+
+-   Azure ML and AWS SageMaker both provide anomaly detection, but we decided to use Azure as Microsoft offers free credits ($250) for students
+-   Choice to use the web app (Studio), CLI or Python Notebooks to train and deploy models
+-   Offers easy to use and intuitive functionality for time series forecasting, can get very technical when you need it
+-   Automatic feature engineering
+-   Supports classification, regression, and time series forecasting
+-   Microsoft Azure tutorials and documentation are awesome!
+-   Easily manage and scale your resources all in one platform
 
 ### 3rd Party Services
 
 #### [Firebase][firebase]
 
 -   [Firebase Authentication](https://firebase.google.com/products/auth)
-    -   A simple yet secure way of setting up OAuth
-    -   Seamless integration for email + Google Account login/signup
+    -   A simple yet secure way of setting up OAuth – no need to reinvent the wheel
+    -   Seamless integration for email + Google Account login or signup
+    -
 -   [Cloud Firestore](https://firebase.google.com/products/firestore)
     -   Storing user data – name, subscription plan, watchlist, notifications, etc.
     -   Removes the need to move user data out of Firebase
@@ -189,6 +200,7 @@ Investobull is a web app designed for everyday investors who struggle with the i
 [investobull]: https://investobull.vercel.app/
 [guide]: https://docs.google.com/document/d/1lpJtf07Uv22bCiGY2IghgsdkWpxphbpEnlNmjR_iexU/edit?usp=sharing
 [swagger]: https://app.swaggerhub.com/apis-docs/InvestobullInvestors/InvestobullInvestors/1.0.0
+[azure-ml]: https://azure.microsoft.com/en-ca/services/machine-learning/
 [firebase]: https://firebase.google.com/
 [stripe]: https://stripe.com/
 [newsapi]: https://newsapi.org/
