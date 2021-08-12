@@ -31,7 +31,7 @@ const OurTeam = () => (
         <TeamMemberCard
             name="Paul Freiwirth"
             imageUrl="/team-members/paul-freiwirth.jpg"
-            linkedIn="https://www.linkedin.com/in/f-paul/?fbclid=IwAR18t50rQJ5F-K17PesQcEyuLxLI7UH7iiiOghieTUz-DRAvFKy1sC6K1F0"
+            linkedIn="https://www.linkedin.com/in/f-paul/"
             github="https://github.com/paulsgh"
             summary="I worked on the news page, implementing the drag and drop system..."
             alignRight

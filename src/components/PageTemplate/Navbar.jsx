@@ -50,7 +50,7 @@ const Logo = () => (
         >
             InvestoBull
         </Text>
-        <Image src="/bull-red-512.png" boxSize={8} />
+        <Image src="/bull2_512px.png" boxSize={8} />
     </HStack>
 );
 
@@ -162,11 +162,13 @@ const NotificationMenu = ({ bgColor }) => {
                 bg={bgColor}
                 maxW={MENU_MAX_WIDTH}
                 maxH={MENU_MAX_HEIGHT}
+                overflow="auto"
                 css={{
-                    margin: '0',
                     scrollbarWidth: 'none',
                     msOverflowStyle: 'none',
-                    overflow: 'scroll',
+                    '&::-webkit-scrollbar': {
+                        width: '0px',
+                    },
                 }}
             >
                 <NotificationList />

@@ -1,17 +1,17 @@
 import React from 'react';
-import { Flex, List, Spacer, Box } from '@chakra-ui/react';
-import NewsCard from './NewsCard';
+import { Box, Flex, List, Spacer } from '@chakra-ui/react';
 
 import { useStockNews } from '../../contexts/useStockNews';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { CloseIcon, DragHandleIcon } from '@chakra-ui/icons';
+import StockNewsCard from './StockNewsCard';
 
-const NewsCardList = () => {
-    const { newsInfo, reorderSources, selectSource } = useStockNews();
+const StockNewsCardList = () => {
+    const { stockListNews, reorderStocks, selectSource } = useStockNews();
     const staticCheckListWidth = '300px';
 
-    let visibleNewsCards = newsInfo.filter(
-        (source) => source.selected === true
+    let visibleStockNewsCards = stockListNews.filter(
+        (stock) => stock.selected === true
     );
 
     return (
@@ -27,7 +27,7 @@ const NewsCardList = () => {
                 ) {
                     return;
                 }
-                reorderSources(source.index, destination.index);
+                reorderStocks(source.index, destination.index);
             }}
         >
             <Droppable droppableId="newsGrid">
@@ -47,10 +47,10 @@ const NewsCardList = () => {
                                 'calc(100% - ' + staticCheckListWidth + ')',
                             ]}
                         >
-                            {visibleNewsCards.map((source, index) => (
+                            {visibleStockNewsCards.map((stock, index) => (
                                 <Draggable
-                                    key={source.id}
-                                    draggableId={source.id}
+                                    key={stock.ticker_id}
+                                    draggableId={stock.ticker_id}
                                     index={index}
                                 >
                                     {(draggableProvided) => (
@@ -58,9 +58,9 @@ const NewsCardList = () => {
                                             {...draggableProvided.draggableProps}
                                             ref={draggableProvided.innerRef}
                                         >
-                                            <NewsCard
-                                                key={source.id}
-                                                source={source}
+                                            <StockNewsCard
+                                                key={stock.ticker_id}
+                                                stock={stock}
                                             >
                                                 <Flex>
                                                     <Box
@@ -78,13 +78,13 @@ const NewsCardList = () => {
                                                     <CloseIcon
                                                         cursor={'pointer'}
                                                         onClick={() =>
-                                                            selectSource(source)
+                                                            selectSource(stock)
                                                         }
                                                         w={5}
                                                         h={5}
                                                     />
                                                 </Flex>
-                                            </NewsCard>
+                                            </StockNewsCard>
                                         </Box>
                                     )}
                                 </Draggable>
@@ -98,4 +98,4 @@ const NewsCardList = () => {
     );
 };
 
-export default NewsCardList;
+export default StockNewsCardList;
