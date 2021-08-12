@@ -11,7 +11,6 @@ const NewsChecklist = () => {
     } = useStockNews();
     const sortedNewsInfo = [...newsInfo];
 
-    // keep checklist items alphabetically sorted
     sortedNewsInfo.sort((a, b) => {
         while (a == null || b == null) {
             setTimeout(null, 1000);

@@ -1,6 +1,16 @@
 import React from 'react';
-import { Box, Button, Checkbox, HStack, Text, VStack } from '@chakra-ui/react';
+import {
+    Button,
+    Checkbox,
+    Flex,
+    HStack,
+    VStack,
+    PopoverTrigger,
+    Popover,
+    PopoverContent,
+} from '@chakra-ui/react';
 import { useStockNews } from '../../contexts/useStockNews';
+import { BiChevronsDown } from 'react-icons/bi';
 
 const StockNewsChecklist = () => {
     const {
@@ -12,7 +22,6 @@ const StockNewsChecklist = () => {
 
     const sortedStockListNews = [...stockListNews];
 
-    // keep checklist items alphabetically sorted
     sortedStockListNews.sort((a, b) => {
         while (a == null || b == null) {
             setTimeout(null, 1000);
@@ -29,35 +38,58 @@ const StockNewsChecklist = () => {
     });
 
     return (
-        <VStack align="stretch">
-            <HStack>
-                <Button onClick={() => selectAllStocks()}>Check All</Button>
-                <Button onClick={() => unselectAllStocks()}>Uncheck All</Button>
-            </HStack>
-            <VStack
-                align="start"
-                maxH="175px"
-                overflow="auto"
-                css={{
-                    scrollbarWidth: 'none',
-                    msOverflowStyle: 'none',
-                    '&::-webkit-scrollbar': {
-                        width: '0px',
-                    },
-                }}
-            >
-                {sortedStockListNews.map((stock) => (
-                    <Checkbox
-                        key={stock.ticker_id}
-                        value={stock.stock_name}
-                        isChecked={stock.selected}
-                        onChange={(e) => selectStock(stock)}
+        <Popover trigger="hover">
+            <PopoverTrigger>
+                <VStack align="stretch">
+                    <HStack>
+                        <Button onClick={() => selectAllStocks()}>
+                            Check All
+                        </Button>
+                        <Button onClick={() => unselectAllStocks()}>
+                            Uncheck All
+                        </Button>
+                    </HStack>
+                    <VStack
+                        align="start"
+                        maxH="175px"
+                        overflow="auto"
+                        css={{
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                            '&::-webkit-scrollbar': {
+                                width: '0px',
+                            },
+                        }}
                     >
-                        {stock.stock_name}
-                    </Checkbox>
-                ))}
-            </VStack>
-        </VStack>
+                        {sortedStockListNews.map((stock) => (
+                            <Checkbox
+                                key={stock.ticker_id}
+                                value={stock.stock_name}
+                                isChecked={stock.selected}
+                                onChange={(e) => selectStock(stock)}
+                            >
+                                {stock.stock_name}
+                            </Checkbox>
+                        ))}
+                    </VStack>
+                </VStack>
+            </PopoverTrigger>
+            <PopoverContent
+                background="transparent"
+                border={0}
+                shadow={0}
+                mt="-25px"
+            >
+                <Flex justify="center">
+                    <BiChevronsDown
+                        size={40}
+                        opacity={0.7}
+                        display="inline-block"
+                        w="100%"
+                    />
+                </Flex>
+            </PopoverContent>
+        </Popover>
     );
 };
 
