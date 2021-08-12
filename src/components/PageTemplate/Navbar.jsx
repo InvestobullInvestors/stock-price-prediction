@@ -48,7 +48,7 @@ const Logo = () => (
             fontSize={24}
             fontWeight={300}
         >
-            Investobull
+            InvestoBull
         </Text>
         <Image src="/bull2_512px.png" boxSize={8} />
     </HStack>
