@@ -6,7 +6,7 @@ const tickerToEndpointMap = {
     AAPL: 'http://4e90c0c4-c301-4dd5-b3a1-7279b5a399ad.canadacentral.azurecontainer.io/score',
     TWTR: 'http://030da4c9-88d8-4549-9689-727fbcbdb424.canadacentral.azurecontainer.io/score',
     TXN: '',
-    FB: '',
+    FB: 'http://73ac4a9e-bcc3-4632-a7b6-c224dab0d02f.canadacentral.azurecontainer.io/score',
     GOOGL: '',
     AMZN: '',
     COST: '',
