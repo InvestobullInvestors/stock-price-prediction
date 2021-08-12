@@ -115,7 +115,8 @@ const StockInfoTable = ({ stocks, handleSortClick }) => {
                 <Thead>
                     <Tr>
                         {tableHeading.map((table_details) => (
-                            <Th
+                            <Th 
+                                key={table_details.name}
                                 w={table_details?.width ?? '12%'}
                                 display={table_details?.display}
                                 _hover={
