@@ -35,10 +35,6 @@ const NewsCard = ({ source, children, ...otherProps }) => {
 
     logoBlack = logoBlack.replace(/\s+/g, '-').toLowerCase();
     logoWhite = logoWhite.replace(/\s+/g, '-').toLowerCase();
-
-    console.log(logoBlack);
-    console.log(logoWhite);
-
     const logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
