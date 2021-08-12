@@ -31,9 +31,9 @@ Investobull is a web app designed for everyday investors who struggle with the i
 -   ✅ Home page with a table containing at least 10 stocks
 -   ✅ Retrieve stock details through an API and store stock data on MongoDB
 -   ✅ Display fundamentals for each stock - market cap, earning etc.
--   ✅ Stock price predictions using historical data as our MVP
+-   ✅ Hard code stock predictions in our database as our MVP
 -   ✅ News page that shows articles relevant to the financial market
--   ✅ Deploying the webapp on Vercel
+-   ✅ Deploy the webapp on Vercel
 
 ### Standard Goals
 
@@ -41,7 +41,7 @@ Investobull is a web app designed for everyday investors who struggle with the i
     -   ✅ Secure authentication with email and Google, ability to reset password
     -   ✅ Persistent watchlist for each user
     -   ✅ Watchlist-specific news in the News page
-    -   ✅ In-app notification system
+    -   ✅ Basic in-app notification system
     -   ✅ Different tiers of subscription plans
     -   ✅ Secure credit card payment through Stripe
 -   Stock Details
@@ -55,8 +55,8 @@ Investobull is a web app designed for everyday investors who struggle with the i
 ### Stretch Goals
 
 -   Real-time Data
-    -   ✅ Setup cron jobs on GitHub Actions to retrieve and update the MongoDB database with real-time stock data such as latest price and volume
-    -   ✅ Utilize cron jobs to fetch the latest news articles from [news API][newsapi]
+    -   ✅ Setup cron jobs on GitHub Actions to retrieve and update the MongoDB database with real-time stock data such as latest price and volume from [Alpha Vantage][alpha-vantage]
+    -   ✅ Utilize cron jobs to fetch the latest news articles from [News API][newsapi]
 -   User Experience
     -   ✅ Light and Dark mode to improve accessibility
     -   ✅ Loading spinners and responsive buttons to indicate interactive components
@@ -64,10 +64,10 @@ Investobull is a web app designed for everyday investors who struggle with the i
 -   Stock Price Predictions
     -   ✅ Integrate AutoML to deploy models as endpoints
     -   ✅ Have predictions set up for more than 10 stocks
-    -   ⚠️ Graph detailed metrics related to each stock
+    -   ⚠️ Graph detailed metrics related to each stock - moving averages, RS, RSI values etc. 
     -   ⚠️ Set up in-app notifications to alert users on price fluctuations
     -   ❌ Send emails to alert users on important updates
-    -   ❌ Analyze technical factors like moving averages, etc. for prediction and validation metrics
+    -   ❌ Analyze technical factors like moving averages, etc. for tuning and validating machine learning algorithms 
     -   ❌ Display public reports from analyzers
 -   Documentation
     -   ✅ [Quick Start Guide][guide]
@@ -83,6 +83,7 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 -   Used Chakra UI: a CSS framework, and styled using inline CSS
 -   Built a Responsive UI for mobile view
+-   Went above and beyond by designing cron jobs using Javascript to fetch realtime stock data 
 
 ### Unit 2 - React
 
@@ -115,7 +116,7 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 ### Unit 4 - NoSQL with MongoDB
 
--   Used MongoDB Atlas to store the following:
+-   Built a future proof, scalable schema design in MongoDB Atlas to store the following:
     -   Real-time stock data
     -   Quarterly stock data
     -   Price fluctuation graphs data for a stock
@@ -125,6 +126,8 @@ Investobull is a web app designed for everyday investors who struggle with the i
 -   Went above and beyond by integrating Cloud Firestore, a MongoDB fork hosted on Firebase, to store:
     -   User data – name, email, photo, plan, etc.
     -   Collections of user-specific Watchlist stocks, Notifications, and successful Payments
+    
+Storing data on Firestore allowed us to store all user related data on Firebase, enhancing integration with the authentication system  
 
 #### Why is NoSQL more suitable than SQL for our project?
 
@@ -138,8 +141,8 @@ Investobull is a web app designed for everyday investors who struggle with the i
 -   Deployed the website on Vercel
     -   Higher performance with lower latency compared to Heroku (for free plans)
     -   Bigger free-tier plan for projects compared to other bigger hosting platforms like AWS, Azure, GCP etc.
-    -   Deploying cron jobs on GitHub actions
-    -   Trigger serverless functions set up on Vercel to pull in the latest stocks, news, and prediction data
+-   Went above and beyond by deploying cron jobs on GitHub actions
+    -   These trigger serverless functions set up on Vercel to pull in the latest stocks, news, and prediction data
 
 <br/>
 
@@ -152,15 +155,18 @@ Investobull is a web app designed for everyday investors who struggle with the i
 <img src='https://content.altexsoft.com/media/2017/03/word-image.jpeg'  alt='ml-services-comparison'/>
 
 -   Azure ML and AWS SageMaker both provide anomaly detection, but we decided to use Azure as Microsoft offers free credits ($250) for students
--   Choice to use the web app (Studio), CLI or Python Notebooks to train and deploy models
--   Offers easy to use and intuitive functionality for time series forecasting, can get very technical when you need it
--   Automatic feature engineering
+-   Well documented interactive portal, CLI or Python Notebooks to train and deploy models
+-   Offers easy to use and intuitive functionality for time series forecasting, that be tuned to a high degree of sophistication
 -   Supports classification, regression, and time series forecasting
--   Microsoft Azure tutorials and documentation are awesome!
 -   Easily manage and scale your resources all in one platform
 -   Predictions use real-time stock data and queries Azure daily for updated predictions
 
 ### Cron Jobs
+![img.png](cron-workflow.png)
+
+-   Leveraged Javascript to update stock, news and prediction information present in our system
+-   Triggered by scheduler attached to Github actions which triggers serverless functions in Vercel to parse latest data
+
 
 ### Third-party Services
 
@@ -177,17 +183,19 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 #### [Stripe][stripe]
 
--   Process Credit Card payments
+-   Seamless way to process Credit Card payments
 -   Reduces security concerns by eliminating the need to store credit card information
 -   Easy integration into the website using stripe elements
 
 #### [NewsAPI][newsapi]
 
 -   Used NewsApi to fetch real-time news data corresponding not only to individual stocks but also to different news sources
+-   Provides the right balance between news sources available and the size of the free plan. [Learn more][newsapi-comparison]
 
 #### [Alpha Vantage API][alpha-vantage]
 
 -   Used the Alpha Vantage API to fetch real-time data for different stocks
+-   Most stock data APIs provide similar data but Alpha Vantage had really clean documentation 
 
 #### [Chart.js][chartjs]
 
@@ -207,6 +215,7 @@ Investobull is a web app designed for everyday investors who struggle with the i
 #### MongoDB structure
 
 -   The MongoDB structure has been designed to handle new markets like TSX and NYSE if we decide to scale up in the future
+-   Workflows have been set up to add new stocks without going into the database
 
 ### Documentation
 
@@ -216,15 +225,22 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 #### [Swagger API Documentation][swagger]
 
--   Clean way to test our API endpoints
--   Convenient way to document endpoints for use by teammates
--   Easy interface to interact with APIs
+-   Clean way to test and document endpoints our API endpoints
+-   Interface to interact with APIs
 
 <br/>
 
 ---
 
 ## 5. Next Steps
+
+-   Find alternative to the free API plan which currently only allows updating data for only 5 stocks a minute
+-   Set up in app notifications for price fluctuations alerts that can be pre-set by the user
+-   Send email alerts with important updates similar to newsletters
+-   Analyze technical factors like moving averages for fine-tuning our algorithms 
+-   Display reports from reputed stock analysts 
+-   Automatically train machine learning models by creating a workflow to download and clean data
+
 
 <br/>
 
@@ -234,11 +250,15 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 #### Himanshu Goyal
 
--   Developed the front-end for Home, Stock Details, Plans and parts of About Us, including interactive graphs and credit card payment section
--   Set up a scalable and future proof MongoDB schema along with backend integration for stock details and news
+-   Developed a responsive front-end for Home, Stock Details, Plans and parts of About Us, including interactive graphs and credit card payment section
+-   Took leadership on setting up a scalable and future proof MongoDB schema along with backend integration and Swagger API documentation for stock details and news
 -   Deployed the project on Vercel and set up the cron jobs to update real time data
+-   Coordinated and scheduled meetings alongside text updates for smooth flow of the project 
 
 #### Paul Freiwirth
+-   Developed the front-end for the news page, including a news filter system 
+-   Set up the drag and drop functionality to enhance user experience 
+-   Worked on making the page responsive 
 
 #### Raghav Thakur
 
@@ -248,9 +268,9 @@ Investobull is a web app designed for everyday investors who struggle with the i
 
 #### Weiyoung Tan
 
--   Set up the login / signup / password reset system using Firebase Authentication and stored user data on Cloud Firestore
+-   Set up the login, signup, and password reset system using Firebase Authentication and stored user data on Cloud Firestore
 -   Built the Navbar, Watchlist, Notifications, Payment Popups, and About Us components, and integrated user accounts with Payments, Notifications, and Watchlist
--   Took charge of the overall UI/UX, performed UAT with potential customers, structured README doc, helped out with Vercel deployment and cron jobs.
+-   Took charge of the overall UI/UX, performed UAT with potential customers, structured README doc, helped out with Vercel deployment and cron jobs
 
 <br/>
 
@@ -262,5 +282,7 @@ Investobull is a web app designed for everyday investors who struggle with the i
 [stripe]: https://stripe.com/
 [newsapi]: https://newsapi.org/
 [alpha-vantage]: https://www.alphavantage.co/
+[newsapi-comparison]: http://rapidapi.ca/blog/rapidapi-featured-news-apis/
 [chartjs]: https://www.chartjs.org/
 [react-dnd]: https://react-dnd.github.io/react-dnd/about
+[cron-workflow]: https://drive.google.com/file/d/1aKen6Y5VnhOW3yXCGJ1H2mRckcYLeYsg/view?usp=sharing
