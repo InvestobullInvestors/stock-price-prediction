@@ -1,7 +1,8 @@
 name: daily stock price graph data cron run
 on:
     schedule:
-        - cron: '25 5 * * *'
+        - cron: '35 23 * * *'
+    workflow_dispatch:
 
 jobs:
     build:
@@ -9,4 +10,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: cURL request
-              run: curl -X GET https://stock-price-prediction-9ec0ib18f-hgoyal09.vercel.app/cron-functions/getDailyStockPriceGraphData
+              run: curl -X GET ${{secrets.VERCEL_DOMAIN_FOR_CRON}}/getDailyStockPriceGraphData
