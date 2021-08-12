@@ -258,7 +258,7 @@ Storing data on Firestore allowed us to store all user related data on Firebase,
 #### Paul Freiwirth
 -   Developed the front-end for the news page, including a news filter system 
 -   Set up the drag and drop functionality to enhance user experience 
--   Worked on making the page responsive 
+-   Worked on making the news page responsive 
 
 #### Raghav Thakur
 
