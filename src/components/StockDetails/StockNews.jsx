@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     Box,
-    Flex,
+    Grid,
+    GridItem,
     Heading,
     HStack,
     Image,
@@ -15,34 +16,39 @@ import LoadingSpinner from '../LoadingSpinner';
 import CustomBox from '../CustomBox';
 
 const NewsLayout = ({ _id, urlToImage, publishedAt, title }) => (
-    <CustomBox
-        width="100%"
-        minW="100%"
-        height="100%"
-        mx={1}
-        mt={5}
-        px={4}
-        py={4}
-        className="my-box"
-    >
-        <Flex align="center">
-            <Image
-                boxSize="150px"
-                objectFit="cover"
-                src={urlToImage}
-                borderRadius="lg"
-            />
-            <Box key={_id} w={{ base: '100%', md: '80%' }} px={8}>
-                <NewsArticle
-                    date={publishedAt}
-                    title={title}
-                    _hover={{
-                        bgColor: useColorModeValue('brand.200', 'brand.700'),
-                    }}
+    <Box width="100%" minW="100%" height="100%">
+        <Grid
+            templateColumns={{
+                base: 'repeat(1, 1fr)',
+                md: 'repeat(4, 1fr)',
+                lg: 'repeat(6, 1fr)',
+            }}
+            alignItems="center"
+        >
+            <GridItem colSpan={1}>
+                <Image
+                    boxSize="150px"
+                    objectFit="cover"
+                    src={urlToImage}
+                    borderRadius="lg"
                 />
-            </Box>
-        </Flex>
-    </CustomBox>
+            </GridItem>
+            <GridItem colSpan={{ base: 1, md: 3, lg: 5 }}>
+                <Box key={_id} w="100%" pr={8}>
+                    <NewsArticle
+                        date={publishedAt}
+                        title={title}
+                        _hover={{
+                            bgColor: useColorModeValue(
+                                'brand.200',
+                                'brand.700'
+                            ),
+                        }}
+                    />
+                </Box>
+            </GridItem>
+        </Grid>
+    </Box>
 );
 
 const StockNews = ({ ...otherProps }) => {
@@ -55,10 +61,11 @@ const StockNews = ({ ...otherProps }) => {
             {isStockNewsLoading ? (
                 <LoadingSpinner />
             ) : (
-                <VStack align="flex-start" spacing={12} mx={16}>
+                <VStack align="flex-start" spacing={12} mx={8}>
                     {stockNews.map(
                         ({ _id, url, title, urlToImage, publishedAt }) => (
                             <Link
+                                key={_id}
                                 href={url}
                                 isExternal
                                 w="100%"

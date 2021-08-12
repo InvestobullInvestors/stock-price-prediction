@@ -8,16 +8,15 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import useDateFormat from '../../hooks/useDateFormat';
-import CustomBox from '../CustomBox';
 
 const NewsArticle = ({ date, title, url }) => {
     const dateColor = useColorModeValue('gray.600', 'gray.400');
     const formatDate = useDateFormat();
-    const hoverColor = useColorModeValue('brand.200', 'brand.700');
+    const hoverColor = useColorModeValue('brand.500', 'brand.400');
 
     return (
         <VStack spacing="4px" align="flex-start">
-            <CustomBox
+            <Box
                 as="button"
                 w="100%"
                 minH={10}
@@ -25,8 +24,7 @@ const NewsArticle = ({ date, title, url }) => {
                 m={0}
                 textAlign="left"
                 border={0}
-                shadow="none"
-                _hover={{ bgColor: hoverColor }}
+                _hover={{ color: hoverColor }}
             >
                 <Link
                     href={url}
@@ -42,7 +40,7 @@ const NewsArticle = ({ date, title, url }) => {
                         {title}
                     </Heading>
                 </Link>
-            </CustomBox>
+            </Box>
         </VStack>
     );
 };
