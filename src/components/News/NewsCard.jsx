@@ -20,28 +20,22 @@ import { BiChevronsDown } from 'react-icons/bi';
 const NewsCard = ({ source, children, ...otherProps }) => {
     const { newsInfo } = useStockNews();
 
-    let name;
-    let articles;
-    let logoBlack;
-    let logoWhite;
-    let logo;
-
-    let targetSource = newsInfo.find(
+    const targetSource = newsInfo.find(
         (currSource) => currSource.id === source.id
     );
 
-    name = targetSource?.name;
-    articles = targetSource?.articles;
-    logoBlack = targetSource
+    const name = targetSource?.name;
+    const articles = targetSource?.articles;
+    let logoBlack = targetSource
         ? process.env.PUBLIC_URL + 'logos/sources/' + name + '.png'
         : '';
-    logoWhite = targetSource
+    let logoWhite = targetSource
         ? process.env.PUBLIC_URL + 'logos/sources/' + name + '_white.png'
         : '';
 
     logoBlack = logoBlack.replace(/\s+/g, '-').toUpperCase();
     logoWhite = logoWhite.replace(/\s+/g, '-').toUpperCase();
-    logo = useColorModeValue(logoBlack, logoWhite);
+    const logo = useColorModeValue(logoBlack, logoWhite);
 
     return (
         <CustomBox

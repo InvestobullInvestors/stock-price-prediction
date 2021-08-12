@@ -19,21 +19,17 @@ import { BiChevronsDown } from 'react-icons/bi';
 const StockNewsCard = ({ stock, children, ...otherProps }) => {
     const { stockListNews } = useStockNews();
 
-    let ticker_id;
-    let name;
-    let articles;
-    let logo;
-
-    let targetStock = stockListNews.find(
+    const targetStock = stockListNews.find(
         (currStock) => currStock.ticker_id === stock.ticker_id
     );
 
-    ticker_id = targetStock?.ticker_id;
-    name = targetStock?.stock_name;
-    articles = targetStock?.news;
-    logo = targetStock
+    const ticker_id = targetStock?.ticker_id;
+    const articles = targetStock?.news;
+    const logo = targetStock
         ? process.env.PUBLIC_URL + 'logos/stocks/' + ticker_id + '.png'
         : '';
+
+    console.log(articles);
 
     return (
         <CustomBox
