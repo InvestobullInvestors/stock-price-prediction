@@ -1,4 +1,4 @@
-# [InvestoBull][investobull] – A Stock Price Prediction WebApp
+# [Investobull][investobull] – A Stock Price Prediction WebApp
 
 ## 1. Project Description
 

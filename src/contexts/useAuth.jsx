@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
         const timestamp = Date.now();
 
         const welcomeMessage = {
-            text: 'Welcome to InvestoBull!',
+            text: 'Welcome to Investobull!',
             timestamp: timestamp,
         };
 

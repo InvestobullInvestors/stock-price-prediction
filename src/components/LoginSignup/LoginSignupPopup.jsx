@@ -24,7 +24,7 @@ const LoginSignupPopup = () => {
 
     const modalContent = {
         login: {
-            header: 'Log In to InvestoBull',
+            header: 'Log In to Investobull',
             body: <LoginForm setMode={setMode} />,
             footer: (
                 <Text>
@@ -41,7 +41,7 @@ const LoginSignupPopup = () => {
             ),
         },
         signup: {
-            header: 'Sign Up for InvestoBull',
+            header: 'Sign Up for Investobull',
             body: <SignupForm />,
             footer: (
                 <Text>
