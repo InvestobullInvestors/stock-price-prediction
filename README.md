@@ -249,7 +249,7 @@ Storing data on Cloud Firestore allowed us to keep all user-related data on Fire
 
 #### Himanshu Goyal
 
--   Developed a responsive front-end for Home, Stock Details, Plans and parts of About Us, including interactive graphs and credit card payment through Stripe
+-   Developed a responsive front-end for Home, Stock Details, Plans and parts of About Us, including interactive graphs and credit card payment section
 -   Took leadership on setting up a scalable and future proof MongoDB schema along with backend integration and Swagger API documentation for stock details, stock news, and stock predictions
 -   Deployed the project on Vercel and set up the cron jobs to update data in real-time
 -   Coordinated and scheduled meetings alongside text updates for smooth flow of the project
@@ -267,7 +267,7 @@ Storing data on Cloud Firestore allowed us to keep all user-related data on Fire
 
 #### Weiyoung Tan
 
--   Set up the login/signup system using Firebase Authentication and stored user data on Cloud Firestore NoSQL Database
+-   Set up the login/signup system using Firebase Authentication and stored user data on Cloud Firestore
 -   Built the Navbar, Watchlist, Notifications, Payment Popups, and About Us components, and integrated user accounts with Payments, Notifications, and Watchlist
 -   Led the overall UI/UX development, performed UAT with potential customers, and enhanced UX by adjusting to user feedback
 -   Took charge of the repo structure and code cleanliness, designed README documentation, aided with Vercel deployment, crons and Github Actions
