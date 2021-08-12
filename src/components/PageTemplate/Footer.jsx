@@ -35,7 +35,7 @@ const Footer = () => (
             />
         </Flex>
         <Text color="brand.500" fontSize="sm" m={2}>
-            Copyright © InvestoBull 2021
+            Copyright © Investobull 2021
         </Text>
     </Flex>
 );
